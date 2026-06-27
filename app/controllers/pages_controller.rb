@@ -244,7 +244,19 @@ class PagesController < ApplicationController
   def summit_notify
     email = params[:email].to_s.strip
     name  = params[:name].to_s.strip
-    # In production: save to DB or send email
+    role  = params[:role].to_s.strip
+
+    Inquiry.create!(
+      name:    name,
+      email:   email,
+      service: "Summit Waitlist",
+      message: role.present? ? "Role: #{role}" : nil,
+      status:  "new"
+    )
+
+    flash[:notice] = "You're on the list! We'll notify you about the Summit."
+    redirect_to summit_path
+  rescue => e
     flash[:notice] = "You're on the list! We'll notify you about the Summit."
     redirect_to summit_path
   end
