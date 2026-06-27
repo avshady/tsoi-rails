@@ -355,7 +355,7 @@
 
   // Attach filter listeners
   filters.q.addEventListener('input', () => debounce(resetAndFetch, 350));
-  filters.city.addEventListener('input', () => debounce(resetAndFetch, 400));
+  // city handled below by cityInput listener
   filters.state.addEventListener('change', resetAndFetch);
   filters.board.addEventListener('change', resetAndFetch);
   filters.type.addEventListener('change', resetAndFetch);
@@ -397,8 +397,8 @@
     if (!cityInput.contains(e.target)) citySugg.style.display = 'none';
   });
 
-  // Load cities
-  fetch('/api/cities?limit=100').then(r=>r.json()).then(d => { allCities = d.cities || []; });
+  // Load top districts (real city names) for autocomplete
+  fetch('/api/cities?limit=200').then(r=>r.json()).then(d => { allCities = d.cities || []; });
 
   // Initial load
   fetchSchools(1, false);

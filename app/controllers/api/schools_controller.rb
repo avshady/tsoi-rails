@@ -44,9 +44,10 @@ module Api
         end
       end
 
-      scope = scope.where(state: state)       if state.present?
-      scope = scope.where(district: district) if district.present?
-      scope = scope.where(city: city)         if city.present?
+      scope = scope.where(state: state)                                    if state.present?
+      scope = scope.where("district LIKE ?", "%#{district}%")            if district.present?
+      # city param maps to district column — UDISE stores ward names in city, districts are real city names
+      scope = scope.where("district LIKE ?", "%#{city}%")                if city.present?
 
       # Board filtering: "State Board" expands to every board that is NOT
       # one of the curated main boards (CBSE/ICSE/IB/IGCSE/Cambridge/NIOS).
@@ -96,16 +97,20 @@ module Api
 
     def cities
       q     = params[:q].to_s.strip
-      limit = [params[:limit].to_i, 100].min
-      limit = 50 if limit == 0
+      limit = [params[:limit].to_i, 200].min
+      limit = 100 if limit == 0
 
       cities = if q.present?
-        School.where("city LIKE ?", "#{q}%")
-              .distinct.order(:city)
+        School.where("district LIKE ?", "#{q}%")
+              .where.not(district: [nil, ''])
+              .distinct.order(:district)
               .limit(limit)
-              .pluck(:city, :state)
+              .pluck(:district, :state)
       else
-        School.distinct.order(:city).limit(limit).pluck(:city, :state)
+        School.where.not(district: [nil, ''])
+              .distinct.order(:district)
+              .limit(limit)
+              .pluck(:district, :state)
       end
 
       render json: { cities: cities.map { |c, s| { city: c, state: s } } }
