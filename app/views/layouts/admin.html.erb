@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Admin — <%= content_for(:title).presence || "TSOI" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <style>
+      body { margin:0; font-family:system-ui,sans-serif; background:#f5f5f5; color:#1A1A1A; }
+      .admin-sidebar { width:220px; background:#1A1A1A; min-height:100vh; position:fixed; top:0; left:0; padding:0; }
+      .admin-sidebar a { display:block; padding:13px 20px; color:rgba(255,255,255,0.65); text-decoration:none; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; border-left:2px solid transparent; transition:all 0.15s; }
+      .admin-sidebar a:hover { color:white; border-left-color:#821E25; background:rgba(255,255,255,0.04); }
+      .admin-sidebar a.active { color:white; border-left-color:#821E25; }
+      .admin-header { background:#821E25; color:white; padding:16px 20px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; }
+      .admin-main { margin-left:220px; padding:2rem; }
+    </style>
+  </head>
+  <body>
+    <div class="admin-sidebar">
+      <div class="admin-header">TSOI Admin</div>
+      <%= link_to "Dashboard",  admin_root_path,       class: request.path == admin_root_path ? "active" : "" %>
+      <%= link_to "Schools",    admin_schools_path,    class: request.path.start_with?("/admin/schools")   ? "active" : "" %>
+      <div style="border-top:1px solid rgba(255,255,255,0.08); margin:8px 0; padding-top:4px;">
+        <div style="padding:8px 20px 4px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.25);">CMS</div>
+        <%= link_to "Content & Images", admin_content_path,    class: request.path.start_with?("/admin/content")    ? "active" : "" %>
+        <%= link_to "Inquiries",        admin_inquiries_path,  class: request.path.start_with?("/admin/inquiries")  ? "active" : "" %>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:8px;">
+        <%= link_to "← View Site", root_path, style:"color:rgba(255,255,255,0.35);" %>
+      </div>
+    </div>
+    <div class="admin-main">
+      <% if flash[:notice].present? %>
+        <div style="background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; padding:10px 16px; margin-bottom:1rem; font-size:13px;"><%= flash[:notice] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

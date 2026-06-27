@@ -1,0 +1,206 @@
+<style>
+.pdb-header { margin-bottom:2rem; }
+.pdb-header h1 { font-family:'Playfair Display',Georgia,serif; font-size:1.8rem; font-weight:700; margin:0 0 4px; color:#1A1A1A; }
+.pdb-header p { font-size:13px; color:rgba(0,0,0,0.45); margin:0; }
+.pdb-header-actions { display:flex; gap:12px; margin-top:1rem; }
+.pdb-view-btn { background:#821E25; color:white; text-decoration:none; padding:10px 20px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; border-radius:4px; }
+.pdb-view-btn:hover { background:#5F1219; }
+
+.pdb-card { background:white; border:1px solid rgba(0,0,0,0.08); margin-bottom:1.5rem; }
+.pdb-card-head { padding:1rem 1.5rem; border-bottom:1px solid rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:space-between; }
+.pdb-card-head h2 { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin:0; color:rgba(0,0,0,0.55); }
+.pdb-card-body { padding:1.5rem; }
+
+.pf-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.pf-full { grid-column:1/-1; }
+.pf-label { display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:rgba(0,0,0,0.45); margin-bottom:7px; }
+.pf-input, .pf-select, .pf-textarea { width:100%; border:1px solid rgba(0,0,0,0.15); border-radius:4px; padding:10px 12px; font-size:13px; color:#1A1A1A; outline:none; box-sizing:border-box; font-family:'Inter',system-ui,sans-serif; background:white; }
+.pf-input:focus, .pf-select:focus, .pf-textarea:focus { border-color:#821E25; }
+.pf-textarea { resize:vertical; min-height:90px; }
+.pf-note { font-size:11px; color:rgba(0,0,0,0.35); margin-top:5px; }
+
+.pf-save-row { display:flex; justify-content:flex-end; padding-top:1rem; border-top:1px solid rgba(0,0,0,0.07); margin-top:0.5rem; }
+.pf-save-btn { background:#821E25; color:white; border:none; border-radius:4px; padding:12px 28px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; cursor:pointer; font-family:'Inter',system-ui,sans-serif; }
+.pf-save-btn:hover { background:#5F1219; }
+
+.pf-section-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:rgba(0,0,0,0.35); border-bottom:1px solid rgba(0,0,0,0.07); padding-bottom:10px; margin:1.5rem 0 1rem; grid-column:1/-1; }
+.pf-section-title:first-child { margin-top:0; }
+</style>
+
+<div class="pdb-header">
+  <h1><%= @school.name %></h1>
+  <p><%= [@school.city, @school.state].compact.join(", ") %> &middot; <%= @school.board %></p>
+  <div class="pdb-header-actions">
+    <%= link_to "View Public Listing →", school_path(@school), target: "_blank", class: "pdb-view-btn" %>
+  </div>
+</div>
+
+<%= form_with url: portal_update_path, method: :patch, local: true do |f| %>
+
+  <!-- BASIC INFO -->
+  <div class="pdb-card">
+    <div class="pdb-card-head"><h2>Basic Information</h2></div>
+    <div class="pdb-card-body">
+      <div class="pf-grid">
+        <div class="pf-full">
+          <label class="pf-label">School Name</label>
+          <input class="pf-input" type="text" name="school[name]" value="<%= @school.name %>">
+        </div>
+        <div>
+          <label class="pf-label">Board / Affiliation</label>
+          <select class="pf-select" name="school[board]">
+            <% %w[CBSE ICSE IB State\ Board IGCSE Cambridge Other].each do |b| %>
+              <option value="<%= b %>" <%= 'selected' if @school.board == b %>><%= b %></option>
+            <% end %>
+          </select>
+        </div>
+        <div>
+          <label class="pf-label">School Type</label>
+          <select class="pf-select" name="school[type]">
+            <% ["Private", "Government", "Government-Aided", "International", "Trust"].each do |t| %>
+              <option value="<%= t %>" <%= 'selected' if @school.type == t %>><%= t %></option>
+            <% end %>
+          </select>
+        </div>
+        <div>
+          <label class="pf-label">Gender</label>
+          <select class="pf-select" name="school[gender]">
+            <% ["Co-Ed", "Boys", "Girls"].each do |g| %>
+              <option value="<%= g %>" <%= 'selected' if @school.gender == g %>><%= g %></option>
+            <% end %>
+          </select>
+        </div>
+        <div>
+          <label class="pf-label">Grades Offered</label>
+          <input class="pf-input" type="text" name="school[grades]" value="<%= @school.grades %>" placeholder="e.g. Nursery–Grade 12">
+        </div>
+        <div>
+          <label class="pf-label">Year Established</label>
+          <input class="pf-input" type="number" name="school[established]" value="<%= @school.established %>" placeholder="e.g. 1988">
+        </div>
+        <div>
+          <label class="pf-label">Student : Teacher Ratio</label>
+          <input class="pf-input" type="text" name="school[student_teacher_ratio]" value="<%= @school.student_teacher_ratio %>" placeholder="e.g. 20:1">
+        </div>
+        <div class="pf-full">
+          <label class="pf-label">Address</label>
+          <input class="pf-input" type="text" name="school[address]" value="<%= @school.address %>">
+        </div>
+        <div class="pf-full">
+          <label class="pf-label">About Your School</label>
+          <textarea class="pf-textarea" name="school[description]" rows="5"><%= @school.description %></textarea>
+        </div>
+        <div class="pf-full">
+          <label class="pf-label">Key Facilities <span style="font-weight:400;">(comma-separated)</span></label>
+          <input class="pf-input" type="text" name="school[facilities]" value="<%= @school.facilities %>" placeholder="Library, Science Lab, Sports Ground, Swimming Pool...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="pdb-card">
+    <div class="pdb-card-head"><h2>Contact Details</h2></div>
+    <div class="pdb-card-body">
+      <div class="pf-grid">
+        <div>
+          <label class="pf-label">Phone Number</label>
+          <input class="pf-input" type="tel" name="school[phone]" value="<%= @school.phone %>">
+        </div>
+        <div>
+          <label class="pf-label">Email Address</label>
+          <input class="pf-input" type="email" name="school[email]" value="<%= @school.email %>">
+        </div>
+        <div class="pf-full">
+          <label class="pf-label">Website</label>
+          <input class="pf-input" type="url" name="school[website]" value="<%= @school.website %>" placeholder="https://...">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEES -->
+  <div class="pdb-card">
+    <div class="pdb-card-head"><h2>Fees</h2></div>
+    <div class="pdb-card-body">
+      <div class="pf-grid">
+        <div>
+          <label class="pf-label">Annual Fees — Minimum (₹)</label>
+          <input class="pf-input" type="number" name="school[annual_fees_min]" value="<%= @school.annual_fees_min %>">
+        </div>
+        <div>
+          <label class="pf-label">Annual Fees — Maximum (₹)</label>
+          <input class="pf-input" type="number" name="school[annual_fees_max]" value="<%= @school.annual_fees_max %>">
+        </div>
+        <div>
+          <label class="pf-label">Admission / Registration Fee (₹)</label>
+          <input class="pf-input" type="number" name="school[admission_fee]" value="<%= @school.admission_fee %>">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMISSIONS -->
+  <div class="pdb-card">
+    <div class="pdb-card-head"><h2>Admissions</h2></div>
+    <div class="pdb-card-body">
+      <div class="pf-grid">
+        <div class="pf-full" style="display:flex;align-items:center;gap:10px;padding-bottom:1rem;border-bottom:1px solid rgba(0,0,0,0.07);">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
+            <input type="hidden" name="school[admission_open]" value="0">
+            <input type="checkbox" name="school[admission_open]" value="1" <%= 'checked' if @school.admission_open? %> style="width:16px;height:16px;accent-color:#821E25;">
+            Admissions are currently <strong>open</strong>
+          </label>
+        </div>
+        <div>
+          <label class="pf-label">Applications Open</label>
+          <input class="pf-input" type="text" name="school[admission_start]" value="<%= @school.admission_start %>" placeholder="e.g. January 2026">
+        </div>
+        <div>
+          <label class="pf-label">Application Deadline</label>
+          <input class="pf-input" type="text" name="school[admission_deadline]" value="<%= @school.admission_deadline %>" placeholder="e.g. 31 March 2026">
+        </div>
+        <div class="pf-full">
+          <label class="pf-label">Admission Criteria</label>
+          <textarea class="pf-textarea" name="school[admission_criteria]"><%= @school.admission_criteria %></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTOS -->
+  <div class="pdb-card">
+    <div class="pdb-card-head"><h2>Photos</h2></div>
+    <div class="pdb-card-body">
+      <div class="pf-grid">
+        <div class="pf-full">
+          <label class="pf-label">Main Cover Photo URL</label>
+          <% if @school.image_url.present? %>
+            <img src="<%= @school.image_url %>" style="width:100%;height:140px;object-fit:cover;border-radius:4px;margin-bottom:8px;" onerror="this.style.display='none'">
+          <% end %>
+          <input class="pf-input" type="url" name="school[image_url]" value="<%= @school.image_url %>" placeholder="https://...">
+        </div>
+        <div class="pf-full">
+          <label class="pf-label">Gallery Photos <span style="font-weight:400;">(one URL per line)</span></label>
+          <% gallery = begin; JSON.parse(@school.gallery_images.to_s); rescue; []; end %>
+          <textarea class="pf-textarea" name="school[gallery_images]" rows="5" placeholder="https://...&#10;https://..."><%= gallery.join("\n") %></textarea>
+          <p class="pf-note">Paste photo URLs — one per line. These appear in the gallery on your school page.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="pdb-card">
+    <div class="pdb-card-head"><h2>Insights & Highlights</h2></div>
+    <div class="pdb-card-body">
+      <label class="pf-label">School Insights <span style="font-weight:400;">(achievements, programmes, unique features)</span></label>
+      <textarea class="pf-textarea" name="school[insights]" rows="6"><%= @school.insights %></textarea>
+    </div>
+  </div>
+
+  <div class="pf-save-row">
+    <button type="submit" class="pf-save-btn">Save All Changes</button>
+  </div>
+
+<% end %>

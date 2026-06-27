@@ -1,0 +1,367 @@
+<% content_for :title, "Find Schools — The Schools of India" %>
+
+<style>
+.filter-select {
+  border: 1px solid rgba(0,0,0,0.12);
+  background: white;
+  padding: 9px 14px;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  min-width: 140px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+.filter-select:focus { border-color: #821E25; }
+.search-input {
+  border: 1px solid rgba(0,0,0,0.12);
+  padding: 9px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  background: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+.search-input:focus { border-color: #821E25; }
+.school-card {
+  border: 1px solid rgba(0,0,0,0.08);
+  background: white;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  gap: 0;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.school-card:hover { border-color: #821E25; box-shadow: 0 2px 16px rgba(130,30,37,0.1); }
+.school-card-img {
+  width: 160px;
+  min-height: 120px;
+  flex-shrink: 0;
+  background: #f0ece8;
+  overflow: hidden;
+  position: relative;
+}
+.school-card-img img { width:100%; height:100%; object-fit:cover; }
+.school-card-body { flex:1; padding:18px 20px; min-width:0; }
+.chip {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: #FAF9F6;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 3px 8px;
+  margin: 2px 3px 2px 0;
+}
+.chip-active { background: #821E25; color: white; border-color: #821E25; cursor:pointer; }
+.load-more-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 14px 40px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.load-more-btn:hover { border-color: #821E25; color: #821E25; }
+.city-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+}
+.city-suggestions li { padding:9px 14px; cursor:pointer; font-size:13px; border-bottom:1px solid rgba(0,0,0,0.04); list-style:none; }
+.city-suggestions li:hover { background:#FAF9F6; }
+@media(max-width:600px) {
+  .school-card { flex-direction:column; }
+  .school-card-img { width:100%; height:160px; }
+}
+</style>
+
+<div style="background:white; border-bottom:1px solid rgba(0,0,0,0.08); padding:1.5rem 3rem;">
+  <div style="max-width:1280px; margin:0 auto;">
+    <h1 style="font-family:Georgia, serif; font-size:1.75rem; color:#5F1219; margin:0 0 0.25rem;">School Directory</h1>
+    <p style="font-size:12px; opacity:0.5; margin:0;">Search and filter <span id="totalCount">…</span> schools across India</p>
+  </div>
+</div>
+
+<div style="max-width:1280px; margin:0 auto; padding:1.5rem 3rem;">
+  <!-- Filters -->
+  <div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:1.25rem; margin-bottom:1.5rem;">
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;">
+      <!-- Name search -->
+      <div style="flex:2; min-width:160px;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">School Name</label>
+        <input type="text" class="search-input" id="filterQ" placeholder="Search schools…" autocomplete="off" value="<%= @initial_query %>">
+      </div>
+
+      <!-- City -->
+      <div style="flex:1.5; min-width:130px; position:relative;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">City</label>
+        <input type="text" class="search-input" id="filterCity" placeholder="Any city…" autocomplete="off" value="<%= @initial_city %>">
+        <ul class="city-suggestions" id="citySuggestions" style="display:none;"></ul>
+      </div>
+
+      <!-- State -->
+      <div style="flex:1.5; min-width:130px;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">State</label>
+        <select class="filter-select" id="filterState">
+          <option value="">All States</option>
+          <% @states.each do |st| %>
+            <option value="<%= st %>" <%= "selected" if st == @initial_state %>><%= st %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <!-- Board -->
+      <div style="flex:1.5; min-width:120px;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">Board</label>
+        <select class="filter-select" id="filterBoard">
+          <option value="">All Boards</option>
+          <% @boards.each do |b| %>
+            <option value="<%= b %>" <%= "selected" if b == @initial_board %>><%= b %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <!-- Type -->
+      <div style="flex:1.2; min-width:110px;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">Type</label>
+        <select class="filter-select" id="filterType">
+          <option value="">All Types</option>
+          <% @types.each do |t| %>
+            <option value="<%= t %>"><%= t %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <!-- Clear -->
+      <button onclick="clearFilters()" style="padding:9px 16px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; border:1px solid rgba(0,0,0,0.12); background:white; cursor:pointer; white-space:nowrap; align-self:flex-end;">Clear</button>
+    </div>
+  </div>
+
+  <!-- Active filter chips -->
+  <div id="activeFilters" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:1rem;"></div>
+
+  <!-- Results -->
+  <div id="schoolGrid" style="display:flex; flex-direction:column; gap:12px;">
+    <div style="text-align:center; padding:3rem; opacity:0.4;">
+      <p style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;">Loading schools…</p>
+    </div>
+  </div>
+
+  <button class="load-more-btn" id="loadMoreBtn" style="display:none;" onclick="loadMore()">Load More Schools</button>
+
+  <div id="endMessage" style="display:none; text-align:center; padding:2rem; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4;">All schools loaded</div>
+</div>
+
+<script>
+(function() {
+  let currentPage = 1;
+  let totalPages = 1;
+  let loading = false;
+  let debounceTimer;
+  let allCities = [];
+
+  const grid = document.getElementById('schoolGrid');
+  const totalCount = document.getElementById('totalCount');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const endMsg = document.getElementById('endMessage');
+
+  const filters = {
+    q: document.getElementById('filterQ'),
+    city: document.getElementById('filterCity'),
+    state: document.getElementById('filterState'),
+    board: document.getElementById('filterBoard'),
+    type: document.getElementById('filterType')
+  };
+
+  function getParams() {
+    const p = new URLSearchParams();
+    if (filters.q.value.trim()) p.set('q', filters.q.value.trim());
+    if (filters.city.value.trim()) p.set('city', filters.city.value.trim());
+    if (filters.state.value) p.set('state', filters.state.value);
+    if (filters.board.value) p.set('board', filters.board.value);
+    if (filters.type.value) p.set('type', filters.type.value);
+    return p;
+  }
+
+  function fetchSchools(page, append) {
+    if (loading) return;
+    loading = true;
+    const params = getParams();
+    params.set('page', page);
+    params.set('per', 24);
+
+    fetch('/api/schools?' + params.toString())
+      .then(r => r.json())
+      .then(data => {
+        if (!append) grid.innerHTML = '';
+        totalPages = data.pages || 1;
+        totalCount.textContent = (data.total || 0).toLocaleString();
+
+        if (!data.schools || data.schools.length === 0) {
+          if (!append) {
+            grid.innerHTML = '<div style="text-align:center; padding:4rem; opacity:0.4;"><p style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;">No schools found</p></div>';
+          }
+        } else {
+          data.schools.forEach(s => {
+            grid.insertAdjacentHTML('beforeend', schoolCardHTML(s));
+          });
+        }
+
+        loadMoreBtn.style.display = (page < totalPages) ? 'block' : 'none';
+        endMsg.style.display = (page >= totalPages && (data.total || 0) > 0) ? 'block' : 'none';
+        updateChips();
+        loading = false;
+      })
+      .catch(err => {
+        grid.innerHTML = '<div style="text-align:center; padding:3rem; color:#991b1b;"><p>Error loading schools. Please try again.</p></div>';
+        loading = false;
+      });
+  }
+
+  function schoolCardHTML(s) {
+    const fees = s.fees_display || 'On Request';
+    const boards = (s.board || 'CBSE').split(/[,\/]/).map(b => b.trim()).filter(Boolean);
+    const gender = s.gender === 'Co-Education' ? 'Co-Ed' : (s.gender || s.type || 'Co-Ed');
+    const rating = (s.rating || 4.5).toFixed(1);
+    const imgHtml = s.image_url
+      ? `<img src="${s.image_url}" alt="${esc(s.name)}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">`
+      : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;opacity:0.2;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>`;
+
+    const featured = s.is_featured ? `<div style="position:absolute;top:8px;left:8px;background:#821E25;color:white;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:2px 7px;">Promoted</div>` : '';
+
+    return `<a href="/schools/${s.id}" class="school-card">
+      <div class="school-card-img">${imgHtml}${featured}</div>
+      <div class="school-card-body">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;">
+          <h3 style="font-family:Georgia,serif;font-size:1rem;color:#5F1219;margin:0;line-height:1.3;">${esc(s.name)}</h3>
+          <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;font-size:11px;font-weight:700;padding:2px 8px;white-space:nowrap;flex-shrink:0;">★ ${rating}</span>
+        </div>
+        <p style="font-size:12px;opacity:0.55;margin:0 0 10px;display:flex;align-items:center;gap:4px;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${esc(s.city)}, ${esc(s.state)}
+        </p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+          ${boards.map(b => `<span class="chip">${esc(b)}</span>`).join('')}
+          <span class="chip">${esc(gender)}</span>
+          ${s.grades ? `<span class="chip" style="color:#666;">${esc(s.grades)}</span>` : ''}
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:13px;font-weight:700;color:#821E25;">${esc(fees)}/yr</span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#821E25;opacity:0.8;">View Details →</span>
+        </div>
+      </div>
+    </a>`;
+  }
+
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function updateChips() {
+    const chips = document.getElementById('activeFilters');
+    chips.innerHTML = '';
+    const labels = {q:'Name', city:'City', state:'State', board:'Board', type:'Type'};
+    Object.entries(filters).forEach(([key, el]) => {
+      const val = el.value;
+      if (!val) return;
+      chips.insertAdjacentHTML('beforeend',
+        `<span class="chip chip-active" onclick="clearFilter('${key}')">${labels[key]}: ${esc(val)} ✕</span>`);
+    });
+  }
+
+  window.clearFilter = function(key) {
+    const el = filters[key];
+    if (el) el.value = '';
+    resetAndFetch();
+  };
+
+  window.clearFilters = function() {
+    Object.values(filters).forEach(el => el.value = '');
+    resetAndFetch();
+  };
+
+  window.loadMore = function() {
+    currentPage++;
+    fetchSchools(currentPage, true);
+  };
+
+  function resetAndFetch() {
+    currentPage = 1;
+    fetchSchools(1, false);
+  }
+
+  function debounce(fn, ms) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(fn, ms);
+  }
+
+  // Attach filter listeners
+  filters.q.addEventListener('input', () => debounce(resetAndFetch, 350));
+  filters.city.addEventListener('change', resetAndFetch);
+  filters.state.addEventListener('change', resetAndFetch);
+  filters.board.addEventListener('change', resetAndFetch);
+  filters.type.addEventListener('change', resetAndFetch);
+
+  // City autocomplete
+  const cityInput = document.getElementById('filterCity');
+  const citySugg = document.getElementById('citySuggestions');
+
+  cityInput.addEventListener('input', function() {
+    const q = this.value.trim();
+    debounce(resetAndFetch, 400);
+    if (!q) { citySugg.style.display = 'none'; return; }
+
+    const local = allCities.filter(c => (c.city||'').toLowerCase().startsWith(q.toLowerCase())).slice(0,8);
+    if (local.length) renderCitySugg(local);
+    else {
+      fetch('/api/cities?q=' + encodeURIComponent(q) + '&limit=8')
+        .then(r=>r.json()).then(d => renderCitySugg(d.cities||[]));
+    }
+  });
+
+  function renderCitySugg(cities) {
+    if (!cities.length) { citySugg.style.display='none'; return; }
+    citySugg.innerHTML = cities.map(c =>
+      `<li onclick="selectCity('${(c.city||'').replace(/'/g,"\\'")}')">
+        ${esc(c.city)} <span style="opacity:0.4;font-size:11px;">${esc(c.state||'')}</span></li>`
+    ).join('');
+    citySugg.style.display = 'block';
+  }
+
+  window.selectCity = function(city) {
+    cityInput.value = city;
+    citySugg.style.display = 'none';
+    resetAndFetch();
+  };
+
+  document.addEventListener('click', e => {
+    if (!cityInput.contains(e.target)) citySugg.style.display = 'none';
+  });
+
+  // Load cities
+  fetch('/api/cities?limit=100').then(r=>r.json()).then(d => { allCities = d.cities || []; });
+
+  // Initial load
+  fetchSchools(1, false);
+})();
+</script>

@@ -1,0 +1,68 @@
+<% content_for :title, "Schools" %>
+
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+  <h1 style="font-size:1.5rem; font-weight:700; margin:0;">Schools (<%= @total %>)</h1>
+  <form method="get" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+    <input type="text" name="q" value="<%= @q %>" placeholder="Search…"
+      style="border:1px solid rgba(0,0,0,0.15); padding:8px 12px; font-size:13px; font-family:inherit; outline:none;">
+    <select name="state" style="border:1px solid rgba(0,0,0,0.15); padding:8px 12px; font-size:13px; font-family:inherit; outline:none;">
+      <option value="">All States</option>
+      <% @states.each do |st| %>
+        <option value="<%= st %>" <%= "selected" if st == @state %>><%= st %></option>
+      <% end %>
+    </select>
+    <button type="submit" style="background:#821E25; color:white; border:none; padding:8px 16px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit;">Filter</button>
+    <%= link_to "Clear", admin_schools_path, style:"font-size:12px; color:#821E25; text-decoration:none; padding:8px;" %>
+  </form>
+</div>
+
+<div style="background:white; border:1px solid rgba(0,0,0,0.08);">
+  <table style="width:100%; border-collapse:collapse; font-size:13px;">
+    <thead>
+      <tr style="border-bottom:2px solid rgba(0,0,0,0.08); background:#fafafa;">
+        <th style="text-align:left; padding:10px 16px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">ID</th>
+        <th style="text-align:left; padding:10px 8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">School</th>
+        <th style="text-align:left; padding:10px 8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">City</th>
+        <th style="text-align:left; padding:10px 8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">Board</th>
+        <th style="text-align:left; padding:10px 8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">Rating</th>
+        <th style="text-align:left; padding:10px 8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">Featured</th>
+        <th style="padding:10px 8px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @schools.each do |s| %>
+        <tr style="border-bottom:1px solid rgba(0,0,0,0.05);">
+          <td style="padding:10px 16px; opacity:0.4; font-size:12px;"><%= s.id %></td>
+          <td style="padding:10px 8px; font-weight:600;">
+            <%= link_to s.name, school_path(s), target: "_blank", style:"color:#5F1219; text-decoration:none;" %>
+          </td>
+          <td style="padding:10px 8px; opacity:0.65;"><%= s.city %>, <%= s.state %></td>
+          <td style="padding:10px 8px; opacity:0.65;"><%= s.board %></td>
+          <td style="padding:10px 8px;"><%= s.rating.to_f.round(1) %></td>
+          <td style="padding:10px 8px;">
+            <%= s.is_featured == 1 ? "⭐ Yes" : "—" %>
+          </td>
+          <td style="padding:10px 8px;">
+            <%= link_to "Edit", edit_admin_school_path(s), style:"color:#821E25; font-size:12px; font-weight:600; text-decoration:none; margin-right:12px;" %>
+            <%= link_to "View", school_path(s), target: "_blank", style:"color:#666; font-size:12px; text-decoration:none;" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% if @schools.empty? %>
+    <div style="padding:2rem; text-align:center; opacity:0.4; font-size:13px;">No schools found.</div>
+  <% end %>
+
+  <!-- Pagination -->
+  <% total_pages = (@total.to_f / 50).ceil %>
+  <% if total_pages > 1 %>
+    <div style="padding:12px 16px; border-top:1px solid rgba(0,0,0,0.06); display:flex; gap:8px; align-items:center;">
+      <% (1..total_pages).each do |p| %>
+        <%= link_to p.to_s, admin_schools_path(q: @q, state: @state, page: p),
+          style: "padding:4px 10px; border:1px solid rgba(0,0,0,#{@page == p ? '0.3' : '0.1'}); font-size:12px; text-decoration:none; color:#{@page == p ? '#821E25' : 'inherit'}; font-weight:#{@page == p ? '700' : '400'};" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

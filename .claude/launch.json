@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "tsoi-rails",
+      "runtimeExecutable": "/opt/homebrew/opt/ruby/bin/ruby",
+      "runtimeArgs": ["bin/rails", "server", "-p", "4000", "-b", "127.0.0.1"],
+      "port": 4000
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<% content_for :title, "Inquiries" %>
+
+<style>
+.inq-table { width:100%; border-collapse:collapse; font-size:13px; }
+.inq-table th { text-align:left; padding:10px 12px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; border-bottom:2px solid rgba(0,0,0,0.08); white-space:nowrap; }
+.inq-table td { padding:12px; border-bottom:1px solid rgba(0,0,0,0.05); vertical-align:top; }
+.inq-table tr:hover td { background:#fafafa; }
+.inq-badge { display:inline-block; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; padding:3px 8px; border-radius:100px; }
+.inq-badge.new  { background:#fef3c7; color:#92400e; }
+.inq-badge.seen { background:#f3f4f6; color:#6b7280; }
+.inq-msg { font-size:12px; color:rgba(0,0,0,0.55); max-width:320px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.del-btn { background:none; border:1px solid rgba(0,0,0,0.15); color:rgba(0,0,0,0.4); border-radius:4px; padding:5px 10px; font-size:11px; cursor:pointer; }
+.del-btn:hover { background:#fee2e2; border-color:#fca5a5; color:#dc2626; }
+</style>
+
+<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;">
+  <div>
+    <h1 style="font-size:1.4rem; font-weight:700; margin:0 0 4px;">Form Inquiries</h1>
+    <p style="font-size:13px; color:rgba(0,0,0,0.45); margin:0;"><%= @inquiries.count %> total submissions</p>
+  </div>
+  <%= link_to "← Back to CMS", admin_content_path, style:"font-size:12px; font-weight:700; color:#821E25; text-decoration:none;" %>
+</div>
+
+<div style="background:white; border:1px solid rgba(0,0,0,0.08);">
+  <% if @inquiries.empty? %>
+    <div style="padding:4rem; text-align:center; color:rgba(0,0,0,0.35);">
+      <p style="font-size:2rem; margin:0 0 8px;">📭</p>
+      <p style="font-size:13px; margin:0;">No inquiries yet.</p>
+    </div>
+  <% else %>
+    <table class="inq-table">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Name</th>
+          <th>Contact</th>
+          <th>School</th>
+          <th>Service</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @inquiries.each do |inq| %>
+          <tr>
+            <td>
+              <span class="inq-badge <%= inq.status %>"><%= inq.status %></span>
+            </td>
+            <td style="font-weight:600; white-space:nowrap;"><%= inq.name %></td>
+            <td>
+              <div><a href="mailto:<%= inq.email %>" style="color:#821E25; text-decoration:none; font-size:12px;"><%= inq.email %></a></div>
+              <div style="font-size:11px; color:rgba(0,0,0,0.45);"><%= inq.phone.presence || "—" %></div>
+            </td>
+            <td style="font-size:12px; color:rgba(0,0,0,0.6);"><%= inq.school_name.presence || "—" %></td>
+            <td>
+              <span style="font-size:11px; font-weight:600; background:#f4f0e6; padding:3px 8px; border-radius:4px; white-space:nowrap;"><%= inq.service.humanize %></span>
+            </td>
+            <td><p class="inq-msg"><%= inq.message.presence || "—" %></p></td>
+            <td style="font-size:11px; color:rgba(0,0,0,0.4); white-space:nowrap;"><%= inq.created_at.strftime("%-d %b %Y") %></td>
+            <td>
+              <%= button_to "Delete", admin_inquiry_path(inq), method: :delete, data: { confirm: "Delete this inquiry?" }, class: "del-btn", form: { style: "display:inline;" } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

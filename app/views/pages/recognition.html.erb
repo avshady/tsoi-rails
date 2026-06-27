@@ -1,0 +1,29 @@
+<% content_for :title, "Recognition & Certification — The Schools of India" %>
+
+<div style="max-width:1000px; margin:0 auto; padding:5rem 3rem; text-align:center;">
+  <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; opacity:0.4; margin:0 0 1rem;">Official Recognition</p>
+  <h1 style="font-family:Georgia, serif; font-size:clamp(2rem, 4vw, 3.5rem); color:#5F1219; margin:0 0 1.5rem; font-weight:400;">TSOI Certification Program</h1>
+  <p style="font-size:1rem; opacity:0.65; font-weight:300; max-width:600px; margin:0 auto 3rem; line-height:1.6;">
+    Get your school recognized by The Schools of India — India's most trusted school discovery and quality assurance platform.
+  </p>
+
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(0,0,0,0.08); margin-bottom:3rem;">
+    <% [
+      ["Verified", "Basic school info verified, listed in the directory with Verified badge."],
+      ["Certified", "Full audit of academic standards, infrastructure, and management quality."],
+      ["Promoted", "Premium placement, featured on homepage and priority search rankings."]
+    ].each do |tier, desc| %>
+      <div style="background:white; padding:32px 24px;">
+        <div style="width:48px; height:48px; background:#821E25; color:white; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; display:flex; align-items:center; justify-content:center; margin:0 auto 14px;">✓</div>
+        <h3 style="font-size:1.1rem; font-weight:700; margin:0 0 10px;"><%= tier %></h3>
+        <p style="font-size:13px; opacity:0.6; margin:0; line-height:1.5;"><%= desc %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div style="background:#5F1219; color:white; padding:3rem; text-align:center;">
+    <h2 style="font-family:Georgia, serif; font-size:1.75rem; margin:0 0 1rem; font-weight:400;">Apply for Certification</h2>
+    <p style="opacity:0.7; margin:0 0 2rem; font-weight:300;">Contact our team to begin the certification process for your school.</p>
+    <%= link_to "Contact Us →", contact_path, style: "display:inline-block; border:1px solid rgba(255,255,255,0.3); color:white; text-decoration:none; padding:12px 28px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;" %>
+  </div>
+</div>

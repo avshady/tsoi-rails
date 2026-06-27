@@ -1,0 +1,99 @@
+<% content_for :title, "About Us — The Schools of India" %>
+
+<style>
+body { background:#f4f0e6 !important; }
+</style>
+
+<!-- Hero -->
+<section style="background:#f4f0e6; padding:6rem 3rem 0; max-width:1280px; margin:0 auto;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;">
+    <div>
+      <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 1.5rem;">About TSOI</p>
+      <h1 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2.8rem,5vw,5rem); line-height:1.08; color:#1A1A1A; margin:0 0 2rem; font-weight:700; letter-spacing:-0.03em;">
+        The School<br>Behind the<br><em style="color:#821E25;">Schools.</em>
+      </h1>
+      <p style="font-size:1.15rem; color:rgba(0,0,0,0.6); line-height:1.75; font-weight:300; max-width:480px; margin:0 0 2.5rem;">
+        TSOI functions as the backbone of great schooling. We are not a competing institution, but a supportive ecosystem that elevates educational standards across India — from land and infrastructure to curriculum, staffing, and technology.
+      </p>
+      <%= link_to services_path, style: "display:inline-flex; align-items:center; gap:10px; background:#821E25; color:white; text-decoration:none; padding:16px 32px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; border-radius:100px;" do %>
+        Our Services
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      <% end %>
+    </div>
+    <div style="position:relative;">
+      <div style="background:#ddd8d0; aspect-ratio:4/5; overflow:hidden; border-radius:4px; position:relative;">
+        <img src="/images/about-hero.png"
+             alt="TSOI team planning a school campus"
+             style="width:100%; height:100%; object-fit:cover; mix-blend-mode:multiply; opacity:0.85; filter:grayscale(1); transition:all 0.8s;"
+             onmouseover="this.style.filter='grayscale(0)'; this.style.transform='scale(1.04)'"
+             onmouseout="this.style.filter='grayscale(1)'; this.style.transform='scale(1)'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission -->
+<section style="background:#f4f0e6; padding:6rem 3rem;">
+  <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 2fr; gap:5rem; align-items:start;">
+    <div>
+      <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 1rem;">Our Mission</p>
+      <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2rem,3vw,3rem); font-weight:700; color:#1A1A1A; margin:0; line-height:1.15; letter-spacing:-0.02em;">
+        Elevating education,<br><em style="color:#821E25;">one school at a time.</em>
+      </h2>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; padding-top:0.5rem;">
+      <% [
+        ["We Connect", "We bridge the gap between landowners, operators, publishers, EdTech providers, and educators — creating a seamless ecosystem for schools to thrive."],
+        ["We Advise", "Our consultants have worked with hundreds of schools across India. We bring that experience to bear on every engagement, big or small."],
+        ["We Build", "From site assessment to interior fit-out, we help build school campuses that are safe, functional, and inspiring for students."],
+        ["We Scale", "Whether you run one school or ten, TSOI provides the systems, talent, and strategy to grow without losing quality."]
+      ].each do |title, body| %>
+        <div style="border-top:2px solid #821E25; padding-top:1.25rem;">
+          <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.3rem; font-weight:700; color:#1A1A1A; margin:0 0 0.75rem;"><%=title%></h3>
+          <p style="font-size:14px; color:rgba(0,0,0,0.6); line-height:1.7; margin:0;"><%=body%></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- What We Believe -->
+<section style="background:#1A1A1A; padding:6rem 3rem;">
+  <div style="max-width:1280px; margin:0 auto;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 1rem; text-align:center;">What We Believe</p>
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2rem,3.5vw,3.5rem); font-weight:700; color:white; margin:0 0 4rem; text-align:center; letter-spacing:-0.02em;">
+      Our values guide every decision.
+    </h2>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem;">
+      <% [
+        ["01", "Modern Learning", "Contemporary spaces and methods that inspire curiosity and creativity in every student."],
+        ["02", "Excellence", "Rigorous standards that prepare students for life beyond the classroom."],
+        ["03", "Holistic Growth", "Nurturing mind, body, and character for complete human flourishing."],
+        ["04", "Engaged Learning", "Active participation over passive absorption — learning by doing."]
+      ].each do |num, title, desc| %>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:4px; padding:2rem;">
+          <p style="font-family:'Playfair Display',Georgia,serif; font-size:2.5rem; font-weight:700; color:rgba(130,30,37,0.4); margin:0 0 1.25rem; line-height:1;"><%=num%></p>
+          <h3 style="font-size:1.05rem; font-weight:700; color:white; margin:0 0 0.75rem;"><%=title%></h3>
+          <p style="font-size:13px; color:rgba(255,255,255,0.5); margin:0; line-height:1.6;"><%=desc%></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:#821E25; padding:6rem 3rem; text-align:center;">
+  <div style="max-width:700px; margin:0 auto;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.5); margin:0 0 1.25rem;">Get In Touch</p>
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2.2rem,4vw,3.5rem); font-weight:700; color:white; margin:0 0 1.25rem; letter-spacing:-0.02em; line-height:1.1;">
+      Want to know more?
+    </h2>
+    <p style="color:rgba(255,255,255,0.65); font-size:1.05rem; font-weight:300; margin:0 0 2.5rem; line-height:1.7;">
+      Reach out to our team — we'd love to hear from you and explore how TSOI can support your school.
+    </p>
+    <%= link_to contact_path, style: "display:inline-flex; align-items:center; gap:10px; background:white; color:#821E25; text-decoration:none; padding:16px 36px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; border-radius:100px;" do %>
+      Contact Us
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <% end %>
+  </div>
+</section>

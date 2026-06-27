@@ -1,0 +1,230 @@
+<% content_for :title, "The Schools of India | Launch, Build & Scale Your School" %>
+
+<style>
+/* Page-level theme overrides */
+body { background-color: #f4f0e6 !important; }
+
+@keyframes blob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(0,0) scale(1); }
+  33%       { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: translate(30px,-20px) scale(1.05); }
+  66%       { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; transform: translate(-20px,15px) scale(0.97); }
+}
+.blob { animation: blob 8s ease-in-out infinite; }
+.blob-delay-2 { animation-delay: 2s; }
+.blob-delay-4 { animation-delay: 4s; }
+
+@keyframes marquee-lbs { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+.marquee-lbs { animation: marquee-lbs 22s linear infinite; }
+
+.pillar:hover .pillar-shape { transform: scale(1.06); }
+.pillar-shape { transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.pillar:hover .pillar-arrow { background:#821E25; color:white; border-color:#821E25; }
+.pillar-arrow { transition: background 0.2s, color 0.2s, border-color 0.2s; }
+
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 20s linear infinite; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+.fade-up { animation: fadeUp 0.8s ease forwards; }
+</style>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section style="background:#f4f0e6; min-height:calc(100vh - 73px); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:4rem 3rem;">
+  <!-- Blobs -->
+  <div class="blob" style="position:absolute; top:10%; left:8%; width:320px; height:320px; background:#821E25; mix-blend-mode:multiply; opacity:0.18; filter:blur(60px); pointer-events:none;"></div>
+  <div class="blob blob-delay-2" style="position:absolute; top:30%; right:10%; width:280px; height:280px; background:#e4f0fc; mix-blend-mode:multiply; opacity:0.7; filter:blur(60px); pointer-events:none;"></div>
+  <div class="blob blob-delay-4" style="position:absolute; bottom:-5%; left:28%; width:360px; height:360px; background:#fad0c0; mix-blend-mode:multiply; opacity:0.6; filter:blur(60px); pointer-events:none;"></div>
+
+  <div style="max-width:1280px; width:100%; margin:0 auto; position:relative; z-index:1;">
+    <div style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+      <!-- Pill badge -->
+      <div style="display:inline-flex; align-items:center; gap:8px; border:2px solid #101010; background:white; padding:8px 20px; border-radius:100px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; margin-bottom:2.5rem; box-shadow:4px 4px 0 #101010; transform:rotate(-1.5deg);">
+        Empowering Education Since Day One
+      </div>
+
+      <!-- Headline -->
+      <h1 style="font-family:Georgia,serif; font-size:clamp(2.5rem,5vw,5rem); font-weight:700; line-height:1.08; letter-spacing:-0.03em; color:#1A1A1A; margin:0 0 1.5rem; max-width:820px;">
+        Everything you need<br>to build
+        <em style="font-style:normal; color:#821E25;"> Great Schools.</em>
+      </h1>
+
+      <!-- Sub -->
+      <p style="font-size:clamp(1rem,1.5vw,1.25rem); font-weight:400; color:rgba(0,0,0,0.55); max-width:680px; line-height:1.65; margin:0 0 3rem;">
+        Whether you're starting your first school from scratch, optimising current operations, or scaling across states, we provide the network and systems.
+      </p>
+
+      <!-- CTAs -->
+      <div style="display:flex; flex-wrap:wrap; gap:1.25rem; justify-content:center;">
+        <%= link_to partner_path, style: "display:inline-flex; align-items:center; gap:8px; background:#1A1A1A; color:#f4f0e6; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; padding:16px 32px; border-radius:100px; text-decoration:none; transition:transform 0.2s, background 0.2s; box-shadow:4px 4px 0 rgba(0,0,0,0.15);", onmouseover: "this.style.transform='translateY(-2px)'", onmouseout: "this.style.transform='translateY(0)'" do %>
+          Explore Our Services
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <% end %>
+        <%= link_to schools_path, style: "display:inline-flex; align-items:center; gap:8px; background:transparent; color:#1A1A1A; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; padding:16px 32px; border-radius:100px; text-decoration:none; border:2px solid rgba(0,0,0,0.2); transition:border-color 0.2s;", onmouseover: "this.style.borderColor='#1A1A1A'", onmouseout: "this.style.borderColor='rgba(0,0,0,0.2)'" do %>
+          Find Schools →
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Floating school images -->
+    <div style="position:absolute; bottom:-2rem; left:3rem; width:160px; height:160px; border-radius:50%; border:4px solid white; box-shadow:0 8px 32px rgba(0,0,0,0.15); overflow:hidden; transform:rotate(-6deg); display:none;" class="lg-show">
+      <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=400" alt="Students" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div style="position:absolute; top:2rem; right:3rem; width:140px; height:140px; border-radius:24px; border:4px solid white; box-shadow:0 8px 32px rgba(0,0,0,0.15); overflow:hidden; transform:rotate(8deg); display:none;" class="lg-show">
+      <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=400" alt="Teacher" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<!-- Scrolling ticker -->
+<div style="width:100%; overflow:hidden; background:#101010; padding:14px 0; border-top:2px solid rgba(255,255,255,0.06);">
+  <div class="marquee-lbs" style="display:flex; gap:0; white-space:nowrap; width:max-content;">
+    <% 2.times do %>
+      <% ["Launch a School", "Board Affiliation", "CBSE · ICSE · IB · IGCSE", "Land & Infrastructure", "Regulatory Approvals", "Curriculum Systems", "Staff Recruitment", "ERP & Tech Stack", "Fee Management", "TSOI Certification", "Multi Campus Expansion", "School Franchise", "Future Schools Summit", "₹60K+ Schools on Platform"].each do |word| %>
+        <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:rgba(255,255,255,0.35); padding:0 2rem; flex-shrink:0;">
+          <%= word %> <span style="color:#821E25;">·</span>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     PILLARS: LAUNCH / BUILD / SCALE
+════════════════════════════════ -->
+<style>
+.pillar-card { display:flex; flex-direction:column; background:#f4f0e6; cursor:pointer; transition:background 0.3s; height:100%; }
+.pillar-card:hover .pillar-person { transform:scale(1.06); }
+.pillar-person { transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); will-change:transform; }
+.pillar-card:hover .p-arrow { background:#821E25; color:white; border-color:#821E25; }
+.p-arrow { transition: background 0.2s, color 0.2s, border-color 0.2s; }
+.pillars-grid { height:100%; grid-template-rows:100%; }
+.pillars-grid > a { display:block; height:100%; }
+</style>
+
+<section style="background:#f4f0e6; border-top:1px solid rgba(0,0,0,0.07); height:100vh; overflow:hidden;">
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; height:100%;" class="pillars-grid">
+
+    <!-- 01 LAUNCH -->
+    <a href="<%= partner_path %>" style="text-decoration:none;">
+    <div class="pillar-card" style="border-right:1px solid rgba(0,0,0,0.08);">
+      <!-- Top meta -->
+      <div style="padding:1rem 2rem 0; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:#821E25;">Phase 01</span>
+        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:#821E25;">Launch</span>
+      </div>
+
+      <!-- Visual: aerial land parcel -->
+      <div style="position:relative; flex:1; min-height:0; overflow:hidden;">
+        <img class="pillar-person" src="/images/land-building-hero.jpg" alt="Land Parcel" style="width:100%; height:100%; object-fit:cover; object-position:center 60%; display:block; transform:scale(1.5); transform-origin:center 65%; transition:transform 0.7s cubic-bezier(0.16,1,0.3,1);">
+        <div style="position:absolute; inset:0; background:rgba(130,30,37,0.08); pointer-events:none;"></div>
+      </div>
+
+      <!-- Text -->
+      <div style="padding:1rem 2rem 1rem; text-align:center;">
+        <h3 style="font-family:Georgia,serif; font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; color:#1A1A1A; margin:0 0 0.5rem; letter-spacing:-0.03em;">Launch.</h3>
+        <p style="font-size:14px; font-weight:400; color:rgba(0,0,0,0.55); line-height:1.75; margin:0 0 2rem; max-width:300px; margin-left:auto; margin-right:auto;">Build your school from a blank plot. Land, board affiliation, approvals, curriculum, and your founding team, all sorted.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; opacity:0.4; color:#1A1A1A;">Scroll to explore</span>
+          <div class="p-arrow" style="width:42px; height:42px; border-radius:50%; border:1px solid rgba(0,0,0,0.15); display:flex; align-items:center; justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    </a>
+
+    <!-- 02 BUILD -->
+    <a href="<%= services_path %>" style="text-decoration:none;">
+    <div class="pillar-card" style="border-right:1px solid rgba(0,0,0,0.08);">
+      <div style="padding:1rem 2rem 0; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:#821E25;">Phase 02</span>
+        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:#821E25;">Build</span>
+      </div>
+
+      <div style="position:relative; flex:1; min-height:0; overflow:hidden;">
+        <img class="pillar-person" src="/images/school-management-hero.png" alt="School Management Team" style="width:100%; height:100%; object-fit:cover; object-position:center 25%; display:block; transform:scale(1.08); transform-origin:center 25%; transition:transform 0.7s cubic-bezier(0.16,1,0.3,1);">
+        <div style="position:absolute; inset:0; background:rgba(130,30,37,0.06); pointer-events:none;"></div>
+      </div>
+
+      <div style="padding:1rem 2rem 1rem; text-align:center;">
+        <h3 style="font-family:Georgia,serif; font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; color:#1A1A1A; margin:0 0 0.5rem; letter-spacing:-0.03em;">Build.</h3>
+        <p style="font-size:14px; font-weight:400; color:rgba(0,0,0,0.55); line-height:1.75; margin:0 0 2rem; max-width:300px; margin-left:auto; margin-right:auto;">Optimise your running school. ERP, academics, teacher training, HR, fee management, and full compliance audits.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; opacity:0.4; color:#1A1A1A;">Scroll to explore</span>
+          <div class="p-arrow" style="width:42px; height:42px; border-radius:50%; border:1px solid rgba(0,0,0,0.15); display:flex; align-items:center; justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    </a>
+
+    <!-- 03 SCALE -->
+    <a href="<%= summit_path %>" style="text-decoration:none;">
+    <div class="pillar-card">
+      <div style="padding:1rem 2rem 0; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:#821E25;">Phase 03</span>
+        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:#821E25;">Scale</span>
+      </div>
+
+      <div style="position:relative; flex:1; min-height:0; overflow:hidden;">
+        <img class="pillar-person" src="/images/scale-campus.png" alt="School Campus" style="width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block; transform:scale(1.08); transform-origin:center 40%; transition:transform 0.7s cubic-bezier(0.16,1,0.3,1);">
+        <div style="position:absolute; inset:0; background:rgba(130,30,37,0.05); pointer-events:none;"></div>
+      </div>
+
+      <div style="padding:1rem 2rem 1rem; text-align:center;">
+        <h3 style="font-family:Georgia,serif; font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; color:#1A1A1A; margin:0 0 0.5rem; letter-spacing:-0.03em;">Scale.</h3>
+        <p style="font-size:14px; font-weight:400; color:rgba(0,0,0,0.55); line-height:1.75; margin:0 0 2rem; max-width:300px; margin-left:auto; margin-right:auto;">Ready for campus 2, 3, and beyond? Franchise model, multi campus ops, TSOI certification, rankings, and investor access.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; opacity:0.4; color:#1A1A1A;">Scroll to explore</span>
+          <div class="p-arrow" style="width:42px; height:42px; border-radius:50%; border:1px solid rgba(0,0,0,0.15); display:flex; align-items:center; justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CTA
+════════════════════════════════ -->
+<section style="background:#101010; padding:8rem 3rem; position:relative; overflow:hidden; border-top:1px solid rgba(255,255,255,0.06);">
+  <!-- blobs -->
+  <div style="position:absolute; top:-80px; left:-80px; width:360px; height:360px; background:#fad0c0; border-radius:50%; opacity:0.12; filter:blur(60px); pointer-events:none;"></div>
+  <div style="position:absolute; bottom:-80px; right:-80px; width:440px; height:440px; background:#e4f0fc; border-radius:50%; opacity:0.12; filter:blur(60px); pointer-events:none;"></div>
+  <div style="max-width:900px; margin:0 auto; text-align:center; position:relative;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.4); margin:0 0 1rem;">Join The Network</p>
+    <h2 style="font-family:Georgia,serif; font-size:clamp(2.5rem,5vw,5rem); font-weight:700; color:white; line-height:1.05; letter-spacing:-0.03em; margin:0 0 1.5rem;">
+      Join the network<br>of tomorrow.
+    </h2>
+    <p style="font-size:clamp(1rem,1.5vw,1.1rem); color:rgba(255,255,255,0.55); font-weight:400; max-width:600px; margin:0 auto 2.5rem; line-height:1.65;">
+      Get access to the Future Schools Summit, connect with educators, and find the systems to grow your institution.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:1.25rem; justify-content:center;">
+      <%= link_to partner_path, style: "display:inline-flex; align-items:center; gap:8px; background:#821E25; color:white; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; padding:14px 28px; border-radius:100px; text-decoration:none; transition:background 0.2s; box-shadow:4px 4px 0 rgba(250,208,192,0.4);", onmouseover: "this.style.background='#5F1219'", onmouseout: "this.style.background='#821E25'" do %>
+        Partner With Us
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      <% end %>
+      <%= link_to summit_path, style: "display:inline-flex; align-items:center; gap:8px; color:rgba(255,255,255,0.6); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; padding:14px 0; text-decoration:none; border-bottom:1px solid rgba(255,255,255,0.2); transition:color 0.2s;", onmouseover: "this.style.color='white'", onmouseout: "this.style.color='rgba(255,255,255,0.6)'" do %>
+        Future Schools Summit →
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<style>
+body { background-color: #f4f0e6 !important; }
+@media (max-width: 900px) {
+  .pillars-grid { grid-template-columns: 1fr !important; }
+  .pillars-grid > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .stats-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 640px) {
+  section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+}
+</style>

@@ -1,0 +1,64 @@
+/*
+ * TSOI — The Schools of India
+ * Global styles matching original Next.js design system
+ */
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #FAF9F6;
+  color: #1A1A1A;
+  line-height: 1.5;
+}
+a { color: inherit; }
+img { max-width: 100%; }
+button { font-family: inherit; }
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 700; }
+p { margin: 0; }
+
+/* ── Brand colors ── */
+.text-brand { color: #821E25; }
+.text-brand-dark { color: #5F1219; }
+.bg-brand { background: #821E25; }
+
+/* ── Utility ── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+@media (max-width: 768px) {
+  .container { padding: 0 1.25rem; }
+  nav { padding: 0 1.25rem !important; }
+  .nav-links { display: none !important; }
+}
+
+/* ── Responsive grid helpers ── */
+@media (max-width: 900px) {
+  [style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  [style*="grid-template-columns:1fr 2fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Nav mobile menu ── */
+#mobileMenu.open { display: flex !important; }
+
+/* ── Smooth scroll for detail page sidebar nav ── */
+.section-block { scroll-margin-top: 88px; }
+
+/* ── Focus styles ── */
+input:focus, select:focus, textarea:focus, button:focus {
+  outline: 2px solid #821E25;
+  outline-offset: 1px;
+}
+
+/* ── Transitions ── */
+a, button { transition: opacity 0.15s, color 0.15s; }

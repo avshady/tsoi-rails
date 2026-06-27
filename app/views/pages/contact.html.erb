@@ -1,0 +1,75 @@
+<% content_for :title, "Contact Us — The Schools of India" %>
+
+<div style="max-width:900px; margin:0 auto; padding:5rem 3rem;">
+  <div style="text-align:center; margin-bottom:3rem;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; opacity:0.4; margin:0 0 1rem;">Get In Touch</p>
+    <h1 style="font-family:Georgia, serif; font-size:clamp(2rem, 4vw, 3.5rem); color:#5F1219; margin:0 0 1rem; font-weight:400;">Contact Us</h1>
+    <p style="font-size:1rem; opacity:0.65; font-weight:300; max-width:500px; margin:0 auto; line-height:1.6;">
+      Whether you're a school, vendor, or parent — we're here to help.
+    </p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
+    <!-- Form -->
+    <div>
+      <form action="<%= contact_send_path %>" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+        <div style="margin-bottom:18px;">
+          <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:6px;">Your Name</label>
+          <input type="text" name="name" required placeholder="Full name"
+            style="width:100%; border:1px solid rgba(0,0,0,0.15); padding:12px 14px; font-size:14px; font-family:inherit; outline:none; box-sizing:border-box; background:white;">
+        </div>
+
+        <div style="margin-bottom:18px;">
+          <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:6px;">Email Address</label>
+          <input type="email" name="email" required placeholder="you@example.com"
+            style="width:100%; border:1px solid rgba(0,0,0,0.15); padding:12px 14px; font-size:14px; font-family:inherit; outline:none; box-sizing:border-box; background:white;">
+        </div>
+
+        <div style="margin-bottom:18px;">
+          <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:6px;">Subject</label>
+          <select name="subject" style="width:100%; border:1px solid rgba(0,0,0,0.15); padding:12px 14px; font-size:14px; font-family:inherit; outline:none; box-sizing:border-box; background:white; appearance:none;">
+            <option value="general">General Enquiry</option>
+            <option value="school">School Partnership</option>
+            <option value="vendor">Vendor Registration</option>
+            <option value="parent">Parent Enquiry</option>
+            <option value="summit">Summit Registration</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:24px;">
+          <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:6px;">Message</label>
+          <textarea name="message" required placeholder="How can we help you?" rows="5"
+            style="width:100%; border:1px solid rgba(0,0,0,0.15); padding:12px 14px; font-size:14px; font-family:inherit; outline:none; box-sizing:border-box; background:white; resize:vertical;"></textarea>
+        </div>
+
+        <button type="submit" style="width:100%; background:#821E25; color:white; border:none; padding:14px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer; font-family:inherit; transition:background 0.2s;">
+          Send Message
+        </button>
+      </form>
+    </div>
+
+    <!-- Info -->
+    <div>
+      <div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:28px; margin-bottom:1rem;">
+        <h3 style="font-size:1rem; font-weight:700; margin:0 0 14px;">TSOI Headquarters</h3>
+        <p style="font-size:13px; opacity:0.65; line-height:1.6; margin:0 0 16px;">
+          The Schools of India<br>
+          India's Premier School Discovery Platform
+        </p>
+        <p style="font-size:13px; font-weight:600; color:#821E25; margin:0;">
+          contact@theschoolsofindia.org
+        </p>
+      </div>
+
+      <div style="background:#5F1219; color:white; padding:28px;">
+        <h3 style="font-size:1rem; font-weight:700; margin:0 0 12px; font-family:Georgia,serif;">Response Time</h3>
+        <p style="font-size:13px; opacity:0.7; line-height:1.6; margin:0 0 14px; font-weight:300;">
+          We typically respond within 24–48 hours during business days.
+        </p>
+        <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5;">Mon – Sat, 9 AM to 6 PM IST</p>
+      </div>
+    </div>
+  </div>
+</div>

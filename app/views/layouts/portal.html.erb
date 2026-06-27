@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>School Portal — The Schools of India</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body { margin:0; font-family:'Inter',system-ui,sans-serif; background:#f4f0e6; color:#1A1A1A; font-size:14px; }
+      .portal-bar { background:#1A1A1A; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:56px; }
+      .portal-bar-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+      .portal-bar-logo img { height:28px; }
+      .portal-bar-logo span { color:rgba(255,255,255,0.5); font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.15em; }
+      .portal-bar-actions { display:flex; align-items:center; gap:1.5rem; }
+      .portal-bar-actions a { color:rgba(255,255,255,0.55); text-decoration:none; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; }
+      .portal-bar-actions a:hover { color:white; }
+      .portal-main { max-width:960px; margin:0 auto; padding:2.5rem 2rem 5rem; }
+      .flash-notice { background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; padding:12px 16px; border-radius:6px; margin-bottom:1.5rem; font-size:13px; }
+      .flash-alert  { background:#fef2f2; border:1px solid #fecaca; color:#dc2626; padding:12px 16px; border-radius:6px; margin-bottom:1.5rem; font-size:13px; }
+    </style>
+  </head>
+  <body>
+    <div class="portal-bar">
+      <a href="<%= root_path %>" class="portal-bar-logo">
+        <img src="/logo.png" alt="TSOI">
+        <span>School Portal</span>
+      </a>
+      <div class="portal-bar-actions">
+        <% if session[:portal_school_id] %>
+          <%= link_to "View Listing", school_path(session[:portal_school_id]), target: "_blank" %>
+          <%= button_to "Log Out", portal_logout_path, method: :delete, style: "background:none; border:none; cursor:pointer; color:rgba(255,255,255,0.55); font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; padding:0; font-family:inherit;" %>
+        <% else %>
+          <%= link_to "← Back to Site", root_path %>
+        <% end %>
+      </div>
+    </div>
+    <div class="portal-main">
+      <% if flash[:notice].present? %>
+        <div class="flash-notice"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert].present? %>
+        <div class="flash-alert"><%= flash[:alert] %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

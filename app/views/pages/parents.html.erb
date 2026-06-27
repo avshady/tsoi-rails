@@ -1,0 +1,633 @@
+<% content_for :title, "Parents Corner — Find the Right School | The Schools of India" %>
+
+<!-- ════════════════════════════════
+     PARENTS CORNER HERO
+════════════════════════════════ -->
+<div style="background:#f4f0e6; padding:3rem 3rem 2.5rem; width:100%;">
+  <div style="max-width:1280px; margin:0 auto; display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap;">
+    <div>
+      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:#821E25; margin-bottom:1rem;">Parents Corner</div>
+      <h1 style="font-family:Playfair Display,Georgia,serif; font-size:clamp(2.5rem,5vw,4rem); font-weight:700; line-height:1; letter-spacing:-0.02em; color:#1A1A1A; margin:0 0 1rem;">
+        Find the <span style="color:#821E25; font-style:italic;">Right School</span><br>for your child.
+      </h1>
+      <p style="font-size:1rem; color:rgba(0,0,0,0.55); font-weight:300; margin:0; max-width:480px; line-height:1.7;">
+        Browse <%= number_with_delimiter(@total_schools) %>+ verified schools across India. Filter by board, city, fees, and more.
+      </p>
+    </div>
+    <div style="display:flex; gap:2.5rem; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-family:Playfair Display,Georgia,serif; font-size:2rem; font-style:italic; color:#821E25; line-height:1;"><%= number_with_delimiter(@total_schools) %>+</div>
+        <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.15em; color:rgba(0,0,0,0.4); margin-top:4px;">Schools</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:Playfair Display,Georgia,serif; font-size:2rem; font-style:italic; color:#821E25; line-height:1;"><%= @states.count %>+</div>
+        <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.15em; color:rgba(0,0,0,0.4); margin-top:4px;">States</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:Playfair Display,Georgia,serif; font-size:2rem; font-style:italic; color:#821E25; line-height:1;">5</div>
+        <div style="font-size:9px; text-transform:uppercase; letter-spacing:0.15em; color:rgba(0,0,0,0.4); margin-top:4px;">Boards</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     SEARCH BAR
+════════════════════════════════ -->
+<div style="width:100%; max-width:1280px; margin:0 auto; padding:0 3rem;" class="finder-outer">
+  <div style="padding:1.5rem 2rem; background:white; border:1px solid rgba(0,0,0,0.1); box-shadow:0 4px 24px rgba(0,0,0,0.08); margin-top:-1px; margin-bottom:2rem; position:relative;">
+    <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+      <div style="flex:1; min-width:200px;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin-bottom:8px; opacity:0.5;">School Name</label>
+        <div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.4; flex-shrink:0;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input id="searchQ" type="text" placeholder="E.g. Delhi Public School" style="flex:1; border:none; outline:none; font-size:1.125rem; font-family:Playfair Display,Georgia,serif; background:transparent; color:#5F1219; min-width:0;" oninput="debouncedSearch()">
+        </div>
+      </div>
+      <div style="width:1px; height:48px; background:rgba(0,0,0,0.1); flex-shrink:0; display:none;" class="md:block"></div>
+      <div style="flex:1; min-width:200px;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin-bottom:8px; opacity:0.5;">City or Region</label>
+        <div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.4; flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <select id="locationFilter" onchange="applyFilters()" style="flex:1; border:none; outline:none; font-size:1.125rem; font-family:Playfair Display,Georgia,serif; background:transparent; color:#5F1219; cursor:pointer; appearance:none; min-width:0;">
+            <option value="">Anywhere in India</option>
+            <optgroup label="Top Cities">
+              <% @top_cities.each do |city| %>
+                <option value="district:<%= city %>"><%= city %></option>
+              <% end %>
+            </optgroup>
+            <optgroup label="Browse by State">
+              <% @states.each do |s| %>
+                <option value="state:<%= s %>"><%= s %></option>
+              <% end %>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Two columns: sidebar + results -->
+  <div style="display:flex; gap:2.5rem; align-items:flex-start; flex-wrap:wrap; padding-bottom:5rem;">
+
+    <!-- ── SIDEBAR ── -->
+    <div style="width:280px; flex-shrink:0; position:sticky; top:88px;" class="sidebar-wrap">
+      <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:1rem; margin-bottom:2rem;">
+        <h3 style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; margin:0; display:flex; align-items:center; gap:8px;">
+          <span style="display:inline-block; width:8px; height:8px; background:#821E25; border-radius:50%;"></span> Filters
+        </h3>
+        <button onclick="clearAllFilters()" style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:#821E25; background:none; border:none; cursor:pointer; font-family:inherit;" onmouseover="this.style.color='#5F1219'" onmouseout="this.style.color='#821E25'">Clear All</button>
+      </div>
+      <div style="margin-bottom:2rem;">
+        <h4 style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.6; margin:0 0 1rem;">Board</h4>
+        <div id="boardFilters" style="display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:12px; opacity:0.4; font-style:italic;">Loading…</div>
+        </div>
+      </div>
+      <div style="margin-bottom:2rem;">
+        <h4 style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.6; margin:0 0 1rem;">School Type</h4>
+        <div id="typeFilters" style="display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:12px; opacity:0.4; font-style:italic;">Loading…</div>
+        </div>
+      </div>
+      <div style="margin-bottom:2rem;">
+        <h4 style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.6; margin:0 0 1rem;">Max Annual Fee</h4>
+        <input type="range" id="feeSlider" min="50000" max="1500000" step="50000" value="1500000" oninput="onFeeSlider(this.value)" onchange="applyFilters()" style="width:100%; accent-color:#821E25; outline:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px; font-size:10px; font-family:monospace; opacity:0.6;">
+          <span>₹50K</span>
+          <span id="feeDisplay" style="color:#821E25; opacity:1; font-weight:700; font-size:12px; border:1px solid rgba(130,30,37,0.2); padding:2px 8px; background:rgba(130,30,37,0.05);">No Limit</span>
+          <span>₹15L+</span>
+        </div>
+      </div>
+      <div style="background:#f5f5f4; padding:1.5rem; border:1px solid rgba(0,0,0,0.05); text-align:center;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#821E25" stroke-width="1.5" style="margin:0 auto 12px; display:block;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <h4 style="font-size:14px; font-weight:700; margin:0 0 8px;">Verified Admissions</h4>
+        <p style="font-size:12px; opacity:0.7; margin:0 0 1rem; line-height:1.6;">Apply to our premium partnered schools with a single click.</p>
+        <%= link_to "See Partners", partner_path, style: "font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; border-bottom:1px solid #821E25; color:#821E25; padding-bottom:2px;" %>
+      </div>
+    </div>
+
+    <!-- ── RESULTS ── -->
+    <div style="flex:1; min-width:0;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:8px;">
+        <h2 id="resultsCount" style="font-family:Playfair Display,Georgia,serif; font-size:1.25rem; color:#5F1219; margin:0;">Loading schools…</h2>
+        <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5;">Sorted by Relevance</div>
+      </div>
+      <div id="schoolCards" style="display:flex; flex-direction:column; gap:1.5rem;"></div>
+      <div id="loadingState" style="display:flex; align-items:center; justify-content:center; padding:4rem; gap:12px; opacity:0.4;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+        <span style="font-size:13px; font-weight:600;">Loading schools…</span>
+      </div>
+      <div id="emptyState" style="display:none; flex-direction:column; align-items:center; padding:6rem 2rem; border:1px solid rgba(0,0,0,0.1); background:white; text-align:center;">
+        <div style="width:64px; height:64px; background:#f5f5f4; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.3;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <p style="font-family:Playfair Display,Georgia,serif; font-size:1.5rem; margin:0 0 0.75rem; opacity:0.4; color:#5F1219;">No institutions found.</p>
+        <button onclick="clearAllFilters()" style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; border:1px solid #821E25; color:#821E25; padding:10px 24px; background:none; cursor:pointer; font-family:inherit;" onmouseover="this.style.background='#821E25';this.style.color='white'" onmouseout="this.style.background='none';this.style.color='#821E25'">Clear All Filters</button>
+      </div>
+      <div id="loadMoreWrap" style="display:none; text-align:center; margin-top:2rem;">
+        <button onclick="loadMore()" style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; border:1px solid rgba(0,0,0,0.15); padding:14px 3rem; background:white; cursor:pointer; font-family:inherit; color:#1A1A1A;" onmouseover="this.style.borderColor='#821E25';this.style.color='#821E25'" onmouseout="this.style.borderColor='rgba(0,0,0,0.15)';this.style.color='#1A1A1A'">Load More Schools</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     COMPARE BAR (sticky bottom)
+════════════════════════════════ -->
+<div id="compareBar" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:80; background:#101010; border-top:2px solid #821E25; padding:14px 2rem; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; box-shadow:0 -4px 24px rgba(0,0,0,0.3);">
+  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.5); flex-shrink:0;">Comparing:</span>
+    <div class="cmp-slots" style="display:flex; gap:8px; flex-wrap:wrap;"></div>
+  </div>
+  <div style="display:flex; gap:10px; flex-shrink:0;">
+    <button onclick="openCompareModal()" style="background:#821E25; color:white; border:none; padding:10px 24px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer; font-family:inherit;" onmouseover="this.style.background='#5F1219'" onmouseout="this.style.background='#821E25'">Compare Now</button>
+    <button onclick="compareIds.length=0; document.querySelectorAll('[data-cmp-id]').forEach(function(b){b.style.background='white';b.style.color='#101010';b.style.borderColor='rgba(0,0,0,0.2)';b.textContent='Compare';}); renderCompareBar();" style="background:rgba(255,255,255,0.08); color:white; border:1px solid rgba(255,255,255,0.15); padding:10px 18px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer; font-family:inherit;">Clear</button>
+  </div>
+</div>
+
+<!-- Compare Modal -->
+<div id="compareModal" style="display:none; position:fixed; inset:0; z-index:110; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); overflow-y:auto; padding:2rem 1rem;">
+  <div style="max-width:1100px; margin:0 auto; background:white; position:relative;">
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:1.25rem 2rem; border-bottom:1px solid rgba(0,0,0,0.1); position:sticky; top:0; background:white; z-index:10;">
+      <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; opacity:0.5;">School Comparison</div>
+      <button onclick="closeCompareModal()" style="width:36px; height:36px; border-radius:50%; background:#f5f5f4; border:none; cursor:pointer; font-size:18px; line-height:1; display:flex; align-items:center; justify-content:center;" onmouseover="this.style.background='#e5e5e4'" onmouseout="this.style.background='#f5f5f4'">×</button>
+    </div>
+    <div id="compareBody" style="padding:2rem;"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     SCHOOL DETAIL MODAL
+════════════════════════════════ -->
+<div id="schoolModal" style="display:none; position:fixed; inset:0; z-index:100; background:rgba(255,255,255,0.97); backdrop-filter:blur(8px); overflow-y:auto; flex-direction:column;">
+  <div style="position:sticky; top:0; background:white; border-bottom:1px solid rgba(0,0,0,0.1); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; z-index:50; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+    <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5;">School Info Profile</div>
+    <button onclick="closeModal()" style="width:36px; height:36px; border-radius:50%; background:#f5f5f4; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;" onmouseover="this.style.background='#e5e5e4'" onmouseout="this.style.background='#f5f5f4'">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="modalBody" style="max-width:1280px; margin:0 auto; padding:2rem 3rem 5rem; width:100%;"></div>
+</div>
+
+<style>
+@keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
+@keyframes spin    { to { transform:rotate(360deg); } }
+@keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.school-card-el:hover { border-color:rgba(130,30,37,0.4) !important; box-shadow:0 8px 32px rgba(0,0,0,0.12) !important; }
+.school-card-el:hover img { transform:scale(1.05); }
+.school-card-el:hover h3  { color:#821E25 !important; }
+.modal-nav-btn { display:block; width:100%; text-align:left; padding:8px 12px; font-size:13px; transition:all 0.15s; border-left:2px solid transparent; background:none; border-top:none; border-right:none; border-bottom:none; cursor:pointer; font-family:inherit; color:rgba(26,26,26,0.7); }
+.modal-nav-btn:hover  { color:#5F1219; background:rgba(0,0,0,0.03); }
+.modal-nav-btn.active { border-left-color:#821E25; color:#821E25; font-weight:500; background:white; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+@media (max-width:900px) {
+  .finder-outer  { padding-left:1.25rem !important; padding-right:1.25rem !important; }
+  .sidebar-wrap  { width:100% !important; position:static !important; }
+}
+@media (max-width:640px) {
+  .school-card-inner { flex-direction:column !important; }
+  .card-img-wrap     { width:100% !important; height:220px !important; }
+}
+</style>
+
+<script>
+var selectedBoards = [];
+var selectedTypes  = [];
+var maxFee         = null;
+var page           = 1;
+var totalPages     = 1;
+var isLoading      = false;
+var searchTimer    = null;
+var compareIds     = [];   // max 3
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadFilters();
+  loadSchools(true);
+});
+
+function loadFilters() {
+  fetch('/api/schools/filters')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      renderCheckboxGroup('boardFilters', data.boards, selectedBoards, function(v) {
+        var idx = selectedBoards.indexOf(v);
+        if (idx > -1) selectedBoards.splice(idx, 1);
+        else selectedBoards.push(v);
+        applyFilters();
+      });
+      renderCheckboxGroup('typeFilters', data.types, selectedTypes, function(v) {
+        var idx = selectedTypes.indexOf(v);
+        if (idx > -1) selectedTypes.splice(idx, 1);
+        else selectedTypes.push(v);
+        applyFilters();
+      });
+    });
+}
+
+function renderCheckboxGroup(containerId, items, selectedArr, onToggle) {
+  var container = document.getElementById(containerId);
+  container.innerHTML = '';
+  items.forEach(function(item) {
+    var label = document.createElement('label');
+    label.style.cssText = 'display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none;';
+    var boxWrap = document.createElement('div');
+    boxWrap.style.cssText = 'width:20px; height:20px; flex-shrink:0; display:flex; align-items:center; justify-content:center; border:1px solid rgba(0,0,0,0.25); background:white; transition:all 0.15s;';
+    var checkSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    checkSvg.setAttribute('width','11'); checkSvg.setAttribute('height','11');
+    checkSvg.setAttribute('viewBox','0 0 24 24'); checkSvg.setAttribute('fill','none');
+    checkSvg.setAttribute('stroke','white'); checkSvg.setAttribute('stroke-width','3');
+    var poly = document.createElementNS('http://www.w3.org/2000/svg','polyline');
+    poly.setAttribute('points','20 6 9 18 4 13'); checkSvg.appendChild(poly);
+    checkSvg.style.display = 'none';
+    boxWrap.appendChild(checkSvg);
+    var span = document.createElement('span');
+    span.style.cssText = 'font-size:14px; color:rgba(26,26,26,0.8); transition:color 0.15s;';
+    span.textContent = item;
+    label.appendChild(boxWrap); label.appendChild(span);
+    function update() {
+      if (selectedArr.includes(item)) {
+        boxWrap.style.background = '#821E25'; boxWrap.style.borderColor = '#821E25';
+        checkSvg.style.display = 'block'; span.style.color = '#5F1219'; span.style.fontWeight = '600';
+      } else {
+        boxWrap.style.background = 'white'; boxWrap.style.borderColor = 'rgba(0,0,0,0.25)';
+        checkSvg.style.display = 'none'; span.style.color = 'rgba(26,26,26,0.8)'; span.style.fontWeight = '400';
+      }
+    }
+    update();
+    label.addEventListener('click', function() { onToggle(item); update(); });
+    container.appendChild(label);
+  });
+}
+
+function onFeeSlider(val) {
+  val = parseInt(val);
+  var display = document.getElementById('feeDisplay');
+  if (val >= 1500000) { display.textContent = 'No Limit'; maxFee = null; }
+  else if (val >= 100000) { display.textContent = '₹' + (val/100000).toFixed(1) + 'L'; maxFee = val; }
+  else { display.textContent = '₹' + (val/1000).toFixed(0) + 'K'; maxFee = val; }
+}
+
+function debouncedSearch() { clearTimeout(searchTimer); searchTimer = setTimeout(applyFilters, 350); }
+function applyFilters() { loadSchools(true); }
+
+function clearAllFilters() {
+  selectedBoards.length = 0; selectedTypes.length = 0; maxFee = null;
+  document.getElementById('searchQ').value = '';
+  document.getElementById('locationFilter').value = '';
+  document.getElementById('feeSlider').value = '1500000';
+  document.getElementById('feeDisplay').textContent = 'No Limit';
+  ['boardFilters','typeFilters'].forEach(function(id) {
+    var c = document.getElementById(id); if (!c) return;
+    Array.from(c.querySelectorAll('label')).forEach(function(lbl) {
+      var box=lbl.querySelector('div'), check=lbl.querySelector('svg'), span=lbl.querySelector('span');
+      if (box)   { box.style.background='white'; box.style.borderColor='rgba(0,0,0,0.25)'; }
+      if (check) { check.style.display='none'; }
+      if (span)  { span.style.color='rgba(26,26,26,0.8)'; span.style.fontWeight='400'; }
+    });
+  });
+  loadSchools(true);
+}
+
+function loadSchools(reset) {
+  if (isLoading) return;
+  if (reset) {
+    page = 1;
+    document.getElementById('schoolCards').innerHTML = '';
+    document.getElementById('loadMoreWrap').style.display = 'none';
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('loadingState').style.display = 'flex';
+    document.getElementById('resultsCount').textContent = 'Loading schools…';
+  }
+  isLoading = true;
+  var params = new URLSearchParams();
+  var q   = document.getElementById('searchQ').value.trim();
+  var loc = document.getElementById('locationFilter').value;
+  if (q) params.set('q', q);
+  if (loc.indexOf('district:') === 0) params.set('district', loc.slice(9));
+  else if (loc.indexOf('city:') === 0)  params.set('city',  loc.slice(5));
+  else if (loc.indexOf('state:') === 0) params.set('state', loc.slice(6));
+  selectedBoards.forEach(function(b) { params.append('board[]', b); });
+  selectedTypes.forEach(function(t)  { params.append('type[]',  t); });
+  if (maxFee) params.set('fees_max', maxFee);
+  params.set('page', page); params.set('per', 24);
+  fetch('/api/schools?' + params.toString())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      isLoading = false; totalPages = data.pages;
+      document.getElementById('loadingState').style.display = 'none';
+      var count = data.total;
+      document.getElementById('resultsCount').textContent = count.toLocaleString('en-IN') + ' ' + (count===1?'School':'Schools') + ' Found';
+      if (data.schools.length === 0 && page === 1) { document.getElementById('emptyState').style.display = 'flex'; return; }
+      var frag = document.createDocumentFragment();
+      data.schools.forEach(function(s) { frag.appendChild(makeCard(s)); });
+      document.getElementById('schoolCards').appendChild(frag);
+      if (page < totalPages) document.getElementById('loadMoreWrap').style.display = 'block';
+    })
+    .catch(function() { isLoading = false; document.getElementById('loadingState').style.display = 'none'; });
+}
+
+function loadMore() { page++; loadSchools(false); }
+
+function makeCard(s) {
+  var card = document.createElement('div');
+  card.className = 'school-card-el';
+  card.style.cssText = 'display:flex; border:1px solid rgba(0,0,0,0.08); background:white; overflow:hidden; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s; animation:slideUp 0.3s ease;';
+  card.addEventListener('click', function() { openModal(s.id); });
+  var imgWrap = document.createElement('div');
+  imgWrap.className = 'card-img-wrap';
+  imgWrap.style.cssText = 'width:256px; flex-shrink:0; position:relative; overflow:hidden; background:#e5e5e4;';
+  var fallback = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=70';
+  var img = document.createElement('img');
+  img.src = s.image_url || fallback; img.alt = s.name; img.loading = 'lazy';
+  img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s;';
+  img.onerror = function() { this.src = fallback; };
+  imgWrap.appendChild(img);
+  if (s.is_featured) {
+    var badge = document.createElement('div');
+    badge.style.cssText = 'position:absolute; top:10px; left:10px; background:#821E25; color:white; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; padding:4px 10px; z-index:2;';
+    badge.textContent = '★ Promoted'; imgWrap.appendChild(badge);
+  }
+  if (s.established) {
+    var est = document.createElement('div');
+    est.style.cssText = 'position:absolute; bottom:10px; left:10px; font-size:10px; font-family:monospace; font-weight:700; padding:4px 8px; background:rgba(255,255,255,0.92); z-index:2;';
+    est.textContent = 'Est. ' + s.established; imgWrap.appendChild(est);
+  }
+  card.appendChild(imgWrap);
+  var content = document.createElement('div');
+  content.className = 'school-card-inner';
+  content.style.cssText = 'flex:1; padding:1.25rem 1.5rem; display:flex; flex-direction:column; min-width:0;';
+  var topRow = document.createElement('div');
+  topRow.style.cssText = 'display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;';
+  var nameDiv = document.createElement('div');
+  nameDiv.style.cssText = 'flex:1; min-width:0; padding-right:12px;';
+  var nameEl = document.createElement('h3');
+  nameEl.style.cssText = 'font-family:Playfair Display,Georgia,serif; font-size:1.375rem; color:#5F1219; margin:0 0 4px; line-height:1.25; transition:color 0.15s; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+  nameEl.textContent = s.name; nameDiv.appendChild(nameEl);
+  var locEl = document.createElement('p');
+  locEl.style.cssText = 'font-size:11px; color:rgba(26,26,26,0.6); margin:0 0 14px; display:flex; align-items:center; gap:4px;';
+  locEl.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.6;flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+  locEl.appendChild(document.createTextNode([s.city, s.state].filter(Boolean).join(', ')));
+  nameDiv.appendChild(locEl); topRow.appendChild(nameDiv);
+  if (s.rating) {
+    var ratingEl = document.createElement('div');
+    ratingEl.style.cssText = 'background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; font-size:12px; font-weight:700; padding:4px 10px; flex-shrink:0;';
+    ratingEl.textContent = '★ ' + s.rating; topRow.appendChild(ratingEl);
+  }
+  content.appendChild(topRow);
+  var stats = document.createElement('div');
+  stats.style.cssText = 'display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; padding:10px 14px; background:rgba(245,245,244,0.8); border:1px solid rgba(0,0,0,0.06); margin-bottom:14px;';
+  function statBlock(lbl, val, span) {
+    var d = document.createElement('div'); if (span) d.style.gridColumn = span;
+    var l = document.createElement('p'); l.style.cssText = 'font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; margin:0 0 4px;'; l.textContent = lbl;
+    var v = document.createElement('p'); v.style.cssText = 'font-size:12px; font-weight:500; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;'; v.textContent = val || '—';
+    d.appendChild(l); d.appendChild(v); return d;
+  }
+  stats.appendChild(statBlock('Board', s.board));
+  stats.appendChild(statBlock('Type', s.type));
+  stats.appendChild(statBlock('Annual Fees', s.fees_display || 'On Request', 'span 2'));
+  content.appendChild(stats);
+  var actions = document.createElement('div');
+  actions.style.cssText = 'margin-top:auto; display:flex; align-items:center; gap:12px; border-top:1px solid rgba(0,0,0,0.05); padding-top:12px;';
+  var viewBtn = document.createElement('button');
+  viewBtn.style.cssText = 'font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:#821E25; background:none; border:none; cursor:pointer; font-family:inherit; margin-right:auto; padding:0;';
+  viewBtn.textContent = 'View Details';
+  viewBtn.addEventListener('click', function(e) { e.stopPropagation(); openModal(s.id); });
+  viewBtn.onmouseover = function() { this.style.color='#5F1219'; };
+  viewBtn.onmouseout  = function() { this.style.color='#821E25'; };
+  var applyBtn = document.createElement('button');
+  applyBtn.style.cssText = 'background:#821E25; color:white; border:none; padding:10px 20px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:6px;';
+  applyBtn.innerHTML = 'Apply Now <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+  applyBtn.onmouseover = function() { this.style.background='#5F1219'; };
+  applyBtn.onmouseout  = function() { this.style.background='#821E25'; };
+  applyBtn.addEventListener('click', function(e) { e.stopPropagation(); });
+  // Compare toggle button
+  var cmpBtn = document.createElement('button');
+  cmpBtn.setAttribute('data-cmp-id', s.id);
+  var inCompare = compareIds.includes(s.id);
+  cmpBtn.style.cssText = 'font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; padding:10px 16px; cursor:pointer; font-family:inherit; border:1px solid; transition:all 0.15s; flex-shrink:0;';
+  function setCmpStyle(active) {
+    if (active) { cmpBtn.style.background='#101010'; cmpBtn.style.color='white'; cmpBtn.style.borderColor='#101010'; cmpBtn.textContent='✓ Comparing'; }
+    else { cmpBtn.style.background='white'; cmpBtn.style.color='#101010'; cmpBtn.style.borderColor='rgba(0,0,0,0.2)'; cmpBtn.textContent='Compare'; }
+  }
+  setCmpStyle(inCompare);
+  cmpBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var idx = compareIds.indexOf(s.id);
+    if (idx > -1) { compareIds.splice(idx, 1); setCmpStyle(false); }
+    else if (compareIds.length < 3) { compareIds.push(s.id); setCmpStyle(true); }
+    else { alert('You can compare up to 3 schools at a time.'); return; }
+    renderCompareBar();
+  });
+  actions.appendChild(viewBtn); actions.appendChild(cmpBtn); actions.appendChild(applyBtn);
+  content.appendChild(actions); card.appendChild(content);
+  return card;
+}
+
+// ── Compare bar ──
+function renderCompareBar() {
+  var bar = document.getElementById('compareBar');
+  if (!bar) return;
+  if (compareIds.length === 0) { bar.style.display = 'none'; return; }
+  bar.style.display = 'flex';
+  var slots = bar.querySelector('.cmp-slots');
+  slots.innerHTML = '';
+  compareIds.forEach(function(id) {
+    var slot = document.createElement('div');
+    slot.style.cssText = 'display:flex; align-items:center; gap:8px; background:white; border:1px solid rgba(0,0,0,0.12); padding:8px 14px; font-size:12px; font-weight:600;';
+    slot.textContent = 'School #' + id;
+    var rem = document.createElement('button');
+    rem.style.cssText = 'background:none; border:none; cursor:pointer; font-size:14px; line-height:1; color:#821E25; padding:0 0 0 6px;';
+    rem.textContent = '×';
+    rem.addEventListener('click', function() {
+      var i = compareIds.indexOf(id); if (i > -1) compareIds.splice(i, 1);
+      document.querySelectorAll('[data-cmp-id="'+id+'"]').forEach(function(b){ setCmpBtnInactive(b); });
+      renderCompareBar();
+    });
+    slot.appendChild(rem); slots.appendChild(slot);
+  });
+}
+function setCmpBtnInactive(btn) {
+  btn.style.background='white'; btn.style.color='#101010'; btn.style.borderColor='rgba(0,0,0,0.2)'; btn.textContent='Compare';
+}
+
+function openModal(schoolId) {
+  var modal = document.getElementById('schoolModal');
+  var body  = document.getElementById('modalBody');
+  modal.style.display = 'flex'; document.body.style.overflow = 'hidden';
+  body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:50vh;gap:12px;opacity:0.4;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg><span style="font-family:Playfair Display,Georgia,serif;font-size:1.25rem;">Loading…</span></div>';
+  fetch('/api/schools/' + schoolId)
+    .then(function(r) { return r.json(); })
+    .then(function(data) { renderModal(data.school); })
+    .catch(function() { body.innerHTML = '<div style="padding:4rem;text-align:center;opacity:0.5;">Failed to load school data.</div>'; });
+}
+function closeModal() { document.getElementById('schoolModal').style.display = 'none'; document.body.style.overflow = ''; }
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+function renderModal(s) {
+  var body = document.getElementById('modalBody');
+  body.innerHTML = ''; body.style.animation = 'slideUp 0.4s ease';
+  var fallback = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900&q=80';
+  var header = el('div', {style:'display:flex;flex-direction:row;flex-wrap:wrap;gap:2rem;align-items:flex-start;margin-bottom:3rem;'});
+  var imgBox = el('div', {style:'width:33%;min-width:260px;flex-shrink:0;'});
+  var imgAspect = el('div', {style:'aspect-ratio:4/3;width:100%;background:#e5e5e4;overflow:hidden;position:relative;box-shadow:0 4px 16px rgba(0,0,0,0.12);'});
+  var mImg = el('img', {src: s.image_url || fallback, alt: s.name, style:'width:100%;height:100%;object-fit:cover;filter:grayscale(30%);'});
+  mImg.onerror = function() { this.src = fallback; };
+  imgAspect.appendChild(mImg);
+  if (s.is_featured) { var fb = el('div', {style:'position:absolute;top:14px;left:14px;background:#821E25;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:5px 12px;'}); fb.textContent = '★ Promoted'; imgAspect.appendChild(fb); }
+  imgBox.appendChild(imgAspect); header.appendChild(imgBox);
+  var info = el('div', {style:'flex:1;min-width:0;'});
+  var metaRow = el('div', {style:'display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;'});
+  if (s.rating) { var rBadge = el('span', {style:'background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;font-size:12px;font-weight:700;padding:4px 12px;'}); rBadge.textContent = '★ ' + s.rating + ' TSOI Rating'; metaRow.appendChild(rBadge); }
+  if (s.established) { var estBadge = el('span', {style:'font-size:10px;text-transform:uppercase;letter-spacing:0.15em;font-weight:700;opacity:0.4;padding-left:10px;border-left:1px solid rgba(0,0,0,0.2);'}); estBadge.textContent = 'Est. ' + s.established; metaRow.appendChild(estBadge); }
+  info.appendChild(metaRow);
+  var mName = el('h1', {style:'font-family:Playfair Display,Georgia,serif;font-size:clamp(1.75rem,4vw,3rem);color:#5F1219;margin:0 0 8px;font-weight:400;line-height:1.1;'}); mName.textContent = s.name; info.appendChild(mName);
+  var mLoc = el('p', {style:'font-size:14px;opacity:0.7;display:flex;align-items:center;gap:8px;margin:0 0 1.5rem;'});
+  mLoc.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+  mLoc.appendChild(document.createTextNode([s.city, s.state, 'India'].filter(Boolean).join(', '))); info.appendChild(mLoc);
+  if (s.description) { var desc = el('p', {style:'font-size:14px;line-height:1.8;opacity:0.8;max-width:700px;font-weight:300;margin:0 0 2rem;'}); desc.textContent = s.description; info.appendChild(desc); }
+  var ctaRow = el('div', {style:'display:flex;flex-wrap:wrap;align-items:center;gap:12px;'});
+  var applyBtn2 = el('button', {style:'background:#821E25;color:white;border:none;padding:12px 24px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(130,30,37,0.25);'});
+  applyBtn2.innerHTML = 'Apply for Admission'; applyBtn2.onmouseover = function() { this.style.background='#5F1219'; }; applyBtn2.onmouseout = function() { this.style.background='#821E25'; };
+  ctaRow.appendChild(applyBtn2); info.appendChild(ctaRow); header.appendChild(info); body.appendChild(header);
+  var twoCol = el('div', {style:'display:flex;gap:3rem;align-items:flex-start;'});
+  var navItems = [{id:'key-stats',label:'Key Stats'},{id:'fee-structure',label:'Fee Structure'},{id:'virtual-tour',label:'Virtual Tour'},{id:'academic-stats',label:'Academic Stats'},{id:'admission-dates',label:'Admission Dates'},{id:'criteria',label:'Admission Criteria'},{id:'hall-of-fame',label:'Hall of Fame'},{id:'results',label:'School Results'},{id:'facilities',label:'Facilities'},{id:'insights',label:'Insights'},{id:'gallery',label:'Gallery'},{id:'videos',label:'Videos'},{id:'contact',label:'Contact'}];
+  var navSidebar = el('div', {style:'width:200px;flex-shrink:0;position:sticky;top:60px;background:rgba(245,245,244,0.7);padding:12px;border:1px solid rgba(0,0,0,0.05);align-self:flex-start;'});
+  var navList = el('ul', {style:'list-style:none;margin:0;padding:0;'});
+  navItems.forEach(function(item) {
+    var li = el('li',{}); var btn = el('button',{}); btn.className='modal-nav-btn'; btn.id='nav-'+item.id; btn.textContent=item.label;
+    btn.addEventListener('click', function() { document.querySelectorAll('.modal-nav-btn').forEach(function(b){b.classList.remove('active');}); btn.classList.add('active'); var sec=document.getElementById('modal-'+item.id); if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'}); });
+    li.appendChild(btn); navList.appendChild(li);
+  });
+  navSidebar.appendChild(navList); twoCol.appendChild(navSidebar);
+  var sections = el('div', {style:'flex:1;display:flex;flex-direction:column;gap:4rem;padding-bottom:5rem;min-width:0;'});
+  function sh(title) { var h2=el('h2',{style:'font-family:Playfair Display,Georgia,serif;font-size:1.5rem;color:#5F1219;margin:0 0 1.5rem;display:flex;align-items:center;gap:12px;font-weight:400;'}); var line=el('span',{style:'display:inline-block;width:24px;height:1px;background:#821E25;flex-shrink:0;'}); h2.appendChild(line); h2.appendChild(document.createTextNode(title)); return h2; }
+  function sec(id) { return el('section',{id:'modal-'+id,style:'scroll-margin-top:80px;'}); }
+  var s1=sec('key-stats'); s1.appendChild(sh('Key School Stats'));
+  var sg=el('div',{style:'display:grid;grid-template-columns:repeat(4,1fr);gap:12px;'});
+  [['Board',s.board],['School Type',s.type],['Grades',s.grades],['Student:Teacher',s.student_teacher_ratio]].forEach(function(p){var d=el('div',{style:'padding:14px;border:1px solid rgba(0,0,0,0.05);background:white;'});var lb=el('p',{style:'font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.5;margin:0 0 6px;'});lb.textContent=p[0];var vl=el('p',{style:'font-size:13px;font-weight:500;margin:0;'});vl.textContent=p[1]||'—';d.appendChild(lb);d.appendChild(vl);sg.appendChild(d);});
+  s1.appendChild(sg); sections.appendChild(s1);
+  var s2=sec('fee-structure'); s2.appendChild(sh('Fee Structure'));
+  var fb2=el('div',{style:'background:white;border:1px solid rgba(0,0,0,0.1);padding:1.5rem 2rem;'});
+  var fp=el('div',{style:'margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(0,0,0,0.05);'});
+  var fBig=el('p',{style:'font-family:Playfair Display,Georgia,serif;font-size:2rem;color:#5F1219;margin:0;'}); fBig.textContent=s.fees_display||'On Request';
+  var fSm=el('p',{style:'font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.4;margin:4px 0 0;'}); fSm.textContent='Annual Fee Range';
+  fp.appendChild(fBig); fp.appendChild(fSm); fb2.appendChild(fp);
+  [['Admission Fee',s.admission_fee?'₹'+Number(s.admission_fee).toLocaleString('en-IN'):'On Request'],['Security Deposit',s.security_deposit?'₹'+Number(s.security_deposit).toLocaleString('en-IN'):'On Request']].forEach(function(p){var row=el('div',{style:'display:flex;justify-content:space-between;font-size:14px;border-top:1px solid rgba(0,0,0,0.05);padding:12px 0;'});var lb=el('span',{style:'opacity:0.7;'});lb.textContent=p[0];var vl=el('span',{style:'font-weight:500;'});vl.textContent=p[1];row.appendChild(lb);row.appendChild(vl);fb2.appendChild(row);});
+  s2.appendChild(fb2); sections.appendChild(s2);
+  var s3=sec('virtual-tour'); s3.appendChild(sh('Virtual Tour'));
+  var tb=el('div',{style:'aspect-ratio:16/9;width:100%;background:#1a1a1a;position:relative;overflow:hidden;border:1px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;cursor:pointer;'});
+  var tbg=el('img',{src:s.image_url||fallback,alt:'Tour',style:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.4;'});tbg.onerror=function(){this.src=fallback;};tb.appendChild(tbg);
+  if(s.virtual_tour_url){tb.onclick=function(){window.open(s.virtual_tour_url,'_blank');};}
+  var tpb=el('div',{style:'width:64px;height:64px;background:rgba(130,30,37,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;'});tpb.innerHTML='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M10 9l6 3-6 3V9z" fill="white"/></svg>';tb.appendChild(tpb);
+  var tlbl=el('p',{style:'position:absolute;bottom:20px;left:20px;color:white;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;z-index:2;margin:0;'});tlbl.textContent=s.virtual_tour_url?'Start 360° Walkthrough':'360° Tour Not Available';tb.appendChild(tlbl);
+  s3.appendChild(tb); sections.appendChild(s3);
+  var s4=sec('academic-stats'); s4.appendChild(sh('Academic Stats'));
+  var ag=el('div',{style:'display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;'});
+  [[s.pass_percentage?s.pass_percentage+'%':'—','Board Pass %'],[s.top_scorers_pct?s.top_scorers_pct+'%':'—','Students >90%']].forEach(function(p){var ac=el('div',{style:'border:1px solid rgba(0,0,0,0.05);padding:1.5rem;background:white;text-align:center;'});var bn=el('p',{style:'font-family:Playfair Display,Georgia,serif;font-size:2.5rem;margin:0 0 8px;'});bn.textContent=p[0];var lb=el('p',{style:'font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.5;margin:0;'});lb.textContent=p[1];ac.appendChild(bn);ac.appendChild(lb);ag.appendChild(ac);});
+  s4.appendChild(ag); sections.appendChild(s4);
+  var s5=sec('admission-dates'); s5.appendChild(sh('Admission Dates'));
+  var ab=el('div',{style:'border:1px solid rgba(0,0,0,0.1);background:white;padding:1.5rem;'});
+  var sr=el('div',{style:'display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;'});
+  var si=el('div',{style:'width:48px;height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,0.08);background:'+(s.admission_open?'#f0fdf4':'#fef2f2')+';'});
+  si.innerHTML=s.admission_open?'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>':'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+  var stx=el('div',{}); var stH=el('h4',{style:'font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 4px;'});stH.textContent=s.admission_open?'Admissions Open':'Admissions Closed';stx.appendChild(stH);sr.appendChild(si);sr.appendChild(stx);ab.appendChild(sr);
+  [['Application Start',s.admission_start],['Deadline',s.admission_deadline],['Entrance Test',s.admission_test_date]].forEach(function(p){var row=el('div',{style:'display:flex;justify-content:space-between;font-size:14px;border-top:1px solid rgba(0,0,0,0.05);padding:10px 0;'});var lb=el('span',{style:'opacity:0.7;'});lb.textContent=p[0];var vl=el('span',{style:'font-weight:500;font-family:monospace;font-size:12px;'});vl.textContent=p[1]||'—';row.appendChild(lb);row.appendChild(vl);ab.appendChild(row);});
+  s5.appendChild(ab); sections.appendChild(s5);
+  var s6=sec('criteria'); s6.appendChild(sh('Admission Criteria'));
+  var cr=el('div',{style:'font-size:14px;line-height:1.9;color:rgba(26,26,26,0.8);font-weight:300;'});
+  cr.textContent=s.admission_criteria||'Contact the school admissions office for detailed eligibility criteria and requirements.';
+  s6.appendChild(cr); sections.appendChild(s6);
+  var s7=sec('hall-of-fame'); s7.appendChild(sh('Hall of Fame'));
+  var hg=el('div',{style:'display:grid;grid-template-columns:1fr 1fr;gap:14px;'});
+  var hi=[];if(s.hall_of_fame){try{hi=JSON.parse(s.hall_of_fame);}catch(e){hi=[{title:s.hall_of_fame}];}}
+  if(!hi.length)hi=[{title:'National Science Olympiad',desc:'Gold Medalist, 2023.'},{title:'Math Olympiad',desc:'Multiple national winners 2022–2024.'}];
+  hi.slice(0,4).forEach(function(item){var d=el('div',{style:'padding:18px;border:1px solid rgba(0,0,0,0.05);background:white;display:flex;align-items:flex-start;gap:14px;'});d.innerHTML='<div style="width:40px;height:40px;background:rgba(130,30,37,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#821E25" stroke-width="2"><polyline points="15 3 21 3 21 9"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="10 21 10 12 3 12"/><polyline points="14 9 21 2"/></svg></div>';var txt=el('div',{});var tH=el('h4',{style:'font-size:13px;font-weight:600;margin:0 0 4px;'});tH.textContent=item.title||item;var tP=el('p',{style:'font-size:12px;opacity:0.65;margin:0;'});tP.textContent=item.desc||item.description||'';txt.appendChild(tH);txt.appendChild(tP);d.appendChild(txt);hg.appendChild(d);});
+  s7.appendChild(hg); sections.appendChild(s7);
+  var s8=sec('results'); s8.appendChild(sh('School Results'));
+  var rb=el('div',{style:'padding:1.5rem;border:1px solid rgba(0,0,0,0.05);background:white;'});
+  var passP=s.pass_percentage||85; var topP=s.top_scorers_pct||30;
+  var bw=el('div',{style:'height:16px;background:#f5f5f4;width:100%;overflow:hidden;display:flex;'});
+  var b1=el('div',{style:'height:100%;background:#821E25;width:'+topP+'%;'});var b2=el('div',{style:'height:100%;background:rgba(130,30,37,0.4);width:'+Math.max(0,passP-topP)+'%;'});
+  bw.appendChild(b1);bw.appendChild(b2);rb.appendChild(bw);
+  var lg=el('div',{style:'display:flex;gap:1.5rem;margin-top:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.6;'});lg.innerHTML='<span>■ >90% ('+topP+'%)</span><span style="opacity:0.5">■ Pass Rate ('+passP+'%)</span>';rb.appendChild(lg);
+  s8.appendChild(rb); sections.appendChild(s8);
+  var s9=sec('facilities'); s9.appendChild(sh('Facilities'));
+  var fi=[];if(s.facilities){try{fi=JSON.parse(s.facilities);}catch(e){fi=s.facilities.split(',').map(function(x){return x.trim();});}}
+  if(!fi.length)fi=['Smart Classrooms','Modern Labs','Library','Sports Complex','ECA Clubs','Transport','Cafeteria','Medical Room'];
+  var fg=el('div',{style:'display:grid;grid-template-columns:repeat(4,1fr);gap:12px;'});
+  fi.slice(0,12).forEach(function(item){var d=el('div',{style:'display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 8px;border:1px solid rgba(0,0,0,0.05);background:white;text-align:center;'});d.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(130,30,37,0.5)" stroke-width="2" style="margin-bottom:8px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';var sp=el('span',{style:'font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;opacity:0.7;'});sp.textContent=item;d.appendChild(sp);fg.appendChild(d);});
+  s9.appendChild(fg); sections.appendChild(s9);
+  var s10=sec('insights'); s10.appendChild(sh('Insights'));
+  var ib=el('div',{style:'background:#821E25;color:white;padding:2rem;'});ib.innerHTML='<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" style="margin-bottom:14px;display:block;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>';
+  var iH=el('h3',{style:'font-family:Playfair Display,Georgia,serif;font-size:1.25rem;margin:0 0 10px;font-weight:400;'});iH.textContent='TSOI Expert Verdict';var iP=el('p',{style:'font-size:14px;opacity:0.9;line-height:1.8;font-weight:300;margin:0;'});iP.textContent=s.insights||'A strong contender for families seeking holistic development.';ib.appendChild(iH);ib.appendChild(iP);
+  s10.appendChild(ib); sections.appendChild(s10);
+  var s11=sec('gallery'); s11.appendChild(sh('Gallery'));
+  var gi=[];if(s.gallery_images){try{gi=JSON.parse(s.gallery_images);}catch(e){gi=s.gallery_images.split(',').map(function(x){return x.trim();}).filter(Boolean);}}
+  var gg=el('div',{style:'display:grid;grid-template-columns:repeat(3,1fr);gap:12px;'});
+  for(var i=0;i<6;i++){var gd=el('div',{style:'aspect-ratio:1;overflow:hidden;background:#e5e5e4;position:relative;cursor:pointer;border:1px solid rgba(0,0,0,0.05);'});var gImg=el('img',{src:gi[i]||(s.image_url||fallback),alt:'Gallery '+(i+1),style:'width:100%;height:100%;object-fit:cover;filter:grayscale(40%);opacity:0.7;transition:all 0.5s;'});gImg.onerror=function(){this.src=fallback;};gd.appendChild(gImg);gd.onmouseover=function(){this.querySelector('img').style.opacity='1';this.querySelector('img').style.filter='grayscale(0%)';this.querySelector('img').style.transform='scale(1.05)';};gd.onmouseout=function(){this.querySelector('img').style.opacity='0.7';this.querySelector('img').style.filter='grayscale(40%)';this.querySelector('img').style.transform='scale(1)';};gg.appendChild(gd);}
+  s11.appendChild(gg); sections.appendChild(s11);
+  var s12=sec('videos'); s12.appendChild(sh('Videos'));
+  var vi=[];if(s.video_urls){try{vi=JSON.parse(s.video_urls);}catch(e){vi=s.video_urls.split(',').map(function(x){return x.trim();}).filter(Boolean);}}
+  var vg=el('div',{style:'display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;'});
+  for(var j=0;j<2;j++){var vd=el('div',{style:'aspect-ratio:16/9;background:#1a1a1a;position:relative;overflow:hidden;border:1px solid rgba(0,0,0,0.05);cursor:pointer;'});var vbg=el('img',{src:s.image_url||fallback,alt:'Video '+(j+1),style:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5;'});vbg.onerror=function(){this.src=fallback;};vd.appendChild(vbg);var pc=el('div',{style:'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;'});pc.innerHTML='<div style="width:48px;height:48px;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.4);"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>';vd.appendChild(pc);if(vi[j]){vd.onclick=(function(url){return function(){window.open(url,'_blank');};})(vi[j]);}vg.appendChild(vd);}
+  s12.appendChild(vg); sections.appendChild(s12);
+  var s13=sec('contact'); s13.appendChild(sh('Address & Contact'));
+  var cb=el('div',{style:'display:flex;flex-wrap:wrap;gap:2rem;background:white;border:1px solid rgba(0,0,0,0.1);padding:2rem;'});
+  var cl=el('div',{style:'flex:1;min-width:240px;display:flex;flex-direction:column;gap:1.5rem;'});
+  if(s.address){var ad=el('div',{});var adL=el('h4',{style:'font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;opacity:0.5;margin:0 0 8px;'});adL.textContent='Address';var aLink=el('a',{href:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.name+', '+(s.city||'')+', '+(s.state||'')),target:'_blank',style:'display:flex;align-items:flex-start;gap:10px;font-size:14px;opacity:0.85;line-height:1.7;color:inherit;text-decoration:none;'});aLink.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.5;flex-shrink:0;margin-top:3px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';aLink.appendChild(document.createTextNode(s.address));ad.appendChild(adL);ad.appendChild(aLink);cl.appendChild(ad);}
+  if(s.phone){var pr=el('p',{style:'display:flex;align-items:center;gap:10px;font-size:14px;opacity:0.8;margin:0;'});pr.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.5;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.37 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';pr.appendChild(document.createTextNode(s.phone));cl.appendChild(pr);}
+  if(s.email){var er=el('p',{style:'display:flex;align-items:center;gap:10px;font-size:14px;opacity:0.8;margin:0;'});er.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.5;flex-shrink:0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';er.appendChild(document.createTextNode(s.email));cl.appendChild(er);}
+  cb.appendChild(cl); s13.appendChild(cb); sections.appendChild(s13);
+  twoCol.appendChild(sections); body.appendChild(twoCol);
+  setTimeout(function(){var fb3=document.getElementById('nav-key-stats');if(fb3)fb3.classList.add('active');},100);
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var id=e.target.id.replace('modal-','');document.querySelectorAll('.modal-nav-btn').forEach(function(b){b.classList.remove('active');});var ab=document.getElementById('nav-'+id);if(ab)ab.classList.add('active');}});},{threshold:0.3,root:document.getElementById('schoolModal')});
+  document.querySelectorAll('[id^="modal-"]').forEach(function(sec){obs.observe(sec);});
+}
+
+function el(tag, attrs) {
+  var e = document.createElement(tag);
+  Object.keys(attrs||{}).forEach(function(k) { if(k==='style') e.style.cssText=attrs[k]; else e.setAttribute(k,attrs[k]); });
+  return e;
+}
+
+// ── Compare Modal ──
+function openCompareModal() {
+  if (compareIds.length < 2) { alert('Select at least 2 schools to compare.'); return; }
+  var modal = document.getElementById('compareModal');
+  var body  = document.getElementById('compareBody');
+  modal.style.display = 'block'; document.body.style.overflow = 'hidden';
+  body.innerHTML = '<div style="text-align:center;padding:3rem;opacity:0.4;">Loading…</div>';
+  Promise.all(compareIds.map(function(id) {
+    return fetch('/api/schools/' + id).then(function(r) { return r.json(); }).then(function(d) { return d.school; });
+  })).then(function(schools) {
+    var cols = schools.length;
+    var grid = 'grid-template-columns:160px ' + schools.map(function(){ return '1fr'; }).join(' ');
+    var fields = [
+      ['Board', 'board'], ['Type', 'type'], ['City', 'city'], ['State', 'state'],
+      ['Est.', 'established'], ['Grades', 'grades'], ['Fees', 'fees_display'],
+      ['Student:Teacher', 'student_teacher_ratio'], ['Pass %', 'pass_percentage'],
+    ];
+    var html = '<div style="display:grid;' + grid + ';gap:1px;background:rgba(0,0,0,0.07);">';
+    // Header row
+    html += '<div style="background:#f5f5f4;padding:1rem;"></div>';
+    schools.forEach(function(s) {
+      html += '<div style="background:white;padding:1.25rem;text-align:center;">';
+      html += '<div style="font-family:Playfair Display,Georgia,serif;font-size:1.125rem;color:#5F1219;font-weight:600;margin-bottom:4px;">' + (s.name||'—') + '</div>';
+      html += '<div style="font-size:11px;color:rgba(0,0,0,0.45);">' + ([s.city,s.state].filter(Boolean).join(', ')||'—') + '</div>';
+      html += '</div>';
+    });
+    fields.forEach(function(pair) {
+      var lbl = pair[0]; var key = pair[1];
+      html += '<div style="background:#f5f5f4;padding:10px 1rem;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.6;display:flex;align-items:center;">' + lbl + '</div>';
+      schools.forEach(function(s) {
+        var val = s[key]; if(!val||val==='') val = '—';
+        if (key==='pass_percentage' && val !== '—') val = val + '%';
+        html += '<div style="background:white;padding:10px 1rem;font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;text-align:center;">' + val + '</div>';
+      });
+    });
+    html += '</div>';
+    body.innerHTML = html;
+  }).catch(function() { body.innerHTML = '<div style="padding:3rem;text-align:center;opacity:0.5;">Failed to load comparison data.</div>'; });
+}
+function closeCompareModal() { document.getElementById('compareModal').style.display = 'none'; document.body.style.overflow = ''; }
+</script>

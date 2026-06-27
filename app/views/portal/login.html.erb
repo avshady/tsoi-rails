@@ -1,0 +1,31 @@
+<style>
+.portal-login-wrap { min-height:calc(100vh - 56px); display:flex; align-items:center; justify-content:center; padding:2rem; margin:-2.5rem -2rem; background:#f4f0e6; }
+.portal-login-card { background:white; border:1px solid rgba(0,0,0,0.1); padding:3rem; width:100%; max-width:440px; }
+.login-logo { font-family:'Playfair Display',Georgia,serif; font-size:1.5rem; font-weight:700; color:#1A1A1A; margin:0 0 6px; }
+.login-logo em { color:#821E25; font-style:italic; }
+.login-sub { font-size:12px; color:rgba(0,0,0,0.45); margin:0 0 2.5rem; }
+.login-label { display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:rgba(0,0,0,0.5); margin-bottom:8px; }
+.login-input { width:100%; border:1px solid rgba(0,0,0,0.15); border-radius:6px; padding:14px 16px; font-size:14px; font-family:monospace; letter-spacing:0.05em; color:#1A1A1A; outline:none; box-sizing:border-box; }
+.login-input:focus { border-color:#821E25; box-shadow:0 0 0 3px rgba(130,30,37,0.08); }
+.login-btn { width:100%; background:#821E25; color:white; border:none; border-radius:6px; padding:16px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer; margin-top:1.5rem; font-family:'Inter',system-ui,sans-serif; }
+.login-btn:hover { background:#5F1219; }
+.login-help { margin-top:1.75rem; padding-top:1.5rem; border-top:1px solid rgba(0,0,0,0.08); font-size:12px; color:rgba(0,0,0,0.45); text-align:center; }
+.login-help a { color:#821E25; text-decoration:none; font-weight:600; }
+</style>
+
+<div class="portal-login-wrap">
+  <div class="portal-login-card">
+    <h1 class="login-logo">Schools of <em>India</em></h1>
+    <p class="login-sub">School Management Portal — enter your access token to manage your listing.</p>
+
+    <%= form_with url: portal_auth_path, method: :post, local: true do |f| %>
+      <label class="login-label">Access Token</label>
+      <%= f.text_field :token, placeholder: "XXXX-XXXX-XXXX-XXXX", class: "login-input", autocomplete: "off", autofocus: true %>
+      <%= f.submit "Access Portal →", class: "login-btn" %>
+    <% end %>
+
+    <div class="login-help">
+      Don't have a token? <a href="mailto:info@theschoolsofindia.org">Contact TSOI</a> to get your school listed.
+    </div>
+  </div>
+</div>

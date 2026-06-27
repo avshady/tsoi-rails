@@ -1,0 +1,47 @@
+<% content_for :title, "Dashboard" %>
+
+<h1 style="font-size:1.5rem; font-weight:700; margin:0 0 2rem;">Dashboard</h1>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:1rem; margin-bottom:2rem;">
+  <% [
+    ["Total Schools", @total_schools, "#821E25"],
+    ["Featured", @featured_count, "#5F1219"],
+    ["States", @states_count, "#1A1A1A"]
+  ].each do |label, val, color| %>
+    <div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:24px;">
+      <p style="font-size:2rem; font-weight:700; color:<%= color %>; margin:0 0 4px;"><%= val %></p>
+      <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; margin:0;"><%= label %></p>
+    </div>
+  <% end %>
+</div>
+
+<div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:1.5rem;">
+  <h2 style="font-size:1rem; font-weight:700; margin:0 0 1rem;">Recently Added Schools</h2>
+  <table style="width:100%; border-collapse:collapse; font-size:13px;">
+    <thead>
+      <tr style="border-bottom:2px solid rgba(0,0,0,0.08);">
+        <th style="text-align:left; padding:8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">Name</th>
+        <th style="text-align:left; padding:8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">City</th>
+        <th style="text-align:left; padding:8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">Board</th>
+        <th style="text-align:left; padding:8px; font-size:10px; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5;">Rating</th>
+        <th style="padding:8px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recent_schools.each do |s| %>
+        <tr style="border-bottom:1px solid rgba(0,0,0,0.05);">
+          <td style="padding:10px 8px; font-weight:600;"><%= s.name %></td>
+          <td style="padding:10px 8px; opacity:0.65;"><%= s.city %>, <%= s.state %></td>
+          <td style="padding:10px 8px; opacity:0.65;"><%= s.board %></td>
+          <td style="padding:10px 8px;"><%= s.rating.to_f.round(1) %></td>
+          <td style="padding:10px 8px;">
+            <%= link_to "Edit", edit_admin_school_path(s), style:"color:#821E25; font-size:12px; font-weight:600; text-decoration:none;" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div style="margin-top:1rem;">
+    <%= link_to "View All Schools →", admin_schools_path, style:"font-size:12px; font-weight:700; color:#821E25; text-decoration:none;" %>
+  </div>
+</div>

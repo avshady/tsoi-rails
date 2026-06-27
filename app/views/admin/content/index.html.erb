@@ -1,0 +1,118 @@
+<% content_for :title, "CMS — Content & Images" %>
+
+<style>
+.cms-section { background:white; border:1px solid rgba(0,0,0,0.08); margin-bottom:2rem; }
+.cms-section-header { padding:1rem 1.5rem; border-bottom:1px solid rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:space-between; }
+.cms-section-header h2 { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin:0; }
+.cms-service-row { display:grid; grid-template-columns:200px 1fr 1fr; gap:0; border-bottom:1px solid rgba(0,0,0,0.06); }
+.cms-service-row:last-child { border-bottom:none; }
+.cms-service-label { padding:1.25rem 1.5rem; border-right:1px solid rgba(0,0,0,0.06); display:flex; flex-direction:column; justify-content:center; }
+.cms-service-label .svc-name { font-weight:700; font-size:13px; color:#1A1A1A; margin:0 0 4px; }
+.cms-service-label .svc-tags { font-size:10px; color:rgba(0,0,0,0.4); text-transform:uppercase; letter-spacing:0.1em; }
+.cms-img-cell { padding:1.25rem 1.5rem; border-right:1px solid rgba(0,0,0,0.06); }
+.cms-img-cell:last-child { border-right:none; }
+.cms-img-cell label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:rgba(0,0,0,0.45); display:block; margin-bottom:8px; }
+.cms-preview { width:100%; height:90px; object-fit:cover; border-radius:4px; display:block; margin-bottom:8px; background:#f5f5f5; }
+.cms-url-row { display:flex; gap:8px; align-items:center; }
+.cms-url-input { flex:1; border:1px solid rgba(0,0,0,0.15); border-radius:4px; padding:7px 10px; font-size:12px; font-family:monospace; color:#1A1A1A; outline:none; min-width:0; }
+.cms-url-input:focus { border-color:#821E25; }
+.cms-save-btn { background:#821E25; color:white; border:none; border-radius:4px; padding:8px 14px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; cursor:pointer; white-space:nowrap; }
+.cms-save-btn:hover { background:#5F1219; }
+
+.cms-text-row { border-bottom:1px solid rgba(0,0,0,0.06); }
+.cms-text-row:last-child { border-bottom:none; }
+.cms-text-inner { padding:1.25rem 1.5rem; display:grid; grid-template-columns:200px 1fr; gap:1.5rem; align-items:start; }
+.cms-text-fields { display:grid; gap:10px; }
+.cms-text-input { width:100%; border:1px solid rgba(0,0,0,0.15); border-radius:4px; padding:7px 10px; font-size:13px; color:#1A1A1A; outline:none; box-sizing:border-box; }
+.cms-text-input:focus { border-color:#821E25; }
+textarea.cms-text-input { resize:vertical; min-height:70px; }
+</style>
+
+<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;">
+  <h1 style="font-size:1.4rem; font-weight:700; margin:0;">Content & Images</h1>
+  <a href="<%= admin_inquiries_path %>" style="background:<%= @new_inquiries > 0 ? '#821E25' : '#1A1A1A' %>; color:white; text-decoration:none; padding:10px 18px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; border-radius:4px;">
+    <%= @new_inquiries > 0 ? "#{@new_inquiries} New Inquiries" : "View Inquiries (#{@inquiries_count})" %>
+  </a>
+</div>
+
+<!-- ── SERVICE IMAGES ── -->
+<div class="cms-section">
+  <div class="cms-section-header">
+    <h2>Service Images</h2>
+    <span style="font-size:11px; color:rgba(0,0,0,0.4);">Card image (services page) + Hero image (detail page)</span>
+  </div>
+
+  <% @services.each do |slug, data| %>
+    <% img_override  = @img_overrides.dig(slug, "img")  %>
+    <% img2_override = @img_overrides.dig(slug, "img2") %>
+    <% current_img  = img_override.presence  || data[:img].to_s %>
+    <% current_img2 = img2_override.presence || data[:img2].to_s %>
+
+    <div class="cms-service-row">
+      <div class="cms-service-label">
+        <p class="svc-name"><%= data[:title] %></p>
+        <p class="svc-tags"><%= data[:tags].join(" · ") %></p>
+      </div>
+
+      <!-- Card image -->
+      <div class="cms-img-cell">
+        <label>Card Image</label>
+        <% if current_img.present? %>
+          <img src="<%= current_img %>" class="cms-preview" alt="" onerror="this.style.opacity='0.2'">
+        <% end %>
+        <%= form_with url: admin_content_service_image_path(slug: slug), method: :post, local: true do |f| %>
+          <%= f.hidden_field :field, value: "img" %>
+          <div class="cms-url-row">
+            <%= f.text_field :url, value: current_img, placeholder: "Image URL or /images/file.jpg", class: "cms-url-input" %>
+            <%= f.submit "Save", class: "cms-save-btn" %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Hero image -->
+      <div class="cms-img-cell">
+        <label>Hero / Detail Image</label>
+        <% if current_img2.present? %>
+          <img src="<%= current_img2 %>" class="cms-preview" alt="" onerror="this.style.opacity='0.2'">
+        <% end %>
+        <%= form_with url: admin_content_service_image_path(slug: slug), method: :post, local: true do |f| %>
+          <%= f.hidden_field :field, value: "img2" %>
+          <div class="cms-url-row">
+            <%= f.text_field :url, value: current_img2, placeholder: "Image URL or /images/file.jpg", class: "cms-url-input" %>
+            <%= f.submit "Save", class: "cms-save-btn" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- ── SERVICE TEXT ── -->
+<div class="cms-section">
+  <div class="cms-section-header">
+    <h2>Service Text</h2>
+    <span style="font-size:11px; color:rgba(0,0,0,0.4);">Title · Tagline · Description for each service detail page</span>
+  </div>
+  <% text_overrides = SiteContent.get_json("service_texts") rescue {} %>
+  <% @services.each do |slug, data| %>
+    <% ov = text_overrides[slug] || {} %>
+    <div class="cms-text-row">
+      <div class="cms-text-inner">
+        <div style="padding-top:4px;">
+          <p style="font-weight:700; font-size:13px; margin:0 0 4px;"><%= data[:title] %></p>
+          <p style="font-size:10px; color:rgba(0,0,0,0.4); text-transform:uppercase; letter-spacing:0.1em; margin:0;"><%= slug %></p>
+        </div>
+        <%= form_with url: admin_content_service_text_path(slug: slug), method: :post, local: true do |f| %>
+          <div class="cms-text-fields">
+            <%= f.text_field :title,   value: ov["title"].presence   || data[:title],   placeholder: "Title",   class: "cms-text-input" %>
+            <%= f.text_field :tagline, value: ov["tagline"].presence || data[:tagline], placeholder: "Tagline", class: "cms-text-input" %>
+            <%= f.text_area  :desc,    value: ov["desc"].presence    || data[:desc],    placeholder: "Description", class: "cms-text-input", rows: 3 %>
+            <div style="text-align:right;">
+              <%= f.submit "Save Text", class: "cms-save-btn" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

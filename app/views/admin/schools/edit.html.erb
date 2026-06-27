@@ -1,0 +1,67 @@
+<% content_for :title, "Edit School" %>
+
+<div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
+  <%= link_to "← Back", admin_schools_path, style:"color:#821E25; text-decoration:none; font-size:13px; font-weight:600;" %>
+  <h1 style="font-size:1.25rem; font-weight:700; margin:0;">Edit: <%= @school.name %></h1>
+</div>
+
+<div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:2rem; max-width:800px;">
+  <%= form_with model: [:admin, @school], method: :patch do |f| %>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+      <% [
+        [f.label(:name, "Name"), f.text_field(:name, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:city, "City"), f.text_field(:city, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:state, "State"), f.text_field(:state, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:board, "Board"), f.text_field(:board, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:type, "Type"), f.text_field(:type, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:gender, "Gender"), f.text_field(:gender, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:grades, "Grades"), f.text_field(:grades, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:established, "Established"), f.number_field(:established, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:annual_fees_min, "Fees Min"), f.number_field(:annual_fees_min, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:annual_fees_max, "Fees Max"), f.number_field(:annual_fees_max, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:rating, "Rating (0–5)"), f.number_field(:rating, step: 0.1, min: 0, max: 5, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:is_featured, "Featured (0 or 1)"), f.number_field(:is_featured, min: 0, max: 1, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:phone, "Phone"), f.text_field(:phone, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:email, "Email"), f.text_field(:email, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:website, "Website"), f.text_field(:website, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+        [f.label(:image_url, "Image URL"), f.text_field(:image_url, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box;")],
+      ].each do |label, field| %>
+        <div>
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; margin-bottom:5px;"><%= label %></div>
+          <%= field %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Textareas (full width) -->
+    <% [[:description, "Description"], [:address, "Address"], [:facilities, "Facilities (comma-separated)"], [:admission_criteria, "Admission Criteria"], [:insights, "Insights"]].each do |attr, label| %>
+      <div style="margin-top:1rem;">
+        <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; margin-bottom:5px;"><%= label %></div>
+        <%= f.text_area attr, rows: 3, style:"width:100%; border:1px solid rgba(0,0,0,0.15); padding:9px 12px; font-size:13px; font-family:inherit; outline:none; box-sizing:border-box; resize:vertical;" %>
+      </div>
+    <% end %>
+
+    <div style="margin-top:1.5rem; display:flex; gap:1rem; align-items:center;">
+      <%= f.submit "Save Changes", style:"background:#821E25; color:white; border:none; padding:12px 28px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer; font-family:inherit;" %>
+      <%= link_to "Cancel", admin_schools_path, style:"font-size:13px; color:#666; text-decoration:none;" %>
+    </div>
+  <% end %>
+</div>
+
+<!-- Portal Token -->
+<div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:2rem; max-width:800px; margin-top:1.5rem;">
+  <h2 style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:rgba(0,0,0,0.45); margin:0 0 1rem;">School Portal Access</h2>
+  <% if @school.portal_token.present? %>
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:1rem;">
+      <code style="background:#f4f0e6; padding:10px 16px; font-size:14px; font-family:monospace; letter-spacing:0.08em; border-radius:4px; flex:1;"><%= @school.portal_token %></code>
+      <span style="font-size:11px; color:rgba(0,0,0,0.4);">Active</span>
+    </div>
+    <p style="font-size:12px; color:rgba(0,0,0,0.45); margin:0 0 1rem;">Share this token with the school. They log in at <strong>/portal</strong> using this token to manage their listing.</p>
+  <% else %>
+    <p style="font-size:13px; color:rgba(0,0,0,0.45); margin:0 0 1rem;">No portal token yet. Generate one to give this school access to the portal.</p>
+  <% end %>
+  <%= form_with url: generate_token_admin_school_path(@school), method: :post, local: true, style:"display:inline;" do |f| %>
+    <%= f.submit @school.portal_token.present? ? "Regenerate Token" : "Generate Token",
+        style:"background:#1A1A1A; color:white; border:none; padding:10px 20px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; cursor:pointer; font-family:inherit; border-radius:4px;" %>
+  <% end %>
+</div>

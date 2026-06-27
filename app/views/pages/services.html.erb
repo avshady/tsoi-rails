@@ -1,0 +1,175 @@
+<% content_for :title, "Services — The Schools of India" %>
+
+<style>
+body { background:#f4f0e6 !important; }
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.svc-card {
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
+}
+.svc-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+
+.svc-card-top {
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+}
+
+.svc-tags {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+.svc-tag-group { display: flex; gap: 8px; }
+.svc-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  padding: 5px 12px; border-radius: 100px; border: 1.5px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.6); color: rgba(0,0,0,0.65);
+  white-space: nowrap;
+}
+.svc-dot {
+  width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+}
+
+.svc-card-title {
+  font-family: Georgia, serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: #1A1A1A;
+  margin: 0 0 0.75rem;
+}
+
+.svc-card-desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.5);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.svc-card-img {
+  flex: 0 0 200px;
+  position: relative;
+  margin: 0 12px 12px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.svc-card-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.svc-card:hover .svc-card-img img { transform: scale(1.04); }
+
+.svc-read-more {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15,15,15,0.72);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 9px 16px 9px 18px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.svc-read-more:hover { background: rgba(130,30,37,0.9); }
+.svc-read-more svg { flex-shrink: 0; }
+
+@media (max-width: 1024px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .svc-grid { grid-template-columns: 1fr; } }
+</style>
+
+<!-- Page header -->
+<section style="background:#f4f0e6; padding:5rem 3rem 3rem; text-align:center; position:relative; overflow:hidden;">
+  <div style="position:absolute; top:-60px; left:10%; width:300px; height:300px; background:#821E25; border-radius:50%; opacity:0.08; filter:blur(60px); pointer-events:none;"></div>
+  <div style="position:absolute; top:20px; right:8%; width:260px; height:260px; background:#e4f0fc; border-radius:50%; opacity:0.6; filter:blur(60px); pointer-events:none;"></div>
+  <div style="position:relative; z-index:1;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 1.25rem;">What We Offer</p>
+    <h1 style="font-family:Georgia,serif; font-size:clamp(2.5rem,6vw,5rem); font-weight:700; letter-spacing:-0.04em; color:#1A1A1A; margin:0 0 1rem; line-height:1.05;">
+      Services for<br><em style="color:#821E25;">Every Stage</em> of School.
+    </h1>
+    <p style="font-size:clamp(1rem,1.5vw,1.25rem); color:rgba(0,0,0,0.55); font-weight:400; max-width:600px; margin:0 auto; line-height:1.6;">
+      From land acquisition to multi-campus expansion — TSOI is your complete partner in building great schools.
+    </p>
+  </div>
+</section>
+
+<!-- Cards grid -->
+<section style="padding:0 2rem 5rem; max-width:1400px; margin:0 auto;">
+  <div class="svc-grid">
+
+    <% services = @services %>
+
+    <% services.each do |svc| %>
+      <% text_color   = svc[:dark] ? "#f4f0e6" : "#1A1A1A" %>
+      <% sub_color    = svc[:dark] ? "rgba(244,240,230,0.55)" : "rgba(0,0,0,0.5)" %>
+      <% border_color = svc[:dark] ? "rgba(244,240,230,0.2)" : "rgba(0,0,0,0.12)" %>
+      <div class="svc-card" style="background:<%= svc[:bg] %>;">
+        <div class="svc-card-top">
+          <div class="svc-tags">
+            <div class="svc-tag-group">
+              <% svc[:tags].each do |t| %>
+                <span class="svc-tag" style="border-color:<%= border_color %>; color:<%= sub_color %>; background:<%= svc[:dark] ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.6)' %>;"><%= t %></span>
+              <% end %>
+            </div>
+            <div class="svc-dot" style="background:<%= svc[:dot] %>;"></div>
+          </div>
+          <h2 class="svc-card-title" style="color:<%= text_color %>;"><%= (svc[:card_title] || svc[:title]).gsub("\n","<br>").html_safe %></h2>
+          <p class="svc-card-desc" style="color:<%= sub_color %>;"><%= svc[:desc] %></p>
+        </div>
+        <div class="svc-card-img">
+          <img src="<%= svc[:img] %>" alt="<%= svc[:title].gsub("\n",' ') %>" loading="lazy">
+          <a href="<%= svc[:href] %>" class="svc-read-more">
+            Read More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:#1A1A1A; padding:6rem 3rem; text-align:center; position:relative; overflow:hidden;">
+  <div style="position:absolute; top:-80px; right:-80px; width:400px; height:400px; background:#821E25; border-radius:50%; opacity:0.15; filter:blur(60px);"></div>
+  <div style="position:relative; z-index:1; max-width:700px; margin:0 auto;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 1.25rem;">Get Started</p>
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:clamp(2.5rem,5vw,4rem); color:white; font-weight:700; letter-spacing:-0.02em; margin:0 0 1rem; line-height:1.1;">
+      Ready to build your<br><em style="color:#821E25; font-style:italic;">great school?</em>
+    </h2>
+    <p style="color:rgba(255,255,255,0.5); font-size:1rem; font-weight:400; margin:0 0 2.5rem; line-height:1.7;">
+      Talk to our team about the right service for your school or institution.
+    </p>
+    <%= link_to contact_path, style: "display:inline-flex; align-items:center; gap:10px; background:#821E25; color:white; text-decoration:none; padding:16px 36px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; border-radius:100px; transition:background 0.2s,transform 0.2s;", onmouseover: "this.style.background='#5F1219';this.style.transform='translateY(-2px)'", onmouseout: "this.style.background='#821E25';this.style.transform='translateY(0)'" do %>
+      Contact Us
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <% end %>
+  </div>
+</section>

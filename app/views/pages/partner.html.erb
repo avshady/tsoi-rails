@@ -1,0 +1,63 @@
+<% content_for :title, "Partner With Us — The Schools of India" %>
+
+<div style="background:white; border-bottom:1px solid rgba(0,0,0,0.08); padding:4rem 3rem; text-align:center;">
+  <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; opacity:0.4; margin:0 0 1rem;">Join the Network</p>
+  <h1 style="font-family:Georgia, serif; font-size:clamp(2rem, 4vw, 3.5rem); color:#5F1219; margin:0 0 1rem; font-weight:400;">Partner With Us</h1>
+  <p style="font-size:1rem; opacity:0.65; font-weight:300; max-width:600px; margin:0 auto; line-height:1.6;">
+    Whether you are a vendor, a landowner, or a school, TSOI offers unparalleled opportunities for growth and collaboration.
+  </p>
+</div>
+
+<div style="max-width:1280px; margin:0 auto; padding:4rem 3rem;">
+  <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:1.5rem; margin-bottom:4rem;">
+    <% [
+      {
+        role: "For Schools",
+        img: "https://images.unsplash.com/photo-1585938389612-a552a28d6914?auto=format&fit=crop&q=80&w=800",
+        detail: "Join the TSOI network to access exclusive services, from ERP deployment to executive hiring. Get featured in India's most trusted school directory."
+      },
+      {
+        role: "For Vendors",
+        img: "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&q=80&w=800",
+        detail: "Connect your products and services with thousands of partnered schools through our verified vendor network."
+      },
+      {
+        role: "For Landowners",
+        img: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&q=80&w=800",
+        detail: "Turn your real estate into a center of learning. We facilitate build-to-lease agreements with top educational brands."
+      }
+    ].each do |p| %>
+      <div style="border:1px solid rgba(0,0,0,0.08); overflow:hidden; background:white; transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 4px 20px rgba(130,30,37,0.1)'; this.style.borderColor='#821E25';" onmouseout="this.style.boxShadow=''; this.style.borderColor='rgba(0,0,0,0.08)';">
+        <div style="aspect-ratio:16/9; overflow:hidden; background:#e8e4e0;">
+          <img src="<%= p[:img] %>" alt="<%= p[:role] %>" style="width:100%; height:100%; object-fit:cover; filter:grayscale(0.3); transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:1.1rem; font-weight:700; margin:0 0 10px; color:#1A1A1A;"><%= p[:role] %></h3>
+          <p style="font-size:13px; opacity:0.65; margin:0 0 18px; line-height:1.6;"><%= p[:detail] %></p>
+          <%= link_to "Get in Touch →", contact_path, style: "font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; text-decoration:none; color:#821E25;" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Process -->
+  <div style="border-top:1px solid rgba(0,0,0,0.08); padding-top:3rem;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; opacity:0.4; margin:0 0 2rem; text-align:center;">How It Works</p>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0; background:rgba(0,0,0,0.06);">
+      <% [["01","Apply","Fill in the partner enquiry form with your details"],["02","Review","Our team reviews your application within 48 hours"],["03","Connect","We schedule a call to discuss your specific needs"],["04","Partner","You're onboarded into the TSOI partner ecosystem"]].each_with_index do |(num,title,desc),i| %>
+        <div style="background:white; padding:28px 20px; <%= i<3 ? 'border-right:1px solid rgba(0,0,0,0.08);' : '' %>">
+          <p style="font-size:24px; font-family:Georgia,serif; color:#821E25; margin:0 0 8px; opacity:0.4;"><%= num %></p>
+          <h4 style="font-size:1rem; font-weight:700; margin:0 0 8px;"><%= title %></h4>
+          <p style="font-size:12px; opacity:0.55; margin:0; line-height:1.5;"><%= desc %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="margin-top:3rem; text-align:center; padding:3rem; background:#5F1219; color:white;">
+    <h2 style="font-family:Georgia, serif; font-size:2rem; margin:0 0 1rem; font-weight:400;">Ready to Join the TSOI Network?</h2>
+    <p style="opacity:0.7; margin:0 0 2rem; font-weight:300;">Contact us today and let's build something great together.</p>
+    <%= link_to "Contact Us Now →", contact_path, style: "display:inline-block; background:white; color:#5F1219; text-decoration:none; padding:13px 32px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;" %>
+  </div>
+</div>

@@ -1,0 +1,292 @@
+<% content_for :title, "#{@service[:title]} — The Schools of India" %>
+
+<style>
+body { background:#f4f0e6 !important; }
+
+.sd-input {
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: white;
+  padding: 13px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.sd-input:focus { border-color: rgba(130,30,37,0.7); }
+.sd-input::placeholder { color: rgba(255,255,255,0.25); }
+.sd-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 6px;
+}
+.step-card { transition: transform 0.3s, box-shadow 0.3s; }
+.step-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+.feat-item { transition: background 0.2s; }
+.feat-item:hover { background: #f0ebe1 !important; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+.fade-up { animation: fadeUp 0.6s ease forwards; }
+
+@media (max-width: 900px) {
+  .sd-grid-2 { grid-template-columns: 1fr !important; }
+  .sd-grid-3 { grid-template-columns: 1fr !important; }
+  .sd-hero-img { display: none !important; }
+}
+</style>
+
+<!-- ── HERO ── -->
+<section style="position:relative; min-height:560px; overflow:hidden; display:flex; align-items:flex-end;">
+  <!-- Full-bleed background image -->
+  <div style="position:absolute; inset:0; z-index:0;">
+    <img src="<%= @service[:img] %>" alt="" style="width:100%; height:100%; object-fit:cover; display:block;">
+    <!-- Gradient overlays -->
+    <div style="position:absolute; inset:0; background:linear-gradient(105deg, rgba(10,5,5,0.88) 0%, rgba(10,5,5,0.55) 55%, rgba(10,5,5,0.18) 100%);"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,5,5,0.7) 0%, transparent 50%);"></div>
+  </div>
+
+  <!-- Content -->
+  <div style="position:relative; z-index:1; width:100%; max-width:1280px; margin:0 auto; padding:7rem 3rem 4rem; box-sizing:border-box;">
+    <!-- Breadcrumb -->
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:2rem; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.18em; color:rgba(255,255,255,0.45);">
+      <%= link_to "Services", services_path, style: "color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.15s;", onmouseover: "this.style.color='white'", onmouseout: "this.style.color='rgba(255,255,255,0.45)'" %>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity:0.35;"><polyline points="9 18 15 12 9 6"/></svg>
+      <span><%= @service[:title] %></span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:end;" class="sd-grid-2">
+      <div class="fade-up">
+        <!-- Tags -->
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:1.5rem;">
+          <% @service[:tags].each do |t| %>
+            <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; padding:5px 14px; border-radius:100px; border:1.5px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.07); backdrop-filter:blur(4px);"><%= t %></span>
+          <% end %>
+        </div>
+
+        <h1 style="font-family:Georgia,serif; font-size:clamp(2.8rem,5.5vw,5rem); font-weight:700; line-height:1.0; letter-spacing:-0.04em; color:white; margin:0 0 1.5rem;">
+          <%= @service[:title] %>
+        </h1>
+        <p style="font-size:clamp(1rem,1.5vw,1.2rem); color:rgba(255,255,255,0.6); line-height:1.7; margin:0 0 2.5rem; max-width:480px;">
+          <%= @service[:tagline] %>
+        </p>
+
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+          <a href="#inquiry-form" style="display:inline-flex; align-items:center; gap:8px; background:#821E25; color:white; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; padding:15px 30px; border-radius:100px; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#5F1219'" onmouseout="this.style.background='#821E25'">
+            Enquire Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <%= link_to services_path, style: "display:inline-flex; align-items:center; gap:6px; color:rgba(255,255,255,0.5); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; text-decoration:none; transition:color 0.2s;", onmouseover: "this.style.color='white'", onmouseout: "this.style.color='rgba(255,255,255,0.5)'" do %>
+            ← All Services
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Stats / quick facts -->
+      <div style="display:flex; flex-direction:column; gap:1px; border-radius:16px; overflow:hidden; backdrop-filter:blur(12px);" class="fade-up sd-hero-img">
+        <div style="background:rgba(255,255,255,0.06); padding:1.25rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.35); margin:0 0 4px;">Who This Is For</p>
+          <p style="font-size:14px; color:rgba(255,255,255,0.8); margin:0; line-height:1.6;"><%= @service[:for_who] %></p>
+        </div>
+        <div style="background:rgba(255,255,255,0.04); padding:1.25rem 1.5rem;">
+          <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.35); margin:0 0 0.75rem;">Service Tags</p>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <% @service[:tags].each do |t| %>
+              <span style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.6); background:rgba(130,30,37,0.25); border:1px solid rgba(130,30,37,0.4); padding:4px 12px; border-radius:100px;"><%= t %></span>
+            <% end %>
+          </div>
+        </div>
+        <div style="background:#821E25; padding:1.25rem 1.5rem;">
+          <p style="font-size:11px; color:rgba(255,255,255,0.7); margin:0 0 0.75rem; line-height:1.5;">Ready to explore this service for your school?</p>
+          <a href="#inquiry-form" style="display:inline-flex; align-items:center; gap:6px; color:white; font-weight:700; font-size:10px; text-transform:uppercase; letter-spacing:0.15em; text-decoration:none;">
+            Fill out the form below →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OVERVIEW STRIP ── -->
+<section style="background:white; border-bottom:1px solid rgba(0,0,0,0.06);">
+  <div style="max-width:1280px; margin:0 auto; padding:3rem; display:grid; grid-template-columns:2fr 1fr; gap:4rem; align-items:center;" class="sd-grid-2">
+    <div>
+      <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 0.75rem;">Overview</p>
+      <p style="font-size:clamp(1rem,1.4vw,1.15rem); line-height:1.85; color:rgba(0,0,0,0.65); margin:0; font-weight:400;"><%= @service[:desc] %></p>
+    </div>
+    <div style="background:#f4f0e6; border-radius:14px; padding:1.5rem;">
+      <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.18em; color:rgba(0,0,0,0.35); margin:0 0 0.6rem;">Best suited for</p>
+      <p style="font-size:14px; line-height:1.65; color:rgba(0,0,0,0.65); margin:0 0 1.25rem;"><%= @service[:for_who] %></p>
+      <a href="#inquiry-form" style="display:inline-flex; align-items:center; gap:6px; background:#1A1A1A; color:white; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; padding:11px 20px; border-radius:100px; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#821E25'" onmouseout="this.style.background='#1A1A1A'">
+        Talk to Our Team →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section style="background:#f4f0e6; padding:5rem 3rem;">
+  <div style="max-width:1280px; margin:0 auto;">
+    <div style="margin-bottom:3rem; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 0.5rem;">Process</p>
+        <h2 style="font-family:Georgia,serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:#1A1A1A; margin:0; letter-spacing:-0.03em;">How it works.</h2>
+      </div>
+      <a href="#inquiry-form" style="display:inline-flex; align-items:center; gap:6px; color:#821E25; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; text-decoration:none; border-bottom:1.5px solid #821E25; padding-bottom:2px; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+        Get started →
+      </a>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px;" class="sd-grid-2">
+      <% @service[:steps].each_with_index do |step, i| %>
+        <div class="step-card" style="background:white; border-radius:18px; padding:2.25rem; border:1px solid rgba(0,0,0,0.05); position:relative; overflow:hidden;">
+          <div style="position:absolute; top:1.5rem; right:1.75rem; font-family:Georgia,serif; font-size:4rem; font-weight:700; color:#821E25; opacity:0.06; line-height:1; pointer-events:none; user-select:none;"><%= step[:num] %></div>
+          <div style="width:36px; height:36px; background:#821E25; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1.25rem;">
+            <span style="font-family:Georgia,serif; font-size:14px; font-weight:700; color:white;"><%= step[:num] %></span>
+          </div>
+          <h3 style="font-family:Georgia,serif; font-size:1.3rem; font-weight:700; color:#1A1A1A; margin:0 0 0.6rem; letter-spacing:-0.02em;"><%= step[:title] %></h3>
+          <p style="font-size:14px; color:rgba(0,0,0,0.52); line-height:1.75; margin:0;"><%= step[:body] %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT'S INCLUDED ── -->
+<section style="background:white; padding:5rem 3rem;">
+  <div style="max-width:1280px; margin:0 auto;">
+    <div style="display:grid; grid-template-columns:1fr 2.5fr; gap:5rem; align-items:start;" class="sd-grid-2">
+      <div style="position:sticky; top:2rem;">
+        <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 0.75rem;">What's Included</p>
+        <h2 style="font-family:Georgia,serif; font-size:clamp(1.8rem,3vw,2.6rem); font-weight:700; color:#1A1A1A; margin:0 0 1rem; letter-spacing:-0.03em; line-height:1.1;">Everything<br><em style="color:#821E25;">you need.</em></h2>
+        <p style="font-size:14px; color:rgba(0,0,0,0.48); line-height:1.75; margin:0 0 2rem;">Every engagement includes these deliverables — customised further for your school's size and goals.</p>
+        <a href="#inquiry-form" style="display:inline-flex; align-items:center; gap:8px; background:#821E25; color:white; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; padding:14px 26px; border-radius:100px; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#5F1219'" onmouseout="this.style.background='#821E25'">
+          Enquire Now →
+        </a>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="sd-grid-2">
+        <% @service[:features].each do |title, desc| %>
+          <div class="feat-item" style="border:1px solid rgba(0,0,0,0.07); padding:1.5rem; border-radius:14px; background:#faf9f7; cursor:default;">
+            <div style="width:34px; height:34px; background:#821E25; border-radius:9px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 18 4 13"/></svg>
+            </div>
+            <p style="font-size:13px; font-weight:700; color:#1A1A1A; margin:0 0 5px; letter-spacing:-0.01em;"><%= title %></p>
+            <p style="font-size:12px; color:rgba(0,0,0,0.48); margin:0; line-height:1.6;"><%= desc %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INQUIRY FORM ── -->
+<section id="inquiry-form" style="background:#1A1A1A; padding:5rem 3rem; position:relative; overflow:hidden;">
+  <div style="position:absolute; top:-80px; right:-80px; width:500px; height:500px; background:#821E25; border-radius:50%; opacity:0.1; filter:blur(90px); pointer-events:none;"></div>
+  <div style="position:absolute; bottom:-60px; left:-40px; width:300px; height:300px; background:#821E25; border-radius:50%; opacity:0.06; filter:blur(60px); pointer-events:none;"></div>
+
+  <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1.4fr; gap:6rem; align-items:start; position:relative; z-index:1;" class="sd-grid-2">
+
+    <!-- Left copy + image -->
+    <div>
+      <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 1.25rem;">Get Started</p>
+      <h2 style="font-family:Georgia,serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:400; color:white; margin:0 0 1rem; letter-spacing:-0.03em; line-height:1.1;">
+        Enquire about<br><em style="color:#821E25;"><%= @service[:title] %>.</em>
+      </h2>
+      <p style="font-size:15px; color:rgba(255,255,255,0.42); line-height:1.8; margin:0 0 2.5rem; max-width:380px;">
+        Tell us about your school and what you're looking to achieve. We respond within 24 hours.
+      </p>
+
+      <!-- Service highlights -->
+      <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:2.5rem;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:8px; height:8px; border-radius:50%; background:#821E25; flex-shrink:0;"></div>
+          <span style="font-size:13px; color:rgba(255,255,255,0.55);">Free initial consultation</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:8px; height:8px; border-radius:50%; background:#821E25; flex-shrink:0;"></div>
+          <span style="font-size:13px; color:rgba(255,255,255,0.55);">Customised plan for your school</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:8px; height:8px; border-radius:50%; background:#821E25; flex-shrink:0;"></div>
+          <span style="font-size:13px; color:rgba(255,255,255,0.55);">Response within 24 hours</span>
+        </div>
+      </div>
+
+      <div style="border-radius:16px; overflow:hidden; height:240px;">
+        <img src="<%= @service[:img2] %>" alt="" style="width:100%; height:100%; object-fit:cover; display:block; filter:brightness(0.65);">
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:2.5rem;">
+
+      <% if flash[:notice] %>
+        <div style="background:rgba(130,30,37,0.25); border:1px solid rgba(130,30,37,0.5); color:#f4c5c8; padding:1rem 1.25rem; border-radius:12px; margin-bottom:1.5rem; font-size:14px; display:flex; align-items:center; gap:10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 18 4 13"/></svg>
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div style="background:rgba(200,50,50,0.15); border:1px solid rgba(200,50,50,0.4); color:#ffaaaa; padding:1rem 1.25rem; border-radius:12px; margin-bottom:1.5rem; font-size:14px;">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <h3 style="font-family:Georgia,serif; font-size:1.25rem; font-weight:700; color:white; margin:0 0 1.75rem; letter-spacing:-0.02em;">Your details</h3>
+
+      <%= form_with url: service_inquiry_path(params[:slug]), method: :post, local: true do |f| %>
+        <div style="display:flex; flex-direction:column; gap:1.1rem;">
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;" class="sd-grid-2">
+            <div>
+              <label class="sd-label">Your Name *</label>
+              <%= f.text_field :name, placeholder: "Priya Sharma", required: true, class: "sd-input" %>
+            </div>
+            <div>
+              <label class="sd-label">Phone</label>
+              <%= f.telephone_field :phone, placeholder: "+91 98765 43210", class: "sd-input" %>
+            </div>
+          </div>
+
+          <div>
+            <label class="sd-label">Email Address *</label>
+            <%= f.email_field :email, placeholder: "priya@yourschool.edu.in", required: true, class: "sd-input" %>
+          </div>
+
+          <div>
+            <label class="sd-label">School / Organisation Name</label>
+            <%= f.text_field :school_name, placeholder: "Sunrise International School, Pune", class: "sd-input" %>
+          </div>
+
+          <div>
+            <label class="sd-label">Tell us about your need</label>
+            <%= f.text_area :message, rows: 4, placeholder: "We're looking to #{@service[:title].downcase} and need guidance on...", class: "sd-input", style: "resize:vertical;" %>
+          </div>
+
+          <%= f.hidden_field :service, value: @service[:title] %>
+
+          <div style="padding-top:0.25rem;">
+            <%= f.submit "Send Enquiry →", class: "sd-submit", style: "width:100%; background:#821E25; color:white; border:none; padding:16px; border-radius:100px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.18em; cursor:pointer; transition:background 0.2s; font-family:inherit;", onmouseover: "this.style.background='#5F1219'", onmouseout: "this.style.background='#821E25'" %>
+          </div>
+
+          <p style="font-size:11px; color:rgba(255,255,255,0.25); text-align:center; margin:0; line-height:1.5;">
+            By submitting you agree to our <a href="<%= privacy_path %>" style="color:rgba(255,255,255,0.4); text-decoration:underline;">privacy policy</a>. No spam, ever.
+          </p>
+
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</section>
+
+<style>
+@media (max-width: 900px) {
+  .sd-grid-2 { grid-template-columns: 1fr !important; gap: 2rem !important; }
+}
+</style>

@@ -1,0 +1,20 @@
+<% content_for :title, "Privacy Policy — The Schools of India" %>
+<div style="max-width:800px; margin:0 auto; padding:4rem 3rem;">
+  <h1 style="font-family:Georgia,serif; font-size:2.5rem; color:#5F1219; margin:0 0 0.5rem;">Privacy Policy</h1>
+  <p style="opacity:0.4; font-size:13px; margin:0 0 3rem;">Last updated: January 2025</p>
+  <% [
+    ["1. Information We Collect", "We collect information you provide directly to us, such as your name, email, and school enquiries. We also collect usage data automatically when you use our platform."],
+    ["2. How We Use Your Information", "We use the information to provide and improve our services, communicate with you, and personalize your experience. We do not sell your personal information."],
+    ["3. Cookies", "We use cookies to enhance your browsing experience and analyze site traffic. You can control cookie settings through your browser."],
+    ["4. Data Security", "We implement industry-standard security measures to protect your information. However, no method of transmission over the Internet is 100% secure."],
+    ["5. Third-Party Services", "We may use third-party services that have their own privacy policies. We are not responsible for the privacy practices of these services."],
+    ["6. Your Rights", "You have the right to access, correct, or delete your personal information. Contact us at privacy@theschoolsofindia.org to exercise these rights."],
+    ["7. Changes to This Policy", "We may update this policy from time to time. We will notify you of significant changes by posting the new policy on this page."],
+    ["8. Contact", "For privacy questions, contact us at privacy@theschoolsofindia.org"]
+  ].each do |heading, body| %>
+    <div style="margin-bottom:2rem;">
+      <h2 style="font-size:1.1rem; font-weight:700; margin:0 0 0.5rem;"><%= heading %></h2>
+      <p style="font-size:14px; opacity:0.7; line-height:1.7; margin:0;"><%= body %></p>
+    </div>
+  <% end %>
+</div>

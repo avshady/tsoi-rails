@@ -1,0 +1,19 @@
+<% content_for :title, "Terms of Service — The Schools of India" %>
+<div style="max-width:800px; margin:0 auto; padding:4rem 3rem;">
+  <h1 style="font-family:Georgia,serif; font-size:2.5rem; color:#5F1219; margin:0 0 0.5rem;">Terms of Service</h1>
+  <p style="opacity:0.4; font-size:13px; margin:0 0 3rem;">Last updated: January 2025</p>
+  <% [
+    ["1. Acceptance of Terms", "By accessing or using The Schools of India platform, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services."],
+    ["2. Use of Service", "The Schools of India provides a school discovery and education services platform. You agree to use this service only for lawful purposes and in a way that does not infringe the rights of others."],
+    ["3. Accuracy of Information", "We strive to maintain accurate school listings, but we do not guarantee the completeness, accuracy, or timeliness of information. Always verify details directly with schools."],
+    ["4. Intellectual Property", "All content on this platform, including text, logos, and design, is the property of The Schools of India and may not be reproduced without permission."],
+    ["5. Limitation of Liability", "The Schools of India shall not be liable for any indirect, incidental, or consequential damages arising from your use of or inability to use our services."],
+    ["6. Changes to Terms", "We reserve the right to modify these terms at any time. Continued use of the service after changes constitutes acceptance of the new terms."],
+    ["7. Contact", "For questions about these terms, contact us at legal@theschoolsofindia.org"]
+  ].each do |heading, body| %>
+    <div style="margin-bottom:2rem;">
+      <h2 style="font-size:1.1rem; font-weight:700; margin:0 0 0.5rem;"><%= heading %></h2>
+      <p style="font-size:14px; opacity:0.7; line-height:1.7; margin:0;"><%= body %></p>
+    </div>
+  <% end %>
+</div>

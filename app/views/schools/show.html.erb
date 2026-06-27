@@ -1,0 +1,490 @@
+<% content_for :title, "#{@school.name} — The Schools of India" %>
+
+<style>
+.detail-nav-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 9px 14px;
+  font-size: 13px;
+  background: none;
+  border: none;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  color: rgba(0,0,0,0.65);
+  transition: all 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.detail-nav-item:hover { color: #1A1A1A; background: rgba(0,0,0,0.03); }
+.detail-nav-item.active { border-left-color: #821E25; color: #821E25; font-weight: 600; background: white; }
+.section-head {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.45;
+  margin: 0 0 1rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.stat-box {
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #FAF9F6;
+  padding: 18px;
+  text-align: center;
+}
+.stat-box .val { font-family: Georgia, serif; font-size: 1.5rem; color: #5F1219; margin: 0 0 4px; }
+.stat-box .lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.5; margin: 0; }
+.section-block { margin-bottom: 3.5rem; scroll-margin-top: 80px; }
+.facility-tag {
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: white;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 4px;
+}
+.gallery-img {
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+}
+</style>
+
+<!-- Back link -->
+<div style="background:white; border-bottom:1px solid rgba(0,0,0,0.06); padding:10px 3rem;">
+  <%= link_to "← Back to Directory", schools_path, style: "font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; text-decoration:none; color:rgba(0,0,0,0.5); transition:color 0.2s;" %>
+</div>
+
+<!-- Header -->
+<div style="background:white; border-bottom:1px solid rgba(0,0,0,0.08); padding:2.5rem 3rem;">
+  <div style="max-width:1280px; margin:0 auto; display:flex; gap:2.5rem; flex-wrap:wrap; align-items:flex-start;">
+    <!-- Image -->
+    <div style="width:340px; flex-shrink:0; aspect-ratio:4/3; overflow:hidden; background:#f0ece8; position:relative; box-shadow:0 4px 20px rgba(0,0,0,0.1);">
+      <% if @school.image_url.present? %>
+        <img src="<%= @school.image_url %>" alt="<%= @school.name %>" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+      <% else %>
+        <div style="width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; opacity:0.2;">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em;"><%= @school.name %></span>
+        </div>
+      <% end %>
+      <% if @school.is_featured == 1 %>
+        <div style="position:absolute; top:14px; left:14px; background:#821E25; color:white; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; padding:3px 10px;">✓ Promoted</div>
+      <% end %>
+    </div>
+
+    <!-- Info -->
+    <div style="flex:1; min-width:280px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
+        <span style="background:#f0fdf4; color:#166534; border:1px solid #bbf7d0; font-size:12px; font-weight:700; padding:3px 10px; display:flex; align-items:center; gap:5px;">
+          ★ <%= @school.rating.to_f.round(1) %> TSOI Rating
+        </span>
+        <% if @school.established.present? %>
+          <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4; padding-left:10px; border-left:1px solid rgba(0,0,0,0.15);">Est. <%= @school.established %></span>
+        <% end %>
+      </div>
+
+      <h1 style="font-family:Georgia, serif; font-size:clamp(1.8rem, 4vw, 3rem); color:#5F1219; margin:0 0 0.5rem; line-height:1.15;">
+        <%= @school.name %>
+      </h1>
+      <p style="font-size:14px; opacity:0.6; margin:0 0 1.5rem; display:flex; align-items:center; gap:6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <%= @school.city %>, <%= @school.state %> — India
+      </p>
+
+      <p style="font-size:14px; line-height:1.7; opacity:0.75; max-width:600px; font-weight:300; margin:0 0 2rem;">
+        <%= @school.description.presence || "One of the premier educational institutions in #{@school.city}, providing exceptional #{@school.board} curriculum education. Committed to holistic development and academic excellence." %>
+      </p>
+
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
+        <% if @school.website.present? %>
+          <a href="<%= @school.website %>" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; background:#821E25; color:white; text-decoration:none; padding:12px 24px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; transition:background 0.2s;">
+            Apply for Admission
+          </a>
+        <% else %>
+          <button style="display:inline-flex; align-items:center; gap:8px; background:#821E25; color:white; border:none; padding:12px 24px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer;">
+            Apply for Admission
+          </button>
+        <% end %>
+        <button style="display:inline-flex; align-items:center; gap:8px; background:white; border:1px solid rgba(0,0,0,0.12); padding:12px 24px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; cursor:pointer; font-family:inherit; transition:border-color 0.2s;">
+          Schedule Visit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Two-column body -->
+<div style="max-width:1280px; margin:0 auto; padding:2rem 3rem; display:flex; gap:2.5rem; align-items:flex-start;">
+
+  <!-- LEFT SIDEBAR NAV -->
+  <div style="width:220px; flex-shrink:0; position:sticky; top:80px; background:#FAF9F6; border:1px solid rgba(0,0,0,0.06); padding:12px 0;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4; padding:6px 14px 10px; margin:0;">Sections</p>
+    <% [
+      ["key-stats", "Key School Stats"],
+      ["fee-structure", "Fee Structure"],
+      ["virtual-tour", "Virtual Tour"],
+      ["academic-stats", "Academic Stats"],
+      ["admission-dates", "Admission Dates"],
+      ["criteria", "Admission Criteria"],
+      ["hall-of-fame", "Hall of Fame"],
+      ["results", "School Results"],
+      ["facilities", "Facilities"],
+      ["insights", "Insights"],
+      ["gallery", "Gallery"],
+      ["videos", "Videos"],
+      ["contact", "Address & Contact"]
+    ].each do |id, label| %>
+      <a href="#<%= id %>" class="detail-nav-item" onclick="setActive(this)"><%= label %></a>
+    <% end %>
+  </div>
+
+  <!-- RIGHT CONTENT -->
+  <div style="flex:1; min-width:0;">
+
+    <!-- 1. KEY STATS -->
+    <div class="section-block" id="key-stats">
+      <p class="section-head">Key School Stats</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:12px;">
+        <div class="stat-box">
+          <p class="val"><%= @school.board_list.first %></p>
+          <p class="lbl">Board</p>
+        </div>
+        <div class="stat-box">
+          <p class="val"><%= @school.type.presence || "Private" %></p>
+          <p class="lbl">School Type</p>
+        </div>
+        <div class="stat-box">
+          <p class="val"><%= @school.gender.presence || "Co-Ed" %></p>
+          <p class="lbl">Gender</p>
+        </div>
+        <div class="stat-box">
+          <p class="val"><%= @school.grades.presence || "LKG–12" %></p>
+          <p class="lbl">Grades</p>
+        </div>
+        <% if @school.established.present? %>
+        <div class="stat-box">
+          <p class="val"><%= @school.established %></p>
+          <p class="lbl">Established</p>
+        </div>
+        <% end %>
+        <% if @school.student_teacher_ratio.present? %>
+        <div class="stat-box">
+          <p class="val"><%= @school.student_teacher_ratio %></p>
+          <p class="lbl">Student:Teacher</p>
+        </div>
+        <% end %>
+        <% if @school.affiliation_no.present? %>
+        <div class="stat-box">
+          <p class="val" style="font-size:1rem;"><%= @school.affiliation_no %></p>
+          <p class="lbl">Affiliation No.</p>
+        </div>
+        <% end %>
+        <div class="stat-box">
+          <p class="val" style="font-size:1.2rem;"><%= @school.total_reviews.to_i %></p>
+          <p class="lbl">Reviews</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. FEE STRUCTURE -->
+    <div class="section-block" id="fee-structure">
+      <p class="section-head">Fee Structure</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:12px;">
+        <div class="stat-box">
+          <p class="val" style="font-size:1.2rem;"><%= @school.annual_fees_min ? fmt_amount(@school.annual_fees_min) : "On Request" %></p>
+          <p class="lbl">Annual Fees (Min)</p>
+        </div>
+        <div class="stat-box">
+          <p class="val" style="font-size:1.2rem;"><%= @school.annual_fees_max ? fmt_amount(@school.annual_fees_max) : "On Request" %></p>
+          <p class="lbl">Annual Fees (Max)</p>
+        </div>
+        <% if @school.admission_fee.present? && @school.admission_fee > 0 %>
+        <div class="stat-box">
+          <p class="val" style="font-size:1.2rem;"><%= fmt_amount(@school.admission_fee) %></p>
+          <p class="lbl">Admission Fee</p>
+        </div>
+        <% end %>
+        <% if @school.security_deposit.present? && @school.security_deposit > 0 %>
+        <div class="stat-box">
+          <p class="val" style="font-size:1.2rem;"><%= fmt_amount(@school.security_deposit) %></p>
+          <p class="lbl">Security Deposit</p>
+        </div>
+        <% end %>
+        <% if @school.annual_fees_min.present? %>
+        <div class="stat-box">
+          <p class="val" style="font-size:1.2rem;"><%= fmt_amount(@school.annual_fees_min / 12) %></p>
+          <p class="lbl">Monthly (approx)</p>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 3. VIRTUAL TOUR -->
+    <div class="section-block" id="virtual-tour">
+      <p class="section-head">Virtual Tour</p>
+      <% if @school.virtual_tour_url.present? %>
+        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border:1px solid rgba(0,0,0,0.1);">
+          <iframe
+            src="<%= @school.virtual_tour_url %>"
+            style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      <% else %>
+        <div style="background:#FAF9F6; border:1px solid rgba(0,0,0,0.08); padding:2.5rem; text-align:center; opacity:0.5;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="display:block; margin:0 auto 12px;"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin:0;">Virtual Tour Not Available</p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 4. ACADEMIC STATS -->
+    <div class="section-block" id="academic-stats">
+      <p class="section-head">Academic Stats</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:12px;">
+        <div class="stat-box">
+          <p class="val"><%= @school.pass_percentage.present? ? "#{@school.pass_percentage.round(1)}%" : "N/A" %></p>
+          <p class="lbl">Pass Percentage</p>
+        </div>
+        <div class="stat-box">
+          <p class="val"><%= @school.top_scorers_pct.present? ? "#{@school.top_scorers_pct.round(1)}%" : "N/A" %></p>
+          <p class="lbl">Top Scorers (90%+)</p>
+        </div>
+        <div class="stat-box">
+          <p class="val"><%= @school.rating.to_f.round(1) %>/5</p>
+          <p class="lbl">TSOI Rating</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. ADMISSION DATES -->
+    <div class="section-block" id="admission-dates">
+      <p class="section-head">Admission Dates</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:12px;">
+        <div class="stat-box" style="<%= @school.admission_open == 1 ? 'background:#f0fdf4; border-color:#bbf7d0;' : '' %>">
+          <p class="val" style="<%= @school.admission_open == 1 ? 'color:#166534;' : '' %>"><%= @school.admission_open == 1 ? "Open" : "Closed" %></p>
+          <p class="lbl">Admissions</p>
+        </div>
+        <% if @school.admission_start.present? %>
+        <div class="stat-box">
+          <p class="val" style="font-size:1rem;"><%= @school.admission_start %></p>
+          <p class="lbl">Opens</p>
+        </div>
+        <% end %>
+        <% if @school.admission_deadline.present? %>
+        <div class="stat-box">
+          <p class="val" style="font-size:1rem;"><%= @school.admission_deadline %></p>
+          <p class="lbl">Deadline</p>
+        </div>
+        <% end %>
+        <% if @school.admission_test_date.present? %>
+        <div class="stat-box">
+          <p class="val" style="font-size:1rem;"><%= @school.admission_test_date %></p>
+          <p class="lbl">Entrance Test</p>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 6. ADMISSION CRITERIA -->
+    <div class="section-block" id="criteria">
+      <p class="section-head">Admission Criteria & Eligibility</p>
+      <% criteria = @school.admission_criteria_list %>
+      <% if criteria.any? %>
+        <ul style="list-style:none; padding:0; margin:0;">
+          <% criteria.each do |c| %>
+            <li style="display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid rgba(0,0,0,0.06); font-size:14px; opacity:0.8;">
+              <span style="color:#821E25; font-size:16px; flex-shrink:0; margin-top:1px;">✓</span>
+              <%= c %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p style="opacity:0.4; font-size:13px;">Admission criteria not specified. Contact the school for details.</p>
+      <% end %>
+    </div>
+
+    <!-- 7. HALL OF FAME -->
+    <div class="section-block" id="hall-of-fame">
+      <p class="section-head">Hall of Fame</p>
+      <% hof = @school.hall_of_fame_list %>
+      <% if hof.any? %>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px;">
+          <% hof.each do |name| %>
+            <div style="background:#FAF9F6; border:1px solid rgba(0,0,0,0.08); padding:16px; display:flex; align-items:center; gap:10px;">
+              <span style="font-size:1.25rem;">🏆</span>
+              <span style="font-size:13px; font-weight:600;"><%= name %></span>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p style="opacity:0.4; font-size:13px;">No hall of fame entries yet.</p>
+      <% end %>
+    </div>
+
+    <!-- 8. SCHOOL RESULTS -->
+    <div class="section-block" id="results">
+      <p class="section-head">School Results</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:12px;">
+        <div class="stat-box">
+          <p class="val"><%= @school.pass_percentage.present? ? "#{@school.pass_percentage.round(0)}%" : "—" %></p>
+          <p class="lbl">Board Pass Rate</p>
+        </div>
+        <div class="stat-box">
+          <p class="val"><%= @school.top_scorers_pct.present? ? "#{@school.top_scorers_pct.round(0)}%" : "—" %></p>
+          <p class="lbl">Distinctions</p>
+        </div>
+        <div class="stat-box">
+          <p class="val"><%= @school.board_list.first %></p>
+          <p class="lbl">Affiliated Board</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. FACILITIES -->
+    <div class="section-block" id="facilities">
+      <p class="section-head">Facilities</p>
+      <% facs = @school.facilities_list %>
+      <% if facs.any? %>
+        <div style="display:flex; flex-wrap:wrap; gap:0; margin:-4px;">
+          <% facs.each do |f| %>
+            <span class="facility-tag">✓ <%= f %></span>
+          <% end %>
+        </div>
+      <% else %>
+        <p style="opacity:0.4; font-size:13px;">Facilities information not available.</p>
+      <% end %>
+    </div>
+
+    <!-- 10. INSIGHTS -->
+    <div class="section-block" id="insights">
+      <p class="section-head">Insights</p>
+      <% if @school.insights.present? %>
+        <div style="background:#5F1219; color:white; padding:2rem 2.5rem; border-left:4px solid #821E25;">
+          <p style="font-size:15px; line-height:1.7; margin:0; font-weight:300; font-style:italic;">
+            "<%= @school.insights %>"
+          </p>
+        </div>
+      <% else %>
+        <p style="opacity:0.4; font-size:13px;">No insights available for this school.</p>
+      <% end %>
+    </div>
+
+    <!-- 11. GALLERY -->
+    <div class="section-block" id="gallery">
+      <p class="section-head">Gallery</p>
+      <% imgs = @school.gallery_images_list %>
+      <% if imgs.any? %>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:8px;">
+          <% imgs.each do |img| %>
+            <div style="overflow:hidden; background:#f0ece8; aspect-ratio:4/3;">
+              <img src="<%= img %>" alt="<%= @school.name %> gallery" class="gallery-img" onerror="this.parentElement.style.display='none'">
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div style="background:#FAF9F6; border:1px solid rgba(0,0,0,0.08); padding:2.5rem; text-align:center; opacity:0.4;">
+          <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin:0;">Gallery Coming Soon</p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 12. VIDEOS -->
+    <div class="section-block" id="videos">
+      <p class="section-head">Videos</p>
+      <% vids = @school.video_urls_list %>
+      <% if vids.any? %>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:16px;">
+          <% vids.each do |url| %>
+            <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border:1px solid rgba(0,0,0,0.08);">
+              <iframe src="<%= url %>" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen loading="lazy"></iframe>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div style="background:#FAF9F6; border:1px solid rgba(0,0,0,0.08); padding:2.5rem; text-align:center; opacity:0.4;">
+          <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin:0;">No Videos Available</p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- 13. ADDRESS & CONTACT -->
+    <div class="section-block" id="contact">
+      <p class="section-head">Address & Contact</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; flex-wrap:wrap;">
+        <div>
+          <% if @school.address.present? %>
+          <div style="margin-bottom:1.5rem;">
+            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4; margin:0 0 6px;">Address</p>
+            <p style="font-size:14px; line-height:1.6; margin:0; opacity:0.8;"><%= @school.address %></p>
+          </div>
+          <% end %>
+          <div style="margin-bottom:1rem;">
+            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4; margin:0 0 4px;">Location</p>
+            <p style="font-size:14px; margin:0; opacity:0.8;"><%= @school.city %>, <%= @school.district.presence || @school.state %>, <%= @school.state %></p>
+          </div>
+        </div>
+        <div>
+          <% if @school.phone.present? %>
+          <div style="margin-bottom:1rem;">
+            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4; margin:0 0 4px;">Phone</p>
+            <a href="tel:<%= @school.phone %>" style="font-size:14px; color:#821E25; text-decoration:none;"><%= @school.phone %></a>
+          </div>
+          <% end %>
+          <% if @school.email.present? %>
+          <div style="margin-bottom:1rem;">
+            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4; margin:0 0 4px;">Email</p>
+            <a href="mailto:<%= @school.email %>" style="font-size:14px; color:#821E25; text-decoration:none;"><%= @school.email %></a>
+          </div>
+          <% end %>
+          <% if @school.website.present? %>
+          <div style="margin-bottom:1rem;">
+            <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4; margin:0 0 4px;">Website</p>
+            <a href="<%= @school.website %>" target="_blank" rel="noopener" style="font-size:14px; color:#821E25; text-decoration:none; word-break:break-all;"><%= @school.website %></a>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function setActive(el) {
+  document.querySelectorAll('.detail-nav-item').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Highlight active section on scroll
+(function() {
+  const sections = document.querySelectorAll('.section-block');
+  const navItems = document.querySelectorAll('.detail-nav-item');
+
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(a => {
+          if (a.getAttribute('href') === '#' + id) {
+            a.classList.add('active');
+          } else {
+            a.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+})();
+</script>
