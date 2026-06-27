@@ -3,7 +3,7 @@
 <!-- ════════════════════════════════
      PARENTS CORNER HERO
 ════════════════════════════════ -->
-<div style="background:#f4f0e6; padding:3rem 3rem 2.5rem; width:100%;">
+<div class="parents-hero" style="background:#f4f0e6; padding:3rem 3rem 2.5rem; width:100%;">
   <div style="max-width:1280px; margin:0 auto; display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap;">
     <div>
       <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:#821E25; margin-bottom:1rem;">Parents Corner</div>
@@ -35,6 +35,14 @@
      SEARCH BAR
 ════════════════════════════════ -->
 <div style="width:100%; max-width:1280px; margin:0 auto; padding:0 3rem;" class="finder-outer">
+
+  <!-- Mobile filter toggle -->
+  <div class="mobile-filter-toggle" style="display:none; margin-bottom:1rem;">
+    <button onclick="toggleSidebar()" id="filterToggleBtn" style="width:100%; padding:11px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; border:1px solid rgba(0,0,0,0.15); background:white; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; font-family:inherit;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+      Filters
+    </button>
+  </div>
   <div style="padding:1.5rem 2rem; background:white; border:1px solid rgba(0,0,0,0.1); box-shadow:0 4px 24px rgba(0,0,0,0.08); margin-top:-1px; margin-bottom:2rem; position:relative;">
     <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
       <div style="flex:1; min-width:200px;">
@@ -71,7 +79,7 @@
   <div style="display:flex; gap:2.5rem; align-items:flex-start; flex-wrap:wrap; padding-bottom:5rem;">
 
     <!-- ── SIDEBAR ── -->
-    <div style="width:280px; flex-shrink:0; position:sticky; top:88px;" class="sidebar-wrap">
+    <div id="sidebarPanel" style="width:280px; flex-shrink:0; position:sticky; top:88px;" class="sidebar-wrap">
       <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:1rem; margin-bottom:2rem;">
         <h3 style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; margin:0; display:flex; align-items:center; gap:8px;">
           <span style="display:inline-block; width:8px; height:8px; background:#821E25; border-radius:50%;"></span> Filters
@@ -183,6 +191,47 @@
 @media (max-width:900px) {
   .finder-outer  { padding-left:1.25rem !important; padding-right:1.25rem !important; }
   .sidebar-wrap  { width:100% !important; position:static !important; }
+}
+@media (max-width:768px) {
+  /* Hero */
+  .parents-hero { padding:1.5rem 1.25rem 1.25rem !important; }
+  .parents-hero h1 { font-size:2rem !important; }
+
+  /* Finder search bar */
+  .finder-outer > div:first-child > div { flex-direction:column !important; gap:1rem !important; }
+  .finder-outer > div:first-child > div > div { min-width:0 !important; flex:unset !important; width:100% !important; }
+
+  /* Mobile filter toggle */
+  .mobile-filter-toggle { display:block !important; }
+
+  /* Sidebar hidden by default on mobile — toggle reveals */
+  #sidebarPanel { display:none; }
+  #sidebarPanel.open { display:block !important; }
+
+  /* Results full width */
+  .finder-outer > div:last-child > div { flex-direction:column !important; }
+  .finder-outer > div:last-child > div > div:first-child { width:100% !important; }
+
+  /* School cards */
+  .school-card-inner { flex-direction:column !important; }
+  .card-img-wrap     { width:100% !important; height:200px !important; }
+
+  /* Card stats grid: 2-col on mobile */
+  .card-stats-grid   { grid-template-columns:1fr 1fr !important; }
+
+  /* Modal */
+  #modalBody { padding:1rem 1rem 4rem !important; }
+  .modal-header-flex { flex-direction:column !important; }
+  .modal-img-box     { width:100% !important; min-width:unset !important; }
+  .modal-two-col     { flex-direction:column !important; gap:1.5rem !important; }
+  .modal-nav-sidebar { display:none !important; }
+  .modal-key-grid    { grid-template-columns:1fr 1fr !important; }
+  .modal-academic-grid  { grid-template-columns:1fr 1fr !important; }
+  .modal-hall-grid   { grid-template-columns:1fr !important; }
+  .modal-facilities-grid { grid-template-columns:repeat(3,1fr) !important; }
+  .modal-gallery-grid { grid-template-columns:repeat(2,1fr) !important; }
+  .modal-videos-grid  { grid-template-columns:1fr !important; }
+  .modal-contact-flex { flex-direction:column !important; }
 }
 @media (max-width:640px) {
   .school-card-inner { flex-direction:column !important; }
@@ -375,6 +424,7 @@ function makeCard(s) {
   }
   content.appendChild(topRow);
   var stats = document.createElement('div');
+  stats.className = 'card-stats-grid';
   stats.style.cssText = 'display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; padding:10px 14px; background:rgba(245,245,244,0.8); border:1px solid rgba(0,0,0,0.06); margin-bottom:14px;';
   function statBlock(lbl, val, span) {
     var d = document.createElement('div'); if (span) d.style.gridColumn = span;
@@ -467,8 +517,8 @@ function renderModal(s) {
   var body = document.getElementById('modalBody');
   body.innerHTML = ''; body.style.animation = 'slideUp 0.4s ease';
   var fallback = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900&q=80';
-  var header = el('div', {style:'display:flex;flex-direction:row;flex-wrap:wrap;gap:2rem;align-items:flex-start;margin-bottom:3rem;'});
-  var imgBox = el('div', {style:'width:33%;min-width:260px;flex-shrink:0;'});
+  var header = el('div', {class:'modal-header-flex', style:'display:flex;flex-direction:row;flex-wrap:wrap;gap:2rem;align-items:flex-start;margin-bottom:3rem;'});
+  var imgBox = el('div', {class:'modal-img-box', style:'width:33%;min-width:260px;flex-shrink:0;'});
   var imgAspect = el('div', {style:'aspect-ratio:4/3;width:100%;background:#e5e5e4;overflow:hidden;position:relative;box-shadow:0 4px 16px rgba(0,0,0,0.12);'});
   var mImg = el('img', {src: s.image_url || fallback, alt: s.name, style:'width:100%;height:100%;object-fit:cover;filter:grayscale(30%);'});
   mImg.onerror = function() { this.src = fallback; };
@@ -489,9 +539,9 @@ function renderModal(s) {
   var applyBtn2 = el('button', {style:'background:#821E25;color:white;border:none;padding:12px 24px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(130,30,37,0.25);'});
   applyBtn2.innerHTML = 'Apply for Admission'; applyBtn2.onmouseover = function() { this.style.background='#5F1219'; }; applyBtn2.onmouseout = function() { this.style.background='#821E25'; };
   ctaRow.appendChild(applyBtn2); info.appendChild(ctaRow); header.appendChild(info); body.appendChild(header);
-  var twoCol = el('div', {style:'display:flex;gap:3rem;align-items:flex-start;'});
+  var twoCol = el('div', {class:'modal-two-col', style:'display:flex;gap:3rem;align-items:flex-start;'});
   var navItems = [{id:'key-stats',label:'Key Stats'},{id:'fee-structure',label:'Fee Structure'},{id:'virtual-tour',label:'Virtual Tour'},{id:'academic-stats',label:'Academic Stats'},{id:'admission-dates',label:'Admission Dates'},{id:'criteria',label:'Admission Criteria'},{id:'hall-of-fame',label:'Hall of Fame'},{id:'results',label:'School Results'},{id:'facilities',label:'Facilities'},{id:'insights',label:'Insights'},{id:'gallery',label:'Gallery'},{id:'videos',label:'Videos'},{id:'contact',label:'Contact'}];
-  var navSidebar = el('div', {style:'width:200px;flex-shrink:0;position:sticky;top:60px;background:rgba(245,245,244,0.7);padding:12px;border:1px solid rgba(0,0,0,0.05);align-self:flex-start;'});
+  var navSidebar = el('div', {class:'modal-nav-sidebar', style:'width:200px;flex-shrink:0;position:sticky;top:60px;background:rgba(245,245,244,0.7);padding:12px;border:1px solid rgba(0,0,0,0.05);align-self:flex-start;'});
   var navList = el('ul', {style:'list-style:none;margin:0;padding:0;'});
   navItems.forEach(function(item) {
     var li = el('li',{}); var btn = el('button',{}); btn.className='modal-nav-btn'; btn.id='nav-'+item.id; btn.textContent=item.label;
@@ -503,7 +553,7 @@ function renderModal(s) {
   function sh(title) { var h2=el('h2',{style:'font-family:Playfair Display,Georgia,serif;font-size:1.5rem;color:#5F1219;margin:0 0 1.5rem;display:flex;align-items:center;gap:12px;font-weight:400;'}); var line=el('span',{style:'display:inline-block;width:24px;height:1px;background:#821E25;flex-shrink:0;'}); h2.appendChild(line); h2.appendChild(document.createTextNode(title)); return h2; }
   function sec(id) { return el('section',{id:'modal-'+id,style:'scroll-margin-top:80px;'}); }
   var s1=sec('key-stats'); s1.appendChild(sh('Key School Stats'));
-  var sg=el('div',{style:'display:grid;grid-template-columns:repeat(4,1fr);gap:12px;'});
+  var sg=el('div',{class:'modal-key-grid', style:'display:grid;grid-template-columns:repeat(4,1fr);gap:12px;'});
   [['Board',s.board],['School Type',s.type],['Grades',s.grades],['Student:Teacher',s.student_teacher_ratio]].forEach(function(p){var d=el('div',{style:'padding:14px;border:1px solid rgba(0,0,0,0.05);background:white;'});var lb=el('p',{style:'font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.5;margin:0 0 6px;'});lb.textContent=p[0];var vl=el('p',{style:'font-size:13px;font-weight:500;margin:0;'});vl.textContent=p[1]||'—';d.appendChild(lb);d.appendChild(vl);sg.appendChild(d);});
   s1.appendChild(sg); sections.appendChild(s1);
   var s2=sec('fee-structure'); s2.appendChild(sh('Fee Structure'));
@@ -522,7 +572,7 @@ function renderModal(s) {
   var tlbl=el('p',{style:'position:absolute;bottom:20px;left:20px;color:white;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;z-index:2;margin:0;'});tlbl.textContent=s.virtual_tour_url?'Start 360° Walkthrough':'360° Tour Not Available';tb.appendChild(tlbl);
   s3.appendChild(tb); sections.appendChild(s3);
   var s4=sec('academic-stats'); s4.appendChild(sh('Academic Stats'));
-  var ag=el('div',{style:'display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;'});
+  var ag=el('div',{class:'modal-academic-grid', style:'display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;'});
   [[s.pass_percentage?s.pass_percentage+'%':'—','Board Pass %'],[s.top_scorers_pct?s.top_scorers_pct+'%':'—','Students >90%']].forEach(function(p){var ac=el('div',{style:'border:1px solid rgba(0,0,0,0.05);padding:1.5rem;background:white;text-align:center;'});var bn=el('p',{style:'font-family:Playfair Display,Georgia,serif;font-size:2.5rem;margin:0 0 8px;'});bn.textContent=p[0];var lb=el('p',{style:'font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.5;margin:0;'});lb.textContent=p[1];ac.appendChild(bn);ac.appendChild(lb);ag.appendChild(ac);});
   s4.appendChild(ag); sections.appendChild(s4);
   var s5=sec('admission-dates'); s5.appendChild(sh('Admission Dates'));
@@ -538,7 +588,7 @@ function renderModal(s) {
   cr.textContent=s.admission_criteria||'Contact the school admissions office for detailed eligibility criteria and requirements.';
   s6.appendChild(cr); sections.appendChild(s6);
   var s7=sec('hall-of-fame'); s7.appendChild(sh('Hall of Fame'));
-  var hg=el('div',{style:'display:grid;grid-template-columns:1fr 1fr;gap:14px;'});
+  var hg=el('div',{class:'modal-hall-grid', style:'display:grid;grid-template-columns:1fr 1fr;gap:14px;'});
   var hi=[];if(s.hall_of_fame){try{hi=JSON.parse(s.hall_of_fame);}catch(e){hi=[{title:s.hall_of_fame}];}}
   if(!hi.length)hi=[{title:'National Science Olympiad',desc:'Gold Medalist, 2023.'},{title:'Math Olympiad',desc:'Multiple national winners 2022–2024.'}];
   hi.slice(0,4).forEach(function(item){var d=el('div',{style:'padding:18px;border:1px solid rgba(0,0,0,0.05);background:white;display:flex;align-items:flex-start;gap:14px;'});d.innerHTML='<div style="width:40px;height:40px;background:rgba(130,30,37,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#821E25" stroke-width="2"><polyline points="15 3 21 3 21 9"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="10 21 10 12 3 12"/><polyline points="14 9 21 2"/></svg></div>';var txt=el('div',{});var tH=el('h4',{style:'font-size:13px;font-weight:600;margin:0 0 4px;'});tH.textContent=item.title||item;var tP=el('p',{style:'font-size:12px;opacity:0.65;margin:0;'});tP.textContent=item.desc||item.description||'';txt.appendChild(tH);txt.appendChild(tP);d.appendChild(txt);hg.appendChild(d);});
@@ -554,7 +604,7 @@ function renderModal(s) {
   var s9=sec('facilities'); s9.appendChild(sh('Facilities'));
   var fi=[];if(s.facilities){try{fi=JSON.parse(s.facilities);}catch(e){fi=s.facilities.split(',').map(function(x){return x.trim();});}}
   if(!fi.length)fi=['Smart Classrooms','Modern Labs','Library','Sports Complex','ECA Clubs','Transport','Cafeteria','Medical Room'];
-  var fg=el('div',{style:'display:grid;grid-template-columns:repeat(4,1fr);gap:12px;'});
+  var fg=el('div',{class:'modal-facilities-grid', style:'display:grid;grid-template-columns:repeat(4,1fr);gap:12px;'});
   fi.slice(0,12).forEach(function(item){var d=el('div',{style:'display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 8px;border:1px solid rgba(0,0,0,0.05);background:white;text-align:center;'});d.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(130,30,37,0.5)" stroke-width="2" style="margin-bottom:8px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';var sp=el('span',{style:'font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;opacity:0.7;'});sp.textContent=item;d.appendChild(sp);fg.appendChild(d);});
   s9.appendChild(fg); sections.appendChild(s9);
   var s10=sec('insights'); s10.appendChild(sh('Insights'));
@@ -563,16 +613,16 @@ function renderModal(s) {
   s10.appendChild(ib); sections.appendChild(s10);
   var s11=sec('gallery'); s11.appendChild(sh('Gallery'));
   var gi=[];if(s.gallery_images){try{gi=JSON.parse(s.gallery_images);}catch(e){gi=s.gallery_images.split(',').map(function(x){return x.trim();}).filter(Boolean);}}
-  var gg=el('div',{style:'display:grid;grid-template-columns:repeat(3,1fr);gap:12px;'});
+  var gg=el('div',{class:'modal-gallery-grid', style:'display:grid;grid-template-columns:repeat(3,1fr);gap:12px;'});
   for(var i=0;i<6;i++){var gd=el('div',{style:'aspect-ratio:1;overflow:hidden;background:#e5e5e4;position:relative;cursor:pointer;border:1px solid rgba(0,0,0,0.05);'});var gImg=el('img',{src:gi[i]||(s.image_url||fallback),alt:'Gallery '+(i+1),style:'width:100%;height:100%;object-fit:cover;filter:grayscale(40%);opacity:0.7;transition:all 0.5s;'});gImg.onerror=function(){this.src=fallback;};gd.appendChild(gImg);gd.onmouseover=function(){this.querySelector('img').style.opacity='1';this.querySelector('img').style.filter='grayscale(0%)';this.querySelector('img').style.transform='scale(1.05)';};gd.onmouseout=function(){this.querySelector('img').style.opacity='0.7';this.querySelector('img').style.filter='grayscale(40%)';this.querySelector('img').style.transform='scale(1)';};gg.appendChild(gd);}
   s11.appendChild(gg); sections.appendChild(s11);
   var s12=sec('videos'); s12.appendChild(sh('Videos'));
   var vi=[];if(s.video_urls){try{vi=JSON.parse(s.video_urls);}catch(e){vi=s.video_urls.split(',').map(function(x){return x.trim();}).filter(Boolean);}}
-  var vg=el('div',{style:'display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;'});
+  var vg=el('div',{class:'modal-videos-grid', style:'display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;'});
   for(var j=0;j<2;j++){var vd=el('div',{style:'aspect-ratio:16/9;background:#1a1a1a;position:relative;overflow:hidden;border:1px solid rgba(0,0,0,0.05);cursor:pointer;'});var vbg=el('img',{src:s.image_url||fallback,alt:'Video '+(j+1),style:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5;'});vbg.onerror=function(){this.src=fallback;};vd.appendChild(vbg);var pc=el('div',{style:'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;'});pc.innerHTML='<div style="width:48px;height:48px;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.4);"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>';vd.appendChild(pc);if(vi[j]){vd.onclick=(function(url){return function(){window.open(url,'_blank');};})(vi[j]);}vg.appendChild(vd);}
   s12.appendChild(vg); sections.appendChild(s12);
   var s13=sec('contact'); s13.appendChild(sh('Address & Contact'));
-  var cb=el('div',{style:'display:flex;flex-wrap:wrap;gap:2rem;background:white;border:1px solid rgba(0,0,0,0.1);padding:2rem;'});
+  var cb=el('div',{class:'modal-contact-flex', style:'display:flex;flex-wrap:wrap;gap:2rem;background:white;border:1px solid rgba(0,0,0,0.1);padding:2rem;'});
   var cl=el('div',{style:'flex:1;min-width:240px;display:flex;flex-direction:column;gap:1.5rem;'});
   if(s.address){var ad=el('div',{});var adL=el('h4',{style:'font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;opacity:0.5;margin:0 0 8px;'});adL.textContent='Address';var aLink=el('a',{href:'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.name+', '+(s.city||'')+', '+(s.state||'')),target:'_blank',style:'display:flex;align-items:flex-start;gap:10px;font-size:14px;opacity:0.85;line-height:1.7;color:inherit;text-decoration:none;'});aLink.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.5;flex-shrink:0;margin-top:3px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';aLink.appendChild(document.createTextNode(s.address));ad.appendChild(adL);ad.appendChild(aLink);cl.appendChild(ad);}
   if(s.phone){var pr=el('p',{style:'display:flex;align-items:center;gap:10px;font-size:14px;opacity:0.8;margin:0;'});pr.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.5;flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.37 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';pr.appendChild(document.createTextNode(s.phone));cl.appendChild(pr);}
@@ -586,8 +636,20 @@ function renderModal(s) {
 
 function el(tag, attrs) {
   var e = document.createElement(tag);
-  Object.keys(attrs||{}).forEach(function(k) { if(k==='style') e.style.cssText=attrs[k]; else e.setAttribute(k,attrs[k]); });
+  Object.keys(attrs||{}).forEach(function(k) {
+    if (k==='style') e.style.cssText=attrs[k];
+    else if (k==='class') e.className=attrs[k];
+    else e.setAttribute(k,attrs[k]);
+  });
   return e;
+}
+
+function toggleSidebar() {
+  var panel = document.getElementById('sidebarPanel');
+  var btn   = document.getElementById('filterToggleBtn');
+  panel.classList.toggle('open');
+  btn.style.borderColor = panel.classList.contains('open') ? '#821E25' : 'rgba(0,0,0,0.15)';
+  btn.style.color       = panel.classList.contains('open') ? '#821E25' : 'inherit';
 }
 
 // ── Compare Modal ──

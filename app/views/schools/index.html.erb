@@ -93,16 +93,22 @@
   .school-card { flex-direction:column; }
   .school-card-img { width:100%; height:160px; }
 }
+@media(max-width:768px) {
+  .schools-header { padding:1rem 1.25rem !important; }
+  .schools-main   { padding:1rem 1.25rem !important; }
+  .filter-select  { min-width:0 !important; font-size:13px; }
+  .school-card-body { padding:12px 14px !important; }
+}
 </style>
 
-<div style="background:white; border-bottom:1px solid rgba(0,0,0,0.08); padding:1.5rem 3rem;">
+<div class="schools-header" style="background:white; border-bottom:1px solid rgba(0,0,0,0.08); padding:1.5rem 3rem;">
   <div style="max-width:1280px; margin:0 auto;">
     <h1 style="font-family:Georgia, serif; font-size:1.75rem; color:#5F1219; margin:0 0 0.25rem;">School Directory</h1>
     <p style="font-size:12px; opacity:0.5; margin:0;">Search and filter <span id="totalCount">…</span> schools across India</p>
   </div>
 </div>
 
-<div style="max-width:1280px; margin:0 auto; padding:1.5rem 3rem;">
+<div class="schools-main" style="max-width:1280px; margin:0 auto; padding:1.5rem 3rem;">
 
   <!-- Top city chips -->
   <div style="margin-bottom:1rem;">
