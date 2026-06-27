@@ -103,57 +103,75 @@
 </div>
 
 <div style="max-width:1280px; margin:0 auto; padding:1.5rem 3rem;">
+
+  <!-- Top city chips -->
+  <div style="margin-bottom:1rem;">
+    <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4; margin:0 0 8px;">Top Cities</p>
+    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+      <% @top_cities.each do |city| %>
+        <button onclick="selectCityChip('<%= city %>')" id="cityChip-<%= city.parameterize %>"
+          style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; border:1px solid rgba(0,0,0,0.12); background:white; padding:6px 14px; cursor:pointer; transition:all 0.15s;"
+          onmouseover="this.style.borderColor='#821E25';this.style.color='#821E25'"
+          onmouseout="if(!this.classList.contains('chip-active')){this.style.borderColor='rgba(0,0,0,0.12)';this.style.color='inherit'}">
+          <%= city %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+
   <!-- Filters -->
   <div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:1.25rem; margin-bottom:1.5rem;">
-    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;">
-      <!-- Name search -->
-      <div style="flex:2; min-width:160px;">
+    <!-- Row 1: Search + City + State -->
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+      <div style="flex:2; min-width:180px;">
         <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">School Name</label>
         <input type="text" class="search-input" id="filterQ" placeholder="Search schools…" autocomplete="off" value="<%= @initial_query %>">
       </div>
-
-      <!-- City -->
-      <div style="flex:1.5; min-width:130px; position:relative;">
+      <div style="flex:1.5; min-width:140px; position:relative;">
         <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">City</label>
         <input type="text" class="search-input" id="filterCity" placeholder="Any city…" autocomplete="off" value="<%= @initial_city %>">
         <ul class="city-suggestions" id="citySuggestions" style="display:none;"></ul>
       </div>
-
-      <!-- State -->
-      <div style="flex:1.5; min-width:130px;">
+      <div style="flex:1.5; min-width:150px;">
         <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">State</label>
-        <select class="filter-select" id="filterState">
+        <select class="filter-select" id="filterState" style="width:100%;">
           <option value="">All States</option>
           <% @states.each do |st| %>
             <option value="<%= st %>" <%= "selected" if st == @initial_state %>><%= st %></option>
           <% end %>
         </select>
       </div>
-
-      <!-- Board -->
-      <div style="flex:1.5; min-width:120px;">
+    </div>
+    <!-- Row 2: Board + Type + Gender + Clear -->
+    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end;">
+      <div style="flex:1.5; min-width:130px;">
         <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">Board</label>
-        <select class="filter-select" id="filterBoard">
+        <select class="filter-select" id="filterBoard" style="width:100%;">
           <option value="">All Boards</option>
           <% @boards.each do |b| %>
             <option value="<%= b %>" <%= "selected" if b == @initial_board %>><%= b %></option>
           <% end %>
         </select>
       </div>
-
-      <!-- Type -->
-      <div style="flex:1.2; min-width:110px;">
-        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">Type</label>
-        <select class="filter-select" id="filterType">
+      <div style="flex:1.2; min-width:120px;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">School Type</label>
+        <select class="filter-select" id="filterType" style="width:100%;">
           <option value="">All Types</option>
           <% @types.each do |t| %>
             <option value="<%= t %>"><%= t %></option>
           <% end %>
         </select>
       </div>
-
-      <!-- Clear -->
-      <button onclick="clearFilters()" style="padding:9px 16px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; border:1px solid rgba(0,0,0,0.12); background:white; cursor:pointer; white-space:nowrap; align-self:flex-end;">Clear</button>
+      <div style="flex:1.2; min-width:120px;">
+        <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5; margin-bottom:5px;">Gender</label>
+        <select class="filter-select" id="filterGender" style="width:100%;">
+          <option value="">All</option>
+          <% @genders.each do |g| %>
+            <option value="<%= g %>" <%= "selected" if g == @initial_gender %>><%= g %></option>
+          <% end %>
+        </select>
+      </div>
+      <button onclick="clearFilters()" style="padding:9px 20px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; border:1px solid rgba(0,0,0,0.12); background:white; cursor:pointer; white-space:nowrap; align-self:flex-end;">✕ Clear All</button>
     </div>
   </div>
 
@@ -190,7 +208,8 @@
     city: document.getElementById('filterCity'),
     state: document.getElementById('filterState'),
     board: document.getElementById('filterBoard'),
-    type: document.getElementById('filterType')
+    type: document.getElementById('filterType'),
+    gender: document.getElementById('filterGender')
   };
 
   function getParams() {
@@ -200,6 +219,7 @@
     if (filters.state.value) p.set('state', filters.state.value);
     if (filters.board.value) p.set('board', filters.board.value);
     if (filters.type.value) p.set('type', filters.type.value);
+    if (filters.gender.value) p.set('gender', filters.gender.value);
     return p;
   }
 
@@ -280,12 +300,20 @@
   function updateChips() {
     const chips = document.getElementById('activeFilters');
     chips.innerHTML = '';
-    const labels = {q:'Name', city:'City', state:'State', board:'Board', type:'Type'};
+    const labels = {q:'Name', city:'City', state:'State', board:'Board', type:'Type', gender:'Gender'};
     Object.entries(filters).forEach(([key, el]) => {
       const val = el.value;
       if (!val) return;
       chips.insertAdjacentHTML('beforeend',
         `<span class="chip chip-active" onclick="clearFilter('${key}')">${labels[key]}: ${esc(val)} ✕</span>`);
+    });
+    // highlight active city chip
+    document.querySelectorAll('[id^="cityChip-"]').forEach(btn => {
+      const active = filters.city.value && btn.textContent.trim() === filters.city.value;
+      btn.classList.toggle('chip-active', active);
+      btn.style.background = active ? '#821E25' : 'white';
+      btn.style.color = active ? 'white' : 'inherit';
+      btn.style.borderColor = active ? '#821E25' : 'rgba(0,0,0,0.12)';
     });
   }
 
@@ -315,12 +343,23 @@
     debounceTimer = setTimeout(fn, ms);
   }
 
+  // City chip click
+  window.selectCityChip = function(city) {
+    if (filters.city.value === city) {
+      filters.city.value = '';
+    } else {
+      filters.city.value = city;
+    }
+    resetAndFetch();
+  };
+
   // Attach filter listeners
   filters.q.addEventListener('input', () => debounce(resetAndFetch, 350));
-  filters.city.addEventListener('change', resetAndFetch);
+  filters.city.addEventListener('input', () => debounce(resetAndFetch, 400));
   filters.state.addEventListener('change', resetAndFetch);
   filters.board.addEventListener('change', resetAndFetch);
   filters.type.addEventListener('change', resetAndFetch);
+  filters.gender.addEventListener('change', resetAndFetch);
 
   // City autocomplete
   const cityInput = document.getElementById('filterCity');
