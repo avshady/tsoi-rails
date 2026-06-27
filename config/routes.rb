@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "pages#home"
 
   # Static pages
-  get "/parents",     to: redirect("/")  # hidden until ready
+  get "/parents",     to: "pages#parents"
   get "/about",       to: "pages#about"
   get "/services",        to: "pages#services"
   get "/services/:slug",  to: "pages#service_detail", as: :service_detail
