@@ -58,12 +58,12 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    url: <%= ENV["DATABASE_URL"] %>
+    database: <%= ENV.fetch("TSOI_DB_NAME") { "tsoi_rails_production" } %>
   cache:
     <<: *primary_production
-    url: <%= ENV["DATABASE_URL"] %>
+    database: <%= ENV.fetch("TSOI_DB_NAME") { "tsoi_rails_production" } %>_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    url: <%= ENV["DATABASE_URL"] %>
+    database: <%= ENV.fetch("TSOI_DB_NAME") { "tsoi_rails_production" } %>_queue
     migrations_paths: db/queue_migrate
