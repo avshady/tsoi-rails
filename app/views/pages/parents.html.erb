@@ -234,8 +234,11 @@
   .modal-contact-flex { flex-direction:column !important; }
 }
 @media (max-width:640px) {
-  .school-card-inner { flex-direction:column !important; }
-  .card-img-wrap     { width:100% !important; height:220px !important; }
+  .school-card-el    { flex-direction:column !important; }
+  .school-card-inner { flex-direction:column !important; padding:1rem !important; }
+  .card-img-wrap     { width:100% !important; height:200px !important; }
+  .card-name-el      { font-size:1.1rem !important; white-space:normal !important; }
+  .card-stats-grid   { grid-template-columns:1fr 1fr !important; }
 }
 </style>
 
@@ -410,6 +413,7 @@ function makeCard(s) {
   var nameDiv = document.createElement('div');
   nameDiv.style.cssText = 'flex:1; min-width:0; padding-right:12px;';
   var nameEl = document.createElement('h3');
+  nameEl.className = 'card-name-el';
   nameEl.style.cssText = 'font-family:Playfair Display,Georgia,serif; font-size:1.375rem; color:#5F1219; margin:0 0 4px; line-height:1.25; transition:color 0.15s; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
   nameEl.textContent = s.name; nameDiv.appendChild(nameEl);
   var locEl = document.createElement('p');
