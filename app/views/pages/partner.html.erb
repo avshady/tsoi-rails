@@ -2,24 +2,111 @@
 
 <style>
 body { background:#f4f0e6 !important; }
-.partner-cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; align-items:stretch; }
-.partner-card {
-  display:flex; flex-direction:column; height:100%;
-  transition: box-shadow 0.25s, border-color 0.25s;
-}
-.partner-card:hover { box-shadow: 0 6px 32px rgba(130,30,37,0.1); border-color: #821E25 !important; }
-.partner-card:hover img { transform: scale(1.04); }
-.partner-card img { transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
-.partner-card-body { display:flex; flex-direction:column; flex:1; padding:28px 28px 32px; }
-.partner-card-cta { margin-top:auto; }
 
+.partner-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.svc-card {
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
+}
+.svc-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+
+.svc-card-top {
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.svc-tags {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+.svc-tag-group { display: flex; gap: 8px; }
+.svc-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  padding: 5px 12px; border-radius: 100px; border: 1.5px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.6); color: rgba(0,0,0,0.65);
+  white-space: nowrap;
+}
+.svc-dot {
+  width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+}
+
+.svc-card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.75rem;
+}
+
+.svc-card-desc {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+.svc-card-bullets { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+.svc-card-bullets li { display:flex; align-items:flex-start; gap:8px; font-size:12px; line-height:1.5; }
+
+.svc-card-img {
+  flex: 0 0 200px;
+  position: relative;
+  margin: 0 12px 12px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.svc-card-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.svc-card:hover .svc-card-img img { transform: scale(1.04); }
+
+.svc-read-more {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15,15,15,0.72);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 9px 16px 9px 18px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.svc-read-more:hover { background: rgba(130,30,37,0.9); }
+.svc-read-more svg { flex-shrink: 0; }
+
+@media (max-width:1024px) { .partner-cards-grid { grid-template-columns:repeat(2,1fr) !important; } }
 @media (max-width:900px) {
   .partner-hero-grid { grid-template-columns:1fr !important; gap:2rem !important; align-items:start !important; }
-  .partner-cards-grid { grid-template-columns:1fr !important; }
   .how-it-works-grid { grid-template-columns:1fr 1fr !important; gap:2rem !important; }
 }
 @media (max-width:640px) {
   section { padding-left:1.25rem !important; padding-right:1.25rem !important; }
+  .partner-cards-grid { grid-template-columns:1fr !important; }
   .how-it-works-grid { grid-template-columns:1fr !important; }
   .dark-cta-flex { flex-direction:column !important; align-items:flex-start !important; gap:2rem !important; }
 }
@@ -51,42 +138,56 @@ body { background:#f4f0e6 !important; }
     <% [
       {
         role: "For Schools",
-        label: "School Network",
+        tags: ["School Network", "Free Listing"],
+        bg: "#f4f0e6", dark: false, dot: "#821E25",
         img: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&q=80&w=800",
-        detail: "Join India's most trusted school directory. Access exclusive services — from ERP deployment to executive hiring — and grow your institution with TSOI's full ecosystem behind you.",
-        bullets: ["Featured listing in the TSOI directory","Verified badge and school profile","Access to ERP, hiring and curriculum services","Co-branding and summit opportunities"]
+        detail: "Join India's most trusted school directory. Access exclusive services — from ERP deployment to executive hiring.",
+        bullets: ["Featured listing in the TSOI directory","Verified badge and school profile","Access to ERP, hiring and curriculum services"]
       },
       {
         role: "For Vendors",
-        label: "Vendor Network",
+        tags: ["Vendor Network", "B2B"],
+        bg: "#101010", dark: true, dot: "#f4f0e6",
         img: "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&q=80&w=800",
-        detail: "Connect your products and services with thousands of partnered schools through our verified vendor network. Get in front of the decision-makers who matter.",
-        bullets: ["Direct access to 60,000+ school network","Verified vendor listing on platform","Curated introductions to school leaders","Summit expo and branding opportunities"]
+        detail: "Connect your products and services with thousands of partnered schools through our verified vendor network.",
+        bullets: ["Direct access to 60,000+ school network","Verified vendor listing on platform","Curated introductions to school leaders"]
       },
       {
         role: "For Landowners",
-        label: "Real Estate",
+        tags: ["Real Estate", "Build-to-Lease"],
+        bg: "#821E25", dark: true, dot: "#f4f0e6",
         img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&q=80&w=800",
-        detail: "Turn your real estate into a centre of learning. We facilitate build-to-lease agreements with top educational brands and guide you through every step.",
-        bullets: ["Build-to-lease with top school brands","Land feasibility and zoning guidance","End-to-end school setup facilitation","Long-term revenue from education infrastructure"]
+        detail: "Turn your real estate into a centre of learning. We facilitate build-to-lease agreements with top educational brands.",
+        bullets: ["Build-to-lease with top school brands","Land feasibility and zoning guidance","End-to-end school setup facilitation"]
       }
     ].each do |p| %>
-      <div class="partner-card" style="border:1px solid rgba(0,0,0,0.08); background:white; overflow:hidden;">
-        <div style="aspect-ratio:16/9; overflow:hidden; background:#e8e4e0;">
-          <img src="<%= p[:img] %>" alt="<%= p[:role] %>" style="width:100%; height:100%; object-fit:cover; filter:grayscale(0.3);">
-        </div>
-        <div class="partner-card-body">
-          <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 6px;"><%= p[:label] %></p>
-          <h3 style="font-family:'Playfair Display',Georgia,serif; font-size:1.4rem; font-weight:700; margin:0 0 0.85rem; color:#1A1A1A; letter-spacing:-0.01em;"><%= p[:role] %></h3>
-          <p style="font-size:13px; color:rgba(0,0,0,0.6); margin:0 0 1.25rem; line-height:1.7;"><%= p[:detail] %></p>
-          <ul style="list-style:none; margin:0 0 1.5rem; padding:0; border-top:1px solid rgba(0,0,0,0.06); padding-top:1rem; display:flex; flex-direction:column; gap:7px;">
+      <% text_color   = p[:dark] ? "#f4f0e6" : "#1A1A1A" %>
+      <% sub_color    = p[:dark] ? "rgba(244,240,230,0.55)" : "rgba(0,0,0,0.5)" %>
+      <% border_color = p[:dark] ? "rgba(244,240,230,0.2)" : "rgba(0,0,0,0.12)" %>
+      <div class="svc-card" style="background:<%= p[:bg] %>;">
+        <div class="svc-card-top">
+          <div class="svc-tags">
+            <div class="svc-tag-group">
+              <% p[:tags].each do |t| %>
+                <span class="svc-tag" style="border-color:<%= border_color %>; color:<%= sub_color %>; background:<%= p[:dark] ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.6)' %>;"><%= t %></span>
+              <% end %>
+            </div>
+            <div class="svc-dot" style="background:<%= p[:dot] %>;"></div>
+          </div>
+          <h2 class="svc-card-title" style="color:<%= text_color %>;"><%= p[:role] %></h2>
+          <p class="svc-card-desc" style="color:<%= sub_color %>;"><%= p[:detail] %></p>
+          <ul class="svc-card-bullets">
             <% p[:bullets].each do |b| %>
-              <li style="display:flex; align-items:flex-start; gap:9px; font-size:12px; color:rgba(0,0,0,0.65); line-height:1.5;">
-                <span style="color:#821E25; flex-shrink:0; font-weight:700;">→</span><%= b %>
-              </li>
+              <li style="color:<%= sub_color %>;"><span style="color:<%= p[:dot] %>; flex-shrink:0; font-weight:700;">→</span><%= b %></li>
             <% end %>
           </ul>
-          <%= link_to "Start a conversation →", contact_path, class: "partner-card-cta", style: "font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.18em; text-decoration:none; color:#821E25;" %>
+        </div>
+        <div class="svc-card-img">
+          <img src="<%= p[:img] %>" alt="<%= p[:role] %>" loading="lazy">
+          <%= link_to contact_path, class: "svc-read-more" do %>
+            Get in Touch
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <% end %>
         </div>
       </div>
     <% end %>
