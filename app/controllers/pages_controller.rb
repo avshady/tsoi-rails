@@ -136,8 +136,8 @@ class PagesController < ApplicationController
     "school-management" => {
       tags:    ["1–10 Yrs", "Consulting"],
       bg:      "#1A1A18", dark: true, dot: "#f4f0e6",
-      card_title: "School Management\nConsultancy",
-      title:   "School Management Consultancy",
+      card_title: "School Management\nAdvisory",
+      title:   "School Management Advisory",
       tagline: "Expert eyes on your school. Actionable plans for every department.",
       desc:    "Partner with TSOI for comprehensive management support, enhancing both academic outcomes and operational efficiency. Whether you are a single-campus school hitting a growth ceiling or a chain looking to standardise — our consultants have seen it all.",
       img:     "https://images.pexels.com/photos/9623645/pexels-photo-9623645.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop",
