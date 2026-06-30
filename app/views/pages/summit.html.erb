@@ -157,10 +157,10 @@
           <% end %>
           <div style="margin-left:14px;">
             <p style="font-size:13px; font-weight:700; color:white; margin:0 0 2px;">Skilled Speakers</p>
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span style="font-size:11px; color:rgba(255,255,255,0.4);">Announcement Coming Soon</span>
+            <a href="#speakers" style="display:flex; align-items:center; gap:6px; text-decoration:none;">
+              <span style="font-size:11px; color:rgba(255,255,255,0.4);">See Confirmed Speakers</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(130,30,37,0.8)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </div>
+            </a>
           </div>
         </div>
 
@@ -233,7 +233,7 @@
 <!-- ══════════════════════════════════════════════
      SPEAKER CARDS
 ══════════════════════════════════════════════ -->
-<section style="padding:5rem 0 5rem; overflow:hidden;">
+<section id="speakers" style="padding:5rem 0 5rem; overflow:hidden;">
   <div class="summit-px" style="padding:0 3rem; margin-bottom:2.5rem; display:flex; justify-content:space-between; align-items:flex-end; max-width:1400px; margin-left:auto; margin-right:auto;">
     <div>
       <span class="summit-tag">Speakers</span>
@@ -258,11 +258,6 @@
           name: "Laxmi Kumar",
           session: "Leadership by Design — A Panel Discussion"
         },
-        { role: "EDUCATION LEADER", type: "Keynote" },
-        { role: "SCHOOL PRINCIPAL", type: "Panel" },
-        { role: "POLICY MAKER", type: "Keynote" },
-        { role: "EDTECH INNOVATOR", type: "Workshop" },
-        { role: "CURRICULUM EXPERT", type: "Panel" },
       ]
     %>
     <% speakers.each do |s| %>
@@ -282,12 +277,10 @@
         <div style="padding:1rem 0 0.5rem;">
           <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.35); margin:0 0 6px;"><%= s[:role] %></p>
           <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-            <p style="font-size:14px; font-weight:700; color:rgba(255,255,255,0.7); margin:0; <%= s[:name] ? '' : 'font-style:italic;' %> font-family:Georgia,serif;"><%= s[:name] || "To Be Announced" %></p>
+            <p style="font-size:14px; font-weight:700; color:rgba(255,255,255,0.7); margin:0; font-family:Georgia,serif;"><%= s[:name] %></p>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(130,30,37,0.7)" stroke-width="2" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </div>
-          <% if s[:session] %>
-            <p class="session-title" style="font-size:11px; color:rgba(255,255,255,0.45); margin:8px 0 0; line-height:1.5;"><%= s[:session] %></p>
-          <% end %>
+          <p class="session-title" style="font-size:11px; color:rgba(255,255,255,0.45); margin:8px 0 0; line-height:1.5;"><%= s[:session] %></p>
         </div>
       </div>
     <% end %>
