@@ -103,7 +103,12 @@ body { background-color: #f4f0e6 !important; }
 .pillars-grid > a { display:block; height:100%; }
 </style>
 
-<section style="background:#f4f0e6; border-top:1px solid rgba(0,0,0,0.07); height:100vh; overflow:hidden;">
+<section class="pillars-section" style="background:#f4f0e6; border-top:1px solid rgba(0,0,0,0.07); height:100vh; overflow:hidden; position:relative;">
+  <div id="pillarsDots" class="pillars-dots" style="display:none; position:absolute; bottom:14px; left:50%; transform:translateX(-50%); gap:6px; z-index:5;">
+    <span class="pillar-dot active" style="width:6px; height:6px; border-radius:50%; background:#821E25; transition:all 0.2s;"></span>
+    <span class="pillar-dot" style="width:6px; height:6px; border-radius:50%; background:rgba(0,0,0,0.2); transition:all 0.2s;"></span>
+    <span class="pillar-dot" style="width:6px; height:6px; border-radius:50%; background:rgba(0,0,0,0.2); transition:all 0.2s;"></span>
+  </div>
   <div style="display:grid; grid-template-columns:1fr 1fr 1fr; height:100%;" class="pillars-grid">
 
     <!-- 01 LAUNCH -->
@@ -220,11 +225,42 @@ body { background-color: #f4f0e6 !important; }
 <style>
 body { background-color: #f4f0e6 !important; }
 @media (max-width: 900px) {
-  .pillars-grid { grid-template-columns: 1fr !important; }
-  .pillars-grid > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .pillars-section { height:88vh !important; }
+  .pillars-grid {
+    grid-template-columns: none !important;
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pillars-grid::-webkit-scrollbar { display: none; }
+  .pillars-grid > a {
+    flex: 0 0 100% !important;
+    scroll-snap-align: start !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .pillars-grid > a > div { border-right: none !important; }
+  .pillars-dots { display: flex !important; }
   .stats-grid { grid-template-columns: 1fr 1fr !important; }
 }
 @media (max-width: 640px) {
   section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
 }
 </style>
+
+<script>
+(function() {
+  var grid = document.querySelector('.pillars-grid');
+  var dots = document.querySelectorAll('.pillar-dot');
+  if (!grid || !dots.length) return;
+  grid.addEventListener('scroll', function() {
+    var idx = Math.round(grid.scrollLeft / grid.clientWidth);
+    dots.forEach(function(d, i) {
+      d.style.background = i === idx ? '#821E25' : 'rgba(0,0,0,0.2)';
+      d.style.width  = i === idx ? '18px' : '6px';
+    });
+  }, { passive: true });
+})();
+</script>
