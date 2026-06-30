@@ -103,6 +103,7 @@ body { background-color: #f4f0e6 !important; }
 .pillars-grid > a { display:block; height:100%; }
 </style>
 
+<div class="pillars-scroll-wrap">
 <section class="pillars-section" style="background:#f4f0e6; border-top:1px solid rgba(0,0,0,0.07); height:100vh; overflow:hidden; position:relative;">
   <div id="pillarsDots" class="pillars-dots" style="display:none; position:absolute; bottom:14px; left:50%; transform:translateX(-50%); gap:6px; z-index:5;">
     <span class="pillar-dot active" style="width:6px; height:6px; border-radius:50%; background:#821E25; transition:all 0.2s;"></span>
@@ -194,6 +195,7 @@ body { background-color: #f4f0e6 !important; }
 
   </div>
 </section>
+</div><!-- /.pillars-scroll-wrap -->
 
 <!-- ════════════════════════════════
      CTA
@@ -225,20 +227,17 @@ body { background-color: #f4f0e6 !important; }
 <style>
 body { background-color: #f4f0e6 !important; }
 @media (max-width: 900px) {
-  .pillars-section { height:88vh !important; }
+  .pillars-scroll-wrap { height:300vh; position:relative; }
+  .pillars-section { height:100vh !important; position:sticky !important; top:0; }
   .pillars-grid {
     grid-template-columns: none !important;
     display: flex !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    width: 300% !important;
+    will-change: transform;
   }
-  .pillars-grid::-webkit-scrollbar { display: none; }
   .pillars-grid > a {
-    flex: 0 0 100% !important;
-    scroll-snap-align: start !important;
-    width: 100% !important;
+    flex: 0 0 33.3333% !important;
+    width: 33.3333% !important;
     height: 100% !important;
   }
   .pillars-grid > a > div { border-right: none !important; }
@@ -252,15 +251,37 @@ body { background-color: #f4f0e6 !important; }
 
 <script>
 (function() {
+  var wrap = document.querySelector('.pillars-scroll-wrap');
   var grid = document.querySelector('.pillars-grid');
   var dots = document.querySelectorAll('.pillar-dot');
-  if (!grid || !dots.length) return;
-  grid.addEventListener('scroll', function() {
-    var idx = Math.round(grid.scrollLeft / grid.clientWidth);
-    dots.forEach(function(d, i) {
-      d.style.background = i === idx ? '#821E25' : 'rgba(0,0,0,0.2)';
-      d.style.width  = i === idx ? '18px' : '6px';
-    });
-  }, { passive: true });
+  if (!wrap || !grid) return;
+
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    if (window.innerWidth > 900) { grid.style.transform = ''; return; }
+    var rect = wrap.getBoundingClientRect();
+    var scrollable = wrap.offsetHeight - window.innerHeight;
+    if (scrollable <= 0) return;
+    var progress = -rect.top / scrollable;
+    progress = Math.max(0, Math.min(1, progress));
+    grid.style.transform = 'translateX(-' + (progress * 66.6667) + '%)';
+    if (dots.length) {
+      var idx = Math.round(progress * (dots.length - 1));
+      dots.forEach(function(d, i) {
+        d.style.background = i === idx ? '#821E25' : 'rgba(0,0,0,0.2)';
+        d.style.width = i === idx ? '18px' : '6px';
+      });
+    }
+  }
+
+  function onScroll() {
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
 })();
 </script>
