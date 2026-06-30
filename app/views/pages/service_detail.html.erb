@@ -36,9 +36,13 @@ body { background:#f4f0e6 !important; }
 .fade-up { animation: fadeUp 0.6s ease forwards; }
 
 @media (max-width: 900px) {
-  .sd-grid-2 { grid-template-columns: 1fr !important; }
-  .sd-grid-3 { grid-template-columns: 1fr !important; }
-  .sd-hero-img { display: none !important; }
+  .sd-grid-2 { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .sd-sticky { position: static !important; top: auto !important; }
+}
+@media (max-width: 640px) {
+  .sd-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+  .sd-hero { padding-top: 5.5rem !important; }
+  .sd-card-pad { padding: 1.75rem !important; }
 }
 </style>
 
@@ -53,7 +57,7 @@ body { background:#f4f0e6 !important; }
   </div>
 
   <!-- Content -->
-  <div style="position:relative; z-index:1; width:100%; max-width:1280px; margin:0 auto; padding:7rem 3rem 4rem; box-sizing:border-box;">
+  <div class="sd-hero sd-section" style="position:relative; z-index:1; width:100%; max-width:1280px; margin:0 auto; padding:7rem 3rem 4rem; box-sizing:border-box;">
     <!-- Breadcrumb -->
     <div style="display:flex; align-items:center; gap:8px; margin-bottom:2rem; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.18em; color:rgba(255,255,255,0.45);">
       <%= link_to "Services", services_path, style: "color:rgba(255,255,255,0.45); text-decoration:none; transition:color 0.15s;", onmouseover: "this.style.color='white'", onmouseout: "this.style.color='rgba(255,255,255,0.45)'" %>
@@ -89,7 +93,7 @@ body { background:#f4f0e6 !important; }
       </div>
 
       <!-- Stats / quick facts -->
-      <div style="display:flex; flex-direction:column; gap:1px; border-radius:16px; overflow:hidden; backdrop-filter:blur(12px);" class="fade-up sd-hero-img">
+      <div style="display:flex; flex-direction:column; gap:1px; border-radius:16px; overflow:hidden; backdrop-filter:blur(12px);" class="fade-up">
         <div style="background:rgba(255,255,255,0.06); padding:1.25rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.08);">
           <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.35); margin:0 0 4px;">Who This Is For</p>
           <p style="font-size:14px; color:rgba(255,255,255,0.8); margin:0; line-height:1.6;"><%= @service[:for_who] %></p>
@@ -115,7 +119,7 @@ body { background:#f4f0e6 !important; }
 
 <!-- ── OVERVIEW STRIP ── -->
 <section style="background:white; border-bottom:1px solid rgba(0,0,0,0.06);">
-  <div style="max-width:1280px; margin:0 auto; padding:3rem; display:grid; grid-template-columns:2fr 1fr; gap:4rem; align-items:center;" class="sd-grid-2">
+  <div style="max-width:1280px; margin:0 auto; padding:3rem; display:grid; grid-template-columns:2fr 1fr; gap:4rem; align-items:center;" class="sd-grid-2 sd-section">
     <div>
       <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 0.75rem;">Overview</p>
       <p style="font-size:clamp(1rem,1.4vw,1.15rem); line-height:1.85; color:rgba(0,0,0,0.65); margin:0; font-weight:400;"><%= @service[:desc] %></p>
@@ -131,7 +135,7 @@ body { background:#f4f0e6 !important; }
 </section>
 
 <!-- ── HOW IT WORKS ── -->
-<section style="background:#f4f0e6; padding:5rem 3rem;">
+<section class="sd-section" style="background:#f4f0e6; padding:5rem 3rem;">
   <div style="max-width:1280px; margin:0 auto;">
     <div style="margin-bottom:3rem; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
       <div>
@@ -158,10 +162,10 @@ body { background:#f4f0e6 !important; }
 </section>
 
 <!-- ── WHAT'S INCLUDED ── -->
-<section style="background:white; padding:5rem 3rem;">
+<section class="sd-section" style="background:white; padding:5rem 3rem;">
   <div style="max-width:1280px; margin:0 auto;">
     <div style="display:grid; grid-template-columns:1fr 2.5fr; gap:5rem; align-items:start;" class="sd-grid-2">
-      <div style="position:sticky; top:2rem;">
+      <div class="sd-sticky" style="position:sticky; top:2rem;">
         <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:#821E25; margin:0 0 0.75rem;">What's Included</p>
         <h2 style="font-family:Georgia,serif; font-size:clamp(1.8rem,3vw,2.6rem); font-weight:700; color:#1A1A1A; margin:0 0 1rem; letter-spacing:-0.03em; line-height:1.1;">Everything<br><em style="color:#821E25;">you need.</em></h2>
         <p style="font-size:14px; color:rgba(0,0,0,0.48); line-height:1.75; margin:0 0 2rem;">Every engagement includes these deliverables — customised further for your school's size and goals.</p>
@@ -185,7 +189,7 @@ body { background:#f4f0e6 !important; }
 </section>
 
 <!-- ── INQUIRY FORM ── -->
-<section id="inquiry-form" style="background:#1A1A1A; padding:5rem 3rem; position:relative; overflow:hidden;">
+<section id="inquiry-form" class="sd-section" style="background:#1A1A1A; padding:5rem 3rem; position:relative; overflow:hidden;">
   <div style="position:absolute; top:-80px; right:-80px; width:500px; height:500px; background:#821E25; border-radius:50%; opacity:0.1; filter:blur(90px); pointer-events:none;"></div>
   <div style="position:absolute; bottom:-60px; left:-40px; width:300px; height:300px; background:#821E25; border-radius:50%; opacity:0.06; filter:blur(60px); pointer-events:none;"></div>
 
@@ -223,7 +227,7 @@ body { background:#f4f0e6 !important; }
     </div>
 
     <!-- Right: form -->
-    <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:2.5rem;">
+    <div class="sd-card-pad" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:2.5rem;">
 
       <% if flash[:notice] %>
         <div style="background:rgba(130,30,37,0.25); border:1px solid rgba(130,30,37,0.5); color:#f4c5c8; padding:1rem 1.25rem; border-radius:12px; margin-bottom:1.5rem; font-size:14px; display:flex; align-items:center; gap:10px;">
@@ -284,9 +288,3 @@ body { background:#f4f0e6 !important; }
 
   </div>
 </section>
-
-<style>
-@media (max-width: 900px) {
-  .sd-grid-2 { grid-template-columns: 1fr !important; gap: 2rem !important; }
-}
-</style>
