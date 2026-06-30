@@ -65,9 +65,30 @@
 @media(max-width:768px){
   .summit-highlights-grid { grid-template-columns:1fr !important; }
   .summit-who-grid { grid-template-columns:1fr 1fr !important; }
-  .summit-split-flex { flex-direction:column !important; }
-  .hero-bottom { flex-direction:column !important; gap:2rem !important; }
-  .hero-headline { font-size:clamp(3rem,15vw,7rem) !important; }
+  .summit-split-flex { flex-direction:column !important; gap:2.5rem !important; }
+  .hero-bottom { flex-direction:column !important; gap:2rem !important; align-items:flex-start !important; }
+  .hero-headline { font-size:clamp(2.75rem,15vw,7rem) !important; }
+
+  .summit-px { padding-left:1.25rem !important; padding-right:1.25rem !important; }
+  .summit-body section[id] { padding-top:4rem !important; padding-bottom:4rem !important; }
+
+  .summit-stats-grid { grid-template-columns:1fr 1fr !important; }
+  .summit-stats-grid > div:nth-child(2) { border-right:none !important; }
+
+  .summit-top-row { gap:1.5rem !important; }
+  .summit-badge { margin-left:0 !important; font-size:8px !important; letter-spacing:0.15em !important; white-space:normal !important; }
+
+  .countdown-box { min-width:0 !important; flex:1 1 70px; padding:10px 12px !important; }
+
+  .summit-bottom-band { flex-direction:column !important; align-items:flex-start !important; padding:1.25rem 1.25rem !important; }
+
+  .summit-register-card { padding:1.5rem !important; }
+
+  .speaker-card { width:200px !important; }
+  .speaker-card .session-title { font-size:10px !important; }
+}
+@media(max-width:480px){
+  .hero-headline { font-size:clamp(2.25rem,15vw,4rem) !important; }
 }
 </style>
 
@@ -96,10 +117,10 @@
   <div style="position:absolute;top:2rem;right:2rem;width:40px;height:40px;border-top:1px solid rgba(255,255,255,0.25);border-right:1px solid rgba(255,255,255,0.25);z-index:2;"></div>
 
   <!-- Content -->
-  <div style="position:relative; z-index:5; flex:1; display:flex; flex-direction:column; padding:3rem; max-width:1400px; margin:0 auto; width:100%; box-sizing:border-box;">
+  <div class="summit-px" style="position:relative; z-index:5; flex:1; display:flex; flex-direction:column; padding:3rem; max-width:1400px; margin:0 auto; width:100%; box-sizing:border-box;">
 
     <!-- Top row: Date + Location -->
-    <div style="display:flex; gap:4rem; padding-top:1rem; margin-bottom:auto; flex-wrap:wrap;">
+    <div class="summit-top-row" style="display:flex; gap:4rem; padding-top:1rem; margin-bottom:auto; flex-wrap:wrap;">
       <div>
         <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:rgba(255,255,255,0.35); margin:0 0 4px;">Date</p>
         <p style="font-size:15px; font-weight:700; color:rgba(255,255,255,0.85); margin:0; letter-spacing:0.05em;">30 Oct – 1 Nov 2026</p>
@@ -109,7 +130,7 @@
         <p style="font-size:15px; font-weight:700; color:rgba(255,255,255,0.85); margin:0; letter-spacing:0.05em;">Pune</p>
       </div>
       <div style="margin-left:auto;">
-        <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:white; border:1px solid rgba(255,255,255,0.4); padding:6px 14px; background:rgba(255,255,255,0.08);">India's Premier Education Summit · 2026</span>
+        <span class="summit-badge" style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:white; border:1px solid rgba(255,255,255,0.4); padding:6px 14px; background:rgba(255,255,255,0.08); display:inline-block;">India's Premier Education Summit · 2026</span>
       </div>
     </div>
 
@@ -180,7 +201,7 @@
      STATS BAR
 ══════════════════════════════════════════════ -->
 <section style="background:#821E25;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(0,0,0,0.4);">
-  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);">
+  <div class="summit-stats-grid" style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);">
     <% [["500+","Education Leaders"],["4","Parallel Tracks"],["30+","Live Sessions"],["3 Days","Max Impact"]].each_with_index do |(val,lbl),i| %>
       <div style="padding:2rem 1.5rem;text-align:center;<%= i<3 ? 'border-right:1px solid rgba(255,255,255,0.12);' : '' %>">
         <p style="font-family:Georgia,serif;font-size:2.25rem;margin:0 0 4px;"><%= val %></p>
@@ -213,26 +234,38 @@
      SPEAKER CARDS
 ══════════════════════════════════════════════ -->
 <section style="padding:5rem 0 5rem; overflow:hidden;">
-  <div style="padding:0 3rem; margin-bottom:2.5rem; display:flex; justify-content:space-between; align-items:flex-end; max-width:1400px; margin-left:auto; margin-right:auto;">
+  <div class="summit-px" style="padding:0 3rem; margin-bottom:2.5rem; display:flex; justify-content:space-between; align-items:flex-end; max-width:1400px; margin-left:auto; margin-right:auto;">
     <div>
       <span class="summit-tag">Speakers</span>
-      <h2 style="font-family:Georgia,serif; font-size:clamp(1.75rem,3.5vw,3rem); font-weight:400; margin:0; letter-spacing:-0.02em;">Announcing Soon</h2>
+      <h2 style="font-family:Georgia,serif; font-size:clamp(1.75rem,3.5vw,3rem); font-weight:400; margin:0; letter-spacing:-0.02em;">First Speakers Announced</h2>
     </div>
     <p style="font-size:13px; color:rgba(255,255,255,0.35); max-width:300px; text-align:right; line-height:1.6; margin:0;">India's most influential education leaders, innovators, and policy makers.</p>
   </div>
 
   <!-- Horizontal scroll of speaker cards -->
-  <div style="display:flex; gap:1px; padding:0 3rem; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;" class="hide-scrollbar">
+  <div style="display:flex; gap:1px; padding:0 3rem; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;" class="hide-scrollbar summit-px">
     <%
-      speaker_roles = [
-        ["EDUCATION LEADER", "Keynote"],
-        ["SCHOOL PRINCIPAL", "Panel"],
-        ["POLICY MAKER", "Keynote"],
-        ["EDTECH INNOVATOR", "Workshop"],
-        ["CURRICULUM EXPERT", "Panel"],
+      speakers = [
+        {
+          role: "FAMILY-OWNED SCHOOL GROUP",
+          type: "Keynote",
+          name: "Anishka & Sanjay Malpani",
+          session: "Keeping It in the Family: Running Schools as a Generational Business"
+        },
+        {
+          role: "DIRECTOR, AVASARA ACADEMY",
+          type: "Panel",
+          name: "Laxmi Kumar",
+          session: "Leadership by Design — A Panel Discussion"
+        },
+        { role: "EDUCATION LEADER", type: "Keynote" },
+        { role: "SCHOOL PRINCIPAL", type: "Panel" },
+        { role: "POLICY MAKER", type: "Keynote" },
+        { role: "EDTECH INNOVATOR", type: "Workshop" },
+        { role: "CURRICULUM EXPERT", type: "Panel" },
       ]
     %>
-    <% speaker_roles.each_with_index do |(role, type), i| %>
+    <% speakers.each do |s| %>
       <div class="speaker-card" style="flex-shrink:0; width:240px;">
         <!-- Photo placeholder -->
         <div style="height:300px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
@@ -243,15 +276,18 @@
           <!-- Bottom accent -->
           <div style="position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg, #821E25, rgba(130,30,37,0.3));"></div>
           <!-- Type tag -->
-          <span style="position:absolute; top:12px; right:12px; font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; border:1px solid rgba(130,30,37,0.4); color:rgba(130,30,37,0.9); padding:3px 8px; background:rgba(6,3,6,0.6);"><%= type %></span>
+          <span style="position:absolute; top:12px; right:12px; font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; border:1px solid rgba(130,30,37,0.4); color:rgba(130,30,37,0.9); padding:3px 8px; background:rgba(6,3,6,0.6);"><%= s[:type] %></span>
         </div>
         <!-- Info -->
         <div style="padding:1rem 0 0.5rem;">
-          <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.35); margin:0 0 6px;"><%= role %></p>
-          <div style="display:flex; align-items:center; justify-content:space-between;">
-            <p style="font-size:14px; font-weight:700; color:rgba(255,255,255,0.7); margin:0; font-style:italic; font-family:Georgia,serif;">To Be Announced</p>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(130,30,37,0.7)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.35); margin:0 0 6px;"><%= s[:role] %></p>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+            <p style="font-size:14px; font-weight:700; color:rgba(255,255,255,0.7); margin:0; <%= s[:name] ? '' : 'font-style:italic;' %> font-family:Georgia,serif;"><%= s[:name] || "To Be Announced" %></p>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(130,30,37,0.7)" stroke-width="2" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </div>
+          <% if s[:session] %>
+            <p class="session-title" style="font-size:11px; color:rgba(255,255,255,0.45); margin:8px 0 0; line-height:1.5;"><%= s[:session] %></p>
+          <% end %>
         </div>
       </div>
     <% end %>
@@ -286,7 +322,7 @@
 <!-- ══════════════════════════════════════════════
      STATEMENT SECTION
 ══════════════════════════════════════════════ -->
-<section style="padding:8rem 3rem; max-width:1100px; margin:0 auto;" id="about">
+<section class="summit-px" style="padding:8rem 3rem; max-width:1100px; margin:0 auto;" id="about">
   <div style="display:flex; gap:6rem; align-items:center; flex-wrap:wrap;" class="summit-split-flex">
     <div style="flex:1; min-width:280px;">
       <span class="summit-tag">The Movement</span>
@@ -324,7 +360,7 @@
 <!-- ══════════════════════════════════════════════
      HIGHLIGHTS / TRACKS
 ══════════════════════════════════════════════ -->
-<section style="padding:8rem 3rem; max-width:1100px; margin:0 auto;" id="highlights">
+<section class="summit-px" style="padding:8rem 3rem; max-width:1100px; margin:0 auto;" id="highlights">
   <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:4rem; flex-wrap:wrap; gap:1rem;">
     <div>
       <span class="summit-tag">What Awaits</span>
@@ -358,7 +394,7 @@
 <!-- ══════════════════════════════════════════════
      WHO ATTENDS
 ══════════════════════════════════════════════ -->
-<section style="background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:6rem 3rem;">
+<section class="summit-px" style="background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:6rem 3rem;">
   <div style="max-width:1100px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:4rem;">
       <span class="summit-tag">Who's In The Room</span>
@@ -388,7 +424,7 @@
 <section style="position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,0.06);" id="register">
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(130,30,37,0.2) 0%,transparent 70%);pointer-events:none;"></div>
 
-  <div style="max-width:1100px;margin:0 auto;padding:8rem 3rem;position:relative;z-index:2;">
+  <div class="summit-px" style="max-width:1100px;margin:0 auto;padding:8rem 3rem;position:relative;z-index:2;">
     <div style="display:flex;gap:6rem;align-items:flex-start;flex-wrap:wrap;" class="summit-split-flex">
       <div style="flex:1;min-width:280px;">
         <span class="summit-tag">Register Interest</span>
@@ -410,7 +446,7 @@
       </div>
 
       <div style="flex:1;min-width:280px;max-width:440px;">
-        <div style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);padding:2.5rem;backdrop-filter:blur(12px);">
+        <div class="summit-register-card" style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);padding:2.5rem;backdrop-filter:blur(12px);">
           <h3 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;margin:0 0 2rem;opacity:0.5;">Join the Waitlist</h3>
           <form action="<%= summit_notify_path %>" method="post">
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -458,7 +494,7 @@
 <!-- ══════════════════════════════════════════════
      BOTTOM BAND
 ══════════════════════════════════════════════ -->
-<div style="background:#821E25;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+<div class="summit-bottom-band" style="background:#821E25;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
   <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;opacity:0.7;margin:0;">TSOI Future Schools Summit · 30 Oct – 1 Nov 2026 · Pune</p>
   <a href="#register" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:white;border-bottom:1px solid rgba(255,255,255,0.4);padding-bottom:2px;text-decoration:none;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Register Interest →</a>
 </div>
