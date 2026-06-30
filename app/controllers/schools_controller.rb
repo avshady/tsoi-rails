@@ -28,4 +28,24 @@ class SchoolsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render file: "public/404.html", status: :not_found, layout: false
   end
+
+  def claim
+    school = School.find(params[:id])
+    role   = params[:role].to_s.strip
+    note   = params[:message].to_s.strip
+
+    Inquiry.create!(
+      name:       params[:name].to_s.strip,
+      email:      params[:email].to_s.strip,
+      phone:      params[:phone].to_s.strip,
+      school_name: school.name,
+      service:    "Claim Listing",
+      message:    ["Role: #{role}", "School ID: #{school.id}", note.presence].compact.join(" — "),
+      status:     "new"
+    )
+    flash[:notice] = "Your claim request has been submitted. Our team will verify and reach out within 2-3 business days."
+    redirect_to school_path(school)
+  rescue ActiveRecord::RecordNotFound
+    redirect_to schools_path, alert: "School not found."
+  end
 end

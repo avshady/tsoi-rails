@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   post "/services/:slug/inquiry",  to: "pages#service_inquiry", as: :service_inquiry
 
   # Schools
-  resources :schools, only: [:index, :show]
+  resources :schools, only: [:index, :show] do
+    member { post :claim }
+  end
 
   # School Portal
   get  "/portal",           to: "portal#login",        as: :portal_login

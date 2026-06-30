@@ -542,7 +542,9 @@ function renderModal(s) {
   var ctaRow = el('div', {style:'display:flex;flex-wrap:wrap;align-items:center;gap:12px;'});
   var applyBtn2 = el('button', {style:'background:#821E25;color:white;border:none;padding:12px 24px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(130,30,37,0.25);'});
   applyBtn2.innerHTML = 'Apply for Admission'; applyBtn2.onmouseover = function() { this.style.background='#5F1219'; }; applyBtn2.onmouseout = function() { this.style.background='#821E25'; };
-  ctaRow.appendChild(applyBtn2); info.appendChild(ctaRow); header.appendChild(info); body.appendChild(header);
+  var claimLink2 = el('a', {href:'/schools/'+s.id, style:'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#821E25;text-decoration:underline;text-underline-offset:3px;'});
+  claimLink2.textContent = 'Are you this school? Claim this listing';
+  ctaRow.appendChild(applyBtn2); ctaRow.appendChild(claimLink2); info.appendChild(ctaRow); header.appendChild(info); body.appendChild(header);
   var twoCol = el('div', {class:'modal-two-col', style:'display:flex;gap:3rem;align-items:flex-start;'});
   var navItems = [{id:'key-stats',label:'Key Stats'},{id:'fee-structure',label:'Fee Structure'},{id:'virtual-tour',label:'Virtual Tour'},{id:'academic-stats',label:'Academic Stats'},{id:'admission-dates',label:'Admission Dates'},{id:'criteria',label:'Admission Criteria'},{id:'hall-of-fame',label:'Hall of Fame'},{id:'results',label:'School Results'},{id:'facilities',label:'Facilities'},{id:'insights',label:'Insights'},{id:'gallery',label:'Gallery'},{id:'videos',label:'Videos'},{id:'contact',label:'Contact'}];
   var navSidebar = el('div', {class:'modal-nav-sidebar', style:'width:200px;flex-shrink:0;position:sticky;top:60px;background:rgba(245,245,244,0.7);padding:12px;border:1px solid rgba(0,0,0,0.05);align-self:flex-start;'});
