@@ -285,3 +285,163 @@ body { background-color: #f4f0e6 !important; }
   update();
 })();
 </script>
+
+<!-- ═══════════════════════════════
+     SUMMIT ANNOUNCEMENT POPUP
+═══════════════════════════════ -->
+<style>
+#summit-popup-backdrop {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+#summit-popup-backdrop.is-visible {
+  opacity: 1; pointer-events: all;
+}
+#summit-popup {
+  background: #0a0a0c;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  max-width: 520px; width: 100%;
+  padding: 2.5rem 2.5rem 2rem;
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+#summit-popup-backdrop.is-visible #summit-popup {
+  transform: translateY(0) scale(1);
+}
+.summit-popup-glow {
+  position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none;
+}
+.summit-popup-close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: rgba(255,255,255,0.08); border: none; border-radius: 50%;
+  width: 32px; height: 32px; cursor: pointer;
+  color: rgba(255,255,255,0.6); font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.summit-popup-close:hover { background: rgba(255,255,255,0.16); color: #fff; }
+.summit-popup-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,42,127,0.15); border: 1px solid rgba(255,42,127,0.35);
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  color: #ff2a7f; margin-bottom: 1.25rem;
+}
+.summit-popup-tag::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: #ff2a7f; display: inline-block;
+  box-shadow: 0 0 6px #ff2a7f;
+}
+.summit-popup-title {
+  font-family: Georgia, serif; font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700; color: #fff; line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+.summit-popup-title em { font-style: normal; color: #ff2a7f; }
+.summit-popup-meta {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+.summit-popup-badge {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.7);
+}
+.summit-popup-desc {
+  font-size: 0.9rem; color: rgba(255,255,255,0.55);
+  line-height: 1.6; margin-bottom: 1.75rem;
+}
+.summit-popup-actions {
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+}
+.summit-popup-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #ff2a7f; color: #fff;
+  padding: 0.7rem 1.5rem; border-radius: 100px;
+  font-weight: 700; font-size: 0.875rem; text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(255,42,127,0.4);
+}
+.summit-popup-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,42,127,0.5); }
+.summit-popup-dismiss {
+  display: inline-flex; align-items: center;
+  background: transparent; border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5); padding: 0.7rem 1.25rem;
+  border-radius: 100px; font-size: 0.875rem; cursor: pointer;
+  font-family: inherit; transition: border-color 0.2s, color 0.2s;
+}
+.summit-popup-dismiss:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+@media (max-width: 480px) {
+  #summit-popup { padding: 2rem 1.5rem 1.5rem; }
+  .summit-popup-cta, .summit-popup-dismiss { width: 100%; justify-content: center; }
+}
+</style>
+
+<div id="summit-popup-backdrop" role="dialog" aria-modal="true" aria-label="Summit Announcement">
+  <div id="summit-popup">
+    <div class="summit-popup-glow" style="width:200px;height:200px;background:#ff2a7f;opacity:0.12;top:-60px;right:-40px;"></div>
+    <div class="summit-popup-glow" style="width:150px;height:150px;background:#7c3aed;opacity:0.1;bottom:-40px;left:-30px;"></div>
+
+    <button class="summit-popup-close" id="summit-popup-close" aria-label="Close">✕</button>
+
+    <div class="summit-popup-tag">Now Announced</div>
+
+    <h2 class="summit-popup-title">
+      The Schools of India<br><em>Education Summit 2026</em>
+    </h2>
+
+    <div class="summit-popup-meta">
+      <span class="summit-popup-badge">📅 30 Oct – 1 Nov 2026</span>
+      <span class="summit-popup-badge">📍 Novotel Imagicaa, Khopoli</span>
+    </div>
+
+    <p class="summit-popup-desc">
+      India's premier gathering for school founders, principals, and education leaders. Three days of bold ideas, keynotes, and workshops to shape the future of K-12 education.
+    </p>
+
+    <div class="summit-popup-actions">
+      <a href="/summit" class="summit-popup-cta">
+        Explore the Summit →
+      </a>
+      <button class="summit-popup-dismiss" id="summit-popup-dismiss">Maybe later</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var KEY = 'tsoi_summit_popup_dismissed';
+  if (sessionStorage.getItem(KEY)) return;
+
+  var backdrop = document.getElementById('summit-popup-backdrop');
+  var closeBtn = document.getElementById('summit-popup-close');
+  var dismissBtn = document.getElementById('summit-popup-dismiss');
+
+  function closePopup() {
+    sessionStorage.setItem(KEY, '1');
+    backdrop.classList.remove('is-visible');
+  }
+
+  closeBtn.addEventListener('click', closePopup);
+  dismissBtn.addEventListener('click', closePopup);
+  backdrop.addEventListener('click', function(e) {
+    if (e.target === backdrop) closePopup();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  setTimeout(function() {
+    backdrop.classList.add('is-visible');
+  }, 1500);
+})();
+</script>
