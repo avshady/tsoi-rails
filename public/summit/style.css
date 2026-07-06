@@ -811,6 +811,7 @@ a {
 .speaker-img-wrapper {
   aspect-ratio: 1;
   width: 100%;
+  min-height: 200px;
   position: relative;
   overflow: hidden;
   background-color: #222;
