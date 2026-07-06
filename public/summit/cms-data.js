@@ -107,7 +107,7 @@ const cmsData = {
     "Technology Integration"
   ],
   speakers: {
-    title: "First Speakers Announced",
+    title: "Board of Advisors",
     subtitle: "More speakers being confirmed — check back soon.",
     list: [
       {
