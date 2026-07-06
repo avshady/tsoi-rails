@@ -114,21 +114,21 @@ const cmsData = {
         name: "Laxmi Kumar",
         designation: "Director",
         organisation: "Avasara Academy",
-        photo: "/summit/assets/advisor_lakshmi.png",
+        photo: "/summit/assets/advisor_lakshmi.jpg",
         color: "#ff2a7f"
       },
       {
         name: "Sanjay Malpani",
         designation: "Director",
         organisation: "Malpani Group of Schools",
-        photo: "/summit/assets/advisor_sanjay.png",
+        photo: "/summit/assets/advisor_sanjay.jpg",
         color: "#7c3aed"
       },
       {
         name: "Piramal",
         designation: "Speaker",
         organisation: "Piramal Foundation",
-        photo: "/summit/assets/advisor_parimal.png",
+        photo: "/summit/assets/advisor_parimal.jpg",
         color: "#2de67b"
       }
     ]
