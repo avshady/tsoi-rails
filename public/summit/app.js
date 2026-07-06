@@ -66,22 +66,9 @@ export function renderPage(data) {
   `).join('');
 
   // --- 7. SPEAKERS SECTION ---
+  // Grid is server-rendered in ERB; only update text elements
   document.getElementById('speakers-title').innerHTML = formatHeading(data.speakers.title);
   document.getElementById('speakers-soon-text').textContent = data.speakers.subtitle;
-  const speakersGrid = document.getElementById('speakers-grid');
-  speakersGrid.innerHTML = data.speakers.list.map(speaker => `
-    <div class="speaker-card">
-      <div class="speaker-img-wrapper">
-        <div class="speaker-bg-accent" style="background-color: ${speaker.color}"></div>
-        <img src="${speaker.photo}" alt="${speaker.name}" class="speaker-photo" loading="lazy">
-      </div>
-      <div class="speaker-info">
-        <h3 class="speaker-name">${speaker.name}</h3>
-        <p class="speaker-title">${speaker.designation}</p>
-        <p class="speaker-org">${speaker.organisation}</p>
-      </div>
-    </div>
-  `).join('');
 
   // --- 8. SESSIONS ---
   const sessionsGrid = document.getElementById('sessions-grid');
