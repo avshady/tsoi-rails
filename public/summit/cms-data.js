@@ -3,7 +3,7 @@ const cmsData = {
     headline: "Where Education Leaders Shape the Future",
     subheadline: "Three days of bold ideas, meaningful conversations, and practical strategies for educators, founders, school leaders, and innovators.",
     dates: "30 & 31 October • 1 November 2026",
-    location: "Convention Centre, New Delhi",
+    location: "Novotel Imagicaa, Khopoli",
     ctaPrimary: {
       text: "Register Interest",
       action: "#registration"
@@ -107,36 +107,29 @@ const cmsData = {
     "Technology Integration"
   ],
   speakers: {
-    title: "Meet Visionaries Transforming Education",
-    subtitle: "More speakers coming soon.",
+    title: "First Speakers Announced",
+    subtitle: "More speakers being confirmed — check back soon.",
     list: [
       {
-        name: "Dr. Anand Rao",
-        designation: "Founder & Director",
-        organisation: "Greenwoods Academy",
-        photo: "/summit/assets/speaker_1.jpg",
+        name: "Laxmi Kumar",
+        designation: "Director",
+        organisation: "Avasara Academy",
+        photo: "/summit/assets/advisor_lakshmi.png",
         color: "#ff2a7f"
       },
       {
-        name: "Priya Sharma",
-        designation: "Co-Founder & CEO",
-        organisation: "EdTech Labs India",
-        photo: "/summit/assets/speaker_2.jpg",
+        name: "Sanjay Malpani",
+        designation: "Director",
+        organisation: "Malpani Group of Schools",
+        photo: "/summit/assets/advisor_sanjay.png",
         color: "#7c3aed"
       },
       {
-        name: "Michael Vance",
-        designation: "Academic Director",
-        organisation: "Beacon Global Schools",
-        photo: "/summit/assets/speaker_3.jpg",
+        name: "Piramal",
+        designation: "Speaker",
+        organisation: "Piramal Foundation",
+        photo: "/summit/assets/advisor_parimal.png",
         color: "#2de67b"
-      },
-      {
-        name: "Dr. Sunita Nair",
-        designation: "Child Psychologist & Author",
-        organisation: "Early Childhood Council",
-        photo: "/summit/assets/speaker_4.jpg",
-        color: "#06b6d4"
       }
     ]
   },
@@ -233,12 +226,12 @@ const cmsData = {
     { title: "School Services", desc: "Branding agencies, enrollment consultants, and bus fleet trackers." }
   ],
   venue: {
-    name: "The Grand Pavilion & Convention Centre",
-    city: "New Delhi, India",
-    parking: "Ample multi-level valet parking available for all registered delegates.",
-    hotels: "Premium 5-star & 4-star hotels within a 1km radius, offering special Summit rates.",
-    travel: "15 minutes drive from the International Airport. Dedicated shuttle services available.",
-    mapPlaceholder: "Interactive Map Location: 28.5562° N, 77.2818° E"
+    name: "Novotel Imagicaa Khopoli",
+    city: "Khopoli, Maharashtra, India",
+    parking: "Ample free parking available on-site at the Imagicaa resort complex.",
+    hotels: "Delegates may book rooms directly at Novotel Imagicaa Khopoli — special Summit rates available on request.",
+    travel: "Approx. 80 km from Mumbai. Accessible via Mumbai-Pune Expressway, Exit Khopoli. Shuttle services from Mumbai planned.",
+    mapPlaceholder: "Interactive Map Location: 18.7815° N, 73.3211° E"
   },
   schedule: {
     Day1: [
@@ -428,9 +421,9 @@ const cmsData = {
   footer: {
     about: "The Education Summit 2026 is India's premier gathering for institutional leaders, builders, and innovators, driving systemic growth and human-centric pedagogy.",
     contact: {
-      email: "info@educationsummit2026.in",
+      email: "summit@theschoolsofindia.org",
       phone: "+91 98765 43210",
-      address: "Chanakyapuri, New Delhi, 110021"
+      address: "Novotel Imagicaa Khopoli, Pali, Khopoli, Maharashtra 410203"
     },
     socials: [
       { name: "LinkedIn", url: "https://linkedin.com", icon: "linkedin" },
