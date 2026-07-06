@@ -155,7 +155,8 @@
             <div class="speaker-img-wrapper">
               <div class="speaker-bg-accent" style="background-color:<%= sp.accent_color %>;"></div>
               <% if sp.photo.present? %>
-                <img src="<%= sp.photo %>" alt="<%= sp.name %>" class="speaker-photo" width="280" height="280" onerror="this.style.opacity='0'">
+                <% photo_url = sp.photo.split('?').first + "?v=#{sp.updated_at.to_i}" %>
+                <img src="<%= photo_url %>" alt="<%= sp.name %>" class="speaker-photo" width="280" height="280" onerror="this.style.opacity='0'">
               <% end %>
             </div>
             <div class="speaker-info">
