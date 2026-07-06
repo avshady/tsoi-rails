@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Schools of India Summit 2026 — Concept Deck (Layout Variants)</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #09090b;
+      --surface: #121216;
+      --surface-2: #1a1a22;
+      --border: rgba(255,255,255,0.06);
+      --text: #ffffff;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      
+      --accent: #ff2a7f; /* Neon Magenta */
+      --accent-violet: #7c3aed; /* Violet */
+      --accent-lime: #2de67b; /* Lime */
+      --accent-cyan: #06b6d4; /* Cyan */
+      
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Outfit', sans-serif;
+      
+      --radius: 16px;
+      --radius-sm: 8px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Film Grain Overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* MAIN CONTAINER (Side-by-side presentation board) */
+    .presentation-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    /* SIDEBAR NAVIGATION */
+    .deck-sidebar {
+      width: 280px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      z-index: 10;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-logo {
+      height: 36px;
+      width: auto;
+      filter: invert(1);
+      margin-bottom: 4px;
+    }
+
+    .sidebar-sub {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .slide-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .slide-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .slide-link:hover {
+      background: rgba(255,255,255,0.02);
+      color: #ffffff;
+    }
+
+    .slide-link.active {
+      background: rgba(255, 42, 127, 0.05);
+      border-color: rgba(255, 42, 127, 0.15);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .slide-link-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-dim);
+      width: 18px;
+    }
+
+    .slide-link.active .slide-link-num {
+      color: var(--accent);
+    }
+
+    /* SLIDES VIEWPORT */
+    .slides-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+    }
+
+    /* SLIDE STYLING (16:9 full bleed image canvas) */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 0 !important;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(40px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    /* GLASS CARD CONTENT */
+    .slide-content-wrap {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .glass-card {
+      backdrop-filter: blur(24px) saturate(185%);
+      -webkit-backdrop-filter: blur(24px) saturate(185%);
+      background: rgba(18, 18, 22, 0.76);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 60px 80px;
+      max-width: 1030px;
+      width: 100%;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+      position: relative;
+    }
+
+    .slide-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .slide-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      margin-bottom: 24px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .slide-title .serif-italic {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--accent);
+    }
+
+    .slide-body {
+      font-size: 17.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* GRID LAYOUTS (Columns & Cards) */
+    .grid-split {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-top: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .slide-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.3s ease;
+      position: relative;
+    }
+
+    .slide-card h3 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .slide-card p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* TIMELINE PROCESS PATH */
+    .timeline-wrap {
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .timeline-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      position: relative;
+    }
+
+    .timeline-badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      border: 1px solid rgba(255, 42, 127, 0.2);
+      background: rgba(255, 42, 127, 0.04);
+      padding: 4px 12px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .timeline-card h3 {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .timeline-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* QUOTE BOX HIGHLIGHT */
+    .deck-quote-box {
+      border-left: 4px solid var(--accent);
+      padding: 20px 32px;
+      background: rgba(255, 42, 127, 0.02);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 24px 0;
+    }
+
+    .deck-quote-text {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-style: italic;
+      line-height: 1.25;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .deck-quote-author {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 12px;
+    }
+
+    /* CONTROLS OVERLAY */
+    .controls-overlay {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .control-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 18px;
+    }
+
+    .control-btn:hover {
+      background: var(--surface-2);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .slide-progress {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .toggle-sidebar-btn {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      z-index: 10;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .toggle-sidebar-btn:hover {
+      background: var(--surface-2);
+      color: #ffffff;
+    }
+
+    /* HIDING SIDEBAR STATE */
+    .presentation-container.fullscreen .deck-sidebar {
+      transform: translateX(-100%);
+      width: 0;
+      padding: 0;
+      overflow: hidden;
+      border-right: none;
+    }
+
+    /* LIST STYLE */
+    .slide-list {
+      margin-left: 24px;
+      margin-top: 12px;
+      color: var(--text-muted);
+    }
+
+    .slide-list li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .slide-list li strong {
+      color: #ffffff;
+    }
+
+    /* PRESENTATION KEYS TIP */
+    .keys-tip {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 10px;
+      color: var(--text-dim);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* MOBILE RESPONSIVE MEDIA QUERIES */
+    @media (max-width: 768px) {
+      .deck-sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 280px !important;
+        transform: translateX(-100%);
+        box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+      }
+      .presentation-container:not(.fullscreen) .deck-sidebar {
+        transform: translateX(0);
+      }
+      .presentation-container.fullscreen .deck-sidebar {
+        transform: translateX(-100%);
+      }
+      .glass-card {
+        padding: 32px 24px !important;
+        max-width: 100% !important;
+      }
+      .slide-content-wrap {
+        padding: 0 16px !important;
+      }
+      .slide-title {
+        font-size: 28px !important;
+        margin-bottom: 16px !important;
+      }
+      .slide-body {
+        font-size: 15px !important;
+      }
+      .grid-split, .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+      .timeline-wrap {
+        flex-direction: column !important;
+        gap: 16px !important;
+      }
+      .deck-quote-text {
+        font-size: 26px !important;
+      }
+      .keys-tip {
+        display: none !important;
+      }
+    }
+
+    /* Brandbook Compliant Speaker Profile Styles (Widescreen Landscape) */
+    .advisors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+      width: 100%;
+    }
+    
+    .speaker-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px; /* Brandbook compliant padding */
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .speaker-img-wrapper {
+      aspect-ratio: 1; /* Brandbook compliant square aspect ratio */
+      width: 100%;
+      height: auto;
+      position: relative;
+      overflow: hidden;
+      background-color: #222; /* Brandbook compliant background color */
+      border-radius: var(--radius-sm); /* Brandbook compliant image rounding */
+      margin-bottom: 16px;
+    }
+    
+    .speaker-bg-accent {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      border-radius: 40% 40% 0 0;
+      z-index: 2;
+      opacity: 0.7;
+    }
+    
+    .speaker-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 3;
+    }
+    
+    .speaker-info {
+      padding: 0;
+      background-color: transparent !important;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .speaker-name {
+      font-family: var(--font-display);
+      font-size: 18px; /* Brandbook compliant font size */
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    
+    .speaker-title {
+      font-size: 13px; /* Brandbook compliant font size */
+      color: var(--text-muted);
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    
+    .speaker-org {
+      font-size: 11px; /* Brandbook compliant font size */
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    /* PRINT LAYOUT STYLING (16:9 Widescreen Landscape Export - Exactly 11 Slides) */
+    @media print {
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+      html, body {
+        background: #09090b !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        overflow: hidden !important;
+        height: 99in !important;
+        max-height: 99in !important;
+        width: 16in !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      body::after {
+        display: none !important;
+        content: none !important;
+      }
+      .deck-sidebar, .controls-overlay, .toggle-sidebar-btn, .keys-tip, script {
+        display: none !important;
+      }
+      .presentation-container {
+        display: block !important;
+        position: static !important;
+        height: auto !important;
+        width: 16in !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+      }
+      .slides-viewport {
+        display: block !important;
+        position: static !important;
+        overflow: visible !important;
+        height: auto !important;
+        width: 16in !important;
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .slide {
+        position: relative !important;
+        width: 16in !important;
+        height: 9in !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        background: #09090b !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+      .slide.active {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        z-index: auto !important;
+      }
+      .slide:last-of-type {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="presentation-container" id="presentationContainer">
+    
+    <!-- KEYBOARD NAV TIP -->
+    <div class="keys-tip">Use Space / Arrow Keys to Navigate</div>
+
+    <!-- SIDEBAR -->
+    <nav class="deck-sidebar" id="deckSidebar">
+      <div class="sidebar-header">
+        <img src="assets/tsoi_summit_combined_logo.png" class="sidebar-logo" alt="The Schools of India Summit Logo">
+        <div class="sidebar-sub">Concept Deck</div>
+      </div>
+      <div class="slide-links" id="slideLinks">
+        <!-- Generated Dynamically -->
+      </div>
+    </nav>
+
+    <!-- SIDEBAR TOGGLE BUTTON -->
+    <button class="toggle-sidebar-btn" id="toggleSidebarBtn">Toggle Sidebar (F)</button>
+
+    <!-- SLIDES VIEWPORT -->
+    <main class="slides-viewport">
+      
+      <!-- Slide 1: Cover -->
+      <section class="slide" id="slide-1">
+        <div style="position: absolute; inset: 0; background: url('assets/tsoi_cover_bg.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: radial-gradient(circle, rgba(9,9,11,0.7) 10%, rgba(9,9,11,0.95) 85%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card" style="text-align: center; max-width: 860px; padding: 72px 80px;">
+            <img src="assets/tsoi_summit_combined_logo.png" alt="Combined Logo Unit" style="height: 100px; width: auto; filter: invert(1); margin-bottom: 24px; display: inline-block;">
+            <div class="slide-eyebrow" style="letter-spacing: 0.3em; margin-bottom: 16px;">The Schools of India Summit 2026</div>
+            <h1 class="slide-title" style="font-size: 48px; letter-spacing: 0.05em; line-height: 1.15; margin-bottom: 16px;">
+              Reimagining the Future<br>of Education, <span class="serif-italic">Together</span>
+            </h1>
+            <p class="slide-body" style="font-size: 15px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-top: 32px; text-align: center; width: 100%;">
+              Conclave: 30th October - 1st November 2026 &nbsp;|&nbsp; Novotel, Imagicaa, Khopoli
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 2: The Friction -->
+      <section class="slide" id="slide-2">
+        <div style="position: absolute; inset: 0; background: url('assets/conference_friction_bg.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 25%, rgba(9,9,11,0.75) 60%, rgba(9,9,11,0.4) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card">
+            <div class="slide-eyebrow">The Friction</div>
+            <h2 class="slide-title">Education Conferences<br><span class="serif-italic">Have Lost</span> Their Purpose.</h2>
+            <div class="grid-split">
+              <div class="slide-body">
+                <div style="border-left: 2px solid var(--accent-lime); padding-left: 12px; margin-bottom: 20px;">
+                  <span style="color: var(--accent-lime); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 6px;">[CONCISED COPY]</span>
+                  <p style="margin-bottom: 12px; font-size: 16.5px; line-height: 1.55;">Traditional conferences have devolved into commercial vendor exhibitions and repetitive keynotes.</p>
+                  <p style="font-size: 16.5px; line-height: 1.55;">Leaders spend days networking but return to campuses where daily school operations remain unchanged.</p>
+                </div>
+              </div>
+              <div style="background: rgba(255, 42, 127, 0.02); border: 1px dashed rgba(255, 42, 127, 0.2); border-radius: var(--radius); padding: 32px; text-align: center;">
+                <div style="font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px;">The Cycle of Zero Action</div>
+                <div style="font-size: 30px; font-weight: 900; font-family: var(--font-display); line-height: 1.25;">People Attend.<br>People Network.<br>Nothing Changes.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: The Thesis -->
+      <section class="slide" id="slide-3">
+        <div style="position: absolute; inset: 0; background: url('assets/tsoi_thesis_collaborate.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 25%, rgba(9,9,11,0.75) 60%, rgba(9,9,11,0.3) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card">
+            <div class="slide-eyebrow">Our Core Thesis</div>
+            <h2 class="slide-title">The Soul of <span class="serif-italic">the Conclave</span></h2>
+            <div class="deck-quote-box">
+              <div class="deck-quote-text">"Every educator has a 5% that can transform another school. This summit exists to share that 5%."</div>
+              <div class="deck-quote-author">— Core Conclave Manifesto</div>
+            </div>
+            
+            <div style="border: 1px dashed var(--accent-lime); padding: 14px 20px; border-radius: var(--radius-sm); background: rgba(45,230,123,0.02); margin-top: 24px; text-align: center;">
+              <span style="color: var(--accent-lime); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 4px;">[CONCISED CORE EQUATION]</span>
+              <p style="font-size: 19px; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; display: inline-block;">
+                Collective Intelligence + Secure Environment = Elevated Ecosystem
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Four Specialized Peer Circuits -->
+      <section class="slide" id="slide-4">
+        <div style="position: absolute; inset: 0; background: url('assets/tsoi_summits_panel.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 20%, rgba(9,9,11,0.75) 65%, rgba(9,9,11,0.4) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card" style="max-width: 1120px; padding: 48px 64px;">
+            <div class="slide-eyebrow">Conclave Structure</div>
+            <h2 class="slide-title" style="margin-bottom: 12px;">Four Parallel <span class="serif-italic">Peer Circuits</span></h2>
+            <p class="slide-body" style="font-size: 14.5px; margin-bottom: 20px; color: var(--text-muted);">To protect peer safety, leaders spend 80% of the summit in their isolated tracks, inclusive of stay & dining at Novotel, Imagicaa, Khopoli.</p>
+            <div class="grid-4">
+              <div class="slide-card" style="border-top: 3px solid var(--accent); background: rgba(18,18,22,0.65);">
+                <h3 style="color: var(--accent);">01 • Founders</h3>
+                <p>Scaling frameworks, regulatory lobbying, JV capital strategy, and legal defense networks.</p>
+              </div>
+              <div class="slide-card" style="border-top: 3px solid var(--accent-violet); background: rgba(18,18,22,0.65);">
+                <h3 style="color: var(--accent-violet);">02 • Principals</h3>
+                <p>Academic excellence systems, pedagogical leadership, and school culture design.</p>
+              </div>
+              <div class="slide-card" style="border-top: 3px solid var(--accent-lime); background: rgba(18,18,22,0.65);">
+                <h3 style="color: var(--accent-lime);">03 • Teachers</h3>
+                <p>AI classroom grading tools, lesson planning models, and student mental health.</p>
+              </div>
+              <div class="slide-card" style="border-top: 3px solid var(--accent-cyan); background: rgba(18,18,22,0.65);">
+                <h3 style="color: var(--accent-cyan);">04 • Admins/Ops</h3>
+                <p>Branding frameworks, operational SOPs, budgeting, and campus technology integration.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5: The Institutional Delegation (Reordered!) -->
+      <section class="slide" id="slide-5">
+        <div style="position: absolute; inset: 0; background: url('assets/tsoi_delegation_walk.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 25%, rgba(9,9,11,0.75) 65%, rgba(9,9,11,0.4) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card">
+            <div class="slide-eyebrow">Institutional Alignment</div>
+            <h2 class="slide-title">The Institutional <span class="serif-italic">Delegation</span></h2>
+            <div class="grid-split">
+              <div>
+                <div style="border-left: 2px solid var(--accent-lime); padding-left: 12px; margin-bottom: 0;">
+                  <span style="color: var(--accent-lime); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 6px;">[CONCISED COPY]</span>
+                  <p style="font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 8px; letter-spacing: 0.2px;">Separated for Depth. United for Execution.</p>
+                  <p style="font-size: 15px; line-height: 1.55; margin-bottom: 12px; color: var(--text-muted);">During the conclave, your team remains in their isolated peer circuits to speak freely with their true equals.</p>
+                  <p style="font-size: 15px; line-height: 1.55; color: var(--text-muted);">But by attending under one delegation, your institution returns with unified insights across leadership, academic, and operations.</p>
+                </div>
+              </div>
+              <div style="background: rgba(18, 18, 22, 0.6); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding-bottom:8px;">
+                  <span style="font-weight:700; color:#ffffff; font-size: 13.5px;">1. Founder / Trustee</span>
+                  <span style="color:var(--accent); font-size:11px; font-weight:800;">STRATEGY & BOARD</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding-bottom:8px;">
+                  <span style="font-weight:700; color:#ffffff; font-size: 13.5px;">2. Principal / Director</span>
+                  <span style="color:var(--accent-violet); font-size:11px; font-weight:800;">PEDAGOGY & CULTURE</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.04); padding-bottom:8px;">
+                  <span style="font-weight:700; color:#ffffff; font-size: 13.5px;">3. HODs / Teachers</span>
+                  <span style="color:var(--accent-lime); font-size:11px; font-weight:800;">CLASSROOM & AI</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:2px;">
+                  <span style="font-weight:700; color:#ffffff; font-size: 13.5px;">4. Admins / Operations</span>
+                  <span style="color:var(--accent-cyan); font-size:11px; font-weight:800;">BUDGETS & ERP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6: Co-Created with Advisors (Reordered!) -->
+      <section class="slide" id="slide-6">
+        <div style="position: absolute; inset: 0; background: url('assets/tsoi_lobby_networking.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 20%, rgba(9,9,11,0.75) 65%, rgba(9,9,11,0.4) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card" style="padding: 72px 96px; max-width: 1030px;">
+            <div class="slide-eyebrow">Dynamic Curation</div>
+            <h2 class="slide-title" style="font-size: 42px; margin-bottom: 24px;">Co-Created with <span class="serif-italic">Advisors</span></h2>
+            <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">The TSOI Conclave does not run on a static, pre-packaged corporate agenda.</p>
+            
+            <div style="border-left: 2px solid var(--accent-lime); padding-left: 16px; margin-top: 16px;">
+              <span style="color: var(--accent-lime); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 6px;">[ADVISOR DESIGN COPY]</span>
+              <p style="font-size: 18px; color: #ffffff; line-height: 1.6; font-weight: 400;">
+                To ensure absolute relevance to the school year's actual challenges, the final schedule, panel debates, and scenario-planning labs will be designed dynamically in partnership with our Founding Board of Advisors, guaranteeing that every session directly addresses the most pressing problems in education today and work on solving them for the industry.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7: Founding Board of Advisors -->
+      <section class="slide" id="slide-7">
+        <div style="position: absolute; inset: 0; background: url('assets/indian_leadership_team.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 20%, rgba(9,9,11,0.75) 65%, rgba(9,9,11,0.4) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card" style="padding: 48px 64px; max-width: 1030px; width: 100%;">
+            <div class="slide-eyebrow">Founding Advisors</div>
+            <h2 class="slide-title" style="font-size: 42px; margin-bottom: 20px;">The Advisory <span class="serif-italic">Council</span></h2>
+            
+            <div class="advisors-grid">
+              <!-- Advisor 1 (Parimal Merchant) -->
+              <div class="speaker-card">
+                <div class="speaker-img-wrapper">
+                  <!-- Grey background dome -->
+                  <div style="position: absolute; bottom: 0; left: 5%; width: 90%; height: 90%; background: rgba(255,255,255,0.08); border-radius: 50% 50% 0 0; z-index: 1;"></div>
+                  <!-- Colored accent dome -->
+                  <div class="speaker-bg-accent" style="background-color: var(--accent);"></div>
+                  <img src="assets/advisor_parimal.png" class="speaker-photo" alt="PARIMAL MERCHANT">
+                </div>
+                <div class="speaker-info">
+                  <h3 class="speaker-name">PARIMAL MERCHANT</h3>
+                  <p class="speaker-title">Director – Global Family Managed Business Program</p>
+                  <p class="speaker-org">SP JAIN SCHOOL OF GLOBAL MANAGEMENT</p>
+                </div>
+              </div>
+
+              <!-- Advisor 2 (Lakshmi Kumar) -->
+              <div class="speaker-card">
+                <div class="speaker-img-wrapper">
+                  <!-- Grey background dome -->
+                  <div style="position: absolute; bottom: 0; left: 5%; width: 90%; height: 90%; background: rgba(255,255,255,0.08); border-radius: 50% 50% 0 0; z-index: 1;"></div>
+                  <!-- Colored accent dome -->
+                  <div class="speaker-bg-accent" style="background-color: var(--accent-violet);"></div>
+                  <img src="assets/advisor_lakshmi.png" class="speaker-photo" alt="DR. LAKSHMI KUMAR">
+                </div>
+                <div class="speaker-info">
+                  <h3 class="speaker-name">DR. LAKSHMI KUMAR</h3>
+                  <p class="speaker-title">Director</p>
+                  <p class="speaker-org">Avasara Academy</p>
+                </div>
+              </div>
+
+              <!-- Advisor 3 (Sanjay Malpani) -->
+              <div class="speaker-card">
+                <div class="speaker-img-wrapper">
+                  <!-- Grey background dome -->
+                  <div style="position: absolute; bottom: 0; left: 5%; width: 90%; height: 90%; background: rgba(255,255,255,0.08); border-radius: 50% 50% 0 0; z-index: 1;"></div>
+                  <!-- Colored accent dome -->
+                  <div class="speaker-bg-accent" style="background-color: var(--accent-lime);"></div>
+                  <img src="assets/advisor_sanjay.png" class="speaker-photo" alt="DR. SANJAY MALPANI">
+                </div>
+                <div class="speaker-info">
+                  <h3 class="speaker-name">DR. SANJAY MALPANI</h3>
+                  <p class="speaker-title">Chairman</p>
+                  <p class="speaker-org">Dhruv Global School</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8: Signature Experiences (Reordered!) -->
+      <section class="slide" id="slide-8">
+        <div style="position: absolute; inset: 0; background: url('assets/tsoi_experiences_workshop.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 20%, rgba(9,9,11,0.75) 65%, rgba(9,9,11,0.4) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card">
+            <div class="slide-eyebrow">Summit Mechanics</div>
+            <h2 class="slide-title">Signature Conclave <span class="serif-italic">Experiences</span></h2>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 280px; border: 1px dashed rgba(255,255,255,0.08); border-radius: var(--radius); background: rgba(255,255,255,0.01); text-align: center; padding: 40px;">
+              <div style="font-family: var(--font-serif); font-size: 56px; font-style: italic; color: var(--accent); margin-bottom: 12px; letter-spacing: 1px;">Coming Soon</div>
+              <div style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; font-weight: 700; max-width: 550px; line-height: 1.5;">Founders' Roundtables, Pedagogical Audits, Classroom Sandboxes, and Operations Forums will be unlocked shortly.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9: The Venue -->
+      <section class="slide" id="slide-9">
+        <div style="position: absolute; inset: 0; background: url('assets/novotel_imagicaa_retreat.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 25%, rgba(9,9,11,0.75) 65%, rgba(9,9,11,0.3) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card" style="padding: 72px 96px; max-width: 1030px;">
+            <div class="slide-eyebrow" style="font-size: 13px;">Retreat Context</div>
+            <h2 class="slide-title" style="font-size: 44px; margin-bottom: 20px;">Designed for <span class="serif-italic">Focus & Trust</span></h2>
+            <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;"><strong>Novotel Imagicaa Khopoli</strong> was selected intentionally as our conclave destination.</p>
+            <p style="font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">By removing school leaders from daily administrative fires and placing them in a premium, off-site retreat setting, we create the bandwidth required for creative strategy, evening networking, and building trust circles.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10: Beyond the Conclave -->
+      <section class="slide" id="slide-10">
+        <div style="position: absolute; inset: 0; background: url('assets/digital_workspace_bg.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 20%, rgba(9,9,11,0.75) 65%, rgba(9,9,11,0.4) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card">
+            <div class="slide-eyebrow">Year-Round Value</div>
+            <h2 class="slide-title">A Continuous <span class="serif-italic">Ecosystem</span></h2>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 280px; border: 1px dashed rgba(255,255,255,0.08); border-radius: var(--radius); background: rgba(255,255,255,0.01); text-align: center; padding: 40px;">
+              <div style="font-family: var(--font-serif); font-size: 56px; font-style: italic; color: var(--accent-violet); margin-bottom: 12px; letter-spacing: 1px;">Coming Soon</div>
+              <div style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; font-weight: 700; max-width: 500px; line-height: 1.5;">Annual benchmarking tools, regional meetups, and cohort registries will be unlocked shortly.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 11: The Ask -->
+      <section class="slide" id="slide-11">
+        <div style="position: absolute; inset: 0; background: url('assets/boardroom_invite_bg.jpg') center/cover no-repeat; z-index: 1;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(9,9,11,0.95) 25%, rgba(9,9,11,0.75) 65%, rgba(9,9,11,0.3) 100%); z-index: 2;"></div>
+        
+        <div class="slide-content-wrap">
+          <div class="glass-card">
+            <div class="slide-eyebrow">The Partnership</div>
+            <h2 class="slide-title" style="margin-bottom: 24px;">Help Us Architect <span class="serif-italic">TSOI Summit 2026</span></h2>
+            <div class="grid-split" style="align-items: flex-start;">
+              <div>
+                <div style="border-left: 2px solid var(--accent-lime); padding-left: 12px; margin-bottom: 16px;">
+                  <p class="slide-body" style="font-weight: 700; color: #ffffff; font-size: 16px;">As an active member of the Founding Board of Advisors, you will guide conclave execution by:</p>
+                </div>
+                <ul class="slide-list">
+                  <li><strong>Curating Circuit Agendas</strong>: Helping us select the core strategic focus areas for the Founders, Principals, Teachers, and Admins to ensure high-value peer exchange.</li>
+                  <li><strong>Structuring Scenario Labs</strong>: Designing interactive simulation labs that pressure-test school operations, pedagogical quality, and administrative workflows.</li>
+                  <li><strong>Identifying High-Caliber Nominees</strong>: Connecting us with progressive school founders, academic heads, and operations directors in their circles who belong in this cohort.</li>
+                </ul>
+              </div>
+              <div style="background: rgba(18, 18, 22, 0.6); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px; border-top: 3px solid var(--accent-cyan);">
+                <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-cyan);">Connect with the Board Convener</div>
+                <div style="font-size: 18px; font-weight: 700; color: #ffffff;">info@tsoi.org</div>
+                <div style="font-size: 14px; color: var(--text-muted);">+91 77198 96969</div>
+                <div style="font-size: 12px; color: var(--text-dim); margin-top: 12px;">© The Schools of India Summit 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- CONTROLS OVERLAY -->
+    <div class="controls-overlay">
+      <button class="control-btn" id="prevBtn" aria-label="Previous Slide">←</button>
+      <div class="slide-progress" id="slideProgress">1 / 10</div>
+      <button class="control-btn" id="nextBtn" aria-label="Next Slide">→</button>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+      const container = document.getElementById('presentationContainer');
+      const sidebarLinksContainer = document.getElementById('slideLinks');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const slideProgress = document.getElementById('slideProgress');
+      const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+      
+      let currentSlideIdx = 0;
+
+      // Slide headers mapping for sidebar (Updated Chronological order!)
+      const slideHeaders = [
+        "1. Cover Page",
+        "2. The Friction",
+        "3. Core Thesis",
+        "4. Four Circuits",
+        "5. The Delegation",
+        "6. Co-Creation Model",
+        "7. Conclave Experiences",
+        "8. Retreat Venue",
+        "9. Year-Round Value",
+        "10. Board Invitation"
+      ];
+
+      // Build Sidebar slide link selectors
+      slideHeaders.forEach((headerText, index) => {
+        const link = document.createElement('a');
+        link.className = `slide-link ${index === 0 ? 'active' : ''}`;
+        link.innerHTML = `<span class="slide-link-num">${String(index + 1).padStart(2, '0')}</span>${headerText}`;
+        link.addEventListener('click', () => {
+          goToSlide(index);
+        });
+        sidebarLinksContainer.appendChild(link);
+      });
+
+      const slideLinks = document.querySelectorAll('.slide-link');
+
+      // Update slide states
+      function goToSlide(index) {
+        if (index < 0 || index >= slides.length) return;
+        
+        slides[currentSlideIdx].classList.remove('active');
+        slideLinks[currentSlideIdx].classList.remove('active');
+        
+        currentSlideIdx = index;
+        
+        slides[currentSlideIdx].classList.add('active');
+        slideLinks[currentSlideIdx].classList.add('active');
+        
+        // Update pagination UI
+        slideProgress.textContent = `${currentSlideIdx + 1} / ${slides.length}`;
+        
+        // Scroll active link into view inside sidebar
+        slideLinks[currentSlideIdx].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+
+      // Prev / Next bindings
+      prevBtn.addEventListener('click', () => {
+        goToSlide(currentSlideIdx - 1);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        goToSlide(currentSlideIdx + 1);
+      });
+
+      // Keyboard bindings
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+          goToSlide(currentSlideIdx + 1);
+          e.preventDefault();
+        } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+          goToSlide(currentSlideIdx - 1);
+          e.preventDefault();
+        } else if (e.key.toLowerCase() === 'f' || e.key.toLowerCase() === 'p') {
+          toggleFullscreen();
+          e.preventDefault();
+        }
+      });
+
+      // Toggle Presentation Mode
+      function toggleFullscreen() {
+        container.classList.toggle('fullscreen');
+      }
+
+      toggleSidebarBtn.addEventListener('click', () => {
+        toggleFullscreen();
+      });
+
+      // Initialize first slide active on load (Slide 1)
+      goToSlide(0);
+    });
+  </script>
+</body>
+</html>

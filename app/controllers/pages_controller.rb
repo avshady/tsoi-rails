@@ -239,7 +239,9 @@ class PagesController < ApplicationController
     redirect_to "#{service_detail_path(params[:slug])}#inquiry-form"
   end
 
-  def summit; end
+  def summit
+    render layout: false
+  end
 
   def summit_notify
     email = params[:email].to_s.strip

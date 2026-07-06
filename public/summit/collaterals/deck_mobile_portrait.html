@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>The Schools of India Summit 2026 — Concept Deck (Mobile View)</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #09090b;
+      --surface: #121216;
+      --border: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      
+      --accent: #ff2a7f; /* Neon Magenta */
+      --accent-violet: #7c3aed; /* Violet */
+      --accent-lime: #2de67b; /* Lime */
+      --accent-cyan: #06b6d4; /* Cyan */
+      
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Outfit', sans-serif;
+      
+      --radius: 16px;
+      --radius-sm: 8px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow: hidden;
+      height: 100vh;
+      height: 100dvh;
+      width: 100vw;
+      -webkit-font-smoothing: antialiased;
+      position: fixed; /* Prevents bounce scroll on mobile */
+    }
+
+    /* Film Grain Overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* VIEWPORT CONTAINER */
+    .mobile-presentation-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* SLIDE LAYOUT (Each occupies exactly full screen) */
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(30px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    /* BACKGROUND CANVAS AND VIGNETTE */
+    .slide-bg-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(9,9,11,0.7) 10%, rgba(9,9,11,0.95) 90%);
+      z-index: 2;
+    }
+
+    /* FLOATING MOBILE GLASS CARD */
+    .slide-content-wrap {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      padding: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-height: 90vh;
+      max-height: 90dvh;
+    }
+
+    .glass-card {
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(18, 18, 22, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      padding: 24px 16px;
+      width: 100%;
+      max-height: 85vh;
+      max-height: 85dvh;
+      overflow-y: auto; /* Internal scrolling if content is tall */
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      -webkit-overflow-scrolling: touch; /* Smooth iOS momentum scroll */
+    }
+
+    /* TYPOGRAPHY */
+    .slide-eyebrow {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .slide-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+      margin-bottom: 18px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .slide-title .serif-italic {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--accent);
+    }
+
+    .slide-body {
+      font-size: 24px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* GRID SYSTEMS FOR MOBILE STACKING */
+    .grid-split, .grid-2, .grid-3, .grid-4 {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .slide-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+    }
+
+    .slide-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .slide-card p {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* QUOTE BOX HIGHLIGHT */
+    .deck-quote-box {
+      border-left: 3px solid var(--accent);
+      padding: 12px 18px;
+      background: rgba(255, 42, 127, 0.02);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 16px 0;
+    }
+
+    .deck-quote-text {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-style: italic;
+      line-height: 1.25;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .deck-quote-author {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    /* LIST STYLE */
+    .slide-list {
+      margin-left: 16px;
+      margin-top: 8px;
+      color: var(--text-muted);
+    }
+
+    .slide-list li {
+      margin-bottom: 6px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .slide-list li strong {
+      color: #ffffff;
+    }
+
+    /* INTERACTION GESTURE TIP */
+    .swipe-tip {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 9px;
+      color: var(--text-dim);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Brandbook Compliant Speaker Profile Styles */
+    .advisors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+      width: 100%;
+      align-items: stretch; /* Cards stretch to uniform height within grid row */
+    }
+    
+    .speaker-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px; /* Reduced padding for 3-column mobile spacing */
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .speaker-img-wrapper {
+      aspect-ratio: 1; /* Keep square */
+      width: 100%;
+      height: auto;
+      position: relative;
+      overflow: hidden;
+      background-color: #222;
+      border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+    }
+    
+    .speaker-bg-accent {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      border-radius: 40% 40% 0 0;
+      z-index: 2;
+      opacity: 0.7;
+    }
+    
+    .speaker-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: relative;
+      z-index: 3;
+    }
+    
+    .speaker-info {
+      padding: 0;
+      background-color: transparent !important;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .speaker-name {
+      font-family: var(--font-display);
+      font-size: 11.5px; /* Scaled down for 3-column mobile fit */
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    
+    .speaker-title {
+      font-size: 9px; /* Scaled down for 3-column mobile fit */
+      color: var(--text-muted);
+      line-height: 1.25;
+      font-weight: 500;
+    }
+    
+    .speaker-org {
+      font-size: 8px; /* Scaled down for 3-column mobile fit */
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      margin-top: 3px;
+      line-height: 1.2;
+    }
+
+    /* PAGINATION OVERLAY */
+    .mobile-nav-bar {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .nav-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      pointer-events: auto;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .slide-progress {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      pointer-events: auto;
+    }
+
+    /* PORTRAIT PRINT LAYOUT STYLING (Exactly 11 Portrait Pages) */
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0;
+      }
+      html, body {
+        background: #09090b !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        overflow: hidden !important;
+        height: 121in !important;
+        max-height: 121in !important;
+        width: 8.5in !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      body::after {
+        display: none !important;
+        content: none !important;
+      }
+      .mobile-nav-bar, .swipe-tip, script {
+        display: none !important;
+      }
+      .mobile-presentation-container {
+        display: block !important;
+        position: static !important;
+        height: auto !important;
+        width: 8.5in !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+      }
+      .slide {
+        position: relative !important;
+        width: 8.5in !important;
+        height: 11in !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        background: #09090b !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+      .slide.active {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        z-index: auto !important;
+      }
+      .slide:last-of-type {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+      .slide-bg-image {
+        height: 100% !important;
+        width: 100% !important;
+      }
+      .slide-content-wrap {
+        max-height: 9.5in !important;
+        padding: 0 48px !important;
+      }
+      .glass-card {
+        padding: 48px !important;
+        background: rgba(18, 18, 22, 0.9) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: none !important;
+        max-height: 9.5in !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-presentation-container" id="presentationContainer">
+    
+    <!-- INTERACTIVE SWIPE TIP -->
+    <div class="swipe-tip">Swipe or Tap to Navigate</div>
+
+    <!-- Slide 1: Cover -->
+    <section class="slide" id="slide-1">
+      <div class="slide-bg-image" style="background-image: url('assets/tsoi_cover_bg.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card" style="text-align: center;">
+          <img src="assets/tsoi_summit_combined_logo.png" alt="TSOI Logo" style="height: 64px; filter: invert(1); margin-bottom: 16px; display: inline-block;">
+          <div class="slide-eyebrow" style="letter-spacing: 0.25em; margin-bottom: 8px;">The Schools of India Summit 2026</div>
+          <h1 class="slide-title" style="font-size: 30px; line-height: 1.25; margin-bottom: 16px;">
+            Reimagining the Future of Education, <span class="serif-italic">Together</span>
+          </h1>
+          <p class="slide-body" style="font-size: 13px; color: var(--accent-lime); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 24px;">
+            30th October - 1st November 2026<br>Novotel, Imagicaa, Khopoli
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2: The Friction -->
+    <section class="slide" id="slide-2">
+      <div class="slide-bg-image" style="background-image: url('assets/conference_friction_bg.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">The Friction</div>
+          <h2 class="slide-title">Education Conferences <span class="serif-italic">Have Lost</span> Their Purpose.</h2>
+          <div class="slide-body">
+            <div style="border-left: 2px solid var(--accent-lime); padding-left: 12px; margin-bottom: 16px;">
+              <p style="margin-bottom: 8px; font-size: 24px; line-height: 1.5;">Traditional conferences have devolved into commercial vendor exhibitions and repetitive keynotes.</p>
+              <p style="font-size: 24px; line-height: 1.5;">Leaders spend days networking but return to campuses where daily school operations remain unchanged.</p>
+            </div>
+            <div style="border: 1px dashed rgba(255, 42, 127, 0.2); background: rgba(255, 42, 127, 0.01); border-radius: var(--radius-sm); padding: 16px; text-align: center;">
+              <div style="font-size: 24px; font-weight: 900; font-family: var(--font-display); line-height: 1.2; color: var(--accent);">People Attend.<br>People Network.<br>Nothing Changes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: The Thesis -->
+    <section class="slide" id="slide-3">
+      <div class="slide-bg-image" style="background-image: url('assets/tsoi_thesis_collaborate.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">Our Core Thesis</div>
+          <h2 class="slide-title">The Soul of <span class="serif-italic">the Conclave</span></h2>
+          <div class="deck-quote-box">
+            <div class="deck-quote-text">"Every educator has a 5% that can transform another school. This summit exists to share that 5%."</div>
+            <div class="deck-quote-author">— Core Conclave Manifesto</div>
+          </div>
+          
+          <div style="border: 1px dashed var(--accent-lime); padding: 12px; border-radius: var(--radius-sm); background: rgba(45,230,123,0.02); text-align: center;">
+            <p style="font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: 0.5px;">
+              Collective Intelligence + Secure Environment = Elevated Ecosystem
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Four Specialized Peer Circuits -->
+    <section class="slide" id="slide-4">
+      <div class="slide-bg-image" style="background-image: url('assets/tsoi_summits_panel.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">Conclave Structure</div>
+          <h2 class="slide-title">Four Parallel <span class="serif-italic">Peer Circuits</span></h2>
+          <p class="slide-body" style="font-size: 20px; margin-bottom: 12px;">Attendees spend 80% of the summit in their isolated tracks, inclusive of stay at Novotel Imagicaa.</p>
+          <div class="grid-4">
+            <div class="slide-card" style="border-left: 3px solid var(--accent); background: rgba(18,18,22,0.55); padding: 12px 16px;">
+              <h3 style="color: var(--accent);">01 • Founders</h3>
+              <p>Scaling frameworks, regulatory lobbying, JV capital, and legal networks.</p>
+            </div>
+            <div class="slide-card" style="border-left: 3px solid var(--accent-violet); background: rgba(18,18,22,0.55); padding: 12px 16px;">
+              <h3 style="color: var(--accent-violet);">02 • Principals</h3>
+              <p>Academic excellence systems, pedagogical leadership, and school culture design.</p>
+            </div>
+            <div class="slide-card" style="border-left: 3px solid var(--accent-lime); background: rgba(18,18,22,0.55); padding: 12px 16px;">
+              <h3 style="color: var(--accent-lime);">03 • Teachers</h3>
+              <p>AI classroom grading tools, lesson planning models, and student mental health.</p>
+            </div>
+            <div class="slide-card" style="border-left: 3px solid var(--accent-cyan); background: rgba(18,18,22,0.55); padding: 12px 16px;">
+              <h3 style="color: var(--accent-cyan);">04 • Admins/Ops</h3>
+              <p>Branding frameworks, operational SOPs, budgeting, and tech integration.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: The Institutional Delegation -->
+    <section class="slide" id="slide-5">
+      <div class="slide-bg-image" style="background-image: url('assets/tsoi_delegation_walk.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">Institutional Alignment</div>
+          <h2 class="slide-title">The Institutional <span class="serif-italic">Delegation</span></h2>
+          <div class="slide-body">
+            <div style="border-left: 2px solid var(--accent-lime); padding-left: 12px; margin-bottom: 12px;">
+              <p style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px;">Separated for Depth. United for Execution.</p>
+              <p style="font-size: 18px; line-height: 1.45; margin-bottom: 6px;">During the conclave, attendees remain in their isolated peer circuits to speak freely with their true equals.</p>
+              <p style="font-size: 18px; line-height: 1.45;">But by attending under one delegation, the institutions return with unified insights across strategy, pedagogy, and operations.</p>
+            </div>
+            <div style="background: rgba(18, 18, 22, 0.6); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+              <div style="display:flex; justify-content:space-between; font-size:16px;">
+                <span style="font-weight:700; color:#ffffff;">1. Founder / Trustee</span>
+                <span style="color:var(--accent); font-weight:800; font-size: 16px;">STRATEGY & BOARD</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:16px;">
+                <span style="font-weight:700; color:#ffffff;">2. Principal / Director</span>
+                <span style="color:var(--accent-violet); font-weight:800; font-size: 16px;">PEDAGOGY & CULTURE</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:16px;">
+                <span style="font-weight:700; color:#ffffff;">3. HODs / Teachers</span>
+                <span style="color:var(--accent-lime); font-weight:800; font-size: 16px;">CLASSROOM & AI</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:16px;">
+                <span style="font-weight:700; color:#ffffff;">4. Admins / Operations</span>
+                <span style="color:var(--accent-cyan); font-weight:800; font-size: 16px;">BUDGETS & ERP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Co-Created with Advisors -->
+    <section class="slide" id="slide-6">
+      <div class="slide-bg-image" style="background-image: url('assets/tsoi_lobby_networking.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">Dynamic Curation</div>
+          <h2 class="slide-title">Co-Created with <span class="serif-italic">Advisors</span></h2>
+          <div class="slide-body">
+            <p style="margin-bottom: 12px; font-size: 14.5px;">The TSOI Conclave does not run on a static, pre-packaged corporate agenda.</p>
+            <div style="border-left: 2px solid var(--accent-lime); padding-left: 12px;">
+              <p style="color: #ffffff; font-size: 14px; line-height: 1.5;">To ensure absolute relevance to the school year's actual challenges, the final schedule, panel debates, and scenario-planning labs will be designed dynamically in partnership with our Founding Board of Advisors, guaranteeing that every session directly addresses the most pressing problems in education today and work on solving them for the industry.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: Founding Board of Advisors -->
+    <section class="slide" id="slide-7">
+      <div class="slide-bg-image" style="background-image: url('assets/indian_leadership_team.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">Founding Advisors</div>
+          <h2 class="slide-title">The Advisory <span class="serif-italic">Council</span></h2>
+          <div class="advisors-grid">
+            
+            <!-- Advisor 1 (Parimal Merchant) -->
+            <div class="speaker-card">
+              <div class="speaker-img-wrapper">
+                <!-- Grey background dome -->
+                <div style="position: absolute; bottom: 0; left: 5%; width: 90%; height: 90%; background: rgba(255,255,255,0.08); border-radius: 50% 50% 0 0; z-index: 1;"></div>
+                <!-- Colored accent dome -->
+                <div class="speaker-bg-accent" style="background-color: var(--accent);"></div>
+                <img src="assets/advisor_parimal.png" class="speaker-photo" alt="PARIMAL MERCHANT">
+              </div>
+              <div class="speaker-info">
+                <h3 class="speaker-name">PARIMAL MERCHANT</h3>
+                <p class="speaker-title">Director – Global Family Managed Business Program</p>
+                <p class="speaker-org">SP JAIN SCHOOL OF GLOBAL MANAGEMENT</p>
+              </div>
+            </div>
+
+            <!-- Advisor 2 (Lakshmi Kumar) -->
+            <div class="speaker-card">
+              <div class="speaker-img-wrapper">
+                <!-- Grey background dome -->
+                <div style="position: absolute; bottom: 0; left: 5%; width: 90%; height: 90%; background: rgba(255,255,255,0.08); border-radius: 50% 50% 0 0; z-index: 1;"></div>
+                <!-- Colored accent dome -->
+                <div class="speaker-bg-accent" style="background-color: var(--accent-violet);"></div>
+                <img src="assets/advisor_lakshmi.png" class="speaker-photo" alt="DR. LAKSHMI KUMAR">
+              </div>
+              <div class="speaker-info">
+                <h3 class="speaker-name">DR. LAKSHMI KUMAR</h3>
+                <p class="speaker-title">Director</p>
+                <p class="speaker-org">Avasara Academy</p>
+              </div>
+            </div>
+
+            <!-- Advisor 3 (Sanjay Malpani) -->
+            <div class="speaker-card">
+              <div class="speaker-img-wrapper">
+                <!-- Grey background dome -->
+                <div style="position: absolute; bottom: 0; left: 5%; width: 90%; height: 90%; background: rgba(255,255,255,0.08); border-radius: 50% 50% 0 0; z-index: 1;"></div>
+                <!-- Colored accent dome -->
+                <div class="speaker-bg-accent" style="background-color: var(--accent-lime);"></div>
+                <img src="assets/advisor_sanjay.png" class="speaker-photo" alt="DR. SANJAY MALPANI">
+              </div>
+              <div class="speaker-info">
+                <h3 class="speaker-name">DR. SANJAY MALPANI</h3>
+                <p class="speaker-title">Chairman</p>
+                <p class="speaker-org">Dhruv Global School</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: Signature Experiences -->
+    <section class="slide" id="slide-8">
+      <div class="slide-bg-image" style="background-image: url('assets/tsoi_experiences_workshop.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">Summit Mechanics</div>
+          <h2 class="slide-title">Signature Conclave <span class="serif-italic">Experiences</span></h2>
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; border: 1px dashed rgba(255,255,255,0.08); border-radius: var(--radius); background: rgba(255,255,255,0.01); text-align: center; padding: 24px;">
+            <div style="font-family: var(--font-serif); font-size: 44px; font-style: italic; color: var(--accent); margin-bottom: 8px; letter-spacing: 1px;">Coming Soon</div>
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; max-width: 320px; line-height: 1.4;">Roundtables, Pedagogical Audits, Classroom Sandboxes, and Operations Forums will be unlocked shortly.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9: The Venue -->
+    <section class="slide" id="slide-9">
+      <div class="slide-bg-image" style="background-image: url('assets/novotel_imagicaa_retreat.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">Retreat Context</div>
+          <h2 class="slide-title">Designed for <span class="serif-italic">Focus & Trust</span></h2>
+          <p class="slide-body" style="margin-bottom: 12px;"><strong>Novotel, Imagicaa </strong> was selected intentionally as our conclave destination.</p>
+          <p class="slide-body">By removing school leaders from daily administrative fires and placing them in a premium, off-site retreat setting, we create the bandwidth required for creative strategy, evening networking, and building trust circles.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 10: Beyond the Conclave -->
+    <section class="slide" id="slide-10">
+      <div class="slide-bg-image" style="background-image: url('assets/digital_workspace_bg.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">Year-Round Value</div>
+          <h2 class="slide-title">A Continuous <span class="serif-italic">Ecosystem</span></h2>
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; border: 1px dashed rgba(255,255,255,0.08); border-radius: var(--radius); background: rgba(255,255,255,0.01); text-align: center; padding: 24px;">
+            <div style="font-family: var(--font-serif); font-size: 44px; font-style: italic; color: var(--accent-violet); margin-bottom: 8px; letter-spacing: 1px;">Coming Soon</div>
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; max-width: 320px; line-height: 1.4;">Annual benchmarking tools, regional meetups, and cohort registries will be unlocked shortly.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 11: The Ask -->
+    <section class="slide" id="slide-11">
+      <div class="slide-bg-image" style="background-image: url('assets/boardroom_invite_bg.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content-wrap">
+        <div class="glass-card">
+          <div class="slide-eyebrow">The Partnership</div>
+          <h2 class="slide-title">Help Us Architect <span class="serif-italic">TSOI 2026</span></h2>
+          <div class="slide-body">
+            <div style="border-left: 2px solid var(--accent-lime); padding-left: 12px; margin-bottom: 12px;">
+              <p style="font-weight: 700; color: #ffffff; font-size: 16.5px;">As an active member of the Founding Board of Advisors, you will guide conclave execution by:</p>
+            </div>
+            <ul class="slide-list" style="margin-bottom: 20px;">
+              <li><strong>Curating Circuit Agendas</strong>: Helping us select the core strategic focus areas for the tracks.</li>
+              <li><strong>Structuring Scenario Labs</strong>: Designing interactive simulation labs that pressure-test school operations.</li>
+              <li><strong>Identifying High-Caliber Nominees</strong>: Connecting us with progressive school founders in their circles.</li>
+            </ul>
+            <div style="background: rgba(18, 18, 22, 0.6); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; text-align: center; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid var(--accent-cyan);">
+              <div style="font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-cyan);">Connect with the Board Convener</div>
+              <div style="font-size: 18px; font-weight: 700; color: #ffffff;">info@tsoi.org</div>
+              <div style="font-size: 15px; color: var(--text-muted);">+91 77198 96969</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION OVERLAYS -->
+    <div class="mobile-nav-bar">
+      <button class="nav-btn" id="prevBtn" aria-label="Previous Slide">←</button>
+      <div class="slide-progress" id="slideProgress">1 / 11</div>
+      <button class="nav-btn" id="nextBtn" aria-label="Next Slide">→</button>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+      const slideProgress = document.getElementById('slideProgress');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      
+      let currentSlideIdx = 0;
+
+      // Update slide states
+      function goToSlide(index) {
+        if (index < 0 || index >= slides.length) return;
+        
+        slides[currentSlideIdx].classList.remove('active');
+        currentSlideIdx = index;
+        slides[currentSlideIdx].classList.add('active');
+        
+        // Update pagination UI
+        slideProgress.textContent = `${currentSlideIdx + 1} / ${slides.length}`;
+      }
+
+      // Prev / Next bindings
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(currentSlideIdx - 1);
+      });
+
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(currentSlideIdx + 1);
+      });
+
+      // Swipe Gestures Support
+      let touchstartX = 0;
+      let touchendX = 0;
+      
+      document.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX;
+      }, {passive: true});
+      
+      document.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX;
+        handleGesture();
+      }, {passive: true});
+      
+      function handleGesture() {
+        if (touchendX < touchstartX - 50) {
+          goToSlide(currentSlideIdx + 1);
+        }
+        if (touchendX > touchstartX + 50) {
+          goToSlide(currentSlideIdx - 1);
+        }
+      }
+
+      // Left / Right Screen Area Tap Navigation
+      document.addEventListener('click', (e) => {
+        // Ignore if clicking on nav buttons or inside glass cards
+        if (e.target.closest('.nav-btn') || e.target.closest('.glass-card')) return;
+        
+        const screenWidth = window.innerWidth;
+        const clickX = e.clientX;
+        
+        if (clickX > screenWidth / 2) {
+          goToSlide(currentSlideIdx + 1);
+        } else {
+          goToSlide(currentSlideIdx - 1);
+        }
+      });
+
+      // Keyboard support (if opened on tablets with keyboard)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          goToSlide(currentSlideIdx + 1);
+        } else if (e.key === 'ArrowLeft') {
+          goToSlide(currentSlideIdx - 1);
+        }
+      });
+
+      // Initialize first slide
+      goToSlide(0);
+    });
+  </script>
+</body>
+</html>

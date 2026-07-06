@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Schools of India Summit — Brand Book</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0c;
+      --surface: #121215;
+      --surface-2: #18181c;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(255,255,255,0.15);
+      --text: #ffffff;
+      --text-muted: #9e9ea7;
+      --text-dim: #63636e;
+      
+      /* Neon Accents matching landing page */
+      --accent: #ff2a7f; /* Magenta default */
+      --accent-violet: #7c3aed;
+      --accent-lime: #2de67b;
+      --accent-cyan: #06b6d4;
+      
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Outfit', sans-serif;
+      
+      --radius: 24px;
+      --radius-sm: 12px;
+      --radius-xs: 8px;
+      --t: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── LIGHT MODE OVERRIDES ── */
+    body.light {
+      --bg: #f4f4f7;
+      --surface: #ffffff;
+      --surface-2: #eaeaf0;
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(0,0,0,0.18);
+      --text: #0a0a0c;
+      --text-muted: #5e5e66;
+      --text-dim: #90909c;
+      
+      /* Muted but clean print-ready dark colors for light mode */
+      --accent: #d81b60; /* Magenta Light */
+      --accent-violet: #6200ea;
+      --accent-lime: #16a34a;
+      --accent-cyan: #0891b2;
+    }
+
+    /* Film Grain Noise */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Serif italic helper style */
+    .serif-italic {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-style: italic;
+      text-transform: none;
+      font-size: 1.15em;
+      line-height: 1;
+    }
+
+    /* ── SIDEBAR NAV ── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 240px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 16px 0 32px 0; /* Reduced top padding */
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .sidebar-logo {
+      padding: 16px 20px 24px 20px; /* Balanced side and bottom padding */
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center horizontally */
+      justify-content: center;
+      text-align: center;
+      gap: 0.25rem;
+    }
+
+    .logo-main-text {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .logo-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent);
+    }
+
+    .sidebar-sub {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .nav-section {
+      padding: 24px 28px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 28px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all var(--t);
+      border-left: 3px solid transparent;
+      cursor: pointer;
+    }
+
+    .nav-link:hover { color: var(--text); background: var(--surface-2); }
+    .nav-link.active { color: var(--accent); border-left-color: var(--accent); background: rgba(255, 42, 127, 0.06); font-weight: 600; }
+    
+    body.light .nav-link.active {
+      background: rgba(216, 27, 96, 0.06);
+    }
+
+    .nav-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      margin-left: 240px;
+      min-height: 100vh;
+    }
+
+    /* ── SECTIONS ── */
+    .bb-section {
+      padding: 80px 64px;
+      border-bottom: 1px solid var(--border);
+      max-width: 1000px;
+    }
+
+    .bb-section:last-child { border-bottom: none; }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .section-lead {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 720px;
+      margin-bottom: 40px;
+    }
+
+    /* ── COVER / HERO ── */
+    #cover {
+      padding: 64px; /* Equal padding on all sides */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      max-width: none;
+      min-height: auto; /* Remove 100vh stretch to keep padding uniform */
+    }
+
+    .cover-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 80%);
+    }
+
+    .cover-glow {
+      position: absolute;
+      right: 0%; top: 50%;
+      transform: translateY(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255, 42, 127, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      width: fit-content;
+      background-color: var(--surface);
+    }
+
+    .cover-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .cover-desc {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-muted);
+      max-width: 550px;
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .cover-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+    .meta-value { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--text-muted); }
+
+    /* ── BRAND STORY ── */
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    
+    .story-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .story-block h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .story-block p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .rule { height: 1px; background: var(--border); margin: 40px 0; }
+
+    /* ── LOGO SHOWCASE ── */
+    .logo-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .logo-tile {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 48px; /* Equal padding around image */
+      padding-bottom: 64px; /* Padding bottom for overlay label */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative; /* Set for absolute label position */
+    }
+
+    .logo-tile.dark-bg { background: #0a0a0c; }
+    .logo-tile.light-bg { background: #f4f4f7; }
+    .logo-tile.magenta-bg { background: var(--accent); }
+    .logo-tile.surface-bg { background: var(--surface); }
+
+    .logo-render {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+    
+    .logo-render.on-dark { color: #ffffff; }
+    .logo-render.on-dark span { color: #ff2a7f; }
+    .logo-render.on-light { color: #0a0a0c; }
+    .logo-render.on-light span { color: #d81b60; }
+    .logo-render.on-accent { color: #0a0a0c; }
+    .logo-render.on-accent span { color: rgba(10,10,12,0.4); }
+
+    .logo-tile-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      position: absolute; /* Pulls label out of image centering flex logic */
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    .logo-rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .logo-rule-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+    }
+
+    .rule-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .rule-label.do { color: var(--accent-lime); }
+    .rule-label.dont { color: #f43f5e; }
+    .rule-label.note { color: var(--text-dim); }
+
+    .rule-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── COLOUR ── */
+    .color-primary-row {
+      display: flex;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      height: 120px;
+    }
+
+    .color-swatch-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+
+    .swatch-name { font-family: var(--font-display); font-size: 14px; font-weight: 800; }
+    .swatch-hex { font-size: 12px; font-family: monospace; opacity: 0.7; }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .color-card {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .color-card-swatch { height: 80px; }
+    .color-card-info { padding: 16px; }
+    .color-card-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .color-card-hex { font-size: 11px; color: var(--text-dim); font-family: monospace; }
+    .color-card-use { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
+
+    .color-usage-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .usage-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+    }
+    .usage-title { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; }
+    .usage-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-muted); }
+    .usage-item:last-child { border-bottom: none; }
+    .usage-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── TYPOGRAPHY ── */
+    .type-specimen {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      margin-bottom: 24px;
+    }
+
+    .type-meta {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+
+    .type-display {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--text);
+    }
+
+    .type-body-specimen {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .type-pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    
+    .type-pair-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 28px;
+    }
+    
+    .pair-font-name { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .pair-role { font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+    .pair-weights { display: flex; flex-direction: column; gap: 10px; }
+    .pair-weight-row { display: flex; justify-content: space-between; align-items: baseline; }
+    .pw-sample { color: var(--text-muted); }
+    .pw-spec { font-size: 11px; color: var(--text-dim); font-family: monospace; }
+
+    .type-scale {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .type-scale-row {
+      display: flex;
+      align-items: baseline;
+      gap: 32px;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .type-scale-row:last-child { border-bottom: none; }
+
+    .scale-label {
+      width: 120px;
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .scale-sample { color: var(--text); }
+
+    /* ── SPACING ── */
+    .spacing-scale {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .spacing-row:last-child { border-bottom: none; }
+
+    .spacing-bar-wrap { width: 200px; flex-shrink: 0; }
+    .spacing-bar { background: var(--accent); height: 6px; border-radius: 3px; }
+    .spacing-token { width: 90px; font-family: monospace; font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
+    .spacing-px { font-size: 12px; color: var(--text-muted); flex-shrink: 0; width: 60px; }
+    .spacing-use { font-size: 12px; color: var(--text-muted); flex: 1; }
+
+    /* ── LIGHT / DARK COMPARE ── */
+    .theme-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .theme-pane { padding: 40px; }
+    .theme-pane.dark-pane { background: #0a0a0c; }
+    .theme-pane.light-pane { background: #f4f4f7; border-left: 1px solid rgba(0,0,0,0.08); }
+
+    .theme-pane-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: var(--text-dim);
+    }
+    .dark-pane .theme-pane-label { color: rgba(255,255,255,0.2); }
+    .light-pane .theme-pane-label { color: rgba(10,10,12,0.3); }
+
+    .theme-body-d { font-size: 13px; color: #9e9ea7; font-weight: 400; line-height: 1.6; margin-bottom: 20px; }
+    .theme-body-l { font-size: 13px; color: #5e5e66; font-weight: 400; line-height: 1.6; margin-bottom: 20px; }
+
+    .theme-btn-d {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      background: #ffffff; color: #0a0a0c; padding: 8px 20px;
+      border-radius: 100px; border: none; cursor: pointer;
+    }
+    .theme-btn-l {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      background: #0a0a0c; color: #ffffff; padding: 8px 20px;
+      border-radius: 100px; border: none; cursor: pointer;
+    }
+
+    /* ── COMPONENTS DEMOS ── */
+    .component-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .demo-btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-body); font-size: 13px; font-weight: 600;
+      color: #0a0a0c; background: #ffffff;
+      border: 1px solid #ffffff; padding: 9px 24px;
+      border-radius: 100px; cursor: pointer; text-decoration: none;
+    }
+
+    .demo-btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-body); font-size: 13px; font-weight: 600;
+      color: var(--text); background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border); padding: 9px 24px;
+      border-radius: 100px; cursor: pointer; text-decoration: none;
+    }
+
+    .demo-badge {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 5px 14px;
+      border-radius: 100px; border: 1px solid var(--border); line-height: 1;
+      background-color: var(--surface-2);
+    }
+    
+    .demo-badge.cat-magenta { color: var(--accent); border-color: rgba(255,42,127,0.2); background: rgba(255,42,127,0.05); }
+    .demo-badge.cat-violet { color: var(--accent-violet); border-color: rgba(124,58,237,0.2); background: rgba(124,58,237,0.05); }
+    .demo-badge.cat-lime { color: var(--accent-lime); border-color: rgba(45,230,123,0.2); background: rgba(45,230,123,0.05); }
+
+    /* Card Spec Demo */
+    .demo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      width: 280px;
+      position: relative;
+    }
+    
+    .demo-card-img {
+      aspect-ratio: 1;
+      width: 100%;
+      background: #222;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .demo-card-bg {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 50%;
+      background-color: var(--accent);
+      border-radius: 40% 40% 0 0;
+      opacity: 0.7;
+    }
+
+    .demo-card-title { font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--text); }
+    .demo-card-role { font-size: 12px; color: var(--text-muted); }
+    .demo-card-org { font-size: 11px; color: var(--text-dim); text-transform: uppercase; font-weight: 700; margin-top: 2px; }
+
+    /* Component Spec list */
+    .component-spec { flex: 1; min-width: 260px; }
+    .spec-title { font-family: var(--font-display); font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .spec-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .spec-list li { font-size: 13px; color: var(--text-muted); padding-left: 16px; position: relative; }
+    .spec-list li::before { content: '—'; position: absolute; left: 0; color: var(--text-dim); }
+
+    /* ── MOTION ── */
+    .motion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .motion-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 24px; }
+    .motion-card h4 { font-family: var(--font-display); font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .motion-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+    .motion-spec { font-family: monospace; font-size: 12px; color: var(--accent); background: rgba(255,42,127,0.06); padding: 8px 12px; border-radius: var(--radius-xs); display: inline-block; }
+    body.light .motion-spec { background: rgba(216, 27, 96, 0.05); }
+
+    /* ── TONE & VOICE ── */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .voice-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 24px; }
+    .voice-card.do-card { border-color: rgba(45,230,123,0.2); }
+    .voice-card.dont-card { border-color: rgba(244,63,94,0.2); }
+    
+    .voice-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; }
+    .voice-tag.do { color: var(--accent-lime); }
+    .voice-tag.dont { color: #f43f5e; }
+    
+    .voice-example { font-size: 14px; color: var(--text-muted); line-height: 1.6; font-style: italic; }
+    .voice-attrs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .voice-attr { font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-muted); }
+
+    /* ── TOKENS TABLE ── */
+    .tokens-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-top: 16px;
+    }
+
+    .tokens-table th {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-dim);
+      padding: 14px 20px; text-align: left;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-2);
+    }
+
+    .tokens-table td {
+      padding: 12px 20px; font-size: 13px; color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .tokens-table tr:last-child td { border-bottom: none; }
+    .token-name { font-family: monospace; color: var(--accent-cyan); font-size: 12px; }
+    .token-val { font-family: monospace; color: var(--text-dim); font-size: 12px; }
+
+    /* ── SCROLLSPY ── */
+    .bb-section { scroll-margin-top: 30px; }
+    
+    .mob-nav-btn {
+      display: none;
+      position: fixed;
+      top: 16px; left: 16px;
+      z-index: 200;
+      background: var(--surface);
+      border: 1px solid var(--border-hover);
+      border-radius: 10px;
+      width: 40px; height: 40px;
+      align-items: center; justify-content: center;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 0;
+    }
+    .mob-nav-btn span {
+      display: block;
+      width: 18px; height: 2px;
+      background: var(--text-muted);
+      transition: all 0.25s ease;
+    }
+    .mob-nav-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .mob-nav-btn.open span:nth-child(2) { opacity: 0; }
+    .mob-nav-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mob-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 149;
+      backdrop-filter: blur(4px);
+    }
+    .mob-overlay.visible { display: block; }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle-wrap {
+      padding: 24px 28px;
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 8px 14px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all var(--t);
+      letter-spacing: 0.05em;
+    }
+
+    .theme-toggle-btn:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 150;
+        width: 260px;
+      }
+      .sidebar.open { transform: translateX(0); }
+      .mob-nav-btn { display: flex; }
+      main { margin-left: 0; }
+
+      #cover { padding: 32px 24px; min-height: auto; }
+      .cover-title { font-size: clamp(38px, 10vw, 60px); }
+      .bb-section { padding: 56px 24px; }
+      
+      .story-grid, .logo-showcase, .color-usage-row, .type-pair-grid, .motion-grid, .voice-grid, .theme-compare {
+        grid-template-columns: 1fr;
+      }
+      
+      .theme-pane.light-pane { border-left: none; border-top: 1px solid rgba(0,0,0,0.08); }
+      .logo-rules, .color-grid { grid-template-columns: 1fr 1fr; }
+      .spacing-bar-wrap { display: none; }
+      .color-primary-row { flex-direction: column; height: auto; }
+      .color-swatch-main { padding: 16px; min-height: 70px; }
+      
+      footer { margin-left: 0; padding: 28px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+
+    @media (max-width: 480px) {
+      .logo-rules, .color-grid { grid-template-columns: 1fr; }
+      .cover-title { font-size: clamp(32px, 12vw, 44px); }
+      .bb-section { padding: 48px 18px; }
+      #cover { padding: 24px 18px; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-left: 240px;
+      padding: 32px 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MOBILE NAV TOGGLE -->
+  <button class="mob-nav-btn" id="mobNavBtn" aria-label="Open navigation">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mob-overlay" id="mobOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <a href="#cover" class="sidebar-logo">
+      <img src="assets/tsoi_summit_combined_logo.png" class="sidebar-unit" alt="The Schools of India Summit" style="height: 44px; width: auto; filter: invert(1); margin-bottom: 6px; display: block; margin-left: auto; margin-right: auto;">
+    </a>
+    <span class="nav-section">Pillars</span>
+    <a class="nav-link active" href="#cover"><span class="nav-dot"></span>Cover</a>
+    <a class="nav-link" href="#story"><span class="nav-dot"></span>Brand Story</a>
+    <a class="nav-link" href="#logo"><span class="nav-dot"></span>Wordmark & Monogram</a>
+
+    <span class="nav-section">Design Tokens</span>
+    <a class="nav-link" href="#colour"><span class="nav-dot"></span>Color Palette</a>
+    <a class="nav-link" href="#typography"><span class="nav-dot"></span>Typography</a>
+    <a class="nav-link" href="#spacing"><span class="nav-dot"></span>Spacing & Radius</a>
+    <a class="nav-link" href="#themes"><span class="nav-dot"></span>Light & Dark</a>
+
+    <span class="nav-section">Component Specs</span>
+    <a class="nav-link" href="#buttons"><span class="nav-dot"></span>Buttons & Badges</a>
+    <a class="nav-link" href="#cards"><span class="nav-dot"></span>Layout Cards</a>
+    <a class="nav-link" href="#motion"><span class="nav-dot"></span>Motion Curves</a>
+
+    <span class="nav-section">Voice & Assets</span>
+    <a class="nav-link" href="#voice"><span class="nav-dot"></span>Tone & Copystyle</a>
+    <a class="nav-link" href="#tokens"><span class="nav-dot"></span>CSS Properties</a>
+
+    <div class="theme-toggle-wrap">
+      <button class="theme-toggle-btn" id="themeToggle">
+        <span class="theme-toggle-icon">☀</span>
+        <span id="themeToggleLabel">Light mode</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- COVER -->
+    <section class="bb-section" id="cover">
+      <div class="cover-grid"></div>
+      <div class="cover-glow"></div>
+      <div class="cover-tag">Official Identity System • Locked July 2026</div>
+      <h1 class="cover-title">
+        <img src="assets/tsoi_summit_combined_logo.png" class="cover-unit" alt="The Schools of India Summit" style="height: 60px; width: auto; filter: invert(1); vertical-align: middle;"><br>
+        <span style="display: block; font-size: 32px; font-weight: 900; margin-top: 16px; letter-spacing: 0.1em; text-transform: uppercase;">Brand Book</span>
+      </h1>
+      <p class="cover-desc">The unified reference guide for visual assets, UI components, typography specs, color models, and messaging guidelines for the IP.</p>
+      
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <span class="meta-label">IP Name</span>
+          <span class="meta-value">The Schools of India Summit</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="meta-label">Type Pair</span>
+          <span class="meta-value">Outfit (display) + Instrument Serif (italic accents)</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="meta-label">Theme Mode</span>
+          <span class="meta-value">Dark mode primary</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="meta-label">Version</span>
+          <span class="meta-value">1.0 — July 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRAND STORY -->
+    <section class="bb-section" id="story">
+      <div class="section-eyebrow">01 — Brand Story</div>
+      <h2 class="section-title">A Summit Built for <span class="serif-italic">Those</span> Who Build Schools.</h2>
+      <p class="section-lead">The Schools of India Summit is the premier intellectual property that brings together the brightest minds in education—founders, directors, principals, vice principals, and EdTech innovators—for three days of bold strategy, collaboration, and pedagogical foresight.</p>
+
+      <div class="story-grid">
+        <div class="story-block">
+          <h3>The Strategic Need</h3>
+          <p>Education is evolving at an unprecedented pace. The rise of generative AI, shifts in parent expectations, new national frameworks, and changing school models require leaders to continuously learn. The summit exists to bridges the gap between vision and operational tools.</p>
+        </div>
+        <div class="story-block">
+          <h3>Who We Serve</h3>
+          <p>We serve the decision-makers. The founders who allocate capital, the directors who set the vision, the principals who build the community, and the teachers who design classroom experiences. We give them space to network and align.</p>
+        </div>
+        <div class="story-block">
+          <h3>Brand Architecture</h3>
+          <p>Atmospheric, premium, block-based, and highly energetic. By steering clear of child-like primary colors, the brand positions itself as a luxury professional conference. It takes inspiration from elite design and creator forums.</p>
+        </div>
+        <div class="story-block">
+          <h3>The Curation Promise</h3>
+          <p>We do not run generalized, flat talks. Every session, masterclass, and roundtable is led by verified domain experts, providing school leaders with structured frameworks, toolkits, and launch-ready tactics.</p>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <div class="story-block" style="background: rgba(255, 42, 127, 0.03); border-color: rgba(255, 42, 127, 0.12);">
+        <h3 style="color: var(--accent);">Our Core Pillars</h3>
+        <p style="margin-top: 10px;">
+          <strong>Vision</strong> — Anticipating shifts in technology, pedagogy, and community expectations.<br><br>
+          <strong>Collaboration</strong> — Creating space for unscripted, peer-to-peer dialogues at roundtables and dinners.<br><br>
+          <strong>Action</strong> — Equipping delegates with toolkits and blueprints they can deploy on Day 1.
+        </p>
+      </div>
+    </section>
+
+    <!-- LOGO -->
+    <section class="bb-section" id="logo">
+      <div class="section-eyebrow">02 — Logo & Monogram</div>
+      <h2 class="section-title">The brand logo unit.</h2>
+      <p class="section-lead">The combined logo unit represents the clean, authoritative design of the brand—combining the symbolic schools crest and the geometric logotype.</p>
+
+      <h3 class="logo-subsection-label" style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-dim); margin-bottom:12px;">Logo configurations</h3>
+      <div class="logo-showcase">
+        <div class="logo-tile dark-bg">
+          <img src="assets/tsoi_summit_combined_logo.png" alt="Schools of India Summit Logo" style="height: 60px; width: auto; filter: invert(1);">
+          <span class="logo-tile-label">Primary — on Dark</span>
+        </div>
+        <div class="logo-tile light-bg">
+          <img src="assets/tsoi_summit_combined_logo.png" alt="Schools of India Summit Logo" style="height: 60px; width: auto;">
+          <span class="logo-tile-label">Alternate — on Light</span>
+        </div>
+        <div class="logo-tile magenta-bg">
+          <img src="assets/tsoi_summit_combined_logo.png" alt="Schools of India Summit Logo" style="height: 60px; width: auto;">
+          <span class="logo-tile-label">On Neon Magenta</span>
+        </div>
+        <div class="logo-tile surface-bg">
+          <img src="assets/tsoi_summit_combined_logo.png" alt="Schools of India Summit Logo" style="height: 60px; width: auto; filter: invert(1); opacity: 0.8;">
+          <span class="logo-tile-label">Sub-Brand (Growth)</span>
+        </div>
+      </div>
+
+      <div class="logo-rules">
+        <div class="logo-rule-card">
+          <div class="rule-label do">✓ Do</div>
+          <p class="rule-body">Always render the logo in all-caps using the heavy geometric Outfit typeface with -0.02em letter spacing.</p>
+        </div>
+        <div class="logo-rule-card">
+          <div class="rule-label do">✓ Do</div>
+          <p class="rule-body">Ensure clean margins around the text boundaries. Set vertical centering when layering elements.</p>
+        </div>
+        <div class="logo-rule-card">
+          <div class="rule-label dont">✗ Don't</div>
+          <p class="rule-body">Never use serif fonts for the main logo wordmark. The wordmark is strictly sans-serif.</p>
+        </div>
+        <div class="logo-rule-card">
+          <div class="rule-label dont">✗ Don't</div>
+          <p class="rule-body">Never distort, rotate, apply drop shadows, or change the aspect ratio of the logo text block.</p>
+        </div>
+        <div class="logo-rule-card">
+          <div class="rule-label dont">✗ Don't</div>
+          <p class="rule-body">Never use the logo text on low-contrast backgrounds. Maintain clear margins around the lockup.</p>
+        </div>
+        <div class="logo-rule-card">
+          <div class="rule-label note">↳ Note</div>
+          <p class="rule-body">Minimum clearspace equal to 1.5x the height of the wordmark letters must be maintained around the logo on all sides.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOUR -->
+    <section class="bb-section" id="colour">
+      <div class="section-eyebrow">03 — Color Palette</div>
+      <h2 class="section-title">The neon palette.</h2>
+      <p class="section-lead">A unified black canvas punctuated by four high-energy neon accent tones. Each accent represents a specific thematic track of the summit.</p>
+
+      <!-- Primary Row -->
+      <div class="color-primary-row">
+        <div class="color-swatch-main" style="background:#ff2a7f; flex:1.5;">
+          <span class="swatch-name" style="color:#0a0a0c;">Neon Magenta</span>
+          <span class="swatch-hex" style="color:#0a0a0c;">#FF2A7F • Main Accent / Technology</span>
+        </div>
+        <div class="color-swatch-main" style="background:#7c3aed;">
+          <span class="swatch-name" style="color:#ffffff;">Electric Violet</span>
+          <span class="swatch-hex" style="color:rgba(255,255,255,0.7);">#7C3AED • Leadership & Vision</span>
+        </div>
+        <div class="color-swatch-main" style="background:#2de67b;">
+          <span class="swatch-name" style="color:#0a0a0c;">Neon Lime</span>
+          <span class="swatch-hex" style="color:#0a0a0c;">#2DE67B • Scaling & Growth</span>
+        </div>
+        <div class="color-swatch-main" style="background:#06b6d4;">
+          <span class="swatch-name" style="color:#0a0a0c;">Neon Cyan</span>
+          <span class="swatch-hex" style="color:#0a0a0c;">#06B6D4 • Tech & Integrations</span>
+        </div>
+      </div>
+
+      <!-- Neutral Cards -->
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-card-swatch" style="background:#0a0a0c;"></div>
+          <div class="color-card-info">
+            <div class="color-card-name">Deep Canvas</div>
+            <div class="color-card-hex">#0A0A0C</div>
+            <div class="color-card-use">Core page background dark</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card-swatch" style="background:#121215;"></div>
+          <div class="color-card-info">
+            <div class="color-card-name">Surface Dark</div>
+            <div class="color-card-hex">#121215</div>
+            <div class="color-card-use">Card and dashboard overlays</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card-swatch" style="background:#ffffff;"></div>
+          <div class="color-card-info">
+            <div class="color-card-name">Crisp White</div>
+            <div class="color-card-hex">#FFFFFF</div>
+            <div class="color-card-use">Primary text & buttons</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card-swatch" style="background:#f4f4f7;"></div>
+          <div class="color-card-info">
+            <div class="color-card-name">Off White</div>
+            <div class="color-card-hex">#F4F4F7</div>
+            <div class="color-card-use">Light mode page canvas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="color-usage-row">
+        <div class="usage-block">
+          <div class="usage-title">Color Rules</div>
+          <div class="usage-item"><span class="usage-dot" style="background:#ff2a7f;"></span>Use Neon Magenta for Technology, AI, and Innovation banners.</div>
+          <div class="usage-item"><span class="usage-dot" style="background:#7c3aed;"></span>Use Electric Violet for leadership roundtables and VIP panels.</div>
+          <div class="usage-item"><span class="usage-dot" style="background:#2de67b;"></span>Use Neon Lime for admissions, branding, and ticketing CTAs.</div>
+          <div class="usage-item"><span class="usage-dot" style="background:#06b6d4;"></span>Use Neon Cyan for helper micro-interactions, links, and map details.</div>
+        </div>
+        <div class="usage-block">
+          <div class="usage-title">Avoid At All Costs</div>
+          <div class="usage-item"><span class="usage-dot" style="background:#fda4af;"></span>Never combine two neon colors as a text gradient.</div>
+          <div class="usage-item"><span class="usage-dot" style="background:#fda4af;"></span>Never use neon tones as full large section background fills.</div>
+          <div class="usage-item"><span class="usage-dot" style="background:#fda4af;"></span>Never use the neon colors for normal paragraph text.</div>
+          <div class="usage-item"><span class="usage-dot" style="background:#fda4af;"></span>Do not let neon colors cover more than 15% of any viewport's space.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section class="bb-section" id="typography">
+      <div class="section-eyebrow">04 — Typography</div>
+      <h2 class="section-title">The type system.</h2>
+      <p class="section-lead">Outfit drives the main layout grids and clean geometric controls, while Instrument Serif italics introduces high-end editorial contrast. This pairing balances modern design with prestige education.</p>
+
+      <div class="type-specimen">
+        <div class="type-meta">Typographic specimen • Outfit Black + Instrument Serif Italic</div>
+        <div class="type-display">Shaping the <span class="serif-italic" style="color: var(--accent);">Future</span></div>
+        <div class="type-display" style="font-size: 42px; font-weight:800; margin-top:-5px;">OF EDUCATION LEADERS.</div>
+        <div class="type-body-specimen">The Schools of India Summit brings together the brightest minds in education for three immersive days of learning, networking, collaboration, and inspiration. Learn from India’s leading educators and leave with actionable plans.</div>
+      </div>
+
+      <div class="type-pair-grid">
+        <div class="type-pair-card">
+          <div class="pair-font-name">Outfit</div>
+          <div class="pair-role">Display • Body • UI Controls</div>
+          <div class="pair-weights">
+            <div class="pair-weight-row">
+              <span class="pw-sample" style="font-family:var(--font-display); font-weight:900; font-size:18px;">SUMMIT 2026</span>
+              <span class="pw-spec">900 — main headlines</span>
+            </div>
+            <div class="pair-weight-row">
+              <span class="pw-sample" style="font-family:var(--font-display); font-weight:700; font-size:18px;">Register Now</span>
+              <span class="pw-spec">700 — CTAs & tabs</span>
+            </div>
+            <div class="pair-weight-row">
+              <span class="pw-sample" style="font-family:var(--font-display); font-weight:400; font-size:15px; color: var(--text-muted);">Standard body text</span>
+              <span class="pw-spec">400 — paragraphs</span>
+            </div>
+          </div>
+        </div>
+        <div class="type-pair-card">
+          <div class="pair-font-name">Instrument Serif</div>
+          <div class="pair-role">Editorial Emphasized Words Only</div>
+          <div class="pair-weights">
+            <div class="pair-weight-row">
+              <span class="pw-sample serif-italic" style="font-size:24px;">Future Schools</span>
+              <span class="pw-spec">400 Italic — display titles</span>
+            </div>
+            <div class="pair-weight-row">
+              <span class="pw-sample serif-italic" style="font-size:22px;">Visionaries</span>
+              <span class="pw-spec">400 Italic — section headers</span>
+            </div>
+            <div class="pair-weight-row">
+              <span class="pw-sample serif-italic" style="font-size:18px; color: var(--accent-cyan);">actionable ideas</span>
+              <span class="pw-spec">400 Italic — subheadings</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-scale">
+        <div class="type-scale-row">
+          <span class="scale-label">Display XL</span>
+          <span class="scale-sample" style="font-family:var(--font-display); font-size: 56px; font-weight: 900; letter-spacing: -0.03em;">Hero Title</span>
+        </div>
+        <div class="type-scale-row">
+          <span class="scale-label">Display L</span>
+          <span class="scale-sample" style="font-family:var(--font-display); font-size: 32px; font-weight: 800; letter-spacing: -0.02em;">Section Title</span>
+        </div>
+        <div class="type-scale-row">
+          <span class="scale-label">Display M</span>
+          <span class="scale-sample" style="font-family:var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.01em;">Card/Component Title</span>
+        </div>
+        <div class="type-scale-row">
+          <span class="scale-label">Body Text</span>
+          <span class="scale-sample" style="font-family:var(--font-body); font-size: 15px; font-weight: 400; color: var(--text-muted);">Standard paragraph copy — Outfit 400, 15px size, 1.6 line-height.</span>
+        </div>
+        <div class="type-scale-row">
+          <span class="scale-label">Label / Eyebrow</span>
+          <span class="scale-sample" style="font-family:var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);">Section category badge</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPACING -->
+    <section class="bb-section" id="spacing">
+      <div class="section-eyebrow">05 — Spacing & Radius</div>
+      <h2 class="section-title">Grids and constraints.</h2>
+      <p class="section-lead">The layout is governed by an 8px base spacing grid. Page structures are container-constrained to 1280px max-width, with 24px margins on desktop, scaling to 16px on mobile viewports.</p>
+
+      <div class="spacing-scale">
+        <div class="spacing-row">
+          <span class="spacing-token">--space-xs</span>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 8px;"></div></div>
+          <span class="spacing-px">8px</span>
+          <span class="spacing-use">Pill button icon gaps, inner flex spacing</span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">--space-sm</span>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 16px;"></div></div>
+          <span class="spacing-px">16px</span>
+          <span class="spacing-use">Inner card elements, small badges gap, margins on mobile</span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">--space-md</span>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 24px;"></div></div>
+          <span class="spacing-px">24px</span>
+          <span class="spacing-use">Standard layout grids gap, card internal paddings</span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">--space-lg</span>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 48px;"></div></div>
+          <span class="spacing-px">48px</span>
+          <span class="spacing-use">Section title bottom spacing, larger element wrappers</span>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-token">--space-xl</span>
+          <div class="spacing-bar-wrap"><div class="spacing-bar" style="width: 80px;"></div></div>
+          <span class="spacing-px">80px</span>
+          <span class="spacing-use">Section vertical top/bottom padding (Desktop)</span>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-display); font-size:18px; font-weight:800; color:var(--text); margin-bottom:16px;">Corner Radius Scale</h3>
+      <div class="color-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom:0;">
+        <div class="color-card">
+          <div class="color-card-swatch" style="background:var(--surface-2); display:flex; align-items:center; justify-content:center;">
+            <div style="width:40px; height:40px; background:var(--border-hover); border-radius:8px;"></div>
+          </div>
+          <div class="color-card-info">
+            <div class="color-card-name">radius-xs</div>
+            <div class="color-card-hex">8px</div>
+            <div class="color-card-use">Dynamic text tags, coordinate labels</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card-swatch" style="background:var(--surface-2); display:flex; align-items:center; justify-content:center;">
+            <div style="width:40px; height:40px; background:var(--border-hover); border-radius:12px;"></div>
+          </div>
+          <div class="color-card-info">
+            <div class="color-card-name">radius-sm</div>
+            <div class="color-card-hex">12px</div>
+            <div class="color-card-use">Accordion items, theme chips, input fields</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card-swatch" style="background:var(--surface-2); display:flex; align-items:center; justify-content:center;">
+            <div style="width:40px; height:40px; background:var(--border-hover); border-radius:24px;"></div>
+          </div>
+          <div class="color-card-info">
+            <div class="color-card-name">radius-lg</div>
+            <div class="color-card-hex">24px</div>
+            <div class="color-card-use">Main grid cards, modal overlays, CTA banner</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-card-swatch" style="background:var(--surface-2); display:flex; align-items:center; justify-content:center;">
+            <div style="width:80px; height:24px; background:var(--border-hover); border-radius:100px;"></div>
+          </div>
+          <div class="color-card-info">
+            <div class="color-card-name">radius-pill</div>
+            <div class="color-card-hex">100px</div>
+            <div class="color-card-use">Action buttons, schedule tabs, role badges</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHT & DARK -->
+    <section class="bb-section" id="themes">
+      <div class="section-eyebrow">06 — Light & Dark Mode</div>
+      <h2 class="section-title">Two modes, one visual system.</h2>
+      <p class="section-lead">The brand is dark-first by default to project premium tech authority. Light mode is provided to accommodate accessibility needs. Note that contrast ratios shift; never use dark-mode neon colors on light canvas fields.</p>
+
+      <div class="theme-compare">
+        <div class="theme-pane dark-pane">
+          <div class="theme-pane-label">Dark Mode (Default)</div>
+          <img src="assets/tsoi_summit_combined_logo.png" alt="The Schools of India Summit Logo" style="height: 44px; width: auto; filter: invert(1); margin-bottom: 20px; display: block;">
+          <p class="theme-body-d">Where education leaders shape the future. Join us for three days of bold ideas in New Delhi.</p>
+          <button class="theme-btn-d">Register Pass</button>
+        </div>
+        <div class="theme-pane light-pane">
+          <div class="theme-pane-label">Light Mode (Accessibility)</div>
+          <img src="assets/tsoi_summit_combined_logo.png" alt="The Schools of India Summit Logo" style="height: 44px; width: auto; margin-bottom: 20px; display: block;">
+          <p class="theme-body-l">Where education leaders shape the future. Join us for three days of bold ideas in New Delhi.</p>
+          <button class="theme-btn-l">Register Pass</button>
+        </div>
+      </div>
+
+      <div class="logo-rules">
+        <div class="logo-rule-card">
+          <div class="rule-label note">Dark Tokens</div>
+          <p class="rule-body">Accent: #ff2a7f<br>Canvas: #0a0a0c<br>Overlay: #121215<br>Text: #ffffff</p>
+        </div>
+        <div class="logo-rule-card">
+          <div class="rule-label note">Light Tokens</div>
+          <p class="rule-body">Accent: #d81b60<br>Canvas: #f4f4f7<br>Overlay: #ffffff<br>Text: #0a0a0c</p>
+        </div>
+        <div class="logo-rule-card">
+          <div class="rule-label dont">✗ Contrast Rule</div>
+          <p class="rule-body">Never use the bright neon yellow/lime or cyan of dark mode on a light background. Switch to deep variants to pass accessibility audits.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUTTONS & BADGES -->
+    <section class="bb-section" id="buttons">
+      <div class="section-eyebrow">07 — Buttons & Badges</div>
+      <h2 class="section-title">Interactive UI components.</h2>
+      <p class="section-lead">Pill geometries govern all interactive buttons. Category badges use low-opacity tinted fills to differentiate educational themes visually.</p>
+
+      <div class="component-row">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <button class="demo-btn-primary">Register Interest ↗</button>
+          <button class="demo-btn-secondary">Become a Partner</button>
+        </div>
+        <div class="component-spec">
+          <div class="spec-title">Button variants</div>
+          <ul class="spec-list">
+            <li><strong>Primary Button</strong>: Solid white in dark mode (solid dark in light mode). Reserved for core conversion triggers (Register, Confirm).</li>
+            <li><strong>Secondary Button</strong>: Semi-transparent backdrop with active border highlights. Used for secondary discovery paths (Become a Partner, View Sponsors).</li>
+            <li>Padding: 9px 24px. Typography: Outfit 600, 13px size. Pill shape (radius: 100px).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rule"></div>
+
+      <div class="component-row">
+        <div style="display:flex; gap:8px; flex-wrap:wrap; max-width: 250px;">
+          <span class="demo-badge cat-magenta">AI in Education</span>
+          <span class="demo-badge cat-violet">Future Schools</span>
+          <span class="demo-badge cat-lime">Growth & Branding</span>
+        </div>
+        <div class="component-spec">
+          <div class="spec-title">Thematic category badges</div>
+          <ul class="spec-list">
+            <li>Used to tag summit agenda items, card themes, and exhibition areas.</li>
+            <li>Utilizes a tinted backdrop (5% opacity of accent) with a matching solid border (20% opacity) and high-contrast text.</li>
+            <li>Keeps the layout organized and color-coded without cluttering the screen.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAYOUT CARDS -->
+    <section class="bb-section" id="cards">
+      <div class="section-eyebrow">08 — Layout Cards</div>
+      <h2 class="section-title">Card structures.</h2>
+      <p class="section-lead">A visual showcase of the layout cards designed for the landing page—including speaker profiles, pass options, and agenda items.</p>
+
+      <div class="component-row">
+        <!-- Speaker Card Demo -->
+        <div class="demo-card">
+          <div class="demo-card-img">
+            <div class="demo-card-bg"></div>
+            <!-- Portrait overlay mock -->
+            <div style="position:absolute; bottom:0; left:5%; width:90%; height:90%; background: rgba(255,255,255,0.1); border-radius: 50% 50% 0 0;"></div>
+          </div>
+          <h4 class="demo-card-title">Dr. Anand Rao</h4>
+          <p class="demo-card-role">Founder & Director</p>
+          <p class="demo-card-org">Greenwoods Academy</p>
+        </div>
+        
+        <div class="component-spec">
+          <div class="spec-title">Speaker Card specifications</div>
+          <ul class="spec-list">
+            <li><strong>Portraits Overlay</strong>: Speaker headshots are layered over a rounded colored backdrop element (representing their theme color).</li>
+            <li><strong>Card body</strong>: Surface Dark backing (#121215) with transparent borders.</li>
+            <li><strong>Typography</strong>: Name (Outfit Bold 16px), Designation (Outfit Regular 12px), Organisation (Outfit Semi-Bold 11px uppercase).</li>
+            <li><strong>Hover state</strong>: Card translates -10px upwards; photo scales up 5% inside the clip-mask, border glows softly.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOTION -->
+    <section class="bb-section" id="motion">
+      <div class="section-eyebrow">09 — Motion Curves</div>
+      <h2 class="section-title">Transitions and micro-animations.</h2>
+      <p class="section-lead">Motion should feel fluid, intentional, and high-end. Transitions avoid linear mechanics and utilize custom cubic-bezier dampening.</p>
+
+      <div class="motion-grid">
+        <div class="motion-card">
+          <h4>Smooth Entry / Transform</h4>
+          <p>Applied to sliding drawers (CMS Editor), page transitions, and card expansions.</p>
+          <span class="motion-spec">transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1)</span>
+        </div>
+        <div class="motion-card">
+          <h4>Hover / Active States</h4>
+          <p>Applied to button color shifts, tab clicks, and interactive link underlines.</p>
+          <span class="motion-spec">transition: all 0.2s ease-in-out</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TONE & VOICE -->
+    <section class="bb-section" id="voice">
+      <div class="section-eyebrow">10 — Tone & Copystyle</div>
+      <h2 class="section-title">Writing guidelines.</h2>
+      <p class="section-lead">The brand voice of The Schools of India Summit represents academic prestige, future readiness, and administrative leadership. It is authoritative yet highly energetic.</p>
+
+      <div class="voice-grid">
+        <div class="voice-card do-card">
+          <div class="voice-tag do">✓ Do (Visionary & Active)</div>
+          <p class="voice-example">"Convene with India's leading school founders to architect the K-12 learning systems of tomorrow."</p>
+          <div class="voice-attrs">
+            <span class="voice-attr">Active verbs</span>
+            <span class="voice-attr">Actionable focus</span>
+            <span class="voice-attr">Prestige</span>
+          </div>
+        </div>
+        <div class="voice-card dont-card">
+          <div class="voice-tag dont">✗ Don't (Passive & Dry)</div>
+          <p class="voice-example">"Our summit discusses educational outcomes and standard methodologies to improve pedagogy parameters."</p>
+          <div class="voice-attrs">
+            <span class="voice-attr">Passive voice</span>
+            <span class="voice-attr">Academic jargon</span>
+            <span class="voice-attr">Stuffy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENS TABLE -->
+    <section class="bb-section" id="tokens">
+      <div class="section-eyebrow">11 — Design Tokens</div>
+      <h2 class="section-title">CSS custom properties.</h2>
+      <p class="section-lead">These CSS variables govern the entire UI system of the landing page, maintaining tokens consistency across all style rules.</p>
+
+      <table class="tokens-table">
+        <thead>
+          <tr>
+            <th>Token Name</th>
+            <th>Token Value</th>
+            <th>System Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="token-name">--bg-dark</td>
+            <td class="token-val">#0a0a0c</td>
+            <td>Core page background color</td>
+          </tr>
+          <tr>
+            <td class="token-name">--bg-card</td>
+            <td class="token-val">#121215</td>
+            <td>Background for grids, cards, surfaces</td>
+          </tr>
+          <tr>
+            <td class="token-name">--color-magenta</td>
+            <td class="token-val">#ff2a7f</td>
+            <td>Primary accent (Tech, AI)</td>
+          </tr>
+          <tr>
+            <td class="token-name">--color-violet</td>
+            <td class="token-val">#7c3aed</td>
+            <td>Thematic accent (Leadership)</td>
+          </tr>
+          <tr>
+            <td class="token-name">--color-lime</td>
+            <td class="token-val">#2de67b</td>
+            <td>Thematic accent (Scaling, CTAs)</td>
+          </tr>
+          <tr>
+            <td class="token-name">--color-cyan</td>
+            <td class="token-val">#06b6d4</td>
+            <td>Thematic accent (Tech integration, highlights)</td>
+          </tr>
+          <tr>
+            <td class="token-name">--font-sans</td>
+            <td class="token-val">'Outfit', sans-serif</td>
+            <td>Primary sans-serif geometric display font</td>
+          </tr>
+          <tr>
+            <td class="token-name">--font-serif</td>
+            <td class="token-val">'Instrument Serif', Georgia, serif</td>
+            <td>Editorial serif italic accent font</td>
+          </tr>
+          <tr>
+            <td class="token-name">--transition-smooth</td>
+            <td class="token-val">all 0.4s cubic-bezier(0.16, 1, 0.3, 1)</td>
+            <td>Entry animations ease curve</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 The Schools of India Summit. All rights reserved.</p>
+  </footer>
+
+  <!-- SCRIPT FOR NAVIGATION & SCROLLSPY -->
+  <script>
+    // Mobile menu toggle
+    const mobNavBtn = document.getElementById('mobNavBtn');
+    const sidebar = document.querySelector('.sidebar');
+    const mobOverlay = document.getElementById('mobOverlay');
+
+    if (mobNavBtn && sidebar && mobOverlay) {
+      const toggleMenu = () => {
+        mobNavBtn.classList.toggle('open');
+        sidebar.classList.toggle('open');
+        mobOverlay.classList.toggle('visible');
+      };
+
+      mobNavBtn.addEventListener('click', toggleMenu);
+      mobOverlay.addEventListener('click', toggleMenu);
+
+      // Close menu on link click
+      sidebar.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobNavBtn.classList.remove('open');
+          sidebar.classList.remove('open');
+          mobOverlay.classList.remove('visible');
+        });
+      });
+    }
+
+    // Scrollspy and Nav highlight
+    const sections = document.querySelectorAll('.bb-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let currentSectionId = '';
+      const scrollPos = window.scrollY + 100;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+
+      if (currentSectionId) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${currentSectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+
+    // Theme Switcher
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleLabel = document.getElementById('themeToggleLabel');
+    const body = document.body;
+
+    if (themeToggle && themeToggleLabel) {
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light');
+        const isLight = body.classList.contains('light');
+        themeToggleLabel.textContent = isLight ? 'Dark mode' : 'Light mode';
+        themeToggle.querySelector('.theme-toggle-icon').textContent = isLight ? '🌙' : '☀';
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,539 +1,513 @@
-<% content_for :title, "TSOI Future Schools Summit 2026" %>
-<% content_for :description, "India's most powerful gathering of school leaders, educators, and education innovators. Three days. One movement." %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Schools of India — Education Summit 2026</title>
+  <meta name="description" content="Where education leaders, founders, principals, and innovators shape the future of learning. Join us for three days of bold ideas and actionable strategies.">
 
-<style>
-@keyframes float   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-@keyframes fadeUp  { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
-@keyframes scanline{ 0%{top:-10%} 100%{top:110%} }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-.summit-body { background:#060306; color:white; }
+  <link rel="stylesheet" href="/summit/style.css">
+</head>
+<body>
 
-.summit-body::before {
-  content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity:0.35;
-}
+  <div class="glow-blob" style="background-color: var(--color-magenta); width: 40vw; height: 40vw; top: 10%; left: -20%;"></div>
+  <div class="glow-blob" style="background-color: var(--color-violet); width: 50vw; height: 50vw; top: 40%; right: -20%;"></div>
+  <div class="glow-blob" style="background-color: var(--color-lime); width: 35vw; height: 35vw; bottom: 10%; left: 10%;"></div>
 
-.summit-tag {
-  display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.35em;
-  color:#821E25;border:1px solid rgba(130,30,37,0.4);padding:6px 14px;margin-bottom:2rem;
-  background:rgba(130,30,37,0.06);
-}
+  <!-- Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        THE SCHOOLS OF INDIA <span class="logo-dot"></span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#intro" class="nav-link">About</a></li>
+        <li><a href="#speakers" class="nav-link">Speakers</a></li>
+        <li><a href="#schedule" class="nav-link">Schedule</a></li>
+        <li><a href="#registration" class="nav-link">Tickets</a></li>
+        <li><a href="#faqs" class="nav-link">FAQs</a></li>
+      </ul>
+      <a href="#registration" class="btn btn-secondary" style="display: none; padding: 0.5rem 1.25rem; font-size: 0.85rem;" id="header-cta">
+        Register Now
+      </a>
+      <button class="hamburger" aria-label="Toggle Menu" id="hamburger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
 
-.highlight-card {
-  border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);
-  padding:2rem;position:relative;overflow:hidden;transition:border-color 0.3s,background 0.3s;cursor:default;
-}
-.highlight-card::after {
-  content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(130,30,37,0.12),transparent);
-  opacity:0;transition:opacity 0.3s;
-}
-.highlight-card:hover { border-color:rgba(130,30,37,0.4);background:rgba(130,30,37,0.05); }
-.highlight-card:hover::after { opacity:1; }
-
-.pill-btn {
-  display:inline-flex;align-items:center;gap:10px;background:#821E25;color:white;
-  border:none;padding:16px 36px;font-size:11px;font-weight:700;text-transform:uppercase;
-  letter-spacing:0.2em;cursor:pointer;font-family:inherit;transition:background 0.2s,transform 0.2s;
-  text-decoration:none;
-}
-.pill-btn:hover { background:#5F1219;transform:translateY(-2px); }
-
-.pill-btn-ghost {
-  display:inline-flex;align-items:center;gap:10px;background:transparent;color:rgba(255,255,255,0.7);
-  border:1px solid rgba(255,255,255,0.2);padding:16px 36px;font-size:11px;font-weight:700;
-  text-transform:uppercase;letter-spacing:0.2em;cursor:pointer;font-family:inherit;
-  transition:all 0.2s;text-decoration:none;
-}
-.pill-btn-ghost:hover { border-color:white;color:white; }
-
-.countdown-box {
-  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
-  padding:16px 24px;text-align:center;min-width:80px;backdrop-filter:blur(8px);
-}
-
-.marquee-track { display:flex;gap:0;animation:marquee 22s linear infinite; }
-.marquee-track:hover { animation-play-state:paused; }
-
-.spk-marquee-track { display:flex;gap:0;animation:marquee 18s linear infinite; }
-
-.speaker-card { flex-shrink:0; width:220px; overflow:hidden; position:relative; cursor:pointer; }
-.speaker-card:hover .spk-img { transform:scale(1.04); }
-.spk-img { transition:transform 0.5s cubic-bezier(0.16,1,0.3,1); }
-
-@media(max-width:768px){
-  .summit-highlights-grid { grid-template-columns:1fr !important; }
-  .summit-who-grid { grid-template-columns:1fr 1fr !important; }
-  .summit-split-flex { flex-direction:column !important; gap:2.5rem !important; }
-  .hero-bottom { flex-direction:column !important; gap:2rem !important; align-items:flex-start !important; }
-  .hero-headline { font-size:clamp(2.75rem,15vw,7rem) !important; }
-
-  .summit-px { padding-left:1.25rem !important; padding-right:1.25rem !important; }
-  .summit-body section[id] { padding-top:4rem !important; padding-bottom:4rem !important; }
-
-  .summit-stats-grid { grid-template-columns:1fr 1fr !important; }
-  .summit-stats-grid > div:nth-child(2) { border-right:none !important; }
-
-  .summit-top-row { gap:1.5rem !important; }
-  .summit-badge { margin-left:0 !important; font-size:8px !important; letter-spacing:0.15em !important; white-space:normal !important; }
-
-  .countdown-box { min-width:0 !important; flex:1 1 70px; padding:10px 12px !important; }
-
-  .summit-bottom-band { flex-direction:column !important; align-items:flex-start !important; padding:1.25rem 1.25rem !important; }
-
-  .summit-register-card { padding:1.5rem !important; }
-
-  .speaker-card { width:200px !important; }
-  .speaker-card .session-title { font-size:10px !important; }
-}
-@media(max-width:480px){
-  .hero-headline { font-size:clamp(2.25rem,15vw,4rem) !important; }
-}
-</style>
-
-<div class="summit-body">
-
-<!-- ══════════════════════════════════════════════
-     HERO — ITconf style
-══════════════════════════════════════════════ -->
-<section style="position:relative; min-height:100vh; display:flex; flex-direction:column; overflow:hidden;">
-
-  <!-- Background photo — conference audience, greyscale + brand tint -->
-  <div style="position:absolute; inset:0; z-index:0;">
-    <img src="/images/summit-hero.png"
-         alt="" style="width:100%; height:100%; object-fit:cover; object-position:center 40%; filter:grayscale(1) blur(3px); display:block; transform:scale(1.02);">
-    <!-- Dark gradient overlay -->
-    <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(6,3,6,0.55) 0%, rgba(6,3,6,0.35) 35%, rgba(6,3,6,0.75) 70%, #060306 100%);"></div>
-    <!-- Brand red tint -->
-    <div style="position:absolute; inset:0; background:rgba(130,30,37,0.18);"></div>
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav-overlay">
+    <a href="#intro" class="mobile-nav-link">About</a>
+    <a href="#speakers" class="mobile-nav-link">Speakers</a>
+    <a href="#schedule" class="mobile-nav-link">Schedule</a>
+    <a href="#registration" class="mobile-nav-link">Tickets</a>
+    <a href="#faqs" class="mobile-nav-link">FAQs</a>
+    <a href="#registration" class="btn btn-primary" style="margin-top: 2rem;">Register Now</a>
   </div>
 
-  <!-- Scan line -->
-  <div style="position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(130,30,37,0.6),transparent);animation:scanline 8s linear infinite;z-index:1;pointer-events:none;"></div>
-
-  <!-- Corner accents -->
-  <div style="position:absolute;top:2rem;left:2rem;width:40px;height:40px;border-top:1px solid rgba(255,255,255,0.25);border-left:1px solid rgba(255,255,255,0.25);z-index:2;"></div>
-  <div style="position:absolute;top:2rem;right:2rem;width:40px;height:40px;border-top:1px solid rgba(255,255,255,0.25);border-right:1px solid rgba(255,255,255,0.25);z-index:2;"></div>
-
-  <!-- Content -->
-  <div class="summit-px" style="position:relative; z-index:5; flex:1; display:flex; flex-direction:column; padding:3rem; max-width:1400px; margin:0 auto; width:100%; box-sizing:border-box;">
-
-    <!-- Top row: Date + Location -->
-    <div class="summit-top-row" style="display:flex; gap:4rem; padding-top:1rem; margin-bottom:auto; flex-wrap:wrap;">
-      <div>
-        <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:rgba(255,255,255,0.35); margin:0 0 4px;">Date</p>
-        <p style="font-size:15px; font-weight:700; color:rgba(255,255,255,0.85); margin:0; letter-spacing:0.05em;">30 Oct – 1 Nov 2026</p>
+  <!-- Hero -->
+  <section class="hero-section" id="hero">
+    <svg class="sticker sticker-magenta" style="top: 15%; right: 10%; width: 50px; height: 50px;" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
+    </svg>
+    <svg class="sticker sticker-lime" style="bottom: 25%; left: 5%; width: 40px; height: 40px;" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
+    </svg>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1 class="hero-headline" id="hero-headline"></h1>
+        <p class="hero-subheadline" id="hero-subheadline"></p>
+        <div class="hero-meta">
+          <span class="hero-date" id="hero-date"></span>
+          <span class="hero-location">
+            <span style="color: var(--color-lime);">📍</span> <span id="hero-location-text"></span>
+          </span>
+        </div>
+        <div class="hero-ctas">
+          <a href="#registration" class="btn btn-primary" id="hero-cta-primary"></a>
+          <a href="#partners" class="btn btn-secondary" id="hero-cta-secondary"></a>
+        </div>
       </div>
-      <div>
-        <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.25em; color:rgba(255,255,255,0.35); margin:0 0 4px;">Location</p>
-        <p style="font-size:15px; font-weight:700; color:rgba(255,255,255,0.85); margin:0; letter-spacing:0.05em;">Pune</p>
-      </div>
-      <div style="margin-left:auto;">
-        <span class="summit-badge" style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:white; border:1px solid rgba(255,255,255,0.4); padding:6px 14px; background:rgba(255,255,255,0.08); display:inline-block;">India's Premier Education Summit · 2026</span>
-      </div>
-    </div>
-
-    <!-- BIG headline -->
-    <div style="padding:3rem 0 2.5rem;">
-      <h1 class="hero-headline" style="font-family:'Inter',sans-serif; font-size:clamp(4rem,11vw,11rem); font-weight:900; line-height:0.92; letter-spacing:-0.04em; margin:0; text-transform:uppercase; color:white;">
-        Future<br>
-        <span style="color:#821E25; -webkit-text-stroke:0px;">Schools</span><br>
-        Summit.
-      </h1>
-    </div>
-
-    <!-- Bottom row: Speakers left + Description right -->
-    <div class="hero-bottom" style="display:flex; justify-content:space-between; align-items:flex-end; gap:3rem; padding-bottom:1rem; flex-wrap:wrap;">
-
-      <!-- Left: speaker avatar placeholders + text -->
-      <div>
-        <!-- Avatar row -->
-        <div style="display:flex; align-items:center; margin-bottom:1rem;">
-          <% 3.times do |i| %>
-            <div style="width:48px; height:48px; border-radius:50%; background:rgba(130,30,37,0.3); border:2px solid rgba(130,30,37,0.5); display:flex; align-items:center; justify-content:center; margin-left:<%= i==0 ? '0' : '-12px' %>; position:relative; z-index:<%= 3-i %>;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-          <% end %>
-          <div style="margin-left:14px;">
-            <p style="font-size:13px; font-weight:700; color:white; margin:0 0 2px;">Skilled Speakers</p>
-            <a href="#speakers" style="display:flex; align-items:center; gap:6px; text-decoration:none;">
-              <span style="font-size:11px; color:rgba(255,255,255,0.4);">See Confirmed Speakers</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(130,30,37,0.8)" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
+      <div class="hero-art-container">
+        <div class="hero-art-main">
+          SHAPING<br>THE<br>FUTURE
+        </div>
+        <div class="hero-art-overlay">
+          <div class="hero-badge">
+            <p style="font-weight:800; font-size:1.1rem; color:var(--text-white);">SUMMIT 2026</p>
+            <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-cyan);">Delhi NCR</p>
           </div>
         </div>
-
-        <!-- Countdown -->
-        <div style="display:flex; gap:8px; flex-wrap:wrap;" id="countdown">
-          <div class="countdown-box"><p style="font-family:Georgia,serif;font-size:1.5rem;margin:0;" id="cd-days">—</p><p style="font-size:8px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin:3px 0 0;">Days</p></div>
-          <div class="countdown-box"><p style="font-family:Georgia,serif;font-size:1.5rem;margin:0;" id="cd-hrs">—</p><p style="font-size:8px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin:3px 0 0;">Hrs</p></div>
-          <div class="countdown-box"><p style="font-family:Georgia,serif;font-size:1.5rem;margin:0;" id="cd-min">—</p><p style="font-size:8px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin:3px 0 0;">Mins</p></div>
-          <div class="countdown-box"><p style="font-family:Georgia,serif;font-size:1.5rem;margin:0;" id="cd-sec">—</p><p style="font-size:8px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.4;margin:3px 0 0;">Secs</p></div>
-        </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Right: description + CTA -->
-      <div style="max-width:420px;">
-        <h2 style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.9); margin:0 0 0.75rem;">TSOI Future Schools Summit</h2>
-        <p style="font-size:14px; color:rgba(255,255,255,0.5); line-height:1.7; margin:0 0 1.5rem; font-weight:300;">
-          India's most powerful gathering of school leaders, educators, and education innovators. Three days. One movement.
-        </p>
-        <a href="#register" class="pill-btn" style="border-radius:0;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          Reserve My Seat
-        </a>
+  <!-- Introduction -->
+  <section class="section" id="intro" style="border-top: 1px solid var(--border-glow); background-color: rgba(255,255,255,0.01);">
+    <div class="container">
+      <div class="intro-text-block">
+        <span class="section-tag">Introduction</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="intro-title"></h2>
+        <p class="intro-lead" id="intro-p1"></p>
+        <p class="intro-sub" id="intro-p2"></p>
       </div>
-
     </div>
+  </section>
 
-    <!-- Contact strip at very bottom -->
-    <div style="border-top:1px solid rgba(255,255,255,0.08); margin-top:2rem; padding-top:1.25rem; display:flex; gap:3rem; flex-wrap:wrap;">
-      <span style="font-size:11px; font-weight:600; letter-spacing:0.1em; color:rgba(255,255,255,0.35);">summit@theschoolsofindia.org</span>
-      <span style="font-size:11px; font-weight:600; letter-spacing:0.1em; color:rgba(255,255,255,0.35);">TSOI Schools Platform</span>
+  <!-- Why Attend -->
+  <section class="section" id="why-attend">
+    <div class="container">
+      <span class="section-tag">Benefits</span>
+      <h2 class="section-title" id="why-title">Why You Should Be Here</h2>
+      <div class="why-grid" id="why-grid"></div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════
-     STATS BAR
-══════════════════════════════════════════════ -->
-<section style="background:#821E25;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(0,0,0,0.4);">
-  <div class="summit-stats-grid" style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);">
-    <% [["500+","Education Leaders"],["4","Parallel Tracks"],["30+","Live Sessions"],["3 Days","Max Impact"]].each_with_index do |(val,lbl),i| %>
-      <div style="padding:2rem 1.5rem;text-align:center;<%= i<3 ? 'border-right:1px solid rgba(255,255,255,0.12);' : '' %>">
-        <p style="font-family:Georgia,serif;font-size:2.25rem;margin:0 0 4px;"><%= val %></p>
-        <p style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;opacity:0.7;margin:0;"><%= lbl %></p>
+  <!-- Who Should Attend -->
+  <section class="section" id="who-attend" style="background-color: rgba(255,255,255,0.01); border-top: 1px solid var(--border-glow); border-bottom: 1px solid var(--border-glow);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 3.5rem;">
+        <span class="section-tag">Delegates</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Designed for Every Education Leader</h2>
       </div>
-    <% end %>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════
-     SPEAKERS MARQUEE (large scrolling text)
-══════════════════════════════════════════════ -->
-<div style="background:#821E25; padding:20px 0; overflow:hidden; border-bottom:1px solid rgba(0,0,0,0.25);">
-  <div class="spk-marquee-track" style="display:flex; white-space:nowrap; width:max-content;">
-    <% 3.times do %>
-      <% ["SPEAKERS", "SPEAKERS", "SPEAKERS"].each do |w| %>
-        <span style="font-size:clamp(2rem,5vw,4rem); font-weight:900; letter-spacing:0.05em; text-transform:uppercase; color:white; padding:0 2.5rem; opacity:0.9; font-family:'Inter',sans-serif;">
-          <%= w %> <span style="opacity:0.4; margin-right:2.5rem;">✦</span>
-        </span>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<!-- Dark section — fades from red into dark below speakers -->
-<div style="background:linear-gradient(to bottom, #821E25 0%, #3a0d10 6%, #060306 14%);">
-
-<!-- ══════════════════════════════════════════════
-     SPEAKER CARDS
-══════════════════════════════════════════════ -->
-<section id="speakers" style="padding:5rem 0 5rem; overflow:hidden;">
-  <div class="summit-px" style="padding:0 3rem; margin-bottom:2.5rem; display:flex; justify-content:space-between; align-items:flex-end; max-width:1400px; margin-left:auto; margin-right:auto;">
-    <div>
-      <span class="summit-tag">Speakers</span>
-      <h2 style="font-family:Georgia,serif; font-size:clamp(1.75rem,3.5vw,3rem); font-weight:400; margin:0; letter-spacing:-0.02em;">First Speakers Announced</h2>
+      <div class="who-grid" id="who-grid"></div>
     </div>
-    <p style="font-size:13px; color:rgba(255,255,255,0.35); max-width:300px; text-align:right; line-height:1.6; margin:0;">India's most influential education leaders, innovators, and policy makers.</p>
-  </div>
+  </section>
 
-  <!-- Horizontal scroll of speaker cards -->
-  <div style="display:flex; gap:1px; padding:0 3rem; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;" class="hide-scrollbar summit-px">
-    <%
-      speakers = [
-        {
-          role: "FAMILY-OWNED SCHOOL GROUP",
-          type: "Keynote",
-          name: "Anishka & Sanjay Malpani",
-          session: "Keeping It in the Family: Running Schools as a Generational Business"
-        },
-        {
-          role: "DIRECTOR, AVASARA ACADEMY",
-          type: "Panel",
-          name: "Laxmi Kumar",
-          session: "Leadership by Design — A Panel Discussion"
-        },
-      ]
-    %>
-    <% speakers.each do |s| %>
-      <div class="speaker-card" style="flex-shrink:0; width:240px;">
-        <!-- Photo placeholder -->
-        <div style="height:300px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <!-- Subtle gradient bg -->
-          <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(130,30,37,0.12) 0%, transparent 60%);"></div>
-          <!-- Silhouette icon -->
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.75" style="position:relative; z-index:1;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <!-- Bottom accent -->
-          <div style="position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg, #821E25, rgba(130,30,37,0.3));"></div>
-          <!-- Type tag -->
-          <span style="position:absolute; top:12px; right:12px; font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; border:1px solid rgba(130,30,37,0.4); color:rgba(130,30,37,0.9); padding:3px 8px; background:rgba(6,3,6,0.6);"><%= s[:type] %></span>
-        </div>
-        <!-- Info -->
-        <div style="padding:1rem 0 0.5rem;">
-          <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.35); margin:0 0 6px;"><%= s[:role] %></p>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-            <p style="font-size:14px; font-weight:700; color:rgba(255,255,255,0.7); margin:0; font-family:Georgia,serif;"><%= s[:name] %></p>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(130,30,37,0.7)" stroke-width="2" style="flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </div>
-          <p class="session-title" style="font-size:11px; color:rgba(255,255,255,0.45); margin:8px 0 0; line-height:1.5;"><%= s[:session] %></p>
-        </div>
+  <!-- Experience Timeline -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-tag">The Flow</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="experience-title"></h2>
       </div>
-    <% end %>
+      <div class="experience-timeline" id="experience-timeline"></div>
+    </div>
+  </section>
 
-    <!-- "More coming" card -->
-    <div style="flex-shrink:0; width:240px; height:300px; background:rgba(130,30,37,0.06); border:1px solid rgba(130,30,37,0.15); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;">
-      <div style="width:48px; height:48px; border:1px solid rgba(130,30,37,0.4); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#821E25" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  <!-- Themes -->
+  <section class="section" id="themes" style="border-top: 1px solid var(--border-glow); background-color: rgba(255,255,255,0.01);">
+    <div class="container">
+      <span class="section-tag">Pillars</span>
+      <h2 class="section-title">What We'll Explore</h2>
+      <div class="themes-grid" id="themes-grid"></div>
+    </div>
+  </section>
+
+  <!-- Speakers -->
+  <section class="section" id="speakers">
+    <svg class="sticker sticker-violet" style="top: 10%; left: 5%; width: 45px; height: 45px;" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
+    </svg>
+    <div class="container">
+      <span class="section-tag">Visionaries</span>
+      <h2 class="section-title" id="speakers-title">Meet Visionaries Transforming Education</h2>
+      <div class="speakers-grid" id="speakers-grid"></div>
+      <div class="speakers-footer">
+        <p class="speakers-soon-text" id="speakers-soon-text"></p>
       </div>
-      <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.2em; color:rgba(255,255,255,0.3); margin:0; text-align:center;">More Speakers<br>Reveal Aug 2026</p>
     </div>
-  </div>
-</section>
+  </section>
 
-
-<!-- ══════════════════════════════════════════════
-     SCROLLING MARQUEE — AGENDA ITEMS
-══════════════════════════════════════════════ -->
-<div style="border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:18px 0;overflow:hidden;background:rgba(130,30,37,0.06);">
-  <div class="marquee-track">
-    <% 2.times do %>
-      <% ["SOP & Systems Lab","School Shark Tank","AI Hackathon","Innovation Showcase","High-Value Networking","Keynote Clinics","Future Curriculum Forum","EdTech Sandbox"].each do |item| %>
-        <span style="white-space:nowrap;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.25em;color:rgba(255,255,255,0.3);padding:0 3rem;">
-          <span style="color:#821E25;margin-right:1rem;">◆</span><%= item %>
-        </span>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════
-     STATEMENT SECTION
-══════════════════════════════════════════════ -->
-<section class="summit-px" style="padding:8rem 3rem; max-width:1100px; margin:0 auto;" id="about">
-  <div style="display:flex; gap:6rem; align-items:center; flex-wrap:wrap;" class="summit-split-flex">
-    <div style="flex:1; min-width:280px;">
-      <span class="summit-tag">The Movement</span>
-      <h2 style="font-family:Georgia,serif;font-size:clamp(2rem,5vw,3.75rem);font-weight:400;line-height:1.05;margin:0 0 2rem;letter-spacing:-0.02em;">
-        Not a conference.<br>
-        <span style="color:#821E25;font-style:italic;">A movement.</span>
-      </h2>
-      <p style="font-size:15px;color:rgba(255,255,255,0.5);line-height:1.9;font-weight:300;margin:0 0 1.25rem;">
-        Move beyond traditional panels. Experience a community-led festival dedicated to actionable innovation, school systems, and practical implementation — built by school leaders, for school leaders.
-      </p>
-      <p style="font-size:15px;color:rgba(255,255,255,0.5);line-height:1.9;font-weight:300;margin:0;">
-        Leave with more than inspiration. Every attendee walks away with a meaningful new connection and at least one proven system ready to deploy on Monday morning.
-      </p>
+  <!-- Sessions -->
+  <section class="section" id="sessions" style="border-top: 1px solid var(--border-glow); background-color: rgba(255,255,255,0.01);">
+    <div class="container">
+      <span class="section-tag">Formats</span>
+      <h2 class="section-title">What's Waiting For You</h2>
+      <div class="sessions-grid" id="sessions-grid"></div>
     </div>
+  </section>
 
-    <div style="flex:1; min-width:280px; display:flex; flex-direction:column; gap:1px; background:rgba(255,255,255,0.06);">
-      <% [
-        ["Build", "Walk in with a problem. Walk out with a deployed solution."],
-        ["Connect", "500+ decision-makers. Structured networking that actually works."],
-        ["Lead", "India's school leaders shaping the next decade of education."]
-      ].each_with_index do |(title, desc), i| %>
-      <div style="background:rgba(6,3,6,0.88);padding:1.75rem 2rem;display:flex;align-items:flex-start;gap:1.5rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(130,30,37,0.25)'" onmouseout="this.style.background='rgba(6,3,6,0.88)'">
-        <span style="font-family:Georgia,serif;font-size:2rem;color:rgba(130,30,37,0.3);font-style:italic;line-height:1;flex-shrink:0;">0<%= i+1 %></span>
+  <!-- Institutions -->
+  <section class="section" id="institutions" style="border-top: 1px solid var(--border-glow); padding-bottom: 2rem;">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-tag">Ecosystem</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto; font-size: 2rem;">Join Leaders From Across Education</h2>
+      </div>
+      <div class="logo-wall-wrapper">
+        <div class="logo-track" id="logo-track"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Networking & Showcase -->
+  <section class="section" id="networking-showcase" style="border-top: 1px solid var(--border-glow); background-color: rgba(255,255,255,0.01);">
+    <div class="container">
+      <div class="feature-split">
         <div>
-          <h3 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 6px;"><%= title %></h3>
-          <p style="font-size:13px;color:rgba(255,255,255,0.4);margin:0;line-height:1.6;"><%= desc %></p>
+          <span class="section-tag">Connections</span>
+          <h2 class="section-title" style="font-size: 2.25rem; margin-bottom: 2rem;">Connections That Last Beyond Three Days</h2>
+          <div class="net-grid" id="net-grid"></div>
+        </div>
+        <div>
+          <span class="section-tag">Exhibition</span>
+          <h2 class="section-title" style="font-size: 2.25rem; margin-bottom: 2rem;">Explore the Future of Education</h2>
+          <div class="showcase-grid" id="showcase-grid"></div>
         </div>
       </div>
-      <% end %>
     </div>
-  </div>
-</section>
+  </section>
 
-
-<!-- ══════════════════════════════════════════════
-     HIGHLIGHTS / TRACKS
-══════════════════════════════════════════════ -->
-<section class="summit-px" style="padding:8rem 3rem; max-width:1100px; margin:0 auto;" id="highlights">
-  <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:4rem; flex-wrap:wrap; gap:1rem;">
-    <div>
-      <span class="summit-tag">What Awaits</span>
-      <h2 style="font-family:Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;margin:0;letter-spacing:-0.02em;">Summit Tracks</h2>
-    </div>
-    <p style="font-size:13px;color:rgba(255,255,255,0.35);max-width:320px;text-align:right;line-height:1.6;">Six high-impact formats designed for school leaders who want to build, not just listen.</p>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);" class="summit-highlights-grid">
-    <% [
-      ["01","SOP & Systems Lab","Hands-on workshop","Walk in with a real operational problem. Walk out with a fully mapped, ready-to-deploy system built live in the room."],
-      ["02","Innovation Showcase","Peer learning","Fast-paced case studies from schools that have already made the leap. Real results, real schools."],
-      ["03","School Shark Tank","Pitch competition","Pitch your idea to education investors and veteran school operators. Winners get mentorship and maximum visibility."],
-      ["04","AI Hackathon","Build in 24 hrs","Teams compete to build working AI tools for real school problems — judged by tech and education leaders."],
-      ["05","Power Networking","500+ leaders","Structured sessions ensure every connection is meaningful. No random mingling. Curated introductions."],
-      ["06","Keynotes & Clinics","Master classes","Curated talks from India's top education minds followed by open-format problem-solving clinics."]
-    ].each do |num, title, tag, desc| %>
-      <div class="highlight-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;">
-          <span style="font-family:Georgia,serif;font-size:3rem;color:rgba(130,30,37,0.25);font-style:italic;line-height:1;"><%= num %></span>
-          <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:rgba(130,30,37,0.7);border:1px solid rgba(130,30,37,0.25);padding:4px 10px;"><%= tag %></span>
-        </div>
-        <h3 style="font-size:1.1rem;font-weight:700;margin:0 0 10px;letter-spacing:-0.01em;"><%= title %></h3>
-        <p style="font-size:13px;color:rgba(255,255,255,0.4);margin:0;line-height:1.7;"><%= desc %></p>
-      </div>
-    <% end %>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════
-     WHO ATTENDS
-══════════════════════════════════════════════ -->
-<section class="summit-px" style="background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:6rem 3rem;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:4rem;">
-      <span class="summit-tag">Who's In The Room</span>
-      <h2 style="font-family:Georgia,serif;font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:400;margin:0;letter-spacing:-0.02em;">Built for India's education builders</h2>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);" class="summit-who-grid">
-      <% [
-        ["🏫","School Founders & Principals","Building the institutions of tomorrow"],
-        ["📚","Academic Directors","Shaping curriculum and learning outcomes"],
-        ["💡","EdTech Innovators","Building tools that power modern schools"],
-        ["🤝","Education Investors","Funding the next wave of school growth"]
-      ].each do |icon, title, desc| %>
-        <div style="background:rgba(6,3,6,0.85);padding:2rem 1.5rem;text-align:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(130,30,37,0.2)'" onmouseout="this.style.background='rgba(6,3,6,0.85)'">
-          <div style="font-size:2rem;margin-bottom:1rem;"><%= icon %></div>
-          <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 8px;"><%= title %></h3>
-          <p style="font-size:12px;color:rgba(255,255,255,0.35);margin:0;line-height:1.6;"><%= desc %></p>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════
-     REGISTER
-══════════════════════════════════════════════ -->
-<section style="position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,0.06);" id="register">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(130,30,37,0.2) 0%,transparent 70%);pointer-events:none;"></div>
-
-  <div class="summit-px" style="max-width:1100px;margin:0 auto;padding:8rem 3rem;position:relative;z-index:2;">
-    <div style="display:flex;gap:6rem;align-items:flex-start;flex-wrap:wrap;" class="summit-split-flex">
-      <div style="flex:1;min-width:280px;">
-        <span class="summit-tag">Register Interest</span>
-        <h2 style="font-family:Georgia,serif;font-size:clamp(2.25rem,5vw,4rem);font-weight:400;line-height:1.05;margin:0 0 1.5rem;letter-spacing:-0.03em;">
-          Secure your place<br>
-          <span style="color:#821E25;font-style:italic;">in the room.</span>
-        </h2>
-        <p style="font-size:15px;color:rgba(255,255,255,0.45);line-height:1.8;font-weight:300;max-width:420px;margin:0 0 2rem;">
-          Limited seats. Be the first to know when registration opens, agenda drops, and speakers are announced.
-        </p>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <% [["📍","Pune, Maharashtra"],["📅","30 Oct – 1 Nov 2026"],["👥","500 Seats — Invite Only"]].each do |icon, text| %>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <span style="font-size:14px;"><%= icon %></span>
-              <span style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:500;"><%= text %></span>
+  <!-- Venue -->
+  <section class="section" id="venue">
+    <div class="container">
+      <span class="section-tag">Venue</span>
+      <h2 class="section-title">A World-Class Venue for Education Leaders</h2>
+      <div class="venue-grid">
+        <div class="venue-info-box">
+          <h3 class="venue-name" id="venue-name"></h3>
+          <p class="venue-city" id="venue-city"></p>
+          <div class="venue-details-list">
+            <div class="venue-detail-item">
+              <span class="venue-detail-icon">🚗</span>
+              <div>
+                <h4 class="venue-detail-title">Parking</h4>
+                <p class="venue-detail-desc" id="venue-parking"></p>
+              </div>
             </div>
-          <% end %>
+            <div class="venue-detail-item">
+              <span class="venue-detail-icon">🏨</span>
+              <div>
+                <h4 class="venue-detail-title">Nearby Hotels</h4>
+                <p class="venue-detail-desc" id="venue-hotels"></p>
+              </div>
+            </div>
+            <div class="venue-detail-item">
+              <span class="venue-detail-icon">✈️</span>
+              <div>
+                <h4 class="venue-detail-title">Travel Information</h4>
+                <p class="venue-detail-desc" id="venue-travel"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map-container">
+          <svg class="map-svg" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" class="map-grid-lines"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            <path d="M 50 0 Q 150 150 450 300" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
+            <path d="M 0 100 Q 250 80 500 200" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4"/>
+            <circle cx="280" cy="130" r="25" fill="rgba(255, 42, 127, 0.15)"/>
+            <circle cx="280" cy="130" r="10" fill="rgba(255, 42, 127, 0.4)"/>
+            <circle cx="280" cy="130" r="5" class="map-marker"/>
+            <text x="295" y="134" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="11" font-weight="bold">THE VENUE</text>
+          </svg>
+          <div class="map-overlay-card">
+            <p style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.25rem;">Convention Centre</p>
+            <p class="map-coords" id="venue-coords"></p>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div style="flex:1;min-width:280px;max-width:440px;">
-        <div class="summit-register-card" style="border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);padding:2.5rem;backdrop-filter:blur(12px);">
-          <h3 style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;margin:0 0 2rem;opacity:0.5;">Join the Waitlist</h3>
-          <form action="<%= summit_notify_path %>" method="post">
+  <!-- Schedule -->
+  <section class="section" id="schedule" style="border-top: 1px solid var(--border-glow); background-color: rgba(255,255,255,0.01);">
+    <svg class="sticker sticker-lime" style="top: 8%; right: 5%; width: 45px; height: 45px;" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
+    </svg>
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-tag">Timetable</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Event Schedule</h2>
+      </div>
+      <div class="schedule-container">
+        <div class="schedule-tabs">
+          <button class="schedule-tab is-active" data-day="Day1">Day 1</button>
+          <button class="schedule-tab" data-day="Day2">Day 2</button>
+          <button class="schedule-tab" data-day="Day3">Day 3</button>
+        </div>
+        <div class="schedule-list" id="schedule-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration -->
+  <section class="section" id="registration">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-tag">Passes</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Secure Your Seat</h2>
+      </div>
+      <div class="reg-grid" id="reg-grid"></div>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <section class="section" id="partners" style="border-top: 1px solid var(--border-glow); background-color: rgba(255,255,255,0.01);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 4rem;">
+        <span class="section-tag">Sponsors</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="partners-title"></h2>
+      </div>
+      <div class="partners-container" id="partners-container"></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <span class="section-tag">Testimonials</span>
+      <h2 class="section-title">Hear From Previous Attendees</h2>
+      <div class="testimonials-carousel-wrapper">
+        <div class="testimonials-track" id="testimonials-track"></div>
+        <div class="carousel-controls">
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="carousel-arrow" id="carousel-prev" aria-label="Previous Testimonial">←</button>
+            <button class="carousel-arrow" id="carousel-next" aria-label="Next Testimonial">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="section" id="faqs" style="border-top: 1px solid var(--border-glow); background-color: rgba(255,255,255,0.01);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-tag">Assistance</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Frequently Asked Questions</h2>
+      </div>
+      <div class="faqs-container" id="faqs-container"></div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section" id="cta-banner" style="padding-top: 2rem;">
+    <svg class="sticker sticker-cyan" style="top: 10%; left: 5%; width: 40px; height: 40px;" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
+    </svg>
+    <svg class="sticker sticker-magenta" style="bottom: 10%; right: 5%; width: 35px; height: 35px;" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
+    </svg>
+    <div class="container">
+      <div class="cta-banner">
+        <h2 class="cta-banner-title" id="cta-banner-title"></h2>
+        <p class="cta-banner-sub" id="cta-banner-sub"></p>
+        <p class="cta-banner-dates" id="cta-banner-dates"></p>
+        <div class="cta-banner-buttons">
+          <a href="#registration" class="btn btn-primary" id="cta-banner-primary"></a>
+          <a href="#partners" class="btn btn-secondary" id="cta-banner-secondary"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section" id="footer" style="background-color: #050507; border-top: 1px solid var(--border-glow); padding-bottom: 2rem;">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-about">
+          <div class="footer-logo">
+            THE SCHOOLS OF INDIA <span class="logo-dot"></span>
+          </div>
+          <p id="footer-about-text"></p>
+        </div>
+        <div class="footer-contact">
+          <h4 class="footer-contact-title">Contact</h4>
+          <ul class="footer-contact-list">
+            <li>📧 <span id="footer-email"></span></li>
+            <li>📞 <span id="footer-phone"></span></li>
+            <li>📍 <span id="footer-address"></span></li>
+          </ul>
+        </div>
+        <div class="footer-newsletter">
+          <h4 class="footer-newsletter-title">Stay Updated</h4>
+          <p class="footer-newsletter-desc">Subscribe to receive the latest updates, session releases, and speaker announcements.</p>
+          <form class="newsletter-form" id="newsletter-form" action="<%= summit_notify_path %>" method="post">
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-            <div style="margin-bottom:1rem;">
-              <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;opacity:0.4;margin-bottom:8px;">Full Name</label>
-              <input type="text" name="name" placeholder="Dr. Priya Sharma"
-                style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:white;padding:14px 16px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box;transition:border-color 0.2s;"
-                onfocus="this.style.borderColor='rgba(130,30,37,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-            </div>
-            <div style="margin-bottom:1rem;">
-              <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;opacity:0.4;margin-bottom:8px;">Email Address</label>
-              <input type="email" name="email" placeholder="priya@school.edu.in" required
-                style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:white;padding:14px 16px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box;transition:border-color 0.2s;"
-                onfocus="this.style.borderColor='rgba(130,30,37,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-            </div>
-            <div style="margin-bottom:1.5rem;">
-              <label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;opacity:0.4;margin-bottom:8px;">Your Role</label>
-              <select name="role"
-                style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 16px;font-size:13px;font-family:inherit;outline:none;box-sizing:border-box;cursor:pointer;appearance:none;transition:border-color 0.2s;"
-                onfocus="this.style.borderColor='rgba(130,30,37,0.6)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-                <option value="" style="background:#1a1a1a;">Select your role…</option>
-                <option value="founder" style="background:#1a1a1a;">School Founder / Trustee</option>
-                <option value="principal" style="background:#1a1a1a;">Principal / Head of School</option>
-                <option value="academic" style="background:#1a1a1a;">Academic Director</option>
-                <option value="edtech" style="background:#1a1a1a;">EdTech / Vendor</option>
-                <option value="investor" style="background:#1a1a1a;">Investor / Funder</option>
-                <option value="other" style="background:#1a1a1a;">Other</option>
-              </select>
-            </div>
-            <button type="submit" class="pill-btn" style="width:100%;justify-content:center;border-radius:0;">
-              Reserve My Spot
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </button>
+            <input type="hidden" name="role" value="Newsletter Subscriber">
+            <input type="email" name="email" placeholder="Your work email address" class="newsletter-input" required aria-label="Work Email Address">
+            <button type="submit" class="btn btn-primary newsletter-submit">Subscribe</button>
           </form>
-          <p style="font-size:11px;color:rgba(255,255,255,0.2);margin:1.25rem 0 0;text-align:center;line-height:1.5;">No spam. Unsubscribe anytime. We'll only contact you<br>with Summit updates.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The Schools of India. All rights reserved.</p>
+        <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-end;">
+          <ul class="footer-bottom-links" id="footer-links"></ul>
+          <div class="footer-socials" id="footer-socials"></div>
         </div>
       </div>
     </div>
+  </footer>
+
+  <!-- Registration Interest Modal -->
+  <dialog id="registration-dialog">
+    <div class="modal-header">
+      <h3 class="modal-title">Register Your Interest</h3>
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">✕</button>
+    </div>
+    <form class="modal-form" id="modal-form" action="<%= summit_notify_path %>" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type="hidden" id="form-pass-id" name="passId">
+      <div class="form-group">
+        <label class="form-label" for="form-pass-name">Selected Pass</label>
+        <input type="text" id="form-pass-name" class="form-input" readonly style="opacity: 0.7;">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="form-fullname">Full Name *</label>
+        <input type="text" id="form-fullname" name="name" class="form-input" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="form-email">Email Address *</label>
+        <input type="email" id="form-email" name="email" class="form-input" placeholder="name@institution.edu" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="form-organisation">Institution / Organisation *</label>
+        <input type="text" id="form-organisation" name="organisation" class="form-input" placeholder="e.g. Greenwoods Academy" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="form-role">Designation / Role *</label>
+        <select id="form-role" name="role" class="form-select" required>
+          <option value="" disabled selected>Select your role</option>
+          <option value="School Founder / Director">School Founder / Director</option>
+          <option value="Principal / Vice Principal">Principal / Vice Principal</option>
+          <option value="Academic Coordinator / Head">Academic Coordinator / Head</option>
+          <option value="Educator / Teacher">Educator / Teacher</option>
+          <option value="EdTech Founder / Entrepreneur">EdTech Founder / Entrepreneur</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary modal-submit-btn">Register Interest</button>
+    </form>
+  </dialog>
+
+  <% if Rails.env.development? %>
+  <button class="cms-panel-btn" id="cms-toggle-btn" aria-label="Open CMS Panel">⚙</button>
+  <div class="cms-drawer" id="cms-drawer">
+    <div class="cms-drawer-header">
+      <h3 class="cms-drawer-title">
+        <span class="cms-drawer-title-dot"></span> CMS Live Editor
+      </h3>
+      <button class="cms-drawer-close" id="cms-drawer-close" aria-label="Close CMS Panel">✕</button>
+    </div>
+    <div class="cms-drawer-body"></div>
+    <div class="cms-drawer-footer">
+      <button class="cms-btn cms-btn-reset" id="cms-reset-btn">Reset Data</button>
+      <button class="cms-btn cms-btn-copy" id="cms-copy-btn">Export CMS JSON</button>
+    </div>
   </div>
-</section>
+  <% end %>
 
+  <div class="toast-msg" id="toast-message">Registered!</div>
 
-</div><!-- /red gradient wrapper -->
+  <script type="module" src="/summit/app.js"></script>
+  <% if Rails.env.development? %>
+  <script type="module" src="/summit/cms-editor.js"></script>
+  <% end %>
 
-<!-- ══════════════════════════════════════════════
-     BOTTOM BAND
-══════════════════════════════════════════════ -->
-<div class="summit-bottom-band" style="background:#821E25;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
-  <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;opacity:0.7;margin:0;">TSOI Future Schools Summit · 30 Oct – 1 Nov 2026 · Pune</p>
-  <a href="#register" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:white;border-bottom:1px solid rgba(255,255,255,0.4);padding-bottom:2px;text-decoration:none;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Register Interest →</a>
-</div>
-
-</div><!-- .summit-body -->
-
-<script>
-(function() {
-  var target = new Date('2026-10-30T09:00:00+05:30').getTime();
-  function tick() {
-    var now  = Date.now();
-    var diff = target - now;
-    if (diff < 0) {
-      ['cd-days','cd-hrs','cd-min','cd-sec'].forEach(function(id) { document.getElementById(id).textContent = '00'; });
-      return;
+  <script>
+    // Hamburger menu
+    var hamburger = document.getElementById('hamburger-btn');
+    var mobileNav = document.getElementById('mobile-nav-overlay');
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('is-active');
+        mobileNav.classList.toggle('is-active');
+      });
+      mobileNav.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('is-active');
+          mobileNav.classList.remove('is-active');
+        });
+      });
     }
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000)  / 60000);
-    var s = Math.floor((diff % 60000)    / 1000);
-    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
-    document.getElementById('cd-hrs').textContent  = String(h).padStart(2,'0');
-    document.getElementById('cd-min').textContent  = String(m).padStart(2,'0');
-    document.getElementById('cd-sec').textContent  = String(s).padStart(2,'0');
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
 
-document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-  a.addEventListener('click', function(e) {
-    var t = document.querySelector(this.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
-  });
-});
-
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.style.animation = 'fadeUp 0.7s ease forwards';
-      observer.unobserve(entry.target);
+    // Show header CTA on scroll
+    var headerCta = document.getElementById('header-cta');
+    if (headerCta) {
+      window.addEventListener('scroll', function() {
+        headerCta.style.display = window.scrollY > 400 ? 'inline-flex' : 'none';
+      });
     }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.highlight-card, .summit-tag').forEach(function(el) {
-  el.style.opacity = '0';
-  observer.observe(el);
-});
-</script>
+
+    // Registration modal close
+    var dialog = document.getElementById('registration-dialog');
+    var modalCloseBtn = document.getElementById('modal-close-btn');
+    if (modalCloseBtn && dialog) {
+      modalCloseBtn.addEventListener('click', function() { dialog.close(); });
+      dialog.addEventListener('click', function(e) { if (e.target === dialog) dialog.close(); });
+    }
+
+    // Schedule tabs
+    document.querySelectorAll('.schedule-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.schedule-tab').forEach(function(t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        if (window.renderSchedule) window.renderSchedule(window.currentCmsData.schedule, tab.dataset.day);
+      });
+    });
+
+    // FAQ accordion
+    document.addEventListener('click', function(e) {
+      var trigger = e.target.closest('.faq-trigger');
+      if (trigger) {
+        trigger.closest('.faq-item').classList.toggle('is-active');
+      }
+    });
+
+    <% if flash[:notice] %>
+    var toast = document.getElementById('toast-message');
+    if (toast) {
+      toast.textContent = "<%= j flash[:notice] %>";
+      toast.classList.add('is-visible');
+      setTimeout(function() { toast.classList.remove('is-visible'); }, 4000);
+    }
+    <% end %>
+  </script>
+</body>
+</html>
