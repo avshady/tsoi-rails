@@ -1,0 +1,10 @@
+<% content_for :title, "Edit Speaker" %>
+
+<div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
+  <%= link_to "← Speakers", admin_summit_speakers_path, style:"color:#821E25; font-size:13px; font-weight:700; text-decoration:none;" %>
+  <h1 style="font-size:1.5rem; font-weight:700; margin:0;">Edit: <%= @speaker.name %></h1>
+</div>
+
+<%= form_with model: [:admin, @speaker], local: true do |f| %>
+  <%= render "form", f: f, speaker: @speaker %>
+<% end %>

@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :schools, only: [:index, :show, :edit, :update] do
       member { post :generate_token }
     end
+    resources :summit_speakers, only: [:index, :new, :create, :edit, :update, :destroy]
 
     # CMS
     get  "content",                     to: "content#index",                as: :content

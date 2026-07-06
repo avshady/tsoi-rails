@@ -1,0 +1,51 @@
+<% if speaker.errors.any? %>
+  <div style="background:#fef2f2; border:1px solid #fecaca; color:#991b1b; padding:10px 16px; margin-bottom:1.5rem; border-radius:4px; font-size:13px;">
+    <% speaker.errors.full_messages.each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+<% end %>
+
+<div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:2rem;">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+    <div>
+      <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:6px;">Full Name *</label>
+      <%= f.text_field :name, placeholder: "e.g. Laxmi Kumar", style:"width:100%; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px; box-sizing:border-box;" %>
+    </div>
+    <div>
+      <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:6px;">Designation / Title</label>
+      <%= f.text_field :title, placeholder: "e.g. Director", style:"width:100%; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px; box-sizing:border-box;" %>
+    </div>
+  </div>
+
+  <div style="margin-bottom:1.25rem;">
+    <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:6px;">Organisation / School</label>
+    <%= f.text_field :organisation, placeholder: "e.g. Avasara Academy", style:"width:100%; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px; box-sizing:border-box;" %>
+  </div>
+
+  <div style="margin-bottom:1.25rem;">
+    <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:6px;">Photo URL or Path</label>
+    <%= f.text_field :photo, placeholder: "/summit/assets/advisor_lakshmi.jpg or https://...", style:"width:100%; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px; box-sizing:border-box;" %>
+    <p style="font-size:11px; opacity:0.45; margin:5px 0 0;">Enter a full URL or a path starting with /summit/assets/</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:2rem;">
+    <div>
+      <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:6px;">Accent Colour</label>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <%= f.color_field :accent_color, style:"width:44px; height:38px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; padding:2px; cursor:pointer;" %>
+        <%= f.text_field :accent_color, placeholder: "#ff2a7f", style:"flex:1; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px;" %>
+      </div>
+    </div>
+    <div>
+      <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:6px;">Display Order</label>
+      <%= f.number_field :position, min: 0, style:"width:100%; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px; box-sizing:border-box;" %>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:1rem; align-items:center;">
+    <%= f.submit (speaker.new_record? ? "Add Speaker" : "Save Changes"),
+          style:"background:#821E25; color:white; border:none; padding:10px 24px; font-size:14px; font-weight:700; border-radius:4px; cursor:pointer;" %>
+    <%= link_to "Cancel", admin_summit_speakers_path, style:"color:#999; font-size:13px; text-decoration:none;" %>
+  </div>
+</div>
