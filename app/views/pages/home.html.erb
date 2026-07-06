@@ -419,15 +419,11 @@ body { background-color: #f4f0e6 !important; }
 
 <script>
 (function() {
-  var KEY = 'tsoi_summit_popup_dismissed';
-  if (sessionStorage.getItem(KEY)) return;
-
   var backdrop = document.getElementById('summit-popup-backdrop');
   var closeBtn = document.getElementById('summit-popup-close');
   var dismissBtn = document.getElementById('summit-popup-dismiss');
 
   function closePopup() {
-    sessionStorage.setItem(KEY, '1');
     backdrop.classList.remove('is-visible');
   }
 
