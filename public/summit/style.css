@@ -2171,3 +2171,83 @@ dialog::backdrop {
   animation: shake 0.4s ease-in-out;
 }
 
+/* ====================================================
+   MOBILE-FIRST OVERRIDES  (max-width: 767px)
+   ==================================================== */
+@media (max-width: 767px) {
+
+  /* ── GLOBAL ─────────────────────────────────── */
+  html, body { overflow-x: hidden; }
+
+  .container { padding-left: 1rem; padding-right: 1rem; }
+
+  /* Section breathing room: 5rem (80px) is too much on a phone */
+  .section { padding: 3rem 0; }
+
+  /* Decorative stickers overlap text on narrow screens — hide them */
+  .sticker { display: none; }
+
+  /* ── HEADER ─────────────────────────────────── */
+  .logo { font-size: 1rem; }
+
+  /* ── HERO ───────────────────────────────────── */
+  .hero-section {
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
+    min-height: auto;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.9rem, 7.5vw, 2.75rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  /* Art container is purely decorative; causes overflow on mobile */
+  .hero-art-container { display: none; }
+
+  .hero-subheadline {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-ctas { flex-direction: column; gap: 0.75rem; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+
+  /* ── SECTION TITLES ─────────────────────────── */
+  .section-title { font-size: 1.75rem; max-width: 100%; }
+
+  /* ── WHO ATTENDS ────────────────────────────── */
+  .who-badge { padding: 0.625rem 1.1rem; font-size: 0.85rem; }
+
+  /* ── THEMES ─────────────────────────────────── */
+  /* 2-col default produces ~150px cards — too cramped for text */
+  .themes-grid { grid-template-columns: 1fr; }
+
+  /* ── SPEAKERS / ADVISORS ────────────────────── */
+  /* 2-col gallery is better than huge full-width portrait photos */
+  .speakers-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .speaker-img-wrapper { aspect-ratio: 3 / 4; min-height: 0; }
+  .speaker-name { font-size: 0.9rem; }
+  .speaker-info { padding: 0.75rem; }
+  .speaker-title, .speaker-org { font-size: 0.72rem; }
+
+  /* ── SCHEDULE ───────────────────────────────── */
+  .schedule-tabs { max-width: 100%; }
+  .schedule-tab { padding: 0.6rem 0.75rem; font-size: 0.85rem; }
+
+  /* ── VENUE ──────────────────────────────────── */
+  .venue-name { font-size: 1.6rem; }
+
+  /* ── CTA BANNER ─────────────────────────────── */
+  .cta-banner-title { font-size: 2rem; }
+  .cta-banner-buttons { flex-direction: column; gap: 0.75rem; }
+  .cta-banner-buttons .btn { width: 100%; justify-content: center; }
+
+  /* ── FAQ ────────────────────────────────────── */
+  .faq-trigger { padding: 1rem 1.25rem; font-size: 0.95rem; }
+
+  /* ── CMS DRAWER ─────────────────────────────── */
+  .cms-drawer { width: 100vw; right: -100vw; }
+}
+

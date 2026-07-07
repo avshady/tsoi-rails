@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sponsorship Prospectus — The Schools of India Summit 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0c;
+      --surface:   #121215;
+      --surface-2: #18181c;
+      --border:    rgba(255,255,255,0.07);
+      --text:      #ffffff;
+      --muted:     #9e9ea7;
+      --dim:       #55555f;
+
+      --magenta: #ff2a7f;
+      --violet:  #7c3aed;
+      --lime:    #2de67b;
+      --cyan:    #06b6d4;
+      --gold:    #f59e0b;
+
+      --ff-display: 'Outfit', sans-serif;
+      --ff-serif:   'Instrument Serif', Georgia, serif;
+      --r:  24px;
+      --rs: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-display);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Film grain */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    em.serif {
+      font-family: var(--ff-serif);
+      font-style: italic;
+      font-size: 1.1em;
+      font-weight: 400;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 60px;
+      background: rgba(10,10,12,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      z-index: 100;
+    }
+    .nav-brand { display: flex; align-items: center; }
+    .nav-brand img { height: 36px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 0.25rem; }
+    .nav-links a {
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      transition: 0.2s;
+      border: 1px solid transparent;
+    }
+    .nav-links a:hover { color: var(--text); border-color: var(--border); }
+    .nav-cta {
+      background: var(--magenta);
+      color: #000 !important;
+      border-color: transparent !important;
+      padding: 0.4rem 1.1rem !important;
+    }
+    .nav-cta:hover { opacity: 0.85; color: #000 !important; }
+
+    /* ── SLIDE SYSTEM ── */
+    .slide {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-inner {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+    .slide-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* Decorative blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      opacity: 0.25;
+    }
+
+    /* Starburst decorations */
+    .star {
+      position: absolute;
+      pointer-events: none;
+    }
+    .star svg { display: block; }
+
+    /* ── TAGS ── */
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    /* ── SLIDE 1: COVER ── */
+    #cover {
+      background: radial-gradient(ellipse 80% 60% at 60% 30%, rgba(124,58,237,0.15) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 20% 80%, rgba(255,42,127,0.12) 0%, transparent 70%);
+    }
+    .cover-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--magenta);
+      margin-bottom: 1.5rem;
+    }
+    .cover-title {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .cover-sub {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.5;
+      margin-bottom: 2.5rem;
+    }
+    .cover-meta {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .cover-meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .cover-meta-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); }
+    .cover-meta-value { font-size: 1.1rem; font-weight: 700; }
+    .cover-tiers {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .cover-tier-pill {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      font-size: 0.9rem; font-weight: 700;
+    }
+    .cover-tier-pill .pip {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+
+    /* ── SLIDE 2: ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-headline {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .about-body { font-size: 1.05rem; color: var(--muted); line-height: 1.65; margin-bottom: 2rem; }
+    .pillar-list { display: flex; flex-direction: column; gap: 1rem; }
+    .pillar {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--rs);
+    }
+    .pillar-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .pillar-text { display: flex; flex-direction: column; gap: 0.15rem; }
+    .pillar-name { font-size: 0.95rem; font-weight: 700; }
+    .pillar-desc { font-size: 0.82rem; color: var(--muted); }
+
+    .stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.75rem;
+    }
+    .stat-number {
+      font-size: 2.75rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-label { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+
+    /* ── SLIDE 3: AUDIENCE ── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .audience-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 2rem 1.75rem;
+    }
+    .audience-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .audience-type { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .audience-pct {
+      font-size: 2.25rem; font-weight: 900;
+      letter-spacing: -0.04em; line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .audience-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    .reach-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+      margin-top: 2rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .reach-item { text-align: center; }
+    .reach-num { font-size: 2rem; font-weight: 900; letter-spacing: -0.03em; }
+    .reach-lbl { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── SLIDE 4: OVERVIEW TABLE ── */
+    .overview-headline {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .overview-sub { font-size: 1.05rem; color: var(--muted); margin-bottom: 3rem; }
+
+    .tier-overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .tier-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+    .tier-card:hover { border-color: var(--tier-color); }
+    .tier-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--tier-color);
+    }
+    .tier-card-label {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--tier-color);
+      margin-bottom: 0.5rem;
+    }
+    .tier-card-name {
+      font-size: 1.35rem; font-weight: 900; margin-bottom: 0.25rem;
+    }
+    .tier-card-price {
+      font-size: 2rem; font-weight: 900;
+      letter-spacing: -0.04em; margin-bottom: 1.5rem;
+      color: var(--tier-color);
+    }
+    .tier-card-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .tier-card-features li {
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      font-size: 0.83rem; color: var(--muted);
+    }
+    .tier-card-features li::before {
+      content: '✓';
+      color: var(--tier-color);
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .tier-card-cta {
+      display: block;
+      margin-top: 1.75rem;
+      padding: 0.7rem;
+      text-align: center;
+      font-size: 0.82rem; font-weight: 700;
+      border-radius: 9999px;
+      border: 1px solid var(--tier-color);
+      color: var(--tier-color);
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .tier-card-cta:hover {
+      background: var(--tier-color);
+      color: #000;
+    }
+    .tier-card.featured {
+      background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface) 100%);
+      border-color: var(--tier-color);
+    }
+    .featured-badge {
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--tier-color);
+      color: #000;
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+    }
+
+    /* ── SLIDE 5–8: TIER DEEP DIVES ── */
+    .tier-slide {
+      background: var(--bg);
+    }
+    .tier-hero {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    .tier-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .tier-name {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900; line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .tier-price-row { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .tier-price-main {
+      font-size: 3.5rem; font-weight: 900;
+      letter-spacing: -0.05em; line-height: 1;
+    }
+    .tier-price-note { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
+    .tier-tagline { font-size: 1.05rem; color: var(--muted); line-height: 1.6; max-width: 480px; }
+    .tier-what-you-get {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--dim);
+      margin-bottom: 1.25rem;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .benefit-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 1rem 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--rs);
+    }
+    .benefit-icon {
+      width: 32px; height: 32px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; flex-shrink: 0;
+    }
+    .benefit-text { display: flex; flex-direction: column; gap: 0.1rem; }
+    .benefit-name { font-size: 0.87rem; font-weight: 700; }
+    .benefit-detail { font-size: 0.76rem; color: var(--muted); }
+
+    .tier-accent-bar {
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── SLIDE 9: COMPARISON TABLE ── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 2.5rem;
+    }
+    .compare-table th {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table th.tier-th {
+      text-align: center;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+    .compare-table td {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .compare-table td.feature-col { color: var(--muted); font-size: 0.83rem; }
+    .compare-table td.value-col { text-align: center; font-weight: 700; }
+    .compare-table td.na { color: var(--dim); font-weight: 400; }
+    .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .check { color: var(--lime); }
+    .col-title { color: var(--magenta); }
+    .col-plat  { color: var(--violet); }
+    .col-gold  { color: var(--cyan); }
+    .col-silv  { color: var(--muted); }
+
+    /* ── SLIDE 10: CLOSE ── */
+    #close {
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,42,127,0.12) 0%, transparent 70%);
+      text-align: center;
+    }
+    .close-title {
+      font-size: clamp(2.5rem, 5.5vw, 5rem);
+      font-weight: 900; letter-spacing: -0.04em; line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .close-sub { font-size: 1.15rem; color: var(--muted); max-width: 600px; margin: 0 auto 3rem; line-height: 1.6; }
+    .close-contacts {
+      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 1.75rem 2.25rem;
+      text-align: left;
+      min-width: 220px;
+    }
+    .contact-role { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.4rem; }
+    .contact-name { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .contact-email { font-size: 0.85rem; color: var(--magenta); }
+    .close-url {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--magenta);
+      color: #000;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.9rem 2.5rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .close-url:hover { opacity: 0.85; }
+
+    /* Horizontal rule between slides */
+    .slide + .slide { border-top: 1px solid var(--border); }
+
+    /* Section label style */
+    .section-tag {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--magenta); margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* Print support */
+    @media print {
+      .nav { display: none; }
+      .slide { page-break-after: always; min-height: auto; padding: 60px 0 50px; }
+      body::after { display: none; }
+    }
+
+    @media (max-width: 900px) {
+      .about-grid, .tier-hero { grid-template-columns: 1fr; gap: 2rem; }
+      .tier-overview { grid-template-columns: 1fr 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .reach-row { grid-template-columns: repeat(2,1fr); }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .compare-table { font-size: 0.75rem; }
+      .compare-table th, .compare-table td { padding: 0.65rem 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <img src="../assets/tsoi_summit_combined_logo.png" alt="The Schools of India Summit" />
+    </div>
+    <div class="nav-links">
+      <a href="#about">Summit</a>
+      <a href="#audience">Audience</a>
+      <a href="#tiers">Tiers</a>
+      <a href="#compare">Benefits</a>
+      <a href="#close" class="nav-cta">Partner With Us →</a>
+    </div>
+  </nav>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 1 · COVER
+  ────────────────────────────────────────── -->
+  <section class="slide" id="cover">
+    <div class="blob" style="background:var(--violet); width:600px; height:600px; top:-100px; right:-150px;"></div>
+    <div class="blob" style="background:var(--magenta); width:400px; height:400px; bottom:-50px; left:-100px;"></div>
+
+    <svg class="star" style="top:18%;right:22%;opacity:0.6;" width="48" height="48" viewBox="0 0 48 48" fill="none">
+      <path d="M24 0 C24 0 24 24 24 24 C24 24 48 24 48 24 C48 24 24 24 24 24 C24 24 24 48 24 48 C24 48 24 24 24 24 C24 24 0 24 0 24 C0 24 24 24 24 24 C24 24 24 0 24 0Z" fill="#ff2a7f"/>
+    </svg>
+    <svg class="star" style="bottom:22%;right:18%;opacity:0.5;" width="32" height="32" viewBox="0 0 48 48" fill="none">
+      <path d="M24 0 C24 0 24 24 24 24 C24 24 48 24 48 24 C48 24 24 24 24 24 C24 24 24 48 24 48 C24 48 24 24 24 24 C24 24 0 24 0 24 C0 24 24 24 24 24 C24 24 24 0 24 0Z" fill="#7c3aed"/>
+    </svg>
+
+    <div class="slide-inner">
+      <p class="cover-eyebrow">Sponsorship Prospectus · 2026</p>
+      <h1 class="cover-title">
+        Shape the<br>
+        <em class="serif">Future</em> of<br>
+        Indian Education.
+      </h1>
+      <p class="cover-sub">
+        Partner with India's most forward-thinking K-12 & Higher Education summit. Three days. Five hundred leaders. One defining conversation.
+      </p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">Date</span>
+          <span class="cover-meta-value">30 & 31 Oct · 1 Nov 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">Venue</span>
+          <span class="cover-meta-value">Novotel Imagicaa, Khopoli</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">Expected Footfall</span>
+          <span class="cover-meta-value">500+ Education Leaders</span>
+        </div>
+      </div>
+      <div class="cover-tiers">
+        <div class="cover-tier-pill" style="--tier-color:var(--magenta)">
+          <span class="pip" style="background:var(--magenta)"></span>
+          Title · ₹75 Lakhs
+        </div>
+        <div class="cover-tier-pill" style="--tier-color:var(--violet)">
+          <span class="pip" style="background:var(--violet)"></span>
+          Platinum · ₹50 Lakhs
+        </div>
+        <div class="cover-tier-pill" style="--tier-color:var(--cyan)">
+          <span class="pip" style="background:var(--cyan)"></span>
+          Gold · ₹30 Lakhs
+        </div>
+        <div class="cover-tier-pill" style="--tier-color:var(--muted)">
+          <span class="pip" style="background:var(--muted)"></span>
+          Silver · ₹15 Lakhs
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 2 · ABOUT THE SUMMIT
+  ────────────────────────────────────────── -->
+  <section class="slide" id="about">
+    <div class="blob" style="background:var(--violet); width:500px; height:500px; top:-80px; left:-150px;"></div>
+    <div class="slide-inner">
+      <div class="about-grid">
+        <div>
+          <span class="section-tag">About the Summit</span>
+          <h2 class="about-headline">
+            A Summit Built for<br>Those Who <em class="serif">Build</em> Schools.
+          </h2>
+          <p class="about-body">
+            The Schools of India Summit is the premier annual convening of K-12 founders, principals, education investors, EdTech leaders, and policy shapers. It is where the people who build schools come to think, connect, and lead.
+          </p>
+          <div class="pillar-list">
+            <div class="pillar">
+              <div class="pillar-icon" style="background:rgba(255,42,127,0.12); color:var(--magenta)">💡</div>
+              <div class="pillar-text">
+                <span class="pillar-name">Bold Ideas</span>
+                <span class="pillar-desc">Keynotes outlining the blueprint for India's next generation of schools</span>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon" style="background:rgba(124,58,237,0.12); color:var(--violet)">🤝</div>
+              <div class="pillar-text">
+                <span class="pillar-name">Meaningful Conversations</span>
+                <span class="pillar-desc">Peer-to-peer roundtables and curated networking that outlast the event</span>
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon" style="background:rgba(45,230,123,0.12); color:var(--lime)">⚡</div>
+              <div class="pillar-text">
+                <span class="pillar-name">Practical Strategies</span>
+                <span class="pillar-desc">Hands-on masterclasses and toolkits delegates can implement immediately</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-number" style="color:var(--magenta)">500+</div>
+            <div class="stat-label">Education leaders expected</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" style="color:var(--violet)">3</div>
+            <div class="stat-label">Days of programming</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" style="color:var(--lime)">25+</div>
+            <div class="stat-label">Keynotes & panels</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" style="color:var(--cyan)">18</div>
+            <div class="stat-label">States represented</div>
+          </div>
+          <div class="stat-card" style="grid-column: span 2;">
+            <div class="stat-number" style="color:var(--magenta)">₹2,500 Cr+</div>
+            <div class="stat-label">Collective assets under management by attending school operators</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 3 · AUDIENCE
+  ────────────────────────────────────────── -->
+  <section class="slide" id="audience">
+    <div class="blob" style="background:var(--cyan); width:450px; height:450px; top:-100px; right:-100px;"></div>
+    <div class="slide-inner">
+      <span class="section-tag">Who Attends</span>
+      <h2 class="about-headline" style="font-size:clamp(2rem,4vw,3rem);">
+        Your Brand in Front of the<br>People Who <em class="serif">Decide.</em>
+      </h2>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-icon">🏫</div>
+          <div class="audience-type">School Founders & Trustees</div>
+          <div class="audience-pct" style="color:var(--magenta)">38%</div>
+          <div class="audience-desc">Operators of K-12 institutions ranging from single-campus schools to multi-city chains.</div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">👩‍💼</div>
+          <div class="audience-type">Principals & Academic Leaders</div>
+          <div class="audience-pct" style="color:var(--violet)">29%</div>
+          <div class="audience-desc">Decision-makers on curriculum, staffing, and school operations.</div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">📈</div>
+          <div class="audience-type">Investors & EdTech Leaders</div>
+          <div class="audience-pct" style="color:var(--lime)">19%</div>
+          <div class="audience-desc">VCs, angel investors, and founders of education technology ventures.</div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🎓</div>
+          <div class="audience-type">Educators & Researchers</div>
+          <div class="audience-pct" style="color:var(--cyan)">9%</div>
+          <div class="audience-desc">Curriculum designers, learning scientists, and pedagogical innovators.</div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🏛️</div>
+          <div class="audience-type">Policy & Government</div>
+          <div class="audience-pct" style="color:var(--muted)">5%</div>
+          <div class="audience-desc">NEP implementers, CBSE & state board representatives.</div>
+        </div>
+      </div>
+
+      <div class="reach-row">
+        <div class="reach-item">
+          <div class="reach-num" style="color:var(--magenta)">50K+</div>
+          <div class="reach-lbl">Social media impressions</div>
+        </div>
+        <div class="reach-item">
+          <div class="reach-num" style="color:var(--violet)">12K+</div>
+          <div class="reach-lbl">TSOI newsletter subscribers</div>
+        </div>
+        <div class="reach-item">
+          <div class="reach-num" style="color:var(--lime)">8+</div>
+          <div class="reach-lbl">Media partners on board</div>
+        </div>
+        <div class="reach-item">
+          <div class="reach-num" style="color:var(--cyan)">76</div>
+          <div class="reach-lbl">Schools in TSOI network</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 4 · TIER OVERVIEW
+  ────────────────────────────────────────── -->
+  <section class="slide" id="tiers">
+    <div class="blob" style="background:var(--magenta); width:400px; height:400px; bottom:-80px; right:-80px;"></div>
+    <div class="slide-inner">
+      <span class="section-tag">Partnership Tiers</span>
+      <h2 class="overview-headline">
+        Four Tiers. One <em class="serif">Mission.</em>
+      </h2>
+      <p class="overview-sub">Choose the partnership level that aligns with your brand's ambition.</p>
+
+      <div class="tier-overview">
+
+        <!-- TITLE -->
+        <div class="tier-card featured" style="--tier-color:var(--magenta)">
+          <div class="featured-badge">Most Visible</div>
+          <div class="tier-card-label">Title Sponsor</div>
+          <div class="tier-card-name">Visionary</div>
+          <div class="tier-card-price">₹75L</div>
+          <ul class="tier-card-features">
+            <li>Exclusive naming rights to the summit</li>
+            <li>Main stage keynote (30 min)</li>
+            <li>Premier exhibition booth (24 sqm)</li>
+            <li>Custom-branded networking zone</li>
+            <li>Logo on all collateral — top placement</li>
+          </ul>
+          <a href="#title" class="tier-card-cta">Explore Tier →</a>
+        </div>
+
+        <!-- PLATINUM -->
+        <div class="tier-card" style="--tier-color:var(--violet)">
+          <div class="tier-card-label">Platinum</div>
+          <div class="tier-card-name">Pioneer</div>
+          <div class="tier-card-price">₹50L</div>
+          <ul class="tier-card-features">
+            <li>"In Association With" branding</li>
+            <li>Main stage speaking slot (20 min)</li>
+            <li>Premium booth (18 sqm)</li>
+            <li>5 VIP dinner seats</li>
+            <li>Dedicated social media features</li>
+          </ul>
+          <a href="#platinum" class="tier-card-cta">Explore Tier →</a>
+        </div>
+
+        <!-- GOLD -->
+        <div class="tier-card" style="--tier-color:var(--cyan)">
+          <div class="tier-card-label">Gold</div>
+          <div class="tier-card-name">Pathfinder</div>
+          <div class="tier-card-price">₹30L</div>
+          <ul class="tier-card-features">
+            <li>Gold Sponsor brand prominence</li>
+            <li>Panel discussion seat</li>
+            <li>Standard booth (12 sqm)</li>
+            <li>1 social media spotlight</li>
+            <li>Full-page ad in delegate kit</li>
+          </ul>
+          <a href="#gold" class="tier-card-cta">Explore Tier →</a>
+        </div>
+
+        <!-- SILVER -->
+        <div class="tier-card" style="--tier-color:var(--muted)">
+          <div class="tier-card-label">Silver</div>
+          <div class="tier-card-name">Advocate</div>
+          <div class="tier-card-price">₹15L</div>
+          <ul class="tier-card-features">
+            <li>Silver Sponsor branding</li>
+            <li>Tabletop display / pop-up stand</li>
+            <li>Logo on select marketing</li>
+            <li>Half-page ad in delegate kit</li>
+            <li>Brand inclusion in digital recap</li>
+          </ul>
+          <a href="#silver" class="tier-card-cta">Explore Tier →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 5 · TITLE SPONSOR DEEP DIVE
+  ────────────────────────────────────────── -->
+  <section class="slide tier-slide" id="title">
+    <div class="blob" style="background:var(--magenta); width:500px; height:500px; top:-100px; right:-100px; opacity:0.2;"></div>
+    <div class="slide-inner">
+      <div class="tier-accent-bar" style="background:linear-gradient(90deg,var(--magenta),rgba(255,42,127,0.15))"></div>
+
+      <div class="tier-hero">
+        <div>
+          <div class="tier-label" style="color:var(--magenta)">Title Sponsor · Exclusive</div>
+          <div class="tier-name">Visionary<br>Partner</div>
+          <div class="tier-price-row">
+            <span class="tier-price-main" style="color:var(--magenta)">₹75 Lakhs</span>
+            <span class="tier-price-note">+ applicable taxes</span>
+          </div>
+          <p class="tier-tagline">
+            The summit carries your name. One brand. One summit. The most exclusive partnership in Indian education leadership — fully bespoke and built around your brand goals.
+          </p>
+        </div>
+        <div>
+          <div class="tier-what-you-get">What You Get</div>
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">🏆</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Exclusive Naming Rights</span>
+                <span class="benefit-detail">"[Brand] presents The Schools of India Summit 2026" on all touchpoints</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">🎤</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Main Stage Keynote</span>
+                <span class="benefit-detail">30-minute keynote slot on Day 1 to the full delegate audience</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">🏛️</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Premier Exhibition Booth</span>
+                <span class="benefit-detail">24 sqm double-decker booth in the highest-traffic zone</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">🌐</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Branded Networking Zone</span>
+                <span class="benefit-detail">A dedicated, fully branded lounge for private meetings & networking</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">📸</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Stage Backdrop</span>
+                <span class="benefit-detail">Logo on main stage backdrop — in every photograph, every video</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">🍽️</div>
+              <div class="benefit-text">
+                <span class="benefit-name">10 VIP Gala Dinner Seats</span>
+                <span class="benefit-detail">Reserved seats at the signature community gala dinner on Day 2</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">📱</div>
+              <div class="benefit-text">
+                <span class="benefit-name">6 Social Media Features</span>
+                <span class="benefit-detail">Dedicated posts across TSOI Instagram, LinkedIn & X before, during & post-event</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">📰</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Pre-event Media Interview</span>
+                <span class="benefit-detail">Exclusive brand feature in TSOI's newsletter & media partner publications</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(255,42,127,0.1); color:var(--magenta)">📦</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Delegate Kit Integration</span>
+                <span class="benefit-detail">Brand collateral inside all delegate kits + full-page ad in programme guide</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 6 · PLATINUM DEEP DIVE
+  ────────────────────────────────────────── -->
+  <section class="slide tier-slide" id="platinum">
+    <div class="blob" style="background:var(--violet); width:500px; height:500px; top:-100px; left:-100px; opacity:0.2;"></div>
+    <div class="slide-inner">
+      <div class="tier-accent-bar" style="background:linear-gradient(90deg,var(--violet),rgba(124,58,237,0.15))"></div>
+
+      <div class="tier-hero">
+        <div>
+          <div class="tier-label" style="color:var(--violet)">Platinum Sponsor · 2 Available</div>
+          <div class="tier-name">Pioneer<br>Partner</div>
+          <div class="tier-price-row">
+            <span class="tier-price-main" style="color:var(--violet)">₹50 Lakhs</span>
+            <span class="tier-price-note">+ applicable taxes</span>
+          </div>
+          <p class="tier-tagline">
+            "In Association With" billing across all event communications. High visibility, speaking access, and a significant presence in the halls and sessions that matter most.
+          </p>
+        </div>
+        <div>
+          <div class="tier-what-you-get">What You Get</div>
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">🏅</div>
+              <div class="benefit-text">
+                <span class="benefit-name">"In Association With" Billing</span>
+                <span class="benefit-detail">Prominent co-branding on event banners, digital & print collateral</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">🎤</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Main Stage Speaking Slot</span>
+                <span class="benefit-detail">20-minute speaking slot on Day 2 to the full delegate audience</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">🏛️</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Premium Exhibition Booth</span>
+                <span class="benefit-detail">18 sqm booth in high-traffic exhibition zone</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">📸</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Stage Backdrop Branding</span>
+                <span class="benefit-detail">Logo on main stage backdrop — second-tier placement</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">🍽️</div>
+              <div class="benefit-text">
+                <span class="benefit-name">5 VIP Gala Dinner Seats</span>
+                <span class="benefit-detail">Access to the exclusive gala dinner with all speakers and advisors</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">📱</div>
+              <div class="benefit-text">
+                <span class="benefit-name">4 Social Media Features</span>
+                <span class="benefit-detail">Branded posts before, during & after the summit across all channels</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">📰</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Media Feature</span>
+                <span class="benefit-detail">Brand spotlight in TSOI newsletter (12K+ subscribers)</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">📦</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Full-Page Delegate Kit Ad</span>
+                <span class="benefit-detail">Full-page brand advertisement in the official programme guide</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(124,58,237,0.1); color:var(--violet)">🎙️</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Breakout Session Sponsorship</span>
+                <span class="benefit-detail">Exclusive naming rights to one masterclass / workshop track</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 7 · GOLD DEEP DIVE
+  ────────────────────────────────────────── -->
+  <section class="slide tier-slide" id="gold">
+    <div class="blob" style="background:var(--cyan); width:450px; height:450px; bottom:-80px; right:-80px; opacity:0.18;"></div>
+    <div class="slide-inner">
+      <div class="tier-accent-bar" style="background:linear-gradient(90deg,var(--cyan),rgba(6,182,212,0.15))"></div>
+
+      <div class="tier-hero">
+        <div>
+          <div class="tier-label" style="color:var(--cyan)">Gold Sponsor · 3 Available</div>
+          <div class="tier-name">Pathfinder<br>Partner</div>
+          <div class="tier-price-row">
+            <span class="tier-price-main" style="color:var(--cyan)">₹30 Lakhs</span>
+            <span class="tier-price-note">+ applicable taxes</span>
+          </div>
+          <p class="tier-tagline">
+            A strong brand presence across the summit floor and sessions, with direct access to decision-makers in a structured, high-value environment.
+          </p>
+        </div>
+        <div>
+          <div class="tier-what-you-get">What You Get</div>
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(6,182,212,0.1); color:var(--cyan)">🥇</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Gold Sponsor Branding</span>
+                <span class="benefit-detail">Prominent logo placement on banners, registration area & signage</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(6,182,212,0.1); color:var(--cyan)">💬</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Panel Discussion Seat</span>
+                <span class="benefit-detail">One curated seat on a main-stage panel discussion of your choice</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(6,182,212,0.1); color:var(--cyan)">🏛️</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Standard Exhibition Booth</span>
+                <span class="benefit-detail">12 sqm booth in the exhibition zone</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(6,182,212,0.1); color:var(--cyan)">📱</div>
+              <div class="benefit-text">
+                <span class="benefit-name">2 Social Media Spotlights</span>
+                <span class="benefit-detail">Dedicated TSOI posts featuring your brand on Instagram & LinkedIn</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(6,182,212,0.1); color:var(--cyan)">📦</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Full-Page Programme Ad</span>
+                <span class="benefit-detail">Full-page advertisement in the official delegate programme guide</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(6,182,212,0.1); color:var(--cyan)">🌐</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Website & App Listing</span>
+                <span class="benefit-detail">Logo and brand description on the summit website & event app</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(6,182,212,0.1); color:var(--cyan)">🎙️</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Networking Session Branding</span>
+                <span class="benefit-detail">Sponsor one structured speed-networking session with your branding</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 8 · SILVER DEEP DIVE
+  ────────────────────────────────────────── -->
+  <section class="slide tier-slide" id="silver">
+    <div class="blob" style="background:#888; width:350px; height:350px; top:-80px; left:-80px; opacity:0.12;"></div>
+    <div class="slide-inner">
+      <div class="tier-accent-bar" style="background:linear-gradient(90deg,var(--muted),rgba(158,158,167,0.15))"></div>
+
+      <div class="tier-hero">
+        <div>
+          <div class="tier-label" style="color:var(--muted)">Silver Sponsor · 6 Available</div>
+          <div class="tier-name">Advocate<br>Partner</div>
+          <div class="tier-price-row">
+            <span class="tier-price-main" style="color:var(--muted)">₹15 Lakhs</span>
+            <span class="tier-price-note">+ applicable taxes</span>
+          </div>
+          <p class="tier-tagline">
+            An entry point into the most influential room in Indian education. Build brand recall among school leaders and education decision-makers at a focused investment level.
+          </p>
+        </div>
+        <div>
+          <div class="tier-what-you-get">What You Get</div>
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(158,158,167,0.1); color:var(--muted)">🥈</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Silver Sponsor Branding</span>
+                <span class="benefit-detail">Logo on event banners, select signage & event website</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(158,158,167,0.1); color:var(--muted)">🗂️</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Tabletop Display</span>
+                <span class="benefit-detail">Premium tabletop or pop-up stand in the exhibition / networking area</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(158,158,167,0.1); color:var(--muted)">📦</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Delegate Kit Insert</span>
+                <span class="benefit-detail">Branded flyer / collateral included in all delegate welcome kits</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(158,158,167,0.1); color:var(--muted)">📖</div>
+              <div class="benefit-text">
+                <span class="benefit-name">Half-Page Programme Ad</span>
+                <span class="benefit-detail">Half-page advertisement in the official delegate programme guide</span>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon" style="background:rgba(158,158,167,0.1); color:var(--muted)">📱</div>
+              <div class="benefit-text">
+                <span class="benefit-name">1 Social Media Mention</span>
+                <span class="benefit-detail">Brand included in the post-event digital recap across TSOI channels</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 9 · COMPARISON TABLE
+  ────────────────────────────────────────── -->
+  <section class="slide" id="compare">
+    <div class="slide-inner">
+      <span class="section-tag">Benefits at a Glance</span>
+      <h2 class="overview-headline">Full <em class="serif">Comparison</em></h2>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Benefit</th>
+            <th class="tier-th col-title">Visionary<br><small style="font-weight:400;font-size:0.75em;color:var(--magenta)">₹75 Lakhs</small></th>
+            <th class="tier-th col-plat">Pioneer<br><small style="font-weight:400;font-size:0.75em;color:var(--violet)">₹50 Lakhs</small></th>
+            <th class="tier-th col-gold">Pathfinder<br><small style="font-weight:400;font-size:0.75em;color:var(--cyan)">₹30 Lakhs</small></th>
+            <th class="tier-th col-silv">Advocate<br><small style="font-weight:400;font-size:0.75em;color:var(--muted)">₹15 Lakhs</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-col">Naming rights / Title branding</td>
+            <td class="value-col col-title">Exclusive</td>
+            <td class="value-col col-plat">"In Assoc. With"</td>
+            <td class="value-col na">—</td>
+            <td class="value-col na">—</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Main stage speaking slot</td>
+            <td class="value-col col-title">30 mins</td>
+            <td class="value-col col-plat">20 mins</td>
+            <td class="value-col na">—</td>
+            <td class="value-col na">—</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Panel discussion seat</td>
+            <td class="value-col col-title"><span class="check">✓</span></td>
+            <td class="value-col col-plat"><span class="check">✓</span></td>
+            <td class="value-col col-gold"><span class="check">✓</span></td>
+            <td class="value-col na">—</td>
+          </tr>
+
+          <tr>
+            <td class="feature-col">Exhibition booth size</td>
+            <td class="value-col col-title">24 sqm</td>
+            <td class="value-col col-plat">18 sqm</td>
+            <td class="value-col col-gold">12 sqm</td>
+            <td class="value-col col-silv">Tabletop</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Branded networking zone</td>
+            <td class="value-col col-title"><span class="check">✓</span></td>
+            <td class="value-col na">—</td>
+            <td class="value-col na">—</td>
+            <td class="value-col na">—</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Stage backdrop logo</td>
+            <td class="value-col col-title">Top placement</td>
+            <td class="value-col col-plat">2nd placement</td>
+            <td class="value-col na">—</td>
+            <td class="value-col na">—</td>
+          </tr>
+          <tr>
+            <td class="feature-col">VIP Gala Dinner seats</td>
+            <td class="value-col col-title">10</td>
+            <td class="value-col col-plat">5</td>
+            <td class="value-col na">—</td>
+            <td class="value-col na">—</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Breakout session naming</td>
+            <td class="value-col col-title"><span class="check">✓</span></td>
+            <td class="value-col col-plat"><span class="check">✓</span></td>
+            <td class="value-col na">—</td>
+            <td class="value-col na">—</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Social media features</td>
+            <td class="value-col col-title">6</td>
+            <td class="value-col col-plat">4</td>
+            <td class="value-col col-gold">2</td>
+            <td class="value-col col-silv">1 (recap)</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Newsletter feature</td>
+            <td class="value-col col-title"><span class="check">✓</span></td>
+            <td class="value-col col-plat"><span class="check">✓</span></td>
+            <td class="value-col na">—</td>
+            <td class="value-col na">—</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Programme guide advertisement</td>
+            <td class="value-col col-title">Full page</td>
+            <td class="value-col col-plat">Full page</td>
+            <td class="value-col col-gold">Full page</td>
+            <td class="value-col col-silv">Half page</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Delegate kit integration</td>
+            <td class="value-col col-title"><span class="check">✓</span></td>
+            <td class="value-col col-plat"><span class="check">✓</span></td>
+            <td class="value-col col-gold"><span class="check">✓</span></td>
+            <td class="value-col col-silv">Flyer insert</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Website & app logo listing</td>
+            <td class="value-col col-title"><span class="check">✓</span></td>
+            <td class="value-col col-plat"><span class="check">✓</span></td>
+            <td class="value-col col-gold"><span class="check">✓</span></td>
+            <td class="value-col col-silv"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td class="feature-col">Slots available</td>
+            <td class="value-col col-title" style="font-weight:900">1 only</td>
+            <td class="value-col col-plat" style="font-weight:900">2</td>
+            <td class="value-col col-gold" style="font-weight:900">3</td>
+            <td class="value-col col-silv" style="font-weight:900">6</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────────
+       SLIDE 10 · CLOSE / CTA
+  ────────────────────────────────────────── -->
+  <section class="slide" id="close">
+    <div class="blob" style="background:var(--magenta); width:600px; height:600px; top:50%; left:50%; transform:translate(-50%,-50%); opacity:0.12;"></div>
+    <svg class="star" style="top:15%;left:12%;opacity:0.5;" width="44" height="44" viewBox="0 0 48 48" fill="none">
+      <path d="M24 0 C24 0 24 24 24 24 C24 24 48 24 48 24 C48 24 24 24 24 24 C24 24 24 48 24 48 C24 48 24 24 24 24 C24 24 0 24 0 24 C0 24 24 24 24 24 C24 24 24 0 24 0Z" fill="#2de67b"/>
+    </svg>
+    <svg class="star" style="bottom:20%;right:10%;opacity:0.4;" width="36" height="36" viewBox="0 0 48 48" fill="none">
+      <path d="M24 0 C24 0 24 24 24 24 C24 24 48 24 48 24 C48 24 24 24 24 24 C24 24 24 48 24 48 C24 48 24 24 24 24 C24 24 0 24 0 24 C0 24 24 24 24 24 C24 24 24 0 24 0Z" fill="#7c3aed"/>
+    </svg>
+
+    <div class="slide-inner" style="text-align:center;">
+      <span class="section-tag" style="display:block;text-align:center;">Let's Build This Together</span>
+      <h2 class="close-title">
+        Be a Part of <em class="serif">India's</em><br>Education Story.
+      </h2>
+      <p class="close-sub">
+        Sponsorship slots are limited by design — so every partner gets real visibility, real access, and real impact. Reach out to begin the conversation.
+      </p>
+
+      <div class="close-contacts">
+        <div class="contact-card">
+          <div class="contact-role">Sponsorship Enquiries</div>
+          <div class="contact-name">The Schools of India</div>
+          <div class="contact-email">summit@theschoolsofindia.org</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-role">Summit</div>
+          <div class="contact-name">30 Oct – 1 Nov 2026</div>
+          <div class="contact-email">Novotel Imagicaa, Khopoli</div>
+        </div>
+      </div>
+
+      <a href="https://theschoolsofindia.org/summit" class="close-url">
+        Visit the Summit Page →
+      </a>
+
+      <p style="margin-top:2rem; font-size:0.8rem; color:var(--dim);">
+        © 2026 The Schools of India · All pricing in Indian Rupees · GST applicable as per prevailing rates
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>
