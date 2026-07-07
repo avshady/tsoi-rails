@@ -450,11 +450,11 @@ window.addEventListener('scroll', () => {
   
   if (window.scrollY > 100) {
     header.style.padding = '0.5rem 0';
-    header.style.backgroundColor = 'rgba(10, 10, 12, 0.9)';
+    header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
     if (headerCta) headerCta.style.display = 'inline-flex';
   } else {
     header.style.padding = '0';
-    header.style.backgroundColor = 'rgba(10, 10, 12, 0.75)';
+    header.style.backgroundColor = 'rgba(255, 255, 255, 0.92)';
     if (headerCta) headerCta.style.display = 'none';
   }
 });
