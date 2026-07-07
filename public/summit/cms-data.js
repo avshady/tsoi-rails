@@ -125,8 +125,8 @@ const cmsData = {
         color: "#7c3aed"
       },
       {
-        name: "Piramal",
-        designation: "Speaker",
+        name: "Parimal Merchant",
+        designation: "Director – Global Family Managed Business Program",
         organisation: "Piramal Foundation",
         photo: "/summit/assets/advisor_parimal.jpg",
         color: "#2de67b"

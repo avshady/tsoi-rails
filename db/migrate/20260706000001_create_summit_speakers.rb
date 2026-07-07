@@ -15,7 +15,7 @@ class CreateSummitSpeakers < ActiveRecord::Migration[8.0]
         [
           { name: "Laxmi Kumar",   title: "Director", organisation: "Avasara Academy",          photo: "/summit/assets/advisor_lakshmi.jpg?v=2", accent_color: "#ff2a7f", position: 1 },
           { name: "Sanjay Malpani", title: "Director", organisation: "Malpani Group of Schools", photo: "/summit/assets/advisor_sanjay.jpg?v=2",   accent_color: "#7c3aed", position: 2 },
-          { name: "Piramal",        title: "Speaker",  organisation: "Piramal Foundation",        photo: "/summit/assets/advisor_parimal.jpg?v=2",  accent_color: "#2de67b", position: 3 }
+          { name: "Parimal Merchant", title: "Director – Global Family Managed Business Program", organisation: "Piramal Foundation", photo: "/summit/assets/advisor_parimal.jpg?v=2", accent_color: "#2de67b", position: 3 }
         ].each do |attrs|
           execute <<~SQL
             INSERT INTO summit_speakers (name, title, organisation, photo, accent_color, position, created_at, updated_at)
