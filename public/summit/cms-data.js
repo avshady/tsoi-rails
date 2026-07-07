@@ -431,7 +431,7 @@ const cmsData = {
     about: "The Education Summit 2026 is India's premier gathering for institutional leaders, builders, and innovators, driving systemic growth and human-centric pedagogy.",
     contact: {
       email: "summit@theschoolsofindia.org",
-      phone: "+91 98765 43210",
+      phone: "+91 77198 96969",
       address: "Novotel Imagicaa Khopoli, Pali, Khopoli, Maharashtra 410203"
     },
     socials: [
