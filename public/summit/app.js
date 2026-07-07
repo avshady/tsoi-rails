@@ -409,20 +409,13 @@ if (regDialog) {
   });
 }
 
-if (regForm) {
-  regForm.addEventListener('submit', (e) => {
+// Wire all "#registration" anchor links to open the modal directly
+document.querySelectorAll('a[href="#registration"]').forEach(link => {
+  link.addEventListener('click', e => {
     e.preventDefault();
-    const fullname = document.getElementById('form-fullname').value;
-    const email = document.getElementById('form-email').value;
-    const org = document.getElementById('form-organisation').value;
-    const ticketName = document.getElementById('form-pass-name').value;
-    
-    // Simulate successful registration
-    alert(`Success! Thank you, ${fullname}.\nYour reservation for a ${ticketName} at the Education Summit 2026 has been logged.\nAn confirmation email will be sent to ${email} shortly.`);
-    regDialog.close();
-    regForm.reset();
+    openRegistrationModal('', 'Register Interest');
   });
-}
+});
 
 // Hamburger menu navigation trigger
 const hamburger = document.getElementById('hamburger-btn');
