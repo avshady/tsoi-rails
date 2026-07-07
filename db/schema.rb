@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_26_102350) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_07_000001) do
   create_table "inquiries", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
@@ -52,6 +52,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_102350) do
     t.string "name", null: false
     t.float "pass_percentage"
     t.string "phone", limit: 50
+    t.string "portal_email", limit: 150
+    t.string "portal_token", limit: 64
     t.float "rating", default: 0.0
     t.integer "security_deposit"
     t.string "state", limit: 100, null: false
@@ -71,6 +73,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_102350) do
     t.index ["is_featured", "rating", "name"], name: "idx_sort", length: { name: 40 }
     t.index ["is_featured"], name: "idx_featured"
     t.index ["name", "city", "description"], name: "ft_search", type: :fulltext
+    t.index ["portal_token"], name: "idx_portal_token", unique: true
     t.index ["rating"], name: "idx_rating"
     t.index ["state"], name: "idx_state"
     t.index ["type"], name: "idx_type"
@@ -79,5 +82,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_102350) do
   create_table "site_content", primary_key: "key", id: { type: :string, limit: 100 }, charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.timestamp "updated_at", default: -> { "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" }
     t.text "value", size: :long, null: false
+  end
+
+  create_table "summit_speakers", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "accent_color", default: "#ff2a7f"
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.string "organisation"
+    t.string "photo"
+    t.integer "position", default: 0
+    t.string "title"
+    t.datetime "updated_at", null: false
   end
 end
