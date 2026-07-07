@@ -45,6 +45,59 @@
       z-index: 9999;
     }
 
+    /* LIGHT MODE OVERRIDES */
+    html.light {
+      --bg:       #f5f5f7;
+      --surface:  #ffffff;
+      --surface-2:#eaeaf0;
+      --border:   rgba(0,0,0,0.09);
+      --text:     #0a0a14;
+      --muted:    #52525b;
+      --dim:      #a1a1aa;
+    }
+    html.light body { background: var(--bg); color: var(--text); }
+    html.light .nav { background: rgba(245,245,247,0.92); }
+    html.light .nav-logo { filter: none; }
+    html.light .card:hover { border-color: rgba(0,0,0,0.14); }
+    html.light .btn-secondary:hover { color: var(--text); border-color: rgba(0,0,0,0.18); }
+    html.light .asset-card:hover { border-color: rgba(0,0,0,0.14); }
+    html.light .asset-preview { filter: none; }
+
+    /* THEME TOGGLE */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px;
+      gap: 2px;
+      cursor: pointer;
+    }
+    .theme-opt {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: var(--dim);
+      transition: all 0.18s;
+    }
+    .theme-opt.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    }
+
     /* NAV */
     .nav {
       position: sticky; top: 0;
@@ -362,9 +415,13 @@
       <div class="nav-divider"></div>
       <span class="nav-title">Collaterals</span>
     </div>
-    <a class="nav-back" href="/summit">
-      ← Back to Summit
-    </a>
+    <div class="nav-right">
+      <div class="theme-toggle" id="themeToggle" role="group" aria-label="Colour scheme">
+        <button class="theme-opt active" data-theme="dark">Dark</button>
+        <button class="theme-opt" data-theme="light">Light</button>
+      </div>
+      <a class="nav-back" href="/summit">← Back to Summit</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -613,5 +670,20 @@
     <span class="footer-note">summit@theschoolsofindia.org</span>
   </footer>
 
+  <script>
+    const html = document.documentElement;
+    const opts = document.querySelectorAll('.theme-opt');
+
+    function applyTheme(theme) {
+      html.classList.toggle('light', theme === 'light');
+      opts.forEach(o => o.classList.toggle('active', o.dataset.theme === theme));
+      localStorage.setItem('collaterals-theme', theme);
+    }
+
+    // Restore on load
+    applyTheme(localStorage.getItem('collaterals-theme') || 'dark');
+
+    opts.forEach(btn => btn.addEventListener('click', () => applyTheme(btn.dataset.theme)));
+  </script>
 </body>
 </html>
