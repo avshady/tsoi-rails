@@ -244,22 +244,31 @@ class PagesController < ApplicationController
   end
 
   def summit_notify
-    email = params[:email].to_s.strip
-    name  = params[:name].to_s.strip
-    role  = params[:role].to_s.strip
+    email        = params[:email].to_s.strip
+    name         = params[:name].to_s.strip
+    role         = params[:role].to_s.strip
+    organisation = params[:organisation].to_s.strip
+    pass_id      = params[:passId].to_s.strip
+
+    newsletter = role == "Newsletter Subscriber"
+
+    parts = []
+    parts << "Role: #{role}"         if role.present? && !newsletter
+    parts << "Pass: #{pass_id}"      if pass_id.present?
 
     Inquiry.create!(
-      name:    name,
-      email:   email,
-      service: "Summit Waitlist",
-      message: role.present? ? "Role: #{role}" : nil,
-      status:  "new"
+      name:        name,
+      email:       email,
+      school_name: organisation.presence,
+      service:     newsletter ? "Summit Newsletter" : "Summit Registration",
+      message:     parts.join(" · ").presence,
+      status:      "new"
     )
 
-    flash[:notice] = "You're on the list! We'll notify you about the Summit."
+    flash[:notice] = newsletter ? "Subscribed! We'll keep you updated." : "You're on the list! We'll be in touch soon."
     redirect_to summit_path
   rescue => e
-    flash[:notice] = "You're on the list! We'll notify you about the Summit."
+    flash[:notice] = "You're on the list! We'll be in touch soon."
     redirect_to summit_path
   end
 end
