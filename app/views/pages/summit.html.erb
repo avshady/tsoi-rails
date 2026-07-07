@@ -241,23 +241,19 @@
           </div>
         </div>
         <div class="map-container">
-          <svg class="map-svg" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" class="map-grid-lines"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-            <path d="M 50 0 Q 150 150 450 300" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
-            <path d="M 0 100 Q 250 80 500 200" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4"/>
-            <circle cx="280" cy="130" r="25" fill="rgba(255, 42, 127, 0.15)"/>
-            <circle cx="280" cy="130" r="10" fill="rgba(255, 42, 127, 0.4)"/>
-            <circle cx="280" cy="130" r="5" class="map-marker"/>
-            <text x="295" y="134" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="11" font-weight="bold">THE VENUE</text>
-          </svg>
+          <iframe
+            src="https://maps.google.com/maps?q=Novotel+Imagicaa,+Khopoli,+Maharashtra&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="100%"
+            style="border:0; display:block;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Novotel Imagicaa, Khopoli">
+          </iframe>
           <div class="map-overlay-card">
-            <p style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.25rem;">Convention Centre</p>
-            <p class="map-coords" id="venue-coords"></p>
+            <p style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.25rem;">Novotel Imagicaa</p>
+            <p style="font-size: 0.8rem; margin: 0; opacity: 0.7;">Khopoli, Maharashtra</p>
           </div>
         </div>
       </div>
