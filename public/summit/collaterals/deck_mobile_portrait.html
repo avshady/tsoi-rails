@@ -34,6 +34,51 @@
       --radius-sm: 8px;
     }
 
+    html.light {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-2: #eaeaf0;
+      --border: rgba(0,0,0,0.09);
+      --text: #0a0a14;
+      --text-muted: #52525b;
+      --text-dim: #a1a1aa;
+      --accent: #d81b60;
+      --accent-violet: #6200ea;
+      --accent-lime: #16a34a;
+      --accent-cyan: #0891b2;
+    }
+    html.light .glass-card {
+      background: rgba(255,255,255,0.88);
+      border-color: rgba(0,0,0,0.09);
+    }
+
+    /* theme pill in nav bar */
+    .mobile-theme-toggle {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 2px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .mobile-theme-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .mobile-theme-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -759,6 +804,10 @@
     <div class="mobile-nav-bar">
       <button class="nav-btn" id="prevBtn" aria-label="Previous Slide">←</button>
       <div class="slide-progress" id="slideProgress">1 / 11</div>
+      <div class="mobile-theme-toggle" id="mobileThemeToggle" role="group" aria-label="Colour scheme">
+        <button class="mobile-theme-btn active" data-theme="dark">Dark</button>
+        <button class="mobile-theme-btn" data-theme="light">Light</button>
+      </div>
       <button class="nav-btn" id="nextBtn" aria-label="Next Slide">→</button>
     </div>
 
@@ -845,6 +894,20 @@
       // Initialize first slide
       goToSlide(0);
     });
+  </script>
+  <script>
+    const html = document.documentElement;
+    const mobileThemeOpts = document.querySelectorAll('#mobileThemeToggle .mobile-theme-btn');
+    function applyMobileTheme(t) {
+      html.classList.toggle('light', t === 'light');
+      mobileThemeOpts.forEach(o => o.classList.toggle('active', o.dataset.theme === t));
+      localStorage.setItem('mobile-deck-theme', t);
+    }
+    applyMobileTheme(localStorage.getItem('mobile-deck-theme') || 'dark');
+    mobileThemeOpts.forEach(btn => btn.addEventListener('click', e => {
+      e.stopPropagation();
+      applyMobileTheme(btn.dataset.theme);
+    }));
   </script>
 </body>
 </html>

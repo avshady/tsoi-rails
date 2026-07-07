@@ -32,6 +32,48 @@
       --rs: 14px;
     }
 
+    html.light {
+      --bg:        #f5f5f7;
+      --surface:   #ffffff;
+      --surface-2: #eaeaf0;
+      --border:    rgba(0,0,0,0.09);
+      --text:      #0a0a14;
+      --muted:     #52525b;
+      --dim:       #a1a1aa;
+      --magenta:   #d81b60;
+      --violet:    #6200ea;
+      --lime:      #16a34a;
+      --cyan:      #0891b2;
+    }
+    html.light .nav { background: rgba(245,245,247,0.92); }
+    html.light .nav-cta { color: #fff !important; }
+
+    /* theme pill in nav */
+    .nav-theme {
+      display: flex;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 3px;
+      gap: 2px;
+    }
+    .nav-theme-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: var(--ff-display);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 13px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .nav-theme-btn.active {
+      background: var(--magenta);
+      color: #fff;
+    }
+
     html { scroll-behavior: smooth; }
 
     body {
@@ -535,6 +577,10 @@
       <a href="#tiers">Tiers</a>
       <a href="#compare">Benefits</a>
       <a href="#close" class="nav-cta">Partner With Us →</a>
+    </div>
+    <div class="nav-theme" id="sponsorThemeToggle" role="group" aria-label="Colour scheme">
+      <button class="nav-theme-btn active" data-theme="dark">Dark</button>
+      <button class="nav-theme-btn" data-theme="light">Light</button>
     </div>
   </nav>
 
@@ -1364,6 +1410,18 @@
       </p>
     </div>
   </section>
+
+  <script>
+    const html = document.documentElement;
+    const sponsorOpts = document.querySelectorAll('#sponsorThemeToggle .nav-theme-btn');
+    function applySponsorTheme(t) {
+      html.classList.toggle('light', t === 'light');
+      sponsorOpts.forEach(o => o.classList.toggle('active', o.dataset.theme === t));
+      localStorage.setItem('sponsor-theme', t);
+    }
+    applySponsorTheme(localStorage.getItem('sponsor-theme') || 'dark');
+    sponsorOpts.forEach(btn => btn.addEventListener('click', () => applySponsorTheme(btn.dataset.theme)));
+  </script>
 
 </body>
 </html>

@@ -1548,12 +1548,19 @@
     const themeToggleLabel = document.getElementById('themeToggleLabel');
     const body = document.body;
 
-    if (themeToggle && themeToggleLabel) {
+    function applyBrandbookTheme(theme) {
+      const isLight = theme === 'light';
+      body.classList.toggle('light', isLight);
+      if (themeToggleLabel) themeToggleLabel.textContent = isLight ? 'Dark mode' : 'Light mode';
+      if (themeToggle) themeToggle.querySelector('.theme-toggle-icon').textContent = isLight ? '🌙' : '☀';
+      localStorage.setItem('brandbook-theme', theme);
+    }
+
+    applyBrandbookTheme(localStorage.getItem('brandbook-theme') || 'dark');
+
+    if (themeToggle) {
       themeToggle.addEventListener('click', () => {
-        body.classList.toggle('light');
-        const isLight = body.classList.contains('light');
-        themeToggleLabel.textContent = isLight ? 'Dark mode' : 'Light mode';
-        themeToggle.querySelector('.theme-toggle-icon').textContent = isLight ? '🌙' : '☀';
+        applyBrandbookTheme(body.classList.contains('light') ? 'dark' : 'light');
       });
     }
   </script>
