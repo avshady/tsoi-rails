@@ -70,24 +70,24 @@ const cmsData = {
     "Higher Education Leaders"
   ],
   experience: {
-    title: "Three Days. Endless Learning.",
+    title: "Every Child Can Flourish.",
     days: [
       {
-        day: "Day 1",
-        theme: "Leadership • Vision • Innovation",
-        description: "Setting the strategic direction for modern institutions. Focuses on fostering forward-thinking school cultures, spearheading administrative innovation, and navigating policy changes.",
+        day: "30 Oct — WHY",
+        theme: "Why Schools Must Change",
+        description: "Arrivals, the opening film 'The Child of 2040', and the question that anchors everything — what kind of human are we building?",
         color: "violet"
       },
       {
-        day: "Day 2",
-        theme: "Teaching • Technology • Transformation",
-        description: "Deep dive into classroom pedagogies and EdTech tools. Focuses on AI integration, modern curriculum design, experiential learning models, and assessment innovations.",
+        day: "31 Oct — HOW",
+        theme: "Building the Future School",
+        description: "Two keynotes, parallel tracks for Founders · Principals · Teachers · Operations, workshops, the Innovation Festival, private Imagicaa access, and the Schools of India Gala.",
         color: "magenta"
       },
       {
-        day: "Day 3",
-        theme: "Future Schools • Networking • Growth",
-        description: "The business and future of education. Focuses on branding, admissions excellence, sustainable scaling, building cross-institutional networks, and securing investments.",
+        day: "1 Nov — NOW WHAT",
+        theme: "Taking It Home",
+        description: "The 90-Day Action Plan workshop, TSOI Community Launch, and the closing ceremony with The Schools of India Pledge.",
         color: "lime"
       }
     ]
@@ -235,27 +235,36 @@ const cmsData = {
   },
   schedule: {
     Day1: [
-      { time: "09:00 AM - 10:00 AM", title: "Registration & Morning Networking", speaker: "Summit Crew", location: "Grand Lobby" },
-      { time: "10:00 AM - 11:30 AM", title: "Keynote: Reimagining Education for the 21st Century", speaker: "Dr. Anand Rao", location: "Main Plenary Hall" },
-      { time: "11:30 AM - 12:30 PM", title: "Panel Discussion: Creating a Culture of Continuous Learning", speaker: "Panel of School Principals", location: "Auditorium A" },
-      { time: "12:30 PM - 01:30 PM", title: "Networking Lunch", speaker: "All Attendees", location: "Exhibition Dining Area" },
-      { time: "01:30 PM - 03:00 PM", title: "Workshop: Leadership in Evolving School Systems", speaker: "Michael Vance", location: "Seminar Room 2" },
-      { time: "03:30 PM - 05:00 PM", title: "Fireside Chat: Policy Changes & Modern Accreditation", speaker: "State Education Board Representatives", location: "Auditorium A" }
+      { time: "2:00 – 4:00 PM", title: "Arrivals & Check-in", speaker: "", location: "Grand Lobby" },
+      { time: "4:00 – 5:00 PM", title: "Opening Experience: The Child of 2040", speaker: "", location: "Main Stage" },
+      { time: "5:00 – 5:30 PM", title: "Welcome Address", speaker: "", location: "Main Stage" },
+      { time: "5:30 – 6:15 PM", title: "Opening Keynote: What Kind of Human Are We Building?", speaker: "", location: "Main Stage" },
+      { time: "6:15 – 7:00 PM", title: "Networking: Meet Your Tribe", speaker: "", location: "Networking Lounge" },
+      { time: "7:00 – 10:00 PM", title: "Welcome Dinner", speaker: "", location: "Outdoor Lawn" }
     ],
     Day2: [
-      { time: "09:30 AM - 11:00 AM", title: "Keynote: Integrating AI Safely and Productively in K-12", speaker: "Priya Sharma", location: "Main Plenary Hall" },
-      { time: "11:00 AM - 12:30 PM", title: "Masterclass: Experiential Learning and Design Thinking", speaker: "Dr. Sunita Nair", location: "Room B" },
-      { time: "12:30 PM - 01:30 PM", title: "Networking Lunch", speaker: "All Attendees", location: "Exhibition Dining Area" },
-      { time: "01:30 PM - 03:00 PM", title: "Panel: STEM, Robotics, and Tech Integration Priorities", speaker: "Tech Directors & Academic Coordinators", location: "Auditorium A" },
-      { time: "03:30 PM - 05:00 PM", title: "Product Demonstrations: Next-Gen Classroom Systems", speaker: "EdTech Showrunners", location: "Showcase Stage" }
+      { time: "7:00 – 8:00 AM", title: "Morning Wellness — Yoga, Walk & Run", speaker: "", location: "Resort Grounds" },
+      { time: "8:00 – 9:00 AM", title: "Breakfast", speaker: "", location: "Dining Area" },
+      { time: "9:00 – 9:30 AM", title: "Day Opening", speaker: "", location: "Main Stage" },
+      { time: "9:30 – 10:15 AM", title: "Keynote: The Future of Schools", speaker: "", location: "Main Stage" },
+      { time: "10:15 – 11:00 AM", title: "Keynote: The 2 Sigma Challenge", speaker: "", location: "Main Stage" },
+      { time: "11:00 – 11:30 AM", title: "Tea & Networking", speaker: "", location: "Networking Lounge" },
+      { time: "11:30 AM – 1:00 PM", title: "Parallel Tracks — Founders · Principals · Teachers · Operations", speaker: "", location: "Halls 2 – 5" },
+      { time: "1:00 – 2:00 PM", title: "Lunch", speaker: "", location: "Dining Area" },
+      { time: "2:00 – 3:30 PM", title: "Workshops — AI Lesson Design · SOPs · Curriculum · Branding", speaker: "", location: "Hall 6" },
+      { time: "3:30 – 4:00 PM", title: "Tea", speaker: "", location: "Networking Lounge" },
+      { time: "4:00 – 5:30 PM", title: "Innovation Festival — Schools Showcase", speaker: "", location: "Main Hall" },
+      { time: "5:30 – 7:30 PM", title: "Imagicaa Experience — Private Access", speaker: "", location: "Imagicaa Park" },
+      { time: "8:00 – 11:00 PM", title: "The Schools of India Gala", speaker: "", location: "Grand Ballroom" }
     ],
     Day3: [
-      { time: "10:00 AM - 11:30 AM", title: "Keynote: The Growth Roadmap - Branding & Admissions", speaker: "Marketing Experts", location: "Main Plenary Hall" },
-      { time: "11:30 AM - 01:00 PM", title: "Roundtable: Institutional Collaboration & Funding Paths", speaker: "Education Investors & Founders", location: "Lounge Room" },
-      { time: "01:00 PM - 02:00 PM", title: "Networking Lunch", speaker: "All Attendees", location: "Exhibition Dining Area" },
-      { time: "02:00 PM - 03:30 PM", title: "Panel: Early Childhood Innovations and Student Wellbeing", speaker: "Dr. Sunita Nair & Guests", location: "Auditorium A" },
-      { time: "04:00 PM - 05:00 PM", title: "Valedictory Ceremony & Closing Remarks", speaker: "Founding Board", location: "Main Plenary Hall" },
-      { time: "07:30 PM - 10:00 PM", title: "Community Gala Dinner & Networking Event", speaker: "All Registered Attendees", location: "Exhibition Lawn" }
+      { time: "7:30 – 8:30 AM", title: "Breakfast", speaker: "", location: "Dining Area" },
+      { time: "8:30 – 9:30 AM", title: "Fireside: The Future of Education in India", speaker: "", location: "Main Stage" },
+      { time: "9:30 – 10:45 AM", title: "Monday Morning Workshop — 90-Day Action Plan", speaker: "", location: "All Halls" },
+      { time: "10:45 – 11:15 AM", title: "Tea", speaker: "", location: "Networking Lounge" },
+      { time: "11:15 – 12:15 PM", title: "Community Launch — TSOI Membership, City Chapters & Peer Forums", speaker: "", location: "Main Stage" },
+      { time: "12:15 – 1:00 PM", title: "Closing Ceremony — The Schools of India Pledge", speaker: "", location: "Main Stage" },
+      { time: "1:00 – 2:00 PM", title: "Lunch & Departures", speaker: "", location: "Dining Area" }
     ]
   },
   registration: [

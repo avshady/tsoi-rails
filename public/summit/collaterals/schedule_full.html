@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Schedule — TSOI Summit 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Outfit', Arial, sans-serif;
+      background: #f0f0f5;
+      color: #0a0a14;
+      -webkit-font-smoothing: antialiased;
+      padding: 32px 16px 64px;
+    }
+    .wrapper { max-width: 820px; margin: 0 auto; }
+
+    /* ── HEADER ── */
+    .doc-header {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-radius: 16px 16px 0 0;
+      border-bottom: none;
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .doc-logo { display: flex; align-items: center; gap: 10px; }
+    .doc-logo-dot { width: 8px; height: 8px; background: #ff2a7f; border-radius: 50%; }
+    .doc-logo-text { font-size: 13px; font-weight: 800; letter-spacing: 0.06em; color: #0a0a14; }
+    .doc-meta { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #9a9aa8; }
+
+    /* ── HERO BAND ── */
+    .doc-hero {
+      background: #ffffff;
+      border-left: 1px solid rgba(0,0,0,0.09);
+      border-right: 1px solid rgba(0,0,0,0.09);
+      padding: 40px 40px 36px;
+      border-bottom: 1px solid rgba(0,0,0,0.09);
+    }
+    .doc-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #ff2a7f; margin-bottom: 10px; }
+    .doc-title { font-size: 40px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; color: #0a0a14; margin-bottom: 14px; }
+    .doc-sub { font-size: 15px; color: #52525f; line-height: 1.6; max-width: 540px; }
+    .flow-strip {
+      display: flex; gap: 0; margin-top: 28px;
+      border: 1px solid rgba(0,0,0,0.09); border-radius: 12px; overflow: hidden;
+    }
+    .flow-cell {
+      flex: 1; padding: 16px 20px;
+      border-right: 1px solid rgba(0,0,0,0.09);
+    }
+    .flow-cell:last-child { border-right: none; }
+    .flow-date { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #9a9aa8; margin-bottom: 4px; }
+    .flow-theme { font-size: 15px; font-weight: 800; }
+    .flow-cell.why .flow-theme { color: #7c3aed; }
+    .flow-cell.how .flow-theme { color: #ff2a7f; }
+    .flow-cell.now .flow-theme { color: #16a34a; }
+
+    /* ── SECTION / DAY ── */
+    .day-block {
+      background: #ffffff;
+      border-left: 1px solid rgba(0,0,0,0.09);
+      border-right: 1px solid rgba(0,0,0,0.09);
+      padding: 36px 40px 0;
+    }
+    .day-block + .day-block { border-top: 1px solid rgba(0,0,0,0.09); }
+    .day-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .day-label .day-pill {
+      display: inline-block; padding: 3px 10px; border-radius: 9999px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+    }
+    .day-block.violet .day-pill { background: #f5f3ff; color: #7c3aed; }
+    .day-block.magenta .day-pill { background: #fff0f6; color: #ff2a7f; }
+    .day-block.lime .day-pill { background: #f0fdf4; color: #16a34a; }
+    .day-heading { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; color: #0a0a14; margin-bottom: 24px; }
+
+    /* ── SESSION ROWS ── */
+    .session { display: flex; gap: 0; padding: 14px 0; border-top: 1px solid rgba(0,0,0,0.06); }
+    .session:first-of-type { border-top-color: rgba(0,0,0,0.09); }
+    .session-time {
+      flex: 0 0 160px; font-size: 13px; font-weight: 700; color: #7c3aed;
+      padding-top: 2px;
+    }
+    .day-block.magenta .session-time { color: #ff2a7f; }
+    .day-block.lime .session-time { color: #16a34a; }
+    .session-body { flex: 1; }
+    .session-title { font-size: 15px; font-weight: 700; color: #0a0a14; margin-bottom: 4px; }
+    .session-title.is-highlight { color: inherit; }
+    .session-desc { font-size: 12px; color: #52525f; line-height: 1.6; }
+    .session-desc ul { list-style: none; padding: 0; margin-top: 4px; }
+    .session-desc ul li::before { content: "·  "; color: #9a9aa8; }
+    .session-tag {
+      display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 9999px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .tag-keynote { background: #fff0f6; color: #ff2a7f; }
+    .tag-workshop { background: #f5f3ff; color: #7c3aed; }
+    .tag-networking { background: #f0fdf4; color: #16a34a; }
+    .tag-meal { background: #f3f4f7; color: #9a9aa8; }
+    .tag-experience { background: #ecfeff; color: #0891b2; }
+    .tag-ceremony { background: #fef3c7; color: #d97706; }
+    .day-block-footer { padding: 20px 0 36px; }
+
+    /* ── TRACKS TABLE ── */
+    .tracks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 8px; }
+    .track-card { background: #f3f4f7; border: 1px solid rgba(0,0,0,0.09); border-radius: 10px; padding: 12px 14px; }
+    .track-name { font-size: 12px; font-weight: 800; color: #0a0a14; margin-bottom: 6px; }
+    .track-topics { list-style: none; }
+    .track-topics li { font-size: 11px; color: #52525f; padding: 1px 0; }
+    .track-topics li::before { content: "→ "; color: #9a9aa8; font-size: 10px; }
+
+    /* ── SPECIAL EVENTS ── */
+    .special-block {
+      background: #ffffff;
+      border-left: 1px solid rgba(0,0,0,0.09);
+      border-right: 1px solid rgba(0,0,0,0.09);
+      border-top: 1px solid rgba(0,0,0,0.09);
+      padding: 36px 40px;
+    }
+    .special-heading { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #ff2a7f; margin-bottom: 6px; }
+    .special-title { font-size: 20px; font-weight: 900; color: #0a0a14; margin-bottom: 20px; letter-spacing: -0.02em; }
+    .special-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .special-card { background: #f3f4f7; border: 1px solid rgba(0,0,0,0.09); border-radius: 10px; padding: 14px 16px; }
+    .special-card-name { font-size: 13px; font-weight: 700; color: #0a0a14; }
+
+    /* ── PHILOSOPHY ── */
+    .phi-block {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-top: none;
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .phi-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9aa8; margin-bottom: 10px; }
+    .phi-item { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .phi-pct { font-size: 22px; font-weight: 900; color: #ff2a7f; letter-spacing: -0.04em; flex: 0 0 52px; }
+    .phi-desc { font-size: 13px; color: #52525f; }
+    .pledge-block { }
+    .pledge-lines { margin-top: 10px; }
+    .pledge-line { font-size: 13px; color: #52525f; padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,0.06); line-height: 1.5; }
+    .pledge-line::before { content: "✦  "; color: #ff2a7f; }
+
+    /* ── FOOTER ── */
+    .doc-footer {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-top: none;
+      border-radius: 0 0 16px 16px;
+      padding: 22px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-left { font-size: 11px; color: #9a9aa8; }
+    .footer-right { font-size: 11px; color: #9a9aa8; text-align: right; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .day-block, .special-block, .phi-block, .doc-footer, .doc-hero, .doc-header { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="doc-logo">
+      <div class="doc-logo-dot"></div>
+      <span class="doc-logo-text">THE SCHOOLS OF INDIA</span>
+    </div>
+    <span class="doc-meta">Full Schedule · Summit 2026</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="doc-hero">
+    <p class="doc-eyebrow">Every Child Can Flourish</p>
+    <h1 class="doc-title">TSOI Summit 2026<br>Full Programme</h1>
+    <p class="doc-sub">30 October – 1 November 2026 · Novotel Imagicaa, Khopoli, Maharashtra</p>
+    <div class="flow-strip">
+      <div class="flow-cell why">
+        <div class="flow-date">30 Oct · Thu</div>
+        <div class="flow-theme">WHY</div>
+      </div>
+      <div class="flow-cell how">
+        <div class="flow-date">31 Oct · Fri</div>
+        <div class="flow-theme">HOW</div>
+      </div>
+      <div class="flow-cell now">
+        <div class="flow-date">1 Nov · Sat</div>
+        <div class="flow-theme">NOW WHAT</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 0 -->
+  <div class="day-block violet">
+    <div>
+      <div class="day-label"><span class="day-pill">DAY 0 · THURSDAY 30 OCTOBER</span></div>
+      <div class="day-heading">Why Schools Must Change</div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">2:00 – 4:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Arrivals & Check-in</div>
+        <div class="session-desc">
+          <ul>
+            <li>Welcome desk · Tea, coffee &amp; networking lounge</li>
+            <li>Photo wall · AI-powered networking app matchmaking</li>
+            <li>Everyone receives: summit badge, school table assignment, experience passport, summit journal</li>
+          </ul>
+        </div>
+        <span class="session-tag tag-networking">Arrival</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">4:00 – 5:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Opening Experience: The Child of 2040</div>
+        <div class="session-desc">No speeches. Short film, student voices, and open questions. Intentionally emotional.</div>
+        <span class="session-tag tag-experience">Opening</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">5:00 – 5:30 PM</div>
+      <div class="session-body">
+        <div class="session-title">Welcome Address</div>
+        <div class="session-desc">Why this summit exists. Why every child can flourish. The movement.</div>
+        <span class="session-tag tag-keynote">Address</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">5:30 – 6:15 PM</div>
+      <div class="session-body">
+        <div class="session-title">Opening Keynote: What Kind of Human Are We Building?</div>
+        <span class="session-tag tag-keynote">Keynote</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">6:15 – 7:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Networking: Meet Your Tribe</div>
+        <div class="session-desc">Structured table networking by role — Founders · Principals · Teachers · Operators · Preschool · University Leaders</div>
+        <span class="session-tag tag-networking">Networking</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">7:00 – 10:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Welcome Dinner</div>
+        <div class="session-desc">Outdoor. Live music. Very relaxed.</div>
+        <span class="session-tag tag-meal">Dinner</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">8:00 – 10:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Founding Council Dinner</div>
+        <div class="session-desc">Separate, invitation-only. The most important dinner of the event.</div>
+        <span class="session-tag tag-ceremony">Private</span>
+      </div>
+    </div>
+
+    <div class="day-block-footer"></div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day-block magenta">
+    <div>
+      <div class="day-label"><span class="day-pill">DAY 1 · FRIDAY 31 OCTOBER</span></div>
+      <div class="day-heading">HOW — Building the Future School</div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">7:00 – 8:00 AM</div>
+      <div class="session-body">
+        <div class="session-title">Morning Wellness — Yoga, Walk & Run</div>
+        <span class="session-tag tag-networking">Wellness</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">8:00 – 9:00 AM</div>
+      <div class="session-body">
+        <div class="session-title">Breakfast & Networking</div>
+        <span class="session-tag tag-meal">Meal</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">9:00 – 9:30 AM</div>
+      <div class="session-body">
+        <div class="session-title">Day Opening</div>
+        <div class="session-desc">Short. Energetic.</div>
+        <span class="session-tag tag-keynote">Opening</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">9:30 – 10:15 AM</div>
+      <div class="session-body">
+        <div class="session-title">Keynote: The Future of Schools</div>
+        <span class="session-tag tag-keynote">Keynote · Main Stage</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">10:15 – 11:00 AM</div>
+      <div class="session-body">
+        <div class="session-title">Keynote: The 2 Sigma Challenge</div>
+        <span class="session-tag tag-keynote">Keynote · Main Stage</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">11:00 – 11:30 AM</div>
+      <div class="session-body">
+        <div class="session-title">Tea & Networking</div>
+        <span class="session-tag tag-meal">Break</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">11:30 AM – 1:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Parallel Tracks</div>
+        <div class="session-desc" style="margin-top:10px;">
+          <div class="tracks-grid">
+            <div class="track-card">
+              <div class="track-name">Founders · Hall 2</div>
+              <ul class="track-topics">
+                <li>Building great schools</li>
+                <li>Growth</li>
+                <li>Culture</li>
+                <li>AI</li>
+              </ul>
+            </div>
+            <div class="track-card">
+              <div class="track-name">Principals · Hall 3</div>
+              <ul class="track-topics">
+                <li>Leadership</li>
+                <li>Academic systems</li>
+                <li>Parent management</li>
+              </ul>
+            </div>
+            <div class="track-card">
+              <div class="track-name">Teachers · Hall 4</div>
+              <ul class="track-topics">
+                <li>Personalisation</li>
+                <li>Engagement</li>
+                <li>AI tools</li>
+              </ul>
+            </div>
+            <div class="track-card">
+              <div class="track-name">Operations · Hall 5</div>
+              <ul class="track-topics">
+                <li>Finance</li>
+                <li>ERP</li>
+                <li>Safety</li>
+                <li>Hiring</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <span class="session-tag tag-workshop" style="margin-top:12px; display:inline-block;">Parallel Sessions</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">1:00 – 2:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Lunch</div>
+        <span class="session-tag tag-meal">Meal</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">2:00 – 3:30 PM</div>
+      <div class="session-body">
+        <div class="session-title">Workshops — Hall 6</div>
+        <div class="session-desc">
+          <ul>
+            <li>AI Lesson Design</li>
+            <li>SOP Building</li>
+            <li>Curriculum Design</li>
+            <li>School Branding</li>
+          </ul>
+        </div>
+        <span class="session-tag tag-workshop">Workshops</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">3:30 – 4:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Tea</div>
+        <span class="session-tag tag-meal">Break</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">4:00 – 5:30 PM</div>
+      <div class="session-body">
+        <div class="session-title">Innovation Festival — Schools Showcase</div>
+        <div class="session-desc">Schools showcase their projects, systems, experiments, and failures. No stalls. Interactive experiences only.</div>
+        <span class="session-tag tag-experience">Innovation · Main Hall</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">5:30 – 7:30 PM</div>
+      <div class="session-body">
+        <div class="session-title">Imagicaa Experience — Private Access</div>
+        <div class="session-desc">Exclusive private access to Imagicaa for all delegates.</div>
+        <span class="session-tag tag-experience">Experience</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">8:00 – 11:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">The Schools of India Gala</div>
+        <div class="session-desc">Awards. Entertainment. Networking.</div>
+        <span class="session-tag tag-ceremony">Gala · Grand Ballroom</span>
+      </div>
+    </div>
+
+    <div class="day-block-footer"></div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-block lime">
+    <div>
+      <div class="day-label"><span class="day-pill">DAY 2 · SATURDAY 1 NOVEMBER</span></div>
+      <div class="day-heading">NOW WHAT — Taking It Home</div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">7:30 – 8:30 AM</div>
+      <div class="session-body">
+        <div class="session-title">Breakfast & Networking</div>
+        <span class="session-tag tag-meal">Meal</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">8:30 – 9:30 AM</div>
+      <div class="session-body">
+        <div class="session-title">Fireside: The Future of Education in India</div>
+        <span class="session-tag tag-keynote">Fireside · Main Stage</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">9:30 – 10:45 AM</div>
+      <div class="session-body">
+        <div class="session-title">Monday Morning Workshop — 90-Day Action Plan</div>
+        <div class="session-desc">The most important session of the summit. Every school creates their own 90-Day Action Plan to take home.</div>
+        <span class="session-tag tag-workshop">Workshop · All Halls</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">10:45 – 11:15 AM</div>
+      <div class="session-body">
+        <div class="session-title">Tea</div>
+        <span class="session-tag tag-meal">Break</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">11:15 – 12:15 PM</div>
+      <div class="session-body">
+        <div class="session-title">Community Launch</div>
+        <div class="session-desc">
+          <ul>
+            <li>TSOI Membership</li>
+            <li>City Chapters</li>
+            <li>Peer Forums</li>
+            <li>Reports & Research</li>
+          </ul>
+        </div>
+        <span class="session-tag tag-experience">Launch · Main Stage</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">12:15 – 1:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Closing Ceremony — The Schools of India Pledge</div>
+        <div class="session-desc" style="margin-top:8px; padding:12px 16px; background:#f0fdf4; border-radius:8px; border-left:3px solid #16a34a;">
+          <em style="font-size:12px; color:#16a34a; font-weight:700;">We believe:</em><br>
+          <span style="font-size:12px; color:#52525f;">
+            Every child can flourish. · Schools are stronger together. ·
+            We will share generously. · We will collaborate.
+          </span>
+        </div>
+        <span class="session-tag tag-ceremony">Closing</span>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-time">1:00 – 2:00 PM</div>
+      <div class="session-body">
+        <div class="session-title">Lunch & Departures</div>
+        <span class="session-tag tag-meal">Meal</span>
+      </div>
+    </div>
+
+    <div class="day-block-footer"></div>
+  </div>
+
+  <!-- SPECIAL EVENTS -->
+  <div class="special-block">
+    <p class="special-heading">Events Within the Event</p>
+    <h2 class="special-title">Invitation-Only Gatherings</h2>
+    <div class="special-grid">
+      <div class="special-card"><div class="special-card-name">Founding Council Dinner</div></div>
+      <div class="special-card"><div class="special-card-name">Women in Education Breakfast</div></div>
+      <div class="special-card"><div class="special-card-name">Preschool Roundtable</div></div>
+      <div class="special-card"><div class="special-card-name">University Leaders Roundtable</div></div>
+      <div class="special-card"><div class="special-card-name">Young Leaders Dinner</div></div>
+      <div class="special-card"><div class="special-card-name">International Delegates Breakfast</div></div>
+      <div class="special-card"><div class="special-card-name">Teacher Awards</div></div>
+      <div class="special-card"><div class="special-card-name">School Builders Club Launch</div></div>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY + PLEDGE -->
+  <div class="phi-block">
+    <div>
+      <p class="phi-label">Programming Philosophy</p>
+      <div class="phi-item"><span class="phi-pct">40%</span><span class="phi-desc">Relationships</span></div>
+      <div class="phi-item"><span class="phi-pct">25%</span><span class="phi-desc">Inspiration</span></div>
+      <div class="phi-item"><span class="phi-pct">20%</span><span class="phi-desc">Practical Learning</span></div>
+      <div class="phi-item" style="border-bottom:none;"><span class="phi-pct">15%</span><span class="phi-desc">Fun & Experiences</span></div>
+    </div>
+    <div class="pledge-block">
+      <p class="phi-label">The Schools of India Pledge</p>
+      <div class="pledge-lines">
+        <div class="pledge-line">Every child can flourish.</div>
+        <div class="pledge-line">Schools are stronger together.</div>
+        <div class="pledge-line">We will share generously.</div>
+        <div class="pledge-line">We will collaborate.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-left">
+      <strong>The Schools of India</strong><br>
+      theschoolsofindia.org/summit
+    </div>
+    <div class="footer-right">
+      © 2026 The Schools of India<br>
+      Schedule subject to change
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
