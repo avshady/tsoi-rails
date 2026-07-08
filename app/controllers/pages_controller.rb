@@ -265,10 +265,11 @@ class PagesController < ApplicationController
       status:      "new"
     )
 
-    flash[:notice] = newsletter ? "Subscribed! We'll keep you updated." : "You're on the list! We'll be in touch soon."
+    first_name = name.split.first.presence || "You"
+    flash[:notice] = newsletter ? "Subscribed! We'll keep you updated." : "Welcome, #{first_name}! You're on our priority list."
     redirect_to summit_path
   rescue => e
-    flash[:notice] = "You're on the list! We'll be in touch soon."
+    flash[:notice] = "You're on our priority list — we'll be in touch soon."
     redirect_to summit_path
   end
 end
