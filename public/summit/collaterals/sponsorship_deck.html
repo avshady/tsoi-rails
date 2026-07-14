@@ -601,9 +601,17 @@
 
     /* Print support */
     @media print {
-      .nav { display: none; }
-      .slide { page-break-after: always; min-height: auto; padding: 60px 0 50px; }
+      .nav, .nav-download { display: none; }
       body::after { display: none; }
+      .blob { display: none; }
+      .slide {
+        page-break-after: always;
+        min-height: auto;
+        padding: 60px 0 50px;
+        overflow: visible !important;
+        position: relative !important;
+      }
+      .slide-inner { overflow: visible !important; }
     }
 
     @media (max-width: 900px) {
