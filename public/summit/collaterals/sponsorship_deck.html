@@ -48,6 +48,60 @@
     html.light .nav { background: rgba(245,245,247,0.92); }
     html.light .nav-cta { color: #fff !important; }
 
+    /* download dropdown in nav */
+    .nav-download {
+      position: relative;
+    }
+    .nav-download-btn {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--ff-display);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .nav-download-btn:hover { border-color: var(--magenta); color: var(--magenta); }
+    .nav-download-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      min-width: 160px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      z-index: 200;
+    }
+    .nav-download:hover .nav-download-menu,
+    .nav-download-menu:hover { display: block; }
+    .nav-download-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      font-family: var(--ff-display);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: 0.15s;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-download-menu a:last-child { border-bottom: none; }
+    .nav-download-menu a:hover { background: var(--surface-2); color: var(--magenta); }
+    .nav-download-menu .dl-icon { font-size: 15px; }
+    html.light .nav-download-menu { box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
     /* theme pill in nav */
     .nav-theme {
       display: flex;
@@ -577,6 +631,17 @@
       <a href="#tiers">Tiers</a>
       <a href="#compare">Benefits</a>
       <a href="#close" class="nav-cta">Partner With Us →</a>
+    </div>
+    <div class="nav-download">
+      <button class="nav-download-btn">↓ Download</button>
+      <div class="nav-download-menu">
+        <a href="The_Schools_of_India_Summit_2026_Sponsorship_Prospectus.pdf" download>
+          <span class="dl-icon">📄</span> PDF
+        </a>
+        <a href="sponsorship_deck.html" download>
+          <span class="dl-icon">🌐</span> HTML
+        </a>
+      </div>
     </div>
     <div class="nav-theme" id="sponsorThemeToggle" role="group" aria-label="Colour scheme">
       <button class="nav-theme-btn active" data-theme="dark">Dark</button>
