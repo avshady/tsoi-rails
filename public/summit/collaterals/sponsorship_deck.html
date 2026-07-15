@@ -599,19 +599,44 @@
       display: block;
     }
 
-    /* Print support */
+    /* ── PRINT ── */
     @media print {
-      .nav, .nav-download { display: none; }
-      body::after { display: none; }
-      .blob { display: none; }
+      @page { size: A4; margin: 0; }
+
+      .nav, .nav-download { display: none !important; }
+      body::after { display: none !important; }
+      .blob, .star, .slide-divider { display: none !important; }
+
+      body {
+        background: var(--bg) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Each section: block (not flex-centered), content-height, page-break after */
       .slide {
-        page-break-after: always;
-        min-height: auto;
-        padding: 60px 0 50px;
+        display: block !important;
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 48pt 0 40pt !important;
         overflow: visible !important;
         position: relative !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+        border-top: none !important;
       }
+      .slide:last-of-type { page-break-after: auto; }
       .slide-inner { overflow: visible !important; }
+
+      /* Grids that are too wide for A4 at full columns — collapse to single col */
+      .tier-hero { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      .benefits-grid { grid-template-columns: 1fr 1fr !important; }
+      .about-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      .audience-grid { grid-template-columns: 1fr 1fr !important; }
+      .reach-row { grid-template-columns: repeat(4, 1fr) !important; }
+      .stat-grid { grid-template-columns: repeat(4, 1fr) !important; }
+      .tier-overview { grid-template-columns: repeat(2, 1fr) !important; }
+      .compare-table { font-size: 9pt !important; }
     }
 
     @media (max-width: 900px) {
