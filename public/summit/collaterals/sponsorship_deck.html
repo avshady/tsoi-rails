@@ -599,44 +599,89 @@
       display: block;
     }
 
-    /* ── PRINT ── */
+    /* ── PRINT ──────────────────────────────────────────────
+       Flowing document — sections pack together, breaks only
+       happen where a block won't fit. No forced one-per-page,
+       so no half-empty pages / negative space.
+    ─────────────────────────────────────────────────────── */
     @media print {
-      @page { size: A4; margin: 0; }
+      @page { size: A4; margin: 14mm 0; }
 
       .nav, .nav-download { display: none !important; }
       body::after { display: none !important; }
       .blob, .star, .slide-divider { display: none !important; }
 
-      body {
+      html, body {
         background: var(--bg) !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
-      /* Each section: block (not flex-centered), content-height, page-break after */
+      /* Sections FLOW continuously — no forced per-section page.
+         Content packs down the page; breaks fall naturally. */
       .slide {
         display: block !important;
         min-height: 0 !important;
         height: auto !important;
-        padding: 48pt 0 40pt !important;
+        padding: 16pt 0 !important;
         overflow: visible !important;
         position: relative !important;
-        page-break-after: always;
-        page-break-inside: avoid;
+        page-break-after: auto !important;
+        page-break-before: auto !important;
+        page-break-inside: auto !important;
         border-top: none !important;
       }
-      .slide:last-of-type { page-break-after: auto; }
-      .slide-inner { overflow: visible !important; }
+      /* Cover: balanced full-page title (content vertically centred) */
+      #cover {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        min-height: calc(100vh - 28mm) !important;
+        padding: 0 !important;
+        page-break-after: always !important;
+      }
+      #cover .blob { display: block !important; }
 
-      /* Grids that are too wide for A4 at full columns — collapse to single col */
-      .tier-hero { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-      .benefits-grid { grid-template-columns: 1fr 1fr !important; }
-      .about-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-      .audience-grid { grid-template-columns: 1fr 1fr !important; }
-      .reach-row { grid-template-columns: repeat(4, 1fr) !important; }
-      .stat-grid { grid-template-columns: repeat(4, 1fr) !important; }
-      .tier-overview { grid-template-columns: repeat(2, 1fr) !important; }
-      .compare-table { font-size: 9pt !important; }
+      .slide-inner {
+        overflow: visible !important;
+        max-width: 100% !important;
+        padding: 0 16mm !important;
+      }
+
+      /* Keep only small atomic blocks whole; everything else flows/splits */
+      .benefit-item, .audience-card, .about-feature, .tier-card,
+      .stat, .reach-item, .advisor-card {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      /* Section labels & headings stay with the content that follows them */
+      .section-tag, .slide-title, .tier-name, .tier-label,
+      .overview-title { page-break-after: avoid; break-after: avoid; }
+
+      /* Column counts tuned for A4 portrait width + compact tiers */
+      .tier-hero      { grid-template-columns: 1fr 1.3fr !important; gap: 1.5rem !important; margin-bottom: 0 !important; align-items: start !important; }
+      .benefits-grid  { grid-template-columns: 1fr 1fr !important; gap: 0.5rem 0.85rem !important; }
+      .about-grid     { grid-template-columns: 1fr 1fr !important; gap: 1.25rem !important; }
+      .audience-grid  { grid-template-columns: repeat(3, 1fr) !important; gap: 1rem !important; }
+      .reach-row      { grid-template-columns: repeat(4, 1fr) !important; }
+      .stat-grid      { grid-template-columns: repeat(4, 1fr) !important; }
+      .tier-overview  { grid-template-columns: repeat(4, 1fr) !important; }
+      .compare-table  { font-size: 8.5pt !important; }
+
+      /* Compact tier deep-dives so two fit per page (no blank bottoms) */
+      .benefit-item   { padding: 0.55rem 0.7rem !important; gap: 0.5rem !important; }
+      .benefit-icon   { width: 26px !important; height: 26px !important; font-size: 0.78rem !important; }
+      .benefit-name   { font-size: 0.8rem !important; }
+      .benefit-detail { font-size: 0.68rem !important; line-height: 1.35 !important; }
+      .tier-name      { font-size: 2.1rem !important; }
+      .tier-price-main{ font-size: 2.1rem !important; }
+      .tier-price-row { margin-bottom: 0.6rem !important; }
+      .tier-tagline   { font-size: 0.85rem !important; line-height: 1.45 !important; }
+      .tier-what-you-get { margin-bottom: 0.6rem !important; }
+
+      /* Tighten oversized display type / spacing for print density */
+      .slide-title    { margin-bottom: 0.85rem !important; }
+      .overview-sub, .about-body { margin-bottom: 1.1rem !important; }
     }
 
     @media (max-width: 900px) {
