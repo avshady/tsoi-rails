@@ -126,10 +126,38 @@ const cmsData = {
       },
       {
         name: "Parimal Merchant",
-        designation: "Director – Global Family Managed Business Program",
-        organisation: "Piramal Foundation",
+        designation: "Director – Global Family Managed Business",
+        organisation: "SP Jain School of Global Management",
         photo: "/summit/assets/advisor_parimal.jpg",
         color: "#2de67b"
+      },
+      {
+        name: "Dr. Swati Popat Vats",
+        designation: "President",
+        organisation: "ECA & Podar Education Network",
+        photo: "/summit/assets/advisor_swati.jpg",
+        color: "#0891b2"
+      },
+      {
+        name: "Russell John Cailey",
+        designation: "CEO & Founder",
+        organisation: "Almach AI™",
+        photo: "/summit/assets/advisor_russell.jpg",
+        color: "#d97706"
+      },
+      {
+        name: "Seetha Murty",
+        designation: "President",
+        organisation: "Heads Assoc. of IB World Schools, India",
+        photo: "/summit/assets/advisor_seetha.jpg",
+        color: "#0d9488"
+      },
+      {
+        name: "Mrunal Shah",
+        designation: "Founder & Play Expert",
+        organisation: "Social Brick",
+        photo: "/summit/assets/advisor_mrunal.jpg",
+        color: "#f59e0b"
       }
     ]
   },
