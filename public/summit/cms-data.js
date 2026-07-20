@@ -158,6 +158,13 @@ const cmsData = {
         organisation: "Social Brick",
         photo: "/summit/assets/advisor_mrunal.jpg",
         color: "#f59e0b"
+      },
+      {
+        name: "Alka Pandey",
+        designation: "Founding Head & Academic Advisor",
+        organisation: "Cambridge International",
+        photo: "/summit/assets/advisor_alka.jpg",
+        color: "#6366f1"
       }
     ]
   },
