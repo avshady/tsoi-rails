@@ -1,4 +1,4 @@
-import initialData from './cms-data.js?v=6';
+import initialData from './cms-data.js?v=7';
 
 // Setup global store for CMS editing
 if (!window.currentCmsData) {
@@ -7,11 +7,16 @@ if (!window.currentCmsData) {
 
 // Function to render the entire page from CMS data
 export function renderPage(data) {
+  // Null-safe DOM helpers — sections may be trimmed from the HTML over
+  // time; a missing element must skip gracefully, never halt the render.
+  const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  const setHTML = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+
   // --- 1. HERO SECTION ---
-  document.getElementById('hero-headline').innerHTML = formatHeading(data.hero.headline);
-  document.getElementById('hero-subheadline').textContent = data.hero.subheadline;
-  document.getElementById('hero-date').textContent = data.hero.dates;
-  document.getElementById('hero-location-text').textContent = data.hero.location;
+  setHTML('hero-headline', formatHeading(data.hero.headline));
+  setText('hero-subheadline', data.hero.subheadline);
+  setText('hero-date', data.hero.dates);
+  setText('hero-location-text', data.hero.location);
   
   const ctaPrimary = document.getElementById('hero-cta-primary');
   ctaPrimary.textContent = data.hero.ctaPrimary.text;
@@ -82,15 +87,16 @@ export function renderPage(data) {
 
   // --- 9. FEATURED INSTITUTIONS (LOGO WALL) ---
   const logoTrack = document.getElementById('logo-track');
-  // Duplicate array twice to ensure smooth infinite loop animation width
-  const logoItemsHtml = [...data.institutions, ...data.institutions, ...data.institutions].map(inst => `
-    <div class="logo-item">
-      <div class="logo-item-icon"></div>
-      <span>${inst.name}</span>
-      <span style="font-size: 0.65rem; color: var(--text-dimmed); text-transform: uppercase;">(${inst.type})</span>
-    </div>
-  `).join('');
-  logoTrack.innerHTML = logoItemsHtml;
+  if (logoTrack && data.institutions) {
+    // Duplicate array to ensure smooth infinite loop animation width
+    logoTrack.innerHTML = [...data.institutions, ...data.institutions, ...data.institutions].map(inst => `
+      <div class="logo-item">
+        <div class="logo-item-icon"></div>
+        <span>${inst.name}</span>
+        <span style="font-size: 0.65rem; color: var(--text-dimmed); text-transform: uppercase;">(${inst.type})</span>
+      </div>
+    `).join('');
+  }
 
   // --- 10. NETWORKING ---
   const netGrid = document.getElementById('net-grid');
@@ -111,80 +117,89 @@ export function renderPage(data) {
   `).join('');
 
   // --- 12. VENUE ---
-  document.getElementById('venue-name').textContent = data.venue.name;
-  document.getElementById('venue-city').textContent = data.venue.city;
-  document.getElementById('venue-parking').textContent = data.venue.parking;
-  document.getElementById('venue-hotels').textContent = data.venue.hotels;
-  document.getElementById('venue-travel').textContent = data.venue.travel;
-  document.getElementById('venue-coords').textContent = data.venue.mapPlaceholder;
+  setText('venue-name', data.venue.name);
+  setText('venue-city', data.venue.city);
+  setText('venue-parking', data.venue.parking);
+  setText('venue-hotels', data.venue.hotels);
+  setText('venue-travel', data.venue.travel);
+  setText('venue-coords', data.venue.mapPlaceholder);
 
   // --- 13. SCHEDULE (AGENDA) ---
   renderSchedule(data.schedule);
 
   // --- 14. REGISTRATION TICKETS ---
   const regGrid = document.getElementById('reg-grid');
-  regGrid.innerHTML = data.registration.map(pass => `
-    <div class="reg-card ${pass.popular ? 'is-popular' : ''}">
-      ${pass.popular ? `<div class="reg-popular-badge">Most Popular</div>` : ''}
-      <h3 class="reg-name">${pass.name}</h3>
-      <div class="reg-price">${pass.price}</div>
-      <p class="reg-subtext">${pass.subtext}</p>
-      <ul class="reg-features">
-        ${pass.features.map(f => `<li class="reg-feature-item">${f}</li>`).join('')}
-      </ul>
-      <button class="btn btn-secondary reg-btn" data-pass-id="${pass.id}" data-pass-name="${pass.name}">
-        ${pass.cta}
-      </button>
-    </div>
-  `).join('');
+  if (regGrid && data.registration) {
+    regGrid.innerHTML = data.registration.map(pass => `
+      <div class="reg-card ${pass.popular ? 'is-popular' : ''}">
+        ${pass.popular ? `<div class="reg-popular-badge">Most Popular</div>` : ''}
+        <h3 class="reg-name">${pass.name}</h3>
+        <div class="reg-price">${pass.price}</div>
+        <p class="reg-subtext">${pass.subtext}</p>
+        <ul class="reg-features">
+          ${pass.features.map(f => `<li class="reg-feature-item">${f}</li>`).join('')}
+        </ul>
+        <button class="btn btn-secondary reg-btn" data-pass-id="${pass.id}" data-pass-name="${pass.name}">
+          ${pass.cta}
+        </button>
+      </div>
+    `).join('');
 
-  // Attach event listeners to ticket CTAs
-  document.querySelectorAll('.reg-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const passId = btn.getAttribute('data-pass-id');
-      const passName = btn.getAttribute('data-pass-name');
-      openRegistrationModal(passId, passName);
+    // Attach event listeners to ticket CTAs
+    document.querySelectorAll('.reg-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const passId = btn.getAttribute('data-pass-id');
+        const passName = btn.getAttribute('data-pass-name');
+        openRegistrationModal(passId, passName);
+      });
     });
-  });
+  }
 
   // --- 15. PARTNERS & SPONSORS ---
-  document.getElementById('partners-title').innerHTML = formatHeading(data.partners.title);
   const partnersContainer = document.getElementById('partners-container');
-  partnersContainer.innerHTML = data.partners.tiers.map(tier => `
-    <div class="partner-tier-block">
-      <h3 class="partner-tier-name">${tier.name}</h3>
-      <div class="partner-logo-grid">
-        ${tier.partners.map(p => `
-          <div class="partner-logo">
-            <span>${p}</span>
-          </div>
-        `).join('')}
+  if (partnersContainer && data.partners) {
+    const partnersTitle = document.getElementById('partners-title');
+    if (partnersTitle) partnersTitle.innerHTML = formatHeading(data.partners.title);
+    partnersContainer.innerHTML = data.partners.tiers.map(tier => `
+      <div class="partner-tier-block">
+        <h3 class="partner-tier-name">${tier.name}</h3>
+        <div class="partner-logo-grid">
+          ${tier.partners.map(p => `
+            <div class="partner-logo">
+              <span>${p}</span>
+            </div>
+          `).join('')}
+        </div>
       </div>
-    </div>
-  `).join('');
+    `).join('');
+  }
 
   // --- 16. TESTIMONIALS (CAROUSEL) ---
   const testimonialsTrack = document.getElementById('testimonials-track');
-  testimonialsTrack.innerHTML = data.testimonials.map(t => `
-    <div class="testimonial-card color-${t.color}">
-      <p class="testimonial-quote">“${t.quote}”</p>
-      <div class="testimonial-author-info">
-        <div class="testimonial-author-avatar">${t.author.charAt(0)}</div>
-        <div class="testimonial-author-details">
-          <span class="testimonial-author-name">${t.author}</span>
-          <span class="testimonial-author-role">${t.role}, ${t.institution}</span>
+  if (testimonialsTrack && data.testimonials) {
+    testimonialsTrack.innerHTML = data.testimonials.map(t => `
+      <div class="testimonial-card color-${t.color}">
+        <p class="testimonial-quote">“${t.quote}”</p>
+        <div class="testimonial-author-info">
+          <div class="testimonial-author-avatar">${t.author.charAt(0)}</div>
+          <div class="testimonial-author-details">
+            <span class="testimonial-author-name">${t.author}</span>
+            <span class="testimonial-author-role">${t.role}, ${t.institution}</span>
+          </div>
         </div>
       </div>
-    </div>
-  `).join('');
+    `).join('');
 
-  // Render dots for testimonial carousel
-  const dotsContainer = document.getElementById('carousel-dots');
-  dotsContainer.innerHTML = data.testimonials.map((_, idx) => `
-    <button class="carousel-dot ${idx === 0 ? 'is-active' : ''}" data-index="${idx}" aria-label="Go to testimonial slide ${idx + 1}"></button>
-  `).join('');
+    // Render dots for testimonial carousel
+    const dotsContainer = document.getElementById('carousel-dots');
+    if (dotsContainer) {
+      dotsContainer.innerHTML = data.testimonials.map((_, idx) => `
+        <button class="carousel-dot ${idx === 0 ? 'is-active' : ''}" data-index="${idx}" aria-label="Go to testimonial slide ${idx + 1}"></button>
+      `).join('');
+    }
 
-  setupTestimonialCarousel();
+    setupTestimonialCarousel();
+  }
 
   // --- 17. FREQUENTLY ASKED QUESTIONS ---
   const faqsContainer = document.getElementById('faqs-container');
@@ -205,36 +220,40 @@ export function renderPage(data) {
   setupFaqAccordion();
 
   // --- 18. CALL TO ACTION BANNER ---
-  document.getElementById('cta-banner-title').innerHTML = formatHeading(data.ctaSection.title);
-  document.getElementById('cta-banner-sub').textContent = data.ctaSection.subheadline;
-  document.getElementById('cta-banner-dates').textContent = data.ctaSection.dates;
-  
-  const ctaBannerPrimary = document.getElementById('cta-banner-primary');
-  ctaBannerPrimary.textContent = data.ctaSection.ctaPrimary.text;
-  ctaBannerPrimary.setAttribute('href', data.ctaSection.ctaPrimary.action);
-  
-  const ctaBannerSecondary = document.getElementById('cta-banner-secondary');
-  ctaBannerSecondary.textContent = data.ctaSection.ctaSecondary.text;
-  ctaBannerSecondary.setAttribute('href', data.ctaSection.ctaSecondary.action);
+  if (data.ctaSection) {
+    setHTML('cta-banner-title', formatHeading(data.ctaSection.title));
+    setText('cta-banner-sub', data.ctaSection.subheadline);
+    setText('cta-banner-dates', data.ctaSection.dates);
+
+    const ctaBannerPrimary = document.getElementById('cta-banner-primary');
+    if (ctaBannerPrimary) {
+      ctaBannerPrimary.textContent = data.ctaSection.ctaPrimary.text;
+      ctaBannerPrimary.setAttribute('href', data.ctaSection.ctaPrimary.action);
+    }
+    const ctaBannerSecondary = document.getElementById('cta-banner-secondary');
+    if (ctaBannerSecondary) {
+      ctaBannerSecondary.textContent = data.ctaSection.ctaSecondary.text;
+      ctaBannerSecondary.setAttribute('href', data.ctaSection.ctaSecondary.action);
+    }
+  }
 
   // --- 19. FOOTER ---
-  document.getElementById('footer-about-text').textContent = data.footer.about;
-  document.getElementById('footer-email').textContent = data.footer.contact.email;
-  document.getElementById('footer-phone').textContent = data.footer.contact.phone;
-  document.getElementById('footer-address').textContent = data.footer.contact.address;
+  if (data.footer) {
+    setText('footer-about-text', data.footer.about);
+    setText('footer-email', data.footer.contact.email);
+    setText('footer-phone', data.footer.contact.phone);
+    setText('footer-address', data.footer.contact.address);
 
-  const footerLinks = document.getElementById('footer-links');
-  footerLinks.innerHTML = data.footer.links.map(link => `
-    <li><a href="${link.url}" class="footer-bottom-link">${link.text}</a></li>
-  `).join('');
+    setHTML('footer-links', data.footer.links.map(link => `
+      <li><a href="${link.url}" class="footer-bottom-link">${link.text}</a></li>
+    `).join(''));
 
-  const footerSocials = document.getElementById('footer-socials');
-  footerSocials.innerHTML = data.footer.socials.map(social => `
-    <a href="${social.url}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="${social.name}">
-      <!-- Dynamic mini SVG or text representing logo -->
-      <span style="font-size:0.75rem; font-weight:800;">${social.name.charAt(0)}</span>
-    </a>
-  `).join('');
+    setHTML('footer-socials', data.footer.socials.map(social => `
+      <a href="${social.url}" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="${social.name}">
+        <span style="font-size:0.75rem; font-weight:800;">${social.name.charAt(0)}</span>
+      </a>
+    `).join(''));
+  }
 }
 
 /* ----------------------------------------------------
