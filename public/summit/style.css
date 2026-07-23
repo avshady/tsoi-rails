@@ -1247,7 +1247,26 @@ a {
 .schedule-info {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
+
+.schedule-type {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+.schedule-type-content    { color: var(--color-magenta); background: rgba(232, 0, 106, 0.08); }
+.schedule-type-tracks     { color: var(--color-magenta); background: rgba(232, 0, 106, 0.08); }
+.schedule-type-network    { color: var(--color-violet);  background: rgba(109, 40, 217, 0.08); }
+.schedule-type-meal       { color: var(--color-cyan);    background: rgba(8, 145, 178, 0.08); }
+.schedule-type-experience { color: var(--color-lime);    background: rgba(22, 163, 74, 0.08); }
+.schedule-type-logistics  { color: var(--text-dimmed);   background: rgba(0, 0, 0, 0.05); }
+.schedule-type-open       { color: var(--text-dimmed);   background: rgba(0, 0, 0, 0.05); }
 
 .schedule-session-title {
   font-size: 1.2rem;

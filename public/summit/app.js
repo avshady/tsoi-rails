@@ -1,4 +1,4 @@
-import initialData from './cms-data.js?v=7';
+import initialData from './cms-data.js?v=8';
 
 // Setup global store for CMS editing
 if (!window.currentCmsData) {
@@ -274,9 +274,10 @@ function formatHeading(text) {
 // Render dynamic schedule list
 function renderSchedule(scheduleData, selectedDay = 'Day1') {
   const scheduleList = document.getElementById('schedule-list');
-  const daySchedule = scheduleData[selectedDay];
+  if (!scheduleList) return;
+  const daySchedule = (scheduleData && scheduleData[selectedDay]) || [];
 
-  if (!daySchedule || daySchedule.length === 0) {
+  if (daySchedule.length === 0) {
     scheduleList.innerHTML = `<p style="text-align:center; padding: 2rem;">No sessions scheduled for this day yet.</p>`;
     return;
   }
@@ -285,8 +286,9 @@ function renderSchedule(scheduleData, selectedDay = 'Day1') {
     <div class="schedule-item">
       <div class="schedule-time">${session.time}</div>
       <div class="schedule-info">
+        ${session.type ? `<span class="schedule-type schedule-type-${session.type.toLowerCase()}">${session.type}</span>` : ''}
         <h3 class="schedule-session-title">${session.title}</h3>
-        <p class="schedule-speaker">${session.speaker ? `By ${session.speaker}` : ''}</p>
+        ${session.speaker ? `<p class="schedule-speaker">By ${session.speaker}</p>` : ''}
       </div>
       <div class="schedule-location">${session.location}</div>
     </div>
