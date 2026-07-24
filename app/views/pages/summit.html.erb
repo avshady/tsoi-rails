@@ -31,7 +31,7 @@
           <li><a href="#schedule" class="nav-link">Schedule</a></li>
           <li><a href="#faqs" class="nav-link">FAQs</a></li>
         </ul>
-        <button type="button" class="btn btn-primary nav-register-btn" id="nav-register-btn">Register</button>
+        <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="btn btn-primary nav-register-btn" id="nav-register-btn">Register</a>
         <button class="hamburger" aria-label="Toggle Menu" id="hamburger-btn">
           <span></span>
           <span></span>
@@ -443,17 +443,6 @@
       dialog.addEventListener('click', function(e) { if (e.target === dialog) dialog.close(); });
     }
 
-    // Header Register button opens the registration dialog
-    var navRegisterBtn = document.getElementById('nav-register-btn');
-    if (navRegisterBtn && dialog) {
-      navRegisterBtn.addEventListener('click', function() {
-        var pid = document.getElementById('form-pass-id');
-        var pname = document.getElementById('form-pass-name');
-        if (pid) pid.value = '';
-        if (pname) pname.value = 'General Registration';
-        dialog.showModal();
-      });
-    }
 
     // Schedule tabs
     document.querySelectorAll('.schedule-tab').forEach(function(tab) {
