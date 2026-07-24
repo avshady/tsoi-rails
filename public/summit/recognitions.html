@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recognitions 2026 — The 5% Showcase | The Schools of India Summit</title>
+  <meta name="description" content="The 5% Showcase — India's largest open knowledge sharing initiative for schools. Every school shares one practice that works, and it enters a permanent, free, searchable Knowledge Library.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/summit/style.css?v=7">
+
+  <style>
+    /* ── RECOGNITIONS 2026 PAGE ── */
+    .rec-serif { font-family: var(--font-serif); font-style: italic; }
+    .rec-accent { color: var(--color-magenta); }
+
+    .rec-hero {
+      padding: 8rem 0 4rem;
+      position: relative;
+    }
+    .rec-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-magenta);
+      margin-bottom: 1.5rem;
+    }
+    .rec-hero-title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    .rec-hero-sub {
+      font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+      font-weight: 600;
+      max-width: 640px;
+      margin-bottom: 1rem;
+    }
+    .rec-hero-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+    .rec-hero-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      line-height: 1.4;
+      border-left: 3px solid var(--color-magenta);
+      padding-left: 1.5rem;
+      max-width: 620px;
+      color: var(--text-white);
+    }
+
+    .rec-section { padding: 4.5rem 0; border-top: 1px solid var(--border-glow); }
+    .rec-section:nth-child(even) { background-color: rgba(0,0,0,0.02); }
+    .rec-num {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: rgba(232, 0, 106, 0.14);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .rec-h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .rec-lead {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin-bottom: 2.5rem;
+    }
+    .rec-sub-h {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin: 2.5rem 0 1.25rem;
+    }
+
+    .rec-bigquote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+      line-height: 1.45;
+      text-align: center;
+      max-width: 780px;
+      margin: 1rem auto 2.5rem;
+    }
+    .rec-callout {
+      border-left: 3px solid var(--color-magenta);
+      background: rgba(232, 0, 106, 0.04);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 0.75rem 0.75rem 0;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.5;
+      margin: 2rem 0;
+    }
+
+    /* Tables */
+    .rec-table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+    .rec-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+      font-size: 0.95rem;
+    }
+    .rec-table th {
+      background: #0a0a14;
+      color: #fff;
+      text-align: left;
+      padding: 0.85rem 1.1rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .rec-table td {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--border-glow);
+      vertical-align: top;
+      color: var(--text-muted);
+    }
+    .rec-table td:first-child { font-weight: 700; color: var(--text-white); }
+    .rec-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+    /* Numbered steps */
+    .rec-steps { display: flex; flex-direction: column; gap: 0.85rem; }
+    .rec-step {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      align-items: stretch;
+      border: 1px solid var(--border-glow);
+      border-radius: 0.9rem;
+      overflow: hidden;
+      background: #fff;
+    }
+    .rec-step-num {
+      background: var(--color-magenta);
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rec-step-body { padding: 1.1rem 1.4rem; }
+    .rec-step-body h4 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .rec-step-body p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* Category cards */
+    .rec-cats { display: flex; flex-direction: column; gap: 1rem; }
+    .rec-cat {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      border: 1px solid var(--border-glow);
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #fff;
+    }
+    .rec-cat-letter {
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rec-cat-body { padding: 1.25rem 1.5rem; }
+    .rec-cat-body h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.35rem; }
+    .rec-cat-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.6rem; }
+    .rec-cat-tags { font-size: 0.82rem; font-weight: 600; line-height: 1.7; }
+
+    /* Two-column card grids */
+    .rec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.25rem 0; }
+    .rec-item {
+      border: 1px solid var(--border-glow);
+      border-left: 3px solid var(--color-magenta);
+      border-radius: 0 0.75rem 0.75rem 0;
+      padding: 1.1rem 1.35rem;
+      background: #fff;
+    }
+    .rec-item h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.25rem; }
+    .rec-item p { color: var(--text-muted); font-size: 0.9rem; }
+
+    /* Bullet list */
+    .rec-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0; }
+    .rec-bullets li { position: relative; padding-left: 1.5rem; color: var(--text-muted); }
+    .rec-bullets li::before { content: "→"; position: absolute; left: 0; color: var(--color-magenta); font-weight: 800; }
+
+    /* Beats (five minutes) */
+    .rec-beats {
+      border-left: 3px solid var(--color-magenta);
+      background: rgba(0,0,0,0.02);
+      border-radius: 0 1rem 1rem 0;
+      padding: 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .rec-beat { display: grid; grid-template-columns: 190px 1fr; gap: 1rem; align-items: baseline; }
+    .rec-beat-label { font-weight: 800; letter-spacing: 0.05em; font-size: 0.9rem; }
+    .rec-beat p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* Narrative steps (library) */
+    .rec-narrative {
+      border-left: 3px solid var(--color-violet);
+      background: rgba(109, 40, 217, 0.03);
+      border-radius: 0 1rem 1rem 0;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 1.05rem;
+      margin: 1.25rem 0;
+    }
+
+    /* Tag pills */
+    .rec-tags-box {
+      border-left: 3px solid var(--color-cyan);
+      background: rgba(8, 145, 178, 0.04);
+      border-radius: 0 1rem 1rem 0;
+      padding: 1.25rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.9;
+      margin: 1rem 0;
+    }
+
+    /* Numbered legal list */
+    .rec-legal { counter-reset: legal; list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin: 1rem 0; }
+    .rec-legal li { position: relative; padding-left: 2.25rem; color: var(--text-muted); }
+    .rec-legal li::before {
+      counter-increment: legal;
+      content: counter(legal);
+      position: absolute; left: 0; top: 0;
+      width: 1.5rem; height: 1.5rem;
+      background: var(--color-magenta); color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 800;
+    }
+
+    /* Campaign posts */
+    .rec-posts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.25rem 0; }
+    .rec-post { border: 1px solid var(--border-glow); border-radius: 0.9rem; padding: 1.1rem 1.35rem; background: #fff; }
+    .rec-post .lbl { font-size: 0.75rem; font-weight: 800; color: var(--color-magenta); letter-spacing: 0.1em; text-transform: uppercase; }
+    .rec-post .txt { font-size: 1.1rem; font-weight: 700; margin-top: 0.2rem; }
+
+    /* Vision ladder */
+    .rec-vision { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.25rem 0; }
+    .rec-vision-row { display: grid; grid-template-columns: 110px 1fr; gap: 1rem; align-items: center; border: 1px solid var(--border-glow); border-radius: 0.75rem; padding: 1rem 1.35rem; background: #fff; }
+    .rec-vision-yr { font-weight: 900; font-size: 1.05rem; color: var(--color-magenta); }
+    .rec-vision-row p { color: var(--text-muted); }
+
+    /* Footer CTA */
+    .rec-cta {
+      text-align: center;
+      padding: 5rem 0 4rem;
+      border-top: 1px solid var(--border-glow);
+    }
+    .rec-cta-line {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--color-magenta);
+      margin-bottom: 1rem;
+    }
+    .rec-cta-meta { color: var(--text-muted); margin-bottom: 2rem; }
+    .rec-cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 768px) {
+      .rec-grid, .rec-posts { grid-template-columns: 1fr; }
+      .rec-beat { grid-template-columns: 1fr; gap: 0.25rem; }
+      .rec-cat { grid-template-columns: 72px 1fr; }
+      .rec-cat-letter { font-size: 1.75rem; }
+      .rec-step { grid-template-columns: 64px 1fr; }
+      .rec-vision-row { grid-template-columns: 80px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-blob" style="background-color: var(--color-magenta); width: 40vw; height: 40vw; top: 5%; left: -20%;"></div>
+  <div class="glow-blob" style="background-color: var(--color-violet); width: 45vw; height: 45vw; top: 45%; right: -20%;"></div>
+  <div class="glow-blob" style="background-color: var(--color-lime); width: 35vw; height: 35vw; bottom: 8%; left: 10%;"></div>
+
+  <!-- Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/summit" class="logo">THE SCHOOLS OF INDIA <span class="logo-dot"></span></a>
+      <div class="header-actions">
+        <ul class="nav-menu">
+          <li><a href="/summit#intro" class="nav-link">About</a></li>
+          <li><a href="/summit#speakers" class="nav-link">Advisory Board</a></li>
+          <li><a href="/summit#schedule" class="nav-link">Schedule</a></li>
+          <li><a href="/summit/recognitions.html" class="nav-link">Recognitions 2026</a></li>
+        </ul>
+        <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="btn btn-primary nav-register-btn">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="rec-hero">
+    <div class="container">
+      <span class="rec-eyebrow">Recognitions 2026 · The Schools of India Summit</span>
+      <h1 class="rec-hero-title">The <span class="rec-serif rec-accent">5% Showcase</span></h1>
+      <p class="rec-hero-sub">India's Largest Open Knowledge Sharing Initiative for Schools.</p>
+      <p class="rec-hero-meta">Presented by The Schools of India Summit · Concept &amp; Framework · Year One, 2026</p>
+      <p class="rec-hero-quote">Share one idea. Inspire a thousand schools. Help every child flourish.</p>
+    </div>
+  </section>
+
+  <!-- 01 Philosophy -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">01</div>
+      <h2 class="rec-h2">The <span class="rec-serif">Philosophy</span></h2>
+      <p class="rec-bigquote">
+        Every school has mastered something. No school has mastered everything.
+        If every school openly shared just five percent of what it has learnt,
+        the entire education ecosystem would become stronger.
+      </p>
+      <p class="rec-lead">
+        That is the whole idea, and it is deliberately modest. We are not asking any school to reveal how it
+        operates, or to hand over its advantage. We are asking for one practice. The five percent it has
+        genuinely worked out.
+      </p>
+      <p class="rec-lead">
+        Five percent is achievable in any school, at any budget, in any city. Alone it is quiet. Aggregated
+        across hundreds of schools and made searchable, it becomes <em class="rec-serif rec-accent">an education
+        system that teaches itself</em>.
+      </p>
+
+      <h3 class="rec-sub-h">Why this is not a competition</h3>
+      <p class="rec-lead">
+        The language matters more than it appears. A competition produces one winner and many losers, and losers
+        do not return. An open knowledge initiative produces contributors, and contributors come back every year
+        with something new.
+      </p>
+      <div class="rec-table-wrap">
+        <table class="rec-table">
+          <thead><tr><th>We do not say</th><th>We say</th><th>Because</th></tr></thead>
+          <tbody>
+            <tr><td>Competition</td><td>Showcase</td><td>Nobody is competing</td></tr>
+            <tr><td>Entry</td><td>Contribution</td><td>They are giving, not applying</td></tr>
+            <tr><td>Winner</td><td>Selected for National Showcase</td><td>Selection, not victory</td></tr>
+            <tr><td>Runner-up</td><td>Contributor to the Library</td><td>Everyone who shares, counts</td></tr>
+            <tr><td>Judges</td><td>Selection Panel</td><td>They curate, they do not rank</td></tr>
+            <tr><td>Speakers</td><td>Founding Contributors</td><td>Permanent, not one day</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rec-callout">
+        A school that is not selected has still contributed to the Knowledge Library. Nothing was lost.
+        That is why they submit again next year.
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 What the Showcase Is -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">02</div>
+      <h2 class="rec-h2">What the Showcase <span class="rec-serif">Is</span></h2>
+      <p class="rec-lead">
+        An open call to every school in India to share one practice that works. Submissions are free, the format
+        is light, and everything shared enters a permanent, searchable, public library.
+      </p>
+      <div class="rec-steps">
+        <div class="rec-step"><div class="rec-step-num">01</div><div class="rec-step-body"><h4>Schools share their five percent</h4><p>One practice, one submission. What the problem was, what they did, what changed.</p></div></div>
+        <div class="rec-step"><div class="rec-step-num">02</div><div class="rec-step-body"><h4>A selection panel curates</h4><p>Twenty submissions are selected for the National Showcase. Every valid submission enters the Library.</p></div></div>
+        <div class="rec-step"><div class="rec-step-num">03</div><div class="rec-step-body"><h4>Twenty schools present at the Summit</h4><p>Five minutes each. TED format: problem, idea, implementation, results, takeaways.</p></div></div>
+        <div class="rec-step"><div class="rec-step-num">04</div><div class="rec-step-body"><h4>Everything is published, free</h4><p>Each presentation becomes a PDF, a video, a podcast episode, a blog post and a case study.</p></div></div>
+        <div class="rec-step"><div class="rec-step-num">05</div><div class="rec-step-body"><h4>The Knowledge Library grows</h4><p>Searchable by subject, by challenge, by school type. Free to every school in India, forever.</p></div></div>
+      </div>
+      <div class="rec-callout">The Showcase is the annual harvest. The Knowledge Library is the asset. Never confuse the two.</div>
+    </div>
+  </section>
+
+  <!-- 03 Six Categories -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">03</div>
+      <h2 class="rec-h2">Six <span class="rec-serif">Categories</span></h2>
+      <p class="rec-lead">
+        Broad enough that every school finds a home, specific enough that submissions are comparable.
+        Category F exists because the best ideas rarely fit a box.
+      </p>
+      <div class="rec-cats">
+        <div class="rec-cat">
+          <div class="rec-cat-letter" style="background: var(--color-magenta);">A</div>
+          <div class="rec-cat-body">
+            <h3>Learning &amp; Student Development</h3>
+            <p class="rec-cat-desc">Anything that changes what happens for the child.</p>
+            <p class="rec-cat-tags" style="color: var(--color-magenta);">Academic Innovation · Personalised Learning · Assessment · Reading · STEM · AI · Projects · Performing Arts · Sports · Student Leadership · Wellbeing</p>
+          </div>
+        </div>
+        <div class="rec-cat">
+          <div class="rec-cat-letter" style="background: var(--color-violet);">B</div>
+          <div class="rec-cat-body">
+            <h3>School Leadership &amp; Culture</h3>
+            <p class="rec-cat-desc">How the adults in the building work, lead and relate.</p>
+            <p class="rec-cat-tags" style="color: var(--color-violet);">Teacher Development · School Culture · Parent Engagement · Community · Leadership · Student Voice</p>
+          </div>
+        </div>
+        <div class="rec-cat">
+          <div class="rec-cat-letter" style="background: var(--color-cyan);">C</div>
+          <div class="rec-cat-body">
+            <h3>Operations &amp; Systems</h3>
+            <p class="rec-cat-desc">The unglamorous machinery that decides whether everything else works.</p>
+            <p class="rec-cat-tags" style="color: var(--color-cyan);">Admissions · Finance · Transport · ERP · Timetable · HR · Security · Operations</p>
+          </div>
+        </div>
+        <div class="rec-cat">
+          <div class="rec-cat-letter" style="background: var(--color-lime);">D</div>
+          <div class="rec-cat-body">
+            <h3>Technology</h3>
+            <p class="rec-cat-desc">Tools genuinely in daily use, not pilots or plans.</p>
+            <p class="rec-cat-tags" style="color: var(--color-lime);">AI · Automation · Digital Learning · Data · Communication</p>
+          </div>
+        </div>
+        <div class="rec-cat">
+          <div class="rec-cat-letter" style="background: var(--color-magenta);">E</div>
+          <div class="rec-cat-body">
+            <h3>Sustainability</h3>
+            <p class="rec-cat-desc">What the school does beyond its own walls.</p>
+            <p class="rec-cat-tags" style="color: var(--color-magenta);">Environment · Energy · Community Projects · CSR</p>
+          </div>
+        </div>
+        <div class="rec-cat">
+          <div class="rec-cat-letter" style="background: var(--color-violet);">F</div>
+          <div class="rec-cat-body">
+            <h3>Wildcard</h3>
+            <p class="rec-cat-desc">Something nobody has thought of.</p>
+            <p class="rec-cat-tags" style="color: var(--color-violet);">Anything that does not fit above, and should not have to.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Selected for National Showcase -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">04</div>
+      <h2 class="rec-h2">Selected for National <span class="rec-serif">Showcase</span></h2>
+      <p class="rec-lead">
+        Twenty schools are selected each year. They are not winners, because nobody lost. They are the schools
+        whose contribution the panel chose to put on the national stage.
+      </p>
+
+      <h3 class="rec-sub-h">What selected schools receive</h3>
+      <div class="rec-grid">
+        <div class="rec-item"><h4>National Showcase Certificate</h4><p>Formal recognition, signed by the Advisory Council.</p></div>
+        <div class="rec-item"><h4>Presentation Slot at the Summit</h4><p>Five minutes on the main stage in front of 500 school leaders.</p></div>
+        <div class="rec-item"><h4>Professional Video</h4><p>A properly produced film of their practice, theirs to keep and use.</p></div>
+        <div class="rec-item"><h4>Website Feature</h4><p>A permanent, credited page in the Knowledge Library.</p></div>
+        <div class="rec-item"><h4>Digital Badge</h4><p>'National Showcase School 2026' for their website, marketing and admissions material.</p></div>
+        <div class="rec-item"><h4>Media Coverage</h4><p>Featured across TSOI channels and eight media partners.</p></div>
+        <div class="rec-item"><h4>Book Feature</h4><p>Included in the annual published compendium of Indian school practice.</p></div>
+        <div class="rec-item"><h4>Podcast Episode</h4><p>A long-form conversation about the practice and how it was built.</p></div>
+      </div>
+
+      <h3 class="rec-sub-h">And every contributing school receives</h3>
+      <ul class="rec-bullets">
+        <li>A permanent, credited entry in the Knowledge Library</li>
+        <li>A Contributor badge for their website and communications</li>
+        <li>Their practice made searchable and useful to schools across India</li>
+        <li>An open invitation to contribute again next year</li>
+      </ul>
+      <div class="rec-callout">
+        This is the structural difference. In a competition, the schools that do not win receive nothing and
+        never return. Here, every school that contributes receives permanent public credit — so the pool grows
+        every year instead of shrinking.
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Five Minutes -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">05</div>
+      <h2 class="rec-h2">Five Minutes, <span class="rec-serif">Exactly.</span></h2>
+      <p class="rec-lead">
+        TED format. No slide overload, no institutional preamble, no thanking the management. Five minutes,
+        five beats, then off. The discipline is what makes twenty presentations watchable rather than exhausting.
+      </p>
+      <div class="rec-beats">
+        <div class="rec-beat"><div class="rec-beat-label" style="color: var(--color-magenta);">PROBLEM</div><p>What was not working. Be specific and honest.</p></div>
+        <div class="rec-beat"><div class="rec-beat-label" style="color: var(--color-violet);">IDEA</div><p>What you decided to try.</p></div>
+        <div class="rec-beat"><div class="rec-beat-label" style="color: var(--color-cyan);">IMPLEMENTATION</div><p>How you actually did it, including what went wrong.</p></div>
+        <div class="rec-beat"><div class="rec-beat-label" style="color: var(--color-lime);">RESULTS</div><p>What changed. Numbers if you have them, observation if you do not.</p></div>
+        <div class="rec-beat"><div class="rec-beat-label" style="color: var(--color-yellow);">TAKEAWAYS</div><p>What another school should know before trying this.</p></div>
+      </div>
+
+      <h3 class="rec-sub-h">What happens to every presentation afterwards</h3>
+      <p class="rec-lead">Nothing is allowed to end on stage. Each of the twenty presentations is converted into a full set of assets, published free.</p>
+      <div class="rec-grid">
+        <div class="rec-item"><h4>PDF Case Study</h4><p>Downloadable, structured, citable.</p></div>
+        <div class="rec-item"><h4>Video</h4><p>The stage recording, professionally edited.</p></div>
+        <div class="rec-item"><h4>Podcast Episode</h4><p>Long-form, in the contributor's own voice.</p></div>
+        <div class="rec-item"><h4>Blog Article</h4><p>Written up for search and sharing.</p></div>
+        <div class="rec-item"><h4>Website Feature</h4><p>Permanent page in the Knowledge Library.</p></div>
+        <div class="rec-item"><h4>YouTube &amp; LinkedIn</h4><p>Distributed where school leaders already are.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Knowledge Library -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">06</div>
+      <h2 class="rec-h2">The Knowledge <span class="rec-serif">Library</span></h2>
+      <p class="rec-lead">
+        This is the part that matters most, and the part that <em class="rec-serif rec-accent">nobody else can build</em>.
+        A free, public, searchable library of proven practice from real Indian schools. Not theory, not consultancy
+        output, not a ministry framework. Practice that worked, documented by the people who ran it.
+      </p>
+
+      <h3 class="rec-sub-h">How a school uses it</h3>
+      <div class="rec-narrative">
+        <span>A principal in Nagpur has a transport problem.</span>
+        <span>She searches 'Transport'.</span>
+        <span>She finds four schools that solved it. One is a similar size, similar city, similar budget.</span>
+        <span>She reads the case study, watches the six-minute video, downloads the PDF.</span>
+        <span>The contributing school's name, city and contact are right there.</span>
+        <span><strong>She calls them.</strong></span>
+      </div>
+
+      <h3 class="rec-sub-h">What every entry carries</h3>
+      <div class="rec-grid">
+        <div class="rec-item"><h4>School logo &amp; name</h4><p>Full credit, permanently.</p></div>
+        <div class="rec-item"><h4>City &amp; board</h4><p>So schools can find comparable contexts.</p></div>
+        <div class="rec-item"><h4>Contributor name</h4><p>The individual who built it, named.</p></div>
+        <div class="rec-item"><h4>Contact</h4><p>So the conversation can continue directly.</p></div>
+        <div class="rec-item"><h4>Video</h4><p>Watch it in six minutes.</p></div>
+        <div class="rec-item"><h4>Downloadable PDF</h4><p>Take it into your next leadership meeting.</p></div>
+      </div>
+
+      <h3 class="rec-sub-h">Searchable by what a school actually needs</h3>
+      <div class="rec-tags-box">
+        Math · Reading · Sports · Admissions · Transport · Assessment · AI · Teachers · Parenting · Culture · ERP · Leadership · Wellbeing
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Submission Form -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">07</div>
+      <h2 class="rec-h2">The Submission <span class="rec-serif">Form</span></h2>
+      <p class="rec-lead">Five sections. Light enough to complete in under half an hour, structured enough to be useful to another school.</p>
+
+      <h3 class="rec-sub-h">Section 1 — The School</h3>
+      <div class="rec-tags-box" style="border-left-color: var(--color-magenta); background: rgba(232,0,106,0.04);">School name · Board · City · Website</div>
+
+      <h3 class="rec-sub-h">Section 2 — Contact Person</h3>
+      <div class="rec-tags-box" style="border-left-color: var(--color-violet); background: rgba(109,40,217,0.04);">Name · Role · Phone · Email</div>
+
+      <h3 class="rec-sub-h">Section 3 — The Contribution</h3>
+      <ul class="rec-bullets">
+        <li>Title</li>
+        <li>Category (A to F)</li>
+        <li>Summary (100 words)</li>
+        <li>The problem · The solution · The impact · The evidence</li>
+        <li>Can another school replicate this?</li>
+        <li>How long did it take?</li>
+        <li>What did it cost?</li>
+      </ul>
+
+      <h3 class="rec-sub-h">Section 4 — Upload</h3>
+      <div class="rec-tags-box" style="border-left-color: var(--color-lime); background: rgba(22,163,74,0.04);">PDF · Images · Video</div>
+
+      <h3 class="rec-sub-h">Section 5 — Declaration</h3>
+      <ul class="rec-bullets">
+        <li>This is original work of our school</li>
+        <li>We have permission to share it</li>
+        <li>We hold photography rights for any images submitted</li>
+        <li>We grant publication rights as set out in the terms</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 08 How Schools Are Selected -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">08</div>
+      <h2 class="rec-h2">How Schools Are <span class="rec-serif">Selected</span></h2>
+      <p class="rec-lead">
+        Seven criteria, applied by a selection panel drawn from the Advisory Council and category specialists.
+        The panel curates; it does not rank.
+      </p>
+      <div class="rec-table-wrap">
+        <table class="rec-table">
+          <thead><tr><th>Criterion</th><th>What the panel looks for</th></tr></thead>
+          <tbody>
+            <tr><td>Impact</td><td>Did something measurably change for children, teachers or the school?</td></tr>
+            <tr><td>Innovation</td><td>Is this a genuinely different way of doing it?</td></tr>
+            <tr><td>Replicability</td><td>Could another school actually do this, with the resources they have?</td></tr>
+            <tr><td>Evidence</td><td>Is there proof, in any form, that it worked?</td></tr>
+            <tr><td>Scalability</td><td>Does it hold up beyond one classroom or one year?</td></tr>
+            <tr><td>Presentation</td><td>Is it explained clearly enough to be useful to a stranger?</td></tr>
+            <tr><td>Originality</td><td>Is this the school's own work?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rec-callout">
+        Replicability carries the most weight. A brilliant practice that only works in a school with unusual
+        resources helps nobody. A modest practice any school could copy tomorrow is worth more to the Library.
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 Terms & Conditions -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">09</div>
+      <h2 class="rec-h2">Terms &amp; <span class="rec-serif">Conditions</span></h2>
+      <p class="rec-lead">Written plainly, because schools will read them and they need to trust what they are agreeing to.</p>
+      <ol class="rec-legal">
+        <li>Ownership of the practice remains entirely with the contributing school.</li>
+        <li>The school retains all intellectual property in what it has built.</li>
+        <li>TSOI receives non-exclusive publishing rights — the right to publish, not to own.</li>
+        <li>Submissions must be the original work of the contributing school.</li>
+        <li>Submissions may be edited for length, clarity and format before publication.</li>
+        <li>Submissions may be published across TSOI platforms and partner media.</li>
+        <li>Selection decisions of the panel are final.</li>
+      </ol>
+      <div class="rec-callout">
+        In plain language: You keep your idea. You keep the credit. You keep the right to use it however you wish.
+        We get permission to publish it so other schools can learn from it. That is the entire arrangement.
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 Timeline -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">10</div>
+      <h2 class="rec-h2">Timeline — <span class="rec-serif">Year One</span></h2>
+      <div class="rec-callout" style="border-left-color: var(--color-yellow); background: rgba(217,119,6,0.05);">
+        Year One runs a compressed cycle because the Summit is in October and we are launching in July. From
+        Year Two the cycle opens on 1 April, giving schools four and a half months to contribute.
+      </div>
+      <div class="rec-table-wrap">
+        <table class="rec-table">
+          <thead><tr><th>When</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td>20 July 2026</td><td>Contributions open. Announcement across all channels and school networks.</td></tr>
+            <tr><td>20 Jul – 15 Sep</td><td>Open window. 57 days. Rolling promotion, category spotlights, contributor features.</td></tr>
+            <tr><td>15 September</td><td>Contributions close.</td></tr>
+            <tr><td>16 – 30 September</td><td>Panel evaluation. Category specialists score, Advisory Council reviews.</td></tr>
+            <tr><td>Early October</td><td>The twenty National Showcase schools announced. Every contributor notified and credited.</td></tr>
+            <tr><td>October</td><td>Selected schools briefed and rehearsed. Videos produced. Library entries built.</td></tr>
+            <tr><td>30 Oct – 1 Nov</td><td>The 5% Showcase at the Summit. Twenty presentations across the three days.</td></tr>
+            <tr><td>November</td><td>Knowledge Library goes live. All assets published free.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="rec-sub-h">From Year Two onwards</h3>
+      <div class="rec-table-wrap">
+        <table class="rec-table">
+          <thead><tr><th>When</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td>1 April</td><td>Contributions open</td></tr>
+            <tr><td>15 August</td><td>Contributions close</td></tr>
+            <tr><td>September</td><td>Evaluation</td></tr>
+            <tr><td>October</td><td>National Showcase schools announced</td></tr>
+            <tr><td>30 Oct – 1 Nov</td><td>Presentations at the Summit</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 The Campaign -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">11</div>
+      <h2 class="rec-h2">The <span class="rec-serif">Campaign</span></h2>
+      <p class="rec-lead">Seven posts carry the whole message. Short, declarative, and built to be forwarded rather than admired.</p>
+      <div class="rec-posts">
+        <div class="rec-post"><div class="lbl">Post 1</div><div class="txt">Every School Has Something Worth Sharing.</div></div>
+        <div class="rec-post"><div class="lbl">Post 2</div><div class="txt">What's Your 5%?</div></div>
+        <div class="rec-post"><div class="lbl">Post 3</div><div class="txt">India's Largest Knowledge Sharing Movement.</div></div>
+        <div class="rec-post"><div class="lbl">Post 4</div><div class="txt">One Idea Can Change A Thousand Schools.</div></div>
+        <div class="rec-post"><div class="lbl">Post 5</div><div class="txt">Every Child Benefits When Schools Share.</div></div>
+        <div class="rec-post"><div class="lbl">Post 6</div><div class="txt">Contributions Open.</div></div>
+        <div class="rec-post"><div class="lbl">Post 7</div><div class="txt">National Showcase Schools Announced.</div></div>
+      </div>
+      <div class="rec-callout">
+        'What's your 5%?' is the line that will outlive the campaign. It is a question a principal can answer in
+        one sentence, and it makes contributing feel small enough to actually do.
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 Ten-Year Vision -->
+  <section class="rec-section">
+    <div class="container">
+      <div class="rec-num">12</div>
+      <h2 class="rec-h2">The Ten-Year <span class="rec-serif">Vision</span></h2>
+      <p class="rec-lead">Twenty presentations is the first year. It is not the point.</p>
+      <div class="rec-vision">
+        <div class="rec-vision-row"><div class="rec-vision-yr">Year 1</div><p>20 schools contribute</p></div>
+        <div class="rec-vision-row"><div class="rec-vision-yr">Year 3</div><p>Several hundred entries across six categories</p></div>
+        <div class="rec-vision-row"><div class="rec-vision-yr">Year 5</div><p>Over a thousand documented practices</p></div>
+        <div class="rec-vision-row"><div class="rec-vision-yr">Year 10</div><p>Five thousand schools. Five thousand proven ideas.</p></div>
+      </div>
+      <p class="rec-lead" style="margin-top: 2rem;">
+        A searchable library of what actually works in Indian classrooms, built by the people who made it work.
+      </p>
+      <p class="rec-lead">
+        No consultant can build this. No ministry has it. No conference owns it. It can only be built
+        <em class="rec-serif rec-accent">by schools, for schools</em>, one contribution at a time, over years.
+      </p>
+      <p class="rec-lead">
+        It becomes the Wikipedia of Indian school innovation — and TSOI is the organisation that convened it.
+      </p>
+
+      <h3 class="rec-sub-h">The Founding Contributors</h3>
+      <p class="rec-lead">
+        Schools that present at the Showcase are not speakers. They are Founding Contributors to The Schools of
+        India Knowledge Library.
+      </p>
+      <div class="rec-callout">
+        A speaker spoke once, in October, at a conference. A Founding Contributor helped build something that will
+        still be useful in twenty years. The word decides which of those a school feels it has become.
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Footer -->
+  <section class="rec-cta">
+    <div class="container">
+      <div class="rec-cta-line">What's your 5%?</div>
+      <p class="rec-cta-meta">The 5% Showcase · Presented by The Schools of India Summit<br>theschoolsofindia.org · summit@theschoolsofindia.org</p>
+      <div class="rec-cta-btns">
+        <a href="mailto:summit@theschoolsofindia.org?subject=The%205%25%20Showcase%20—%20Contribution" class="btn btn-primary">Contribute Your 5%</a>
+        <a href="/summit" class="btn btn-secondary">Back to the Summit</a>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
