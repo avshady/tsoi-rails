@@ -438,36 +438,36 @@ const cmsData = {
   ],
   faqs: [
     {
-      question: "Who can attend the Education Summit 2026?",
-      answer: "The summit is designed for anyone building, managing, or teaching in K-12 and Higher Education. This includes school founders, directors, board members, principals, academic coordinators, teachers, preschool owners, EdTech startups, curriculum designers, and investors."
+      question: "Who can attend The Schools of India Summit 2026?",
+      answer: "The Summit is open to everyone in education — school founders, directors and trustees, principals and academic heads, teachers and educators, EdTech founders, and anyone building or working in education."
     },
     {
-      question: "Is accommodation included in the pass price?",
-      answer: "Accommodation is not included in the registration passes. However, we have partnered with premium hotels near the venue (ranging from luxury 5-star to business 4-star properties) that offer exclusive discounted booking rates for summit delegates. Details will be emailed to you upon registration."
+      question: "Is accommodation included?",
+      answer: "Yes. Hotel accommodation is included for delegates at Novotel Imagicaa, Khopoli."
     },
     {
-      question: "Will digital participation certificates be provided?",
-      answer: "Yes, all registered delegates will receive an official, blockchain-verifiable digital participation certificate sent to their registered email address within 7 days after the summit ends."
+      question: "Will delegates receive a participation kit?",
+      answer: "Yes. Every delegate receives a participation kit, along with plenty of takeaways to carry back to their school."
     },
     {
-      question: "Are meals included in the ticket packages?",
-      answer: "Yes. All tickets (Early Bird, Standard, Group, VIP) include access to the networking lunches, morning coffee spreads, and evening tea with snacks on all three days of the summit. The VIP pass also includes entry to the exclusive Speakers' Gala Dinner on Day 3."
+      question: "Are meals included?",
+      answer: "Yes. All meals across the three days of the Summit are covered."
     },
     {
-      question: "Can educational institutions register as a group?",
-      answer: "Absolutely. We encourage leadership teams to attend together. The Group Pass is tailored for registrations of 3 or more delegates from the same school or organization, offering a discounted per-ticket price of ₹18,999."
+      question: "Can schools register as a group?",
+      answer: "Yes. Schools can register an entire school delegation as well — you'll find that option on the <a href='https://www.tezticket.com/events/TSOIS/sub_events/298' target='_blank' rel='noopener'>registration page</a>."
     },
     {
-      question: "Is parking available at the convention centre?",
-      answer: "Yes, the Grand Pavilion Convention Centre has a dedicated multi-level parking facility. Complimentary valet parking is available for all registered delegates showing their Summit entry badge at the gates."
+      question: "Is parking available, and how do I get to the venue?",
+      answer: "Yes, parking is available at the venue. Transfers are also covered from the nearest airports, so you're taken care of on arrival."
     },
     {
-      question: "Can I transfer my ticket to another team member?",
-      answer: "Yes, you can transfer your registration to another colleague from your institution. Ticket transfers can be requested by emailing registration@educationsummit.in up to 10 days before the event (on or before October 20, 2026)."
+      question: "Can I transfer my ticket to someone else?",
+      answer: "No. Tickets are non-transferable."
     },
     {
-      question: "Will session recordings and presentation slides be shared?",
-      answer: "Yes. Recorded keynote presentations, panel sessions, and downloadable speaker slides will be made available in a secure online portal. Access links will be sent to all ticket holders after the event concludes."
+      question: "Will there be takeaways from the sessions?",
+      answer: "Yes — delegates will leave with plenty of practical takeaways from across the three days of the Summit."
     }
   ],
   ctaSection: {
