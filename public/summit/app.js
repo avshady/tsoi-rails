@@ -1,4 +1,4 @@
-import initialData from './cms-data.js?v=8';
+import initialData from './cms-data.js?v=9';
 
 // Setup global store for CMS editing
 if (!window.currentCmsData) {
@@ -11,6 +11,15 @@ export function renderPage(data) {
   // time; a missing element must skip gracefully, never halt the render.
   const setText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   const setHTML = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+  // CTA link: external (http) actions open in a new tab; in-page anchors stay same-tab.
+  const setCta = (id, cta) => {
+    const el = document.getElementById(id);
+    if (!el || !cta) return;
+    el.textContent = cta.text;
+    el.setAttribute('href', cta.action);
+    if (/^https?:/i.test(cta.action)) { el.setAttribute('target', '_blank'); el.setAttribute('rel', 'noopener'); }
+    else { el.removeAttribute('target'); el.removeAttribute('rel'); }
+  };
 
   // --- 1. HERO SECTION ---
   setHTML('hero-headline', formatHeading(data.hero.headline));
@@ -18,13 +27,8 @@ export function renderPage(data) {
   setText('hero-date', data.hero.dates);
   setText('hero-location-text', data.hero.location);
   
-  const ctaPrimary = document.getElementById('hero-cta-primary');
-  ctaPrimary.textContent = data.hero.ctaPrimary.text;
-  ctaPrimary.setAttribute('href', data.hero.ctaPrimary.action);
-  
-  const ctaSecondary = document.getElementById('hero-cta-secondary');
-  ctaSecondary.textContent = data.hero.ctaSecondary.text;
-  ctaSecondary.setAttribute('href', data.hero.ctaSecondary.action);
+  setCta('hero-cta-primary', data.hero.ctaPrimary);
+  setCta('hero-cta-secondary', data.hero.ctaSecondary);
 
   // --- 2. INTRODUCTION ---
   document.getElementById('intro-title').innerHTML = formatHeading(data.intro.title);
@@ -224,17 +228,8 @@ export function renderPage(data) {
     setHTML('cta-banner-title', formatHeading(data.ctaSection.title));
     setText('cta-banner-sub', data.ctaSection.subheadline);
     setText('cta-banner-dates', data.ctaSection.dates);
-
-    const ctaBannerPrimary = document.getElementById('cta-banner-primary');
-    if (ctaBannerPrimary) {
-      ctaBannerPrimary.textContent = data.ctaSection.ctaPrimary.text;
-      ctaBannerPrimary.setAttribute('href', data.ctaSection.ctaPrimary.action);
-    }
-    const ctaBannerSecondary = document.getElementById('cta-banner-secondary');
-    if (ctaBannerSecondary) {
-      ctaBannerSecondary.textContent = data.ctaSection.ctaSecondary.text;
-      ctaBannerSecondary.setAttribute('href', data.ctaSection.ctaSecondary.action);
-    }
+    setCta('cta-banner-primary', data.ctaSection.ctaPrimary);
+    setCta('cta-banner-secondary', data.ctaSection.ctaSecondary);
   }
 
   // --- 19. FOOTER ---
@@ -403,9 +398,11 @@ const closeBtn = document.getElementById('modal-close-btn');
 const regForm = document.getElementById('modal-form');
 
 function openRegistrationModal(passId, passName) {
-  document.getElementById('form-pass-id').value = passId;
-  document.getElementById('form-pass-name').value = passName;
-  regDialog.showModal();
+  const pid = document.getElementById('form-pass-id');
+  const pnm = document.getElementById('form-pass-name');
+  if (pid) pid.value = passId;
+  if (pnm) pnm.value = passName;
+  if (regDialog) regDialog.showModal();
 }
 
 if (closeBtn) {

@@ -251,22 +251,34 @@ class PagesController < ApplicationController
     pass_id      = params[:passId].to_s.strip
 
     newsletter = role == "Newsletter Subscriber"
+    sponsor    = pass_id == "sponsor"
 
     parts = []
     parts << "Role: #{role}"         if role.present? && !newsletter
-    parts << "Pass: #{pass_id}"      if pass_id.present?
+    parts << "Pass: #{pass_id}"      if pass_id.present? && !sponsor
+
+    service = if newsletter then "Summit Newsletter"
+              elsif sponsor then "Summit Sponsorship"
+              else "Summit Registration"
+              end
 
     Inquiry.create!(
       name:        name,
       email:       email,
       school_name: organisation.presence,
-      service:     newsletter ? "Summit Newsletter" : "Summit Registration",
+      service:     service,
       message:     parts.join(" · ").presence,
       status:      "new"
     )
 
     first_name = name.split.first.presence || "You"
-    flash[:notice] = newsletter ? "Subscribed! We'll keep you updated." : "Welcome, #{first_name}! You're on our priority list."
+    flash[:notice] = if newsletter
+      "Subscribed! We'll keep you updated."
+    elsif sponsor
+      "Thanks #{first_name}! Our partnerships team will be in touch about sponsorship shortly."
+    else
+      "Welcome, #{first_name}! You're on our priority list."
+    end
     redirect_to summit_path
   rescue => e
     flash[:notice] = "You're on our priority list — we'll be in touch soon."

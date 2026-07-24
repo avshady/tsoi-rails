@@ -5,12 +5,12 @@ const cmsData = {
     dates: "30 & 31 October • 1 November 2026",
     location: "Novotel Imagicaa, Khopoli",
     ctaPrimary: {
-      text: "Register Interest",
-      action: "#registration"
+      text: "Register Now",
+      action: "https://www.tezticket.com/events/TSOIS/sub_events/298"
     },
     ctaSecondary: {
-      text: "Become a Partner",
-      action: "#partners"
+      text: "Become a Sponsor",
+      action: "#sponsor"
     }
   },
   intro: {
@@ -474,8 +474,8 @@ const cmsData = {
     title: "Ready to Shape the Future of Education?",
     subheadline: "Join hundreds of educators, founders, principals, and innovators for three transformative days of learning and collaboration.",
     dates: "30 & 31 October • 1 November 2026",
-    ctaPrimary: { text: "Register Now", action: "#registration" },
-    ctaSecondary: { text: "Become a Sponsor", action: "#partners" }
+    ctaPrimary: { text: "Register Now", action: "https://www.tezticket.com/events/TSOIS/sub_events/298" },
+    ctaSecondary: { text: "Become a Sponsor", action: "#sponsor" }
   },
   footer: {
     about: "The Education Summit 2026 is India's premier gathering for institutional leaders, builders, and innovators, driving systemic growth and human-centric pedagogy.",

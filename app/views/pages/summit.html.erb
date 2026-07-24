@@ -347,44 +347,43 @@
     </div>
   </footer>
 
-  <!-- Registration Interest Modal -->
+  <!-- Sponsorship Enquiry Modal -->
   <dialog id="registration-dialog">
     <div class="modal-header">
-      <h3 class="modal-title">Register Your Interest</h3>
+      <h3 class="modal-title">Become a Sponsor</h3>
       <button class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">✕</button>
     </div>
     <form class="modal-form" id="modal-form" action="<%= summit_notify_path %>" method="post">
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-      <input type="hidden" id="form-pass-id" name="passId">
-      <div class="form-group">
-        <label class="form-label" for="form-pass-name">Selected Pass</label>
-        <input type="text" id="form-pass-name" class="form-input" readonly style="opacity: 0.7;">
-      </div>
+      <input type="hidden" id="form-pass-id" name="passId" value="sponsor">
+      <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Tell us about your organisation and our partnerships team will be in touch with sponsorship &amp; partnership
+        opportunities for The Schools of India Summit 2026.
+      </p>
       <div class="form-group">
         <label class="form-label" for="form-fullname">Full Name *</label>
         <input type="text" id="form-fullname" name="name" class="form-input" placeholder="Enter your full name" required>
       </div>
       <div class="form-group">
         <label class="form-label" for="form-email">Email Address *</label>
-        <input type="email" id="form-email" name="email" class="form-input" placeholder="name@institution.edu" required>
+        <input type="email" id="form-email" name="email" class="form-input" placeholder="name@company.com" required>
       </div>
       <div class="form-group">
-        <label class="form-label" for="form-organisation">Institution / Organisation *</label>
-        <input type="text" id="form-organisation" name="organisation" class="form-input" placeholder="e.g. Greenwoods Academy" required>
+        <label class="form-label" for="form-organisation">Company / Organisation *</label>
+        <input type="text" id="form-organisation" name="organisation" class="form-input" placeholder="e.g. Acme Corporation" required>
       </div>
       <div class="form-group">
-        <label class="form-label" for="form-role">Designation / Role *</label>
+        <label class="form-label" for="form-role">Your Role *</label>
         <select id="form-role" name="role" class="form-select" required>
           <option value="" disabled selected>Select your role</option>
-          <option value="School Founder / Director">School Founder / Director</option>
-          <option value="Principal / Vice Principal">Principal / Vice Principal</option>
-          <option value="Academic Coordinator / Head">Academic Coordinator / Head</option>
-          <option value="Educator / Teacher">Educator / Teacher</option>
-          <option value="EdTech Founder / Entrepreneur">EdTech Founder / Entrepreneur</option>
+          <option value="Founder / CEO">Founder / CEO</option>
+          <option value="Marketing / Brand">Marketing / Brand</option>
+          <option value="Partnerships / Business Development">Partnerships / Business Development</option>
+          <option value="Sales">Sales</option>
           <option value="Other">Other</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary modal-submit-btn">Register Interest</button>
+      <button type="submit" class="btn btn-primary modal-submit-btn">Submit Enquiry</button>
     </form>
   </dialog>
 
@@ -407,7 +406,7 @@
 
   <div class="toast-msg" id="toast-message">Registered!</div>
 
-  <script type="module" src="/summit/app.js?v=9"></script>
+  <script type="module" src="/summit/app.js?v=10"></script>
   <% if Rails.env.development? %>
   <script type="module" src="/summit/cms-editor.js"></script>
   <% end %>
@@ -437,13 +436,24 @@
       });
     }
 
-    // Registration modal close
+    // Sponsor enquiry modal close
     var dialog = document.getElementById('registration-dialog');
     var modalCloseBtn = document.getElementById('modal-close-btn');
     if (modalCloseBtn && dialog) {
       modalCloseBtn.addEventListener('click', function() { dialog.close(); });
       dialog.addEventListener('click', function(e) { if (e.target === dialog) dialog.close(); });
     }
+
+    // "Become a Sponsor" CTAs open the sponsorship enquiry form
+    ['hero-cta-secondary', 'cta-banner-secondary'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && dialog) {
+        el.addEventListener('click', function(e) {
+          e.preventDefault();
+          dialog.showModal();
+        });
+      }
+    });
 
 
     // Schedule tabs
