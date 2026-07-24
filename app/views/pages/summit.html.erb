@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/summit/style.css?v=6">
+  <link rel="stylesheet" href="/summit/style.css?v=7">
 </head>
 <body>
 
@@ -24,17 +24,20 @@
       <a href="/" class="logo">
         THE SCHOOLS OF INDIA <span class="logo-dot"></span>
       </a>
-      <ul class="nav-menu">
-        <li><a href="#intro" class="nav-link">About</a></li>
-        <li><a href="#speakers" class="nav-link">Advisory Board</a></li>
-        <li><a href="#schedule" class="nav-link">Schedule</a></li>
-        <li><a href="#faqs" class="nav-link">FAQs</a></li>
-      </ul>
-      <button class="hamburger" aria-label="Toggle Menu" id="hamburger-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="header-actions">
+        <ul class="nav-menu">
+          <li><a href="#intro" class="nav-link">About</a></li>
+          <li><a href="#speakers" class="nav-link">Advisory Board</a></li>
+          <li><a href="#schedule" class="nav-link">Schedule</a></li>
+          <li><a href="#faqs" class="nav-link">FAQs</a></li>
+        </ul>
+        <button type="button" class="btn btn-primary nav-register-btn" id="nav-register-btn">Register</button>
+        <button class="hamburger" aria-label="Toggle Menu" id="hamburger-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -438,6 +441,18 @@
     if (modalCloseBtn && dialog) {
       modalCloseBtn.addEventListener('click', function() { dialog.close(); });
       dialog.addEventListener('click', function(e) { if (e.target === dialog) dialog.close(); });
+    }
+
+    // Header Register button opens the registration dialog
+    var navRegisterBtn = document.getElementById('nav-register-btn');
+    if (navRegisterBtn && dialog) {
+      navRegisterBtn.addEventListener('click', function() {
+        var pid = document.getElementById('form-pass-id');
+        var pname = document.getElementById('form-pass-name');
+        if (pid) pid.value = '';
+        if (pname) pname.value = 'General Registration';
+        dialog.showModal();
+      });
     }
 
     // Schedule tabs
