@@ -260,6 +260,25 @@
     .rec-vision-yr { font-weight: 900; font-size: 1.05rem; color: var(--color-magenta); }
     .rec-vision-row p { color: var(--text-muted); }
 
+    /* Embedded submission form */
+    .rec-form-embed {
+      border: 1px solid var(--border-glow);
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #fff;
+      margin-top: 1rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    }
+    .rec-form-embed iframe {
+      width: 100%;
+      height: 1500px;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .rec-form-embed iframe { height: 1900px; }
+    }
+
     /* Footer CTA */
     .rec-cta {
       text-align: center;
@@ -587,6 +606,21 @@
         <li>We hold photography rights for any images submitted</li>
         <li>We grant publication rights as set out in the terms</li>
       </ul>
+
+      <h3 class="rec-sub-h" id="submit-form">Submit your 5%</h3>
+      <p class="rec-lead">
+        Complete the submission below. It takes under half an hour, and everything you share enters the free,
+        public Knowledge Library.
+      </p>
+      <div class="rec-form-embed">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeCMeiur9whGlwtp-j2omZoeqoW2uRgTOXO5FXufjD3EH_Udw/viewform?embedded=true"
+                title="The 5% Showcase — Submission Form" loading="lazy">Loading the submission form…</iframe>
+      </div>
+      <p class="rec-lead" style="font-size:0.9rem; margin-top:0.85rem;">
+        Trouble loading the form?
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeCMeiur9whGlwtp-j2omZoeqoW2uRgTOXO5FXufjD3EH_Udw/viewform"
+           target="_blank" rel="noopener" style="color:var(--color-magenta); font-weight:700;">Open it in a new tab →</a>
+      </p>
     </div>
   </section>
 
@@ -746,7 +780,7 @@
       <div class="rec-cta-line">What's your 5%?</div>
       <p class="rec-cta-meta">The 5% Showcase · Presented by The Schools of India Summit<br>theschoolsofindia.org · summit@theschoolsofindia.org</p>
       <div class="rec-cta-btns">
-        <a href="mailto:summit@theschoolsofindia.org?subject=The%205%25%20Showcase%20—%20Contribution" class="btn btn-primary">Contribute Your 5%</a>
+        <a href="#submit-form" class="btn btn-primary">Contribute Your 5%</a>
         <a href="/summit" class="btn btn-secondary">Back to the Summit</a>
       </div>
     </div>
