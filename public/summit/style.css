@@ -1706,6 +1706,64 @@ a {
 }
 
 /* ----------------------------------------------------
+   PARTNERS
+   ---------------------------------------------------- */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.5rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.partner-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  text-align: center;
+  transition: var(--transition-fast);
+}
+
+.partner-card:hover {
+  border-color: var(--border-active);
+  transform: translateY(-3px);
+}
+
+.partner-logo-wrap {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-logo-wrap img {
+  max-height: 68px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.partner-logo-fallback {
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-white);
+}
+
+.partner-role {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-magenta);
+}
+
+/* ----------------------------------------------------
    CALL TO ACTION BANNER (Section 18)
    ---------------------------------------------------- */
 .cta-banner {
