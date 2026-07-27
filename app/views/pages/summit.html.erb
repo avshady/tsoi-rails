@@ -465,14 +465,6 @@
       });
     });
 
-    // FAQ accordion
-    document.addEventListener('click', function(e) {
-      var trigger = e.target.closest('.faq-trigger');
-      if (trigger) {
-        trigger.closest('.faq-item').classList.toggle('is-active');
-      }
-    });
-
     <% if flash[:notice] %>
     var toast = document.getElementById('toast-message');
     if (toast) {
