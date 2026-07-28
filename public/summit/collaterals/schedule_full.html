@@ -162,6 +162,25 @@
     .footer-left { font-size: 11px; color: #9a9aa8; }
     .footer-right { font-size: 11px; color: #9a9aa8; text-align: right; }
 
+    @media (max-width: 640px) {
+      body { padding: 16px 10px 40px; }
+      .doc-header, .doc-hero, .day-block, .special-block, .phi-block, .doc-footer { padding-left: 20px; padding-right: 20px; }
+      .doc-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .doc-hero { padding-top: 28px; padding-bottom: 26px; }
+      .doc-title { font-size: 28px; }
+      .day-block { padding-top: 28px; }
+      .flow-strip { flex-direction: column; }
+      .flow-cell { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.09); }
+      .flow-cell:last-child { border-bottom: none; }
+      .session { flex-direction: column; gap: 2px; }
+      .session-time { flex: 0 0 auto; }
+      .tracks-grid { grid-template-columns: 1fr; }
+      .special-grid { grid-template-columns: 1fr; }
+      .phi-block { grid-template-columns: 1fr; gap: 24px; }
+      .doc-footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .footer-right { text-align: left; }
+    }
+
     @media print {
       body { background: #fff; padding: 0; }
       .day-block, .special-block, .phi-block, .doc-footer, .doc-hero, .doc-header { break-inside: avoid; }

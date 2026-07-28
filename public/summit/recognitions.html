@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/summit/style.css?v=7">
+  <link rel="stylesheet" href="/summit/style.css?v=9">
 
   <style>
     /* ── RECOGNITIONS 2026 PAGE ── */
@@ -356,9 +356,25 @@
           <li><a href="/summit#faqs" class="nav-link">FAQs</a></li>
         </ul>
         <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="btn btn-primary nav-register-btn">Register</a>
+        <button class="hamburger" aria-label="Toggle Menu" id="hamburger-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobile-nav-overlay">
+    <a href="/summit#intro" class="mobile-nav-link">About</a>
+    <a href="/summit#speakers" class="mobile-nav-link">Advisory Board</a>
+    <a href="/summit#schedule" class="mobile-nav-link">Schedule</a>
+    <a href="/summit#partners" class="mobile-nav-link">Partners</a>
+    <a href="/summit/recognitions.html" class="mobile-nav-link">Recognitions 2026</a>
+    <a href="/summit#faqs" class="mobile-nav-link">FAQs</a>
+    <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="mobile-nav-link" style="color: var(--color-magenta);">Register →</a>
+  </div>
 
   <!-- Hero -->
   <section class="rec-hero">
@@ -677,5 +693,23 @@
     </div>
   </section>
 
+  <script>
+    (function () {
+      var hb = document.getElementById('hamburger-btn');
+      var mn = document.getElementById('mobile-nav-overlay');
+      if (hb && mn) {
+        hb.addEventListener('click', function () {
+          hb.classList.toggle('is-active');
+          mn.classList.toggle('is-active');
+        });
+        mn.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            hb.classList.remove('is-active');
+            mn.classList.remove('is-active');
+          });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
