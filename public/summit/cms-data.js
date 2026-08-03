@@ -111,7 +111,7 @@ const cmsData = {
     subtitle: "More speakers being confirmed — check back soon.",
     list: [
       {
-        name: "Laxmi Kumar",
+        name: "Lakshmi Kumar",
         designation: "Director",
         organisation: "Avasara Academy",
         photo: "/summit/assets/advisor_lakshmi.jpg",
