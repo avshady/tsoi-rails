@@ -1,0 +1,67 @@
+<% inp = "width:100%; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px; box-sizing:border-box; font-family:inherit;" %>
+<% lbl = "display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.55; margin-bottom:6px;" %>
+
+<%= form_with model: [:admin, post], local: true do |f| %>
+  <% if post.errors.any? %>
+    <div style="background:#fef2f2; border:1px solid #fecaca; color:#991b1b; padding:12px 16px; margin-bottom:1.5rem; border-radius:4px; font-size:13px;">
+      <%= post.errors.full_messages.to_sentence %>
+    </div>
+  <% end %>
+
+  <div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:1.75rem; margin-bottom:1.5rem;">
+    <div style="margin-bottom:1.25rem;">
+      <%= f.label :title, "Title *", style: lbl %>
+      <%= f.text_field :title, placeholder: "e.g. What great school leadership actually looks like", style: inp %>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div>
+        <%= f.label :author, "Author", style: lbl %>
+        <%= f.text_field :author, placeholder: "e.g. The Schools of India", style: inp %>
+      </div>
+      <div>
+        <%= f.label :category, "Category", style: lbl %>
+        <%= f.select :category,
+              options_for_select(Post::CATEGORIES, post.category),
+              { include_blank: "— none —" },
+              style: inp %>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1.25rem;">
+      <%= f.label :cover_image, "Cover image URL", style: lbl %>
+      <%= f.text_field :cover_image, placeholder: "/images/blog/my-post.jpg or https://…", style: inp %>
+      <p style="font-size:11px; opacity:0.45; margin:6px 0 0;">Paste a full URL, or upload the file to <code>public/images/blog/</code> and use <code>/images/blog/filename.jpg</code>.</p>
+    </div>
+
+    <div style="margin-bottom:1.25rem;">
+      <%= f.label :excerpt, "Excerpt", style: lbl %>
+      <%= f.text_area :excerpt, rows: 2, placeholder: "One or two lines shown on the blog listing. Leave blank to use the opening paragraph.", style: inp %>
+    </div>
+
+    <div>
+      <%= f.label :body, "Body *", style: lbl %>
+      <%= f.text_area :body, rows: 20, placeholder: "Write the article here.\n\nLeave a blank line between paragraphs — they become separate paragraphs on the page.", style: inp + " line-height:1.7;" %>
+      <p style="font-size:11px; opacity:0.45; margin:6px 0 0;">Plain text. Separate paragraphs with a blank line.</p>
+    </div>
+  </div>
+
+  <div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:1.75rem; margin-bottom:1.5rem;">
+    <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+      <%= f.check_box :published, style: "width:16px; height:16px; accent-color:#821E25;" %>
+      <span style="font-size:13px; font-weight:600;">Published — visible on /blog</span>
+    </label>
+    <p style="font-size:11px; opacity:0.45; margin:8px 0 0 26px;">Leave unticked to keep it as a draft. The publish date is stamped automatically the first time you publish.</p>
+
+    <div style="margin-top:1.25rem;">
+      <%= f.label :slug, "URL slug", style: lbl %>
+      <%= f.text_field :slug, placeholder: "auto-generated from the title", style: inp %>
+      <p style="font-size:11px; opacity:0.45; margin:6px 0 0;">Leave blank to generate from the title. Changing this on a live post breaks existing links.</p>
+    </div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:1rem;">
+    <%= f.submit submit_label, style:"background:#821E25; color:white; padding:11px 28px; font-size:13px; font-weight:700; border:none; border-radius:4px; cursor:pointer;" %>
+    <%= link_to "Cancel", admin_posts_path, style:"color:#999; font-size:13px; font-weight:600; text-decoration:none;" %>
+  </div>
+<% end %>

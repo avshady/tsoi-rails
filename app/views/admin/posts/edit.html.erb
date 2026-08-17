@@ -1,0 +1,13 @@
+<% content_for :title, "Edit Post" %>
+
+<div style="margin-bottom:2rem; display:flex; align-items:flex-end; justify-content:space-between;">
+  <div>
+    <%= link_to "← Blog Posts", admin_posts_path, style:"font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999; text-decoration:none;" %>
+    <h1 style="font-size:1.5rem; font-weight:700; margin:0.75rem 0 0;">Edit Post</h1>
+  </div>
+  <% if @post.published? %>
+    <%= link_to "View on site →", blog_post_path(@post), target: "_blank", style:"font-size:12px; font-weight:600; color:#821E25; text-decoration:none;" %>
+  <% end %>
+</div>
+
+<%= render "form", post: @post, submit_label: "Save Changes" %>

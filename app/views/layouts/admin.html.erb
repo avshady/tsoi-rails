@@ -26,6 +26,7 @@
       <div style="border-top:1px solid rgba(255,255,255,0.08); margin:8px 0; padding-top:4px;">
         <div style="padding:8px 20px 4px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.25);">CMS</div>
         <%= link_to "Content & Images", admin_content_path,    class: request.path.start_with?("/admin/content")    ? "active" : "" %>
+        <%= link_to "Blog Posts",       admin_posts_path,      class: request.path.start_with?("/admin/posts")      ? "active" : "" %>
         <%= link_to "Inquiries",        admin_inquiries_path,  class: request.path.start_with?("/admin/inquiries")  ? "active" : "" %>
       </div>
       <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:8px;">

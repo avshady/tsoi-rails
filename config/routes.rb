@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   get "/recognition", to: "pages#recognition"
   get "/summit",      to: "pages#summit"
 
+  # Blog
+  get "/blog",        to: "posts#index", as: :blog
+  get "/blog/:slug",  to: "posts#show",  as: :blog_post
+
   post "/summit/notify",           to: "pages#summit_notify"
   post "/contact/send",            to: "pages#contact_send"
   post "/services/:slug/inquiry",  to: "pages#service_inquiry", as: :service_inquiry
@@ -49,6 +53,7 @@ Rails.application.routes.draw do
       member { post :generate_token }
     end
     resources :summit_speakers, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :posts
 
     # CMS
     get  "content",                     to: "content#index",                as: :content
