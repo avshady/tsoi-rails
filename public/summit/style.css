@@ -626,6 +626,81 @@ a {
 }
 
 /* ----------------------------------------------------
+   WHO TSOI IS FOR (THREE GENERATIONS)
+   ---------------------------------------------------- */
+.who-for-lead {
+  max-width: 640px;
+  margin: 1rem auto 0;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.generations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 3rem auto 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .generations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.generation-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-top: 3px solid var(--color-magenta);
+  border-radius: 1rem;
+  padding: 2rem 1.75rem;
+  transition: var(--transition-fast);
+}
+
+.generation-card:hover {
+  border-color: var(--border-active);
+  transform: translateY(-3px);
+}
+
+.generation-card.color-violet { border-top-color: var(--color-violet); }
+.generation-card.color-magenta { border-top-color: var(--color-magenta); }
+.generation-card.color-lime { border-top-color: var(--color-lime); }
+
+.generation-role {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-magenta);
+  margin-bottom: 0.75rem;
+}
+.generation-card.color-violet .generation-role { color: var(--color-violet); }
+.generation-card.color-lime .generation-role { color: var(--color-lime); }
+
+.generation-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.generation-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.who-for-closing {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* ----------------------------------------------------
    THE EXPERIENCE (TIMELINE)
    ---------------------------------------------------- */
 .experience-timeline {
@@ -735,6 +810,83 @@ a {
 .timeline-desc {
   font-size: 0.95rem;
   line-height: 1.6;
+}
+
+/* ----------------------------------------------------
+   CONTENT TRACKS
+   ---------------------------------------------------- */
+.tracks-lead {
+  max-width: 640px;
+  margin: 1rem auto 0;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.tracks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 3rem auto 0;
+}
+
+.track-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: start;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-left: 4px solid var(--color-magenta);
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.75rem;
+  transition: var(--transition-fast);
+}
+
+.track-card:hover {
+  border-color: var(--border-active);
+  border-left-color: var(--color-magenta);
+  background-color: rgba(0,0,0,0.02);
+}
+
+.track-card.color-violet { border-left-color: var(--color-violet); }
+.track-card.color-magenta { border-left-color: var(--color-magenta); }
+.track-card.color-lime { border-left-color: var(--color-lime); }
+.track-card.color-cyan { border-left-color: var(--color-cyan); }
+.track-card.color-yellow { border-left-color: var(--color-yellow); }
+
+.track-number {
+  font-size: 1.75rem;
+  font-weight: 900;
+  font-family: var(--font-serif);
+  color: var(--color-magenta);
+  line-height: 1;
+}
+.track-card.color-violet .track-number { color: var(--color-violet); }
+.track-card.color-lime .track-number { color: var(--color-lime); }
+.track-card.color-cyan .track-number { color: var(--color-cyan); }
+.track-card.color-yellow .track-number { color: var(--color-yellow); }
+
+.track-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+
+.track-question {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.track-themes {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .track-card { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.25rem 1.5rem; }
 }
 
 /* ----------------------------------------------------
@@ -1187,6 +1339,34 @@ a {
 /* ----------------------------------------------------
    SCHEDULE (INTERACTIVE AGENDA)
    ---------------------------------------------------- */
+.schedule-flow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-dimmed);
+}
+
+.schedule-flow-arrow {
+  color: var(--color-magenta);
+  font-weight: 400;
+}
+
+.schedule-tab-theme {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  opacity: 0.65;
+  margin-top: 2px;
+}
+
 .schedule-container {
   margin-top: 3rem;
 }

@@ -1,7 +1,7 @@
 const cmsData = {
   hero: {
-    headline: "Where Education Leaders Shape the Future",
-    subheadline: "Three days of bold ideas, meaningful conversations, and practical strategies for educators, founders, school leaders, and innovators.",
+    headline: "For the People Building What Education Becomes Next",
+    subheadline: "Three days where the generation that built Indian education, the generation that will lead it, and the students experiencing it sit at the same table.",
     dates: "30 & 31 October • 1 November 2026",
     location: "Novotel Imagicaa, Khopoli",
     ctaPrimary: {
@@ -14,9 +14,34 @@ const cmsData = {
     }
   },
   intro: {
-    title: "A Summit Built for Those Who Build Schools",
-    paragraph1: "Education is evolving faster than ever. New technologies, changing parent expectations, emerging pedagogies, and evolving leadership challenges require educators to continuously learn and adapt.",
-    paragraph2: "The Education Summit 2026 brings together the brightest minds in education for three immersive days of learning, networking, collaboration, and inspiration."
+    title: "The Central Question",
+    paragraph1: "If we could design education again for the world children are entering, what would we keep, what would we change, and what would we build?",
+    paragraph2: "TSOI is not a summit designed to predict the future of education from a stage. It is designed to bring together the people who will actually build that future."
+  },
+  whoTsoiFor: {
+    title: "Not an Event for Everyone in Education",
+    lead: "TSOI is deliberately curated. The primary audience: people who will build, inherit, lead or reinvent education over the next 10–20 years.",
+    generations: [
+      {
+        name: "The Generation That Built It",
+        role: "Founders, Promoters & Experienced Educators",
+        description: "Decades of building institutions. Their role is to share what worked, what failed, what took decades to understand, and what the next generation should never forget.",
+        color: "violet"
+      },
+      {
+        name: "The Generation That Will Lead It",
+        role: "Next-Generation Education Leaders",
+        description: "Young promoters, teachers, principals and entrepreneurs who will shape education over the coming decades — bringing different expectations around technology, culture and scale.",
+        color: "magenta"
+      },
+      {
+        name: "The Generation Experiencing It",
+        role: "Students",
+        description: "Not performers, not decoration, not a ceremonial panel. Students participate in real conversations about the systems being designed for them.",
+        color: "lime"
+      }
+    ],
+    closing: "Education's past, present and future in the same room."
   },
   whyAttend: [
     {
@@ -69,25 +94,66 @@ const cmsData = {
     "Trainers",
     "Higher Education Leaders"
   ],
+  tracks: {
+    title: "Five Tracks. One Central Question.",
+    lead: "Rather than dividing the summit by job title, TSOI is organised around the questions education needs to answer. Choose your room — the summit still feels like one shared gathering, not five disconnected conferences.",
+    list: [
+      {
+        number: "01",
+        name: "The Future",
+        question: "What will education look like in 2035?",
+        themes: "AI in education · the future role of teachers · personalised learning · future skills · assessment · credentials beyond degrees",
+        color: "violet"
+      },
+      {
+        number: "02",
+        name: "Build",
+        question: "How do we actually build great education institutions?",
+        themes: "Starting a school · scaling from one to ten · capital allocation · governance · professionalising family-run schools · succession",
+        color: "magenta"
+      },
+      {
+        number: "03",
+        name: "Learning",
+        question: "How do children actually learn better?",
+        themes: "Reading · mastery learning · personalisation · play · project-based learning · assessment · learning science",
+        color: "lime"
+      },
+      {
+        number: "04",
+        name: "People",
+        question: "How do we build exceptional educators and organisations?",
+        themes: "Finding great teachers · onboarding · leadership pipelines · retention · school culture · the teacher's role in an AI-enabled world",
+        color: "cyan"
+      },
+      {
+        number: "05",
+        name: "The 5%",
+        question: "What have schools already figured out?",
+        themes: "Fast, practitioner-led demonstrations of things that actually work. No institutional advertisements. One practice, one insight, one thing another school can copy.",
+        color: "yellow"
+      }
+    ]
+  },
   experience: {
     title: "Every Child Can Flourish.",
     days: [
       {
         day: "30 Oct — WHY",
         theme: "Why Schools Must Change",
-        description: "Arrivals, the opening film 'The Child of 2040', and the question that anchors everything — what kind of human are we building?",
+        description: "Arrivals, the opening film 'The Child of 2040', and the Opening Debate — 'Schooling Should Not Take Fifteen Years.'",
         color: "violet"
       },
       {
         day: "31 Oct — HOW",
         theme: "Building the Future School",
-        description: "Two keynotes, parallel tracks for Founders · Principals · Teachers · Operations, workshops, the Innovation Festival, private Imagicaa access, and the Schools of India Gala.",
+        description: "Morning provocations, five tracks — The Future · Build · Learning · People · The 5% — The 5% Showcase, the Innovation Festival, private Imagicaa access, and the Schools of India Gala.",
         color: "magenta"
       },
       {
         day: "1 Nov — NOW WHAT",
         theme: "Taking It Home",
-        description: "The 90-Day Action Plan workshop, TSOI Community Launch, and the closing ceremony with The Schools of India Pledge.",
+        description: "The 'When I Go Back' 90-Day Action Plan workshop, TSOI Community Launch, and the closing ceremony with The Schools of India Pledge.",
         color: "lime"
       }
     ]
@@ -170,44 +236,44 @@ const cmsData = {
   },
   sessions: [
     {
-      title: "Keynote Sessions",
-      description: "Visionary talks laying out the blueprint for the next decade of education.",
-      icon: "📣"
+      title: "The 5%",
+      description: "Five-minute demonstrations of things schools have actually figured out. No institutional pitch, high pace, high utility.",
+      icon: "🎤"
     },
     {
-      title: "Leadership Talks",
-      description: "Strategic presentations from top-tier institutional founders and directors.",
-      icon: "🎯"
+      title: "We Messed Up",
+      description: "Founders and institutions explain experiments, investments or decisions that did not work. No PR — one institution's expensive mistake becomes another's free lesson.",
+      icon: "💥"
     },
     {
-      title: "Fireside Chats",
-      description: "Candid, unscripted discussions with leaders and policy-makers.",
-      icon: "🔥"
+      title: "TSOI Debates",
+      description: "Real arguments on real motions — 'Schooling should not take fifteen years,' 'AI will make teachers less important.' Audience votes before and after.",
+      icon: "🗣️"
     },
     {
-      title: "Panel Discussions",
-      description: "Diverse perspectives on debate-worthy topics in modern pedagogy.",
-      icon: "💬"
+      title: "Problem Rooms",
+      description: "Small, facilitated groups formed around a shared problem — teacher attrition, admissions, AI policy. No keynote, no slides. Every room leaves with practical actions.",
+      icon: "🧩"
     },
     {
-      title: "Masterclasses",
-      description: "Intensive training modules focused on specialized institutional skills.",
+      title: "Build School 2035",
+      description: "Mixed teams of students, teachers, founders and next-generation leaders design the school they would create today, from a blank sheet.",
+      icon: "🏗️"
+    },
+    {
+      title: "Students Take Over",
+      description: "Students question founders and principals, teach short reverse-classroom sessions, and share what they actually think school should be.",
       icon: "🎓"
     },
     {
-      title: "Workshops",
-      description: "Hands-on, collaborative problem-solving sessions with expert trainers.",
-      icon: "🛠️"
+      title: "Morning Provocations",
+      description: "Three people, seven minutes each, no panels — sharp opening arguments that set up the day's discussion.",
+      icon: "⚡"
     },
     {
-      title: "Product Demonstrations",
-      description: "Live showcases of cutting-edge EdTech and classroom infrastructure solutions.",
-      icon: "💻"
-    },
-    {
-      title: "Networking Mixers",
-      description: "Curated social hours designed to spark partnerships and collaborations.",
-      icon: "🥂"
+      title: "TSOI Next",
+      description: "A community and programming layer for the people who will build the next generation of education — founders, successors, and young institution builders.",
+      icon: "🚀"
     }
   ],
   institutions: [
@@ -277,7 +343,7 @@ const cmsData = {
       { time: "3:30 – 4:00 PM", type: "Logistics", title: "Hall 1 Doors Open", speaker: "", location: "Hall 1" },
       { time: "4:00 – 5:00 PM", type: "Content", title: "Opening Experience — The Child of 2040", speaker: "", location: "Hall 1" },
       { time: "5:00 – 5:30 PM", type: "Content", title: "Welcome — Yash & Ankit", speaker: "", location: "Hall 1" },
-      { time: "5:30 – 6:15 PM", type: "Content", title: "Opening Keynote — What Kind of Human Are We Building?", speaker: "", location: "Hall 1" },
+      { time: "5:30 – 6:15 PM", type: "Content", title: "Opening Debate — Schooling Should Not Take Fifteen Years", speaker: "", location: "Hall 1" },
       { time: "6:15 – 7:15 PM", type: "Network", title: "Cross-Table Challenge", speaker: "", location: "Hall 1" },
       { time: "7:15 – 8:00 PM", type: "Open", title: "Open Time", speaker: "", location: "Grounds" },
       { time: "8:00 – 11:00 PM", type: "Meal", title: "Welcome Dinner — Outdoor", speaker: "", location: "Outdoor Lawn" },
@@ -288,12 +354,12 @@ const cmsData = {
       { time: "6:45 – 7:45 AM", type: "Experience", title: "Move — Yoga, Trail Walk or Run", speaker: "", location: "Imagicaa Grounds" },
       { time: "7:45 – 9:00 AM", type: "Meal", title: "Breakfast", speaker: "", location: "Dining Area" },
       { time: "9:00 – 9:20 AM", type: "Content", title: "Day Opening", speaker: "", location: "Hall 1" },
-      { time: "9:20 – 10:05 AM", type: "Content", title: "Keynote — The Future of Schools", speaker: "", location: "Hall 1" },
-      { time: "10:05 – 10:50 AM", type: "Content", title: "Keynote — The 2 Sigma Challenge", speaker: "", location: "Hall 1" },
+      { time: "9:20 – 10:05 AM", type: "Content", title: "Morning Provocation — Three Things We Should Stop Doing", speaker: "", location: "Hall 1" },
+      { time: "10:05 – 10:50 AM", type: "Content", title: "School 2035 — Designing Education for What's Next", speaker: "", location: "Hall 1" },
       { time: "10:50 – 11:35 AM", type: "Network", title: "Long Break", speaker: "", location: "Lounge" },
-      { time: "11:35 AM – 1:00 PM", type: "Tracks", title: "Parallel Tracks — Session 1", speaker: "", location: "Halls 2 – 5" },
-      { time: "1:00 – 2:00 PM", type: "Meal", title: "Lunch", speaker: "", location: "Dining Area" },
-      { time: "2:00 – 3:30 PM", type: "Tracks", title: "Parallel Tracks — Session 2", speaker: "", location: "Halls 2 – 5" },
+      { time: "11:35 AM – 1:00 PM", type: "Tracks", title: "Choose Your Room — Session 1", speaker: "", location: "Halls 2 – 5" },
+      { time: "1:00 – 2:00 PM", type: "Meal", title: "Curated Lunch", speaker: "", location: "Dining Area" },
+      { time: "2:00 – 3:30 PM", type: "Tracks", title: "Choose Your Room — Session 2", speaker: "", location: "Halls 2 – 5" },
       { time: "3:30 – 3:50 PM", type: "Network", title: "Tea", speaker: "", location: "Hall 1 Foyer" },
       { time: "3:50 – 5:40 PM", type: "Content", title: "The 5% Showcase", speaker: "", location: "Hall 1" },
       { time: "5:40 – 6:15 PM", type: "Experience", title: "Innovation Festival — Walk-through", speaker: "", location: "Festival Hall" },
@@ -307,11 +373,11 @@ const cmsData = {
       { time: "7:00 – 8:00 AM", type: "Logistics", title: "Luggage Out", speaker: "", location: "All Rooms" },
       { time: "7:30 – 8:30 AM", type: "Meal", title: "Breakfast", speaker: "", location: "Dining Area" },
       { time: "8:30 – 8:45 AM", type: "Content", title: "Day Opening", speaker: "", location: "Hall 1" },
-      { time: "8:45 – 9:30 AM", type: "Content", title: "Fireside — The Future of Indian Education", speaker: "", location: "Hall 1" },
+      { time: "8:45 – 9:30 AM", type: "Content", title: "If We Started School From Scratch Today...", speaker: "", location: "Hall 1" },
       { time: "9:30 – 9:50 AM", type: "Network", title: "Break", speaker: "", location: "Lounge" },
-      { time: "9:50 – 10:50 AM", type: "Content", title: "The Monday Morning Workshop — 90-Day Action Plan", speaker: "", location: "Hall 1" },
+      { time: "9:50 – 10:50 AM", type: "Content", title: "When I Go Back — The 90-Day Action Plan", speaker: "", location: "Hall 1" },
       { time: "10:50 – 11:15 AM", type: "Network", title: "Accountability Pairing", speaker: "", location: "Hall 1" },
-      { time: "11:15 – 11:45 AM", type: "Content", title: "Closing Pledge & Group Photo", speaker: "", location: "Hall 1 · Lawn" },
+      { time: "11:15 – 11:45 AM", type: "Content", title: "Closing — See You in School", speaker: "", location: "Hall 1 · Lawn" },
       { time: "11:45 AM – 12:00 PM", type: "Logistics", title: "Room Checkout Complete", speaker: "", location: "Summit Desk" },
       { time: "12:00 – 1:00 PM", type: "Meal", title: "Farewell Lunch (Optional)", speaker: "", location: "Lounge" },
       { time: "12:00 PM onwards", type: "Logistics", title: "Departures", speaker: "", location: "Mumbai · Pune · Lonavala" }

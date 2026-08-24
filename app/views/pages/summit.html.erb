@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/summit/style.css?v=9">
+  <link rel="stylesheet" href="/summit/style.css?v=10">
 </head>
 <body>
 
@@ -28,6 +28,7 @@
         <ul class="nav-menu">
           <li><a href="#intro" class="nav-link">About</a></li>
           <li><a href="#speakers" class="nav-link">Advisory Board</a></li>
+          <li><a href="#tracks" class="nav-link">Tracks</a></li>
           <li><a href="#schedule" class="nav-link">Schedule</a></li>
           <li><a href="#partners" class="nav-link">Partners</a></li>
           <li><a href="/summit/recognitions.html" class="nav-link">Recognitions 2026</a></li>
@@ -47,6 +48,7 @@
   <div class="mobile-nav" id="mobile-nav-overlay">
     <a href="#intro" class="mobile-nav-link">About</a>
     <a href="#speakers" class="mobile-nav-link">Advisory Board</a>
+    <a href="#tracks" class="mobile-nav-link">Tracks</a>
     <a href="#schedule" class="mobile-nav-link">Schedule</a>
     <a href="#partners" class="mobile-nav-link">Partners</a>
     <a href="/summit/recognitions.html" class="mobile-nav-link">Recognitions 2026</a>
@@ -103,6 +105,19 @@
     </div>
   </section>
 
+  <!-- Who TSOI Is For -->
+  <section class="section" id="who-for" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span class="section-tag">The Room</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="who-for-title"></h2>
+        <p class="who-for-lead" id="who-for-lead"></p>
+      </div>
+      <div class="generations-grid" id="generations-grid"></div>
+      <p class="who-for-closing" id="who-for-closing"></p>
+    </div>
+  </section>
+
   <!-- Why Attend -->
   <section class="section" id="why-attend">
     <div class="container">
@@ -120,6 +135,18 @@
         <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Designed for Every Education Leader</h2>
       </div>
       <div class="who-grid" id="who-grid"></div>
+    </div>
+  </section>
+
+  <!-- Content Tracks -->
+  <section class="section" id="tracks" style="border-top: 1px solid var(--border-glow);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span class="section-tag">Choose Your Room</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="tracks-title"></h2>
+        <p class="tracks-lead" id="tracks-lead"></p>
+      </div>
+      <div class="tracks-grid" id="tracks-grid"></div>
     </div>
   </section>
 
@@ -179,7 +206,7 @@
   <section class="section" id="sessions" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
     <div class="container">
       <span class="section-tag">Formats</span>
-      <h2 class="section-title">What's Waiting For You</h2>
+      <h2 class="section-title">Signature TSOI Formats</h2>
       <div class="sessions-grid" id="sessions-grid"></div>
     </div>
   </section>
@@ -264,12 +291,15 @@
       <div style="text-align: center; margin-bottom: 2rem;">
         <span class="section-tag">Timetable</span>
         <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Event Schedule</h2>
+        <div class="schedule-flow" aria-label="Event flow">
+          <span>LISTEN</span><span class="schedule-flow-arrow">→</span><span>QUESTION</span><span class="schedule-flow-arrow">→</span><span>CHOOSE</span><span class="schedule-flow-arrow">→</span><span>SHARE</span><span class="schedule-flow-arrow">→</span><span>SOLVE</span><span class="schedule-flow-arrow">→</span><span>PLAY</span><span class="schedule-flow-arrow">→</span><span>BUILD</span><span class="schedule-flow-arrow">→</span><span>COMMIT</span>
+        </div>
       </div>
       <div class="schedule-container">
         <div class="schedule-tabs">
-          <button class="schedule-tab is-active" data-day="Day1">30 Oct</button>
-          <button class="schedule-tab" data-day="Day2">31 Oct</button>
-          <button class="schedule-tab" data-day="Day3">1 Nov</button>
+          <button class="schedule-tab is-active" data-day="Day1">30 Oct <span class="schedule-tab-theme">Arrive & Belong</span></button>
+          <button class="schedule-tab" data-day="Day2">31 Oct <span class="schedule-tab-theme">Question Everything</span></button>
+          <button class="schedule-tab" data-day="Day3">1 Nov <span class="schedule-tab-theme">Build What's Next</span></button>
         </div>
         <div class="schedule-list" id="schedule-list"></div>
       </div>
@@ -456,7 +486,7 @@
 
   <div class="toast-msg" id="toast-message">Registered!</div>
 
-  <script type="module" src="/summit/app.js?v=12"></script>
+  <script type="module" src="/summit/app.js?v=13"></script>
   <% if Rails.env.development? %>
   <script type="module" src="/summit/cms-editor.js"></script>
   <% end %>

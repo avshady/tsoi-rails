@@ -1,4 +1,4 @@
-import initialData from './cms-data.js?v=11';
+import initialData from './cms-data.js?v=12';
 
 // Setup global store for CMS editing
 if (!window.currentCmsData) {
@@ -35,6 +35,21 @@ export function renderPage(data) {
   document.getElementById('intro-p1').textContent = data.intro.paragraph1;
   document.getElementById('intro-p2').textContent = data.intro.paragraph2;
 
+  // --- 2b. WHO TSOI IS FOR (three generations) ---
+  const whoForSection = document.getElementById('who-for');
+  if (whoForSection && data.whoTsoiFor) {
+    setHTML('who-for-title', formatHeading(data.whoTsoiFor.title));
+    setText('who-for-lead', data.whoTsoiFor.lead);
+    setHTML('generations-grid', data.whoTsoiFor.generations.map(g => `
+      <div class="generation-card color-${g.color}">
+        <div class="generation-role">${g.role}</div>
+        <h3 class="generation-name">${g.name}</h3>
+        <p class="generation-desc">${g.description}</p>
+      </div>
+    `).join(''));
+    setText('who-for-closing', data.whoTsoiFor.closing);
+  }
+
   // --- 3. WHY ATTEND ---
   const whyGrid = document.getElementById('why-grid');
   whyGrid.innerHTML = data.whyAttend.map((item, index) => `
@@ -50,6 +65,23 @@ export function renderPage(data) {
   whoGrid.innerHTML = data.whoShouldAttend.map(role => `
     <div class="who-badge">${role}</div>
   `).join('');
+
+  // --- 4b. CONTENT TRACKS ---
+  const tracksSection = document.getElementById('tracks');
+  if (tracksSection && data.tracks) {
+    setHTML('tracks-title', formatHeading(data.tracks.title));
+    setText('tracks-lead', data.tracks.lead);
+    setHTML('tracks-grid', data.tracks.list.map(t => `
+      <div class="track-card color-${t.color}">
+        <div class="track-number">${t.number}</div>
+        <div class="track-body">
+          <h3 class="track-name">${t.name}</h3>
+          <p class="track-question">${t.question}</p>
+          <p class="track-themes">${t.themes}</p>
+        </div>
+      </div>
+    `).join(''));
+  }
 
   // --- 5. THE EXPERIENCE (TIMELINE) ---
   document.getElementById('experience-title').innerHTML = formatHeading(data.experience.title);
@@ -257,7 +289,7 @@ export function renderPage(data) {
 
 // Formats headings to insert Instrument Serif italics on key words (like Future, Schools, etc.)
 function formatHeading(text) {
-  const emphasisWords = ['Future', 'Schools', 'School', 'Visionaries', 'Leaders', 'Endless', 'Attend', 'Shaping'];
+  const emphasisWords = ['Future', 'Schools', 'School', 'Visionaries', 'Leaders', 'Endless', 'Attend', 'Shaping', 'Education', 'Next'];
   let formatted = text;
   emphasisWords.forEach(word => {
     const regex = new RegExp(`\\b${word}\\b`, 'g');
