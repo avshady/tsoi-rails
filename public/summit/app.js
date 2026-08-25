@@ -1,4 +1,4 @@
-import initialData from './cms-data.js?v=12';
+import initialData from './cms-data.js?v=13';
 
 // Setup global store for CMS editing
 if (!window.currentCmsData) {
@@ -110,6 +110,32 @@ export function renderPage(data) {
   // Grid is server-rendered in ERB; only update text elements
   document.getElementById('speakers-title').innerHTML = formatHeading(data.speakers.title);
   document.getElementById('speakers-soon-text').textContent = data.speakers.subtitle;
+
+  // --- 7b. FEATURED SPEAKERS ---
+  const featuredSection = document.getElementById('featured-speakers');
+  if (featuredSection && data.featuredSpeakers) {
+    setHTML('featured-speakers-title', formatHeading(data.featuredSpeakers.title));
+    setText('featured-speakers-lead', data.featuredSpeakers.lead);
+    const rows = data.featuredSpeakers.list.map(sp => `
+      <div class="featured-speaker-row color-${sp.color}">
+        <div class="featured-speaker-avatar">${sp.name.charAt(0)}</div>
+        <div>
+          <h3 class="featured-speaker-name">${sp.name}</h3>
+          <p class="featured-speaker-role">${sp.role}</p>
+        </div>
+      </div>
+    `).join('') + `
+      <div class="featured-speaker-row featured-speaker-more">
+        <div class="featured-speaker-avatar featured-speaker-plus">+</div>
+        <div>
+          <h3 class="featured-speaker-name">More Voices to Be Announced</h3>
+          <p class="featured-speaker-role">Founders · Practitioners · Students · Ecosystem Leaders</p>
+        </div>
+      </div>
+    `;
+    setHTML('featured-speakers-grid', rows);
+    setText('featured-speakers-closing', data.featuredSpeakers.closing);
+  }
 
   // --- 8. SESSIONS ---
   const sessionsGrid = document.getElementById('sessions-grid');

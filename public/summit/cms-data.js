@@ -231,8 +231,27 @@ const cmsData = {
         organisation: "Cambridge International",
         photo: "/summit/assets/advisor_alka.jpg",
         color: "#6366f1"
+      },
+      {
+        name: "Kiran Bir Sethi",
+        designation: "Founder",
+        organisation: "Riverside School & Design for Change",
+        photo: "/summit/assets/advisor_kiran.jpg",
+        color: "#e11d48"
       }
     ]
+  },
+  featuredSpeakers: {
+    title: "A Few of the Voices Joining the Room",
+    lead: "Founders, school builders and education voices bringing different perspectives into one practical room.",
+    list: [
+      { name: "Sanjay Jain", role: "Google for Education, India", color: "magenta" },
+      { name: "Umesh Shrestha", role: "Founder & Chairperson, Little Angels' Education Group", color: "violet" },
+      { name: "Devika Nadig", role: "Co-founder & Director, Shikshangan", color: "cyan" },
+      { name: "Aneesh Bangia", role: "Co-founder, Open Door", color: "lime" },
+      { name: "Dr Ganesh Natarajan", role: "Executive Chairman & Founder, 5F World", color: "yellow" }
+    ],
+    closing: "Different vantage points. One shared question: What should a school become for the world children are entering?"
   },
   sessions: [
     {

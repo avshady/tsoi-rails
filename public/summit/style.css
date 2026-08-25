@@ -1055,6 +1055,100 @@ a {
 }
 
 /* ----------------------------------------------------
+   FEATURED SPEAKERS
+   ---------------------------------------------------- */
+.featured-speakers-lead {
+  max-width: 640px;
+  margin: 1rem auto 0;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.featured-speakers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 3rem auto 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .featured-speakers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.featured-speaker-row {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  transition: var(--transition-fast);
+}
+
+.featured-speaker-row:hover {
+  border-color: var(--border-active);
+  transform: translateY(-2px);
+}
+
+.featured-speaker-avatar {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--color-magenta);
+  background: rgba(232, 0, 106, 0.1);
+  color: var(--color-magenta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.featured-speaker-row.color-violet .featured-speaker-avatar { border-color: var(--color-violet); background: rgba(109, 40, 217, 0.1); color: var(--color-violet); }
+.featured-speaker-row.color-cyan   .featured-speaker-avatar { border-color: var(--color-cyan);   background: rgba(8, 145, 178, 0.1);  color: var(--color-cyan); }
+.featured-speaker-row.color-lime   .featured-speaker-avatar { border-color: var(--color-lime);   background: rgba(22, 163, 74, 0.1);  color: var(--color-lime); }
+.featured-speaker-row.color-yellow .featured-speaker-avatar { border-color: var(--color-yellow); background: rgba(217, 119, 6, 0.1);  color: var(--color-yellow); }
+
+.featured-speaker-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.featured-speaker-role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.featured-speaker-more {
+  border-style: dashed;
+}
+
+.featured-speaker-plus {
+  border-color: var(--border-active) !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+  color: var(--text-dimmed) !important;
+  font-size: 1.5rem !important;
+}
+
+.featured-speakers-closing {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--text-muted);
+}
+
+/* ----------------------------------------------------
    SESSIONS SECTION
    ---------------------------------------------------- */
 .sessions-grid {

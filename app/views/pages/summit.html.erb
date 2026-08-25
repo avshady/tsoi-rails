@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/summit/style.css?v=10">
+  <link rel="stylesheet" href="/summit/style.css?v=11">
 </head>
 <body>
 
@@ -199,6 +199,19 @@
       <div class="speakers-footer">
         <p class="speakers-soon-text" id="speakers-soon-text">More speakers being confirmed — check back soon.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Featured Speakers -->
+  <section class="section" id="featured-speakers" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 1.25rem;">
+        <span class="section-tag">Featured Speakers</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="featured-speakers-title"></h2>
+        <p class="featured-speakers-lead" id="featured-speakers-lead"></p>
+      </div>
+      <div class="featured-speakers-grid" id="featured-speakers-grid"></div>
+      <p class="featured-speakers-closing" id="featured-speakers-closing"></p>
     </div>
   </section>
 
@@ -486,7 +499,7 @@
 
   <div class="toast-msg" id="toast-message">Registered!</div>
 
-  <script type="module" src="/summit/app.js?v=13"></script>
+  <script type="module" src="/summit/app.js?v=14"></script>
   <% if Rails.env.development? %>
   <script type="module" src="/summit/cms-editor.js"></script>
   <% end %>
