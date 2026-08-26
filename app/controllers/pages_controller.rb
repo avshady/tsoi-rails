@@ -246,25 +246,29 @@ class PagesController < ApplicationController
   def summit_notify
     email        = params[:email].to_s.strip
     name         = params[:name].to_s.strip
+    phone        = params[:phone].to_s.strip
     role         = params[:role].to_s.strip
     organisation = params[:organisation].to_s.strip
     pass_id      = params[:passId].to_s.strip
 
     newsletter = role == "Newsletter Subscriber"
     sponsor    = pass_id == "sponsor"
+    callback   = pass_id == "callback"
 
     parts = []
     parts << "Role: #{role}"         if role.present? && !newsletter
-    parts << "Pass: #{pass_id}"      if pass_id.present? && !sponsor
+    parts << "Pass: #{pass_id}"      if pass_id.present? && !sponsor && !callback
 
     service = if newsletter then "Summit Newsletter"
               elsif sponsor then "Summit Sponsorship"
+              elsif callback then "Summit Callback Request"
               else "Summit Registration"
               end
 
     Inquiry.create!(
       name:        name,
       email:       email,
+      phone:       phone.presence,
       school_name: organisation.presence,
       service:     service,
       message:     parts.join(" · ").presence,
@@ -276,6 +280,8 @@ class PagesController < ApplicationController
       "Subscribed! We'll keep you updated."
     elsif sponsor
       "Thanks #{first_name}! Our partnerships team will be in touch about sponsorship shortly."
+    elsif callback
+      "Thanks #{first_name}! We'll call you back shortly."
     else
       "Welcome, #{first_name}! You're on our priority list."
     end

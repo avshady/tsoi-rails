@@ -77,6 +77,7 @@
         <div class="hero-ctas">
           <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="btn btn-primary" id="hero-cta-primary">Register Now</a>
           <a href="#sponsor" class="btn btn-secondary" id="hero-cta-secondary">Become a Sponsor</a>
+          <a href="#callback" class="btn btn-secondary" id="hero-cta-callback">Request Call Back</a>
         </div>
       </div>
       <div class="hero-art-container">
@@ -462,6 +463,10 @@
         <input type="email" id="form-email" name="email" class="form-input" placeholder="name@company.com" required>
       </div>
       <div class="form-group">
+        <label class="form-label" for="form-phone">Phone Number *</label>
+        <input type="tel" id="form-phone" name="phone" class="form-input" placeholder="+91 98765 43210" required>
+      </div>
+      <div class="form-group">
         <label class="form-label" for="form-organisation">Company / Organisation *</label>
         <input type="text" id="form-organisation" name="organisation" class="form-input" placeholder="e.g. Acme Corporation" required>
       </div>
@@ -477,6 +482,35 @@
         </select>
       </div>
       <button type="submit" class="btn btn-primary modal-submit-btn">Submit Enquiry</button>
+    </form>
+  </dialog>
+
+  <!-- Request a Call Back Modal -->
+  <dialog id="callback-dialog">
+    <div class="modal-header">
+      <h3 class="modal-title">Request a Call Back</h3>
+      <button class="modal-close-btn" id="callback-close-btn" aria-label="Close dialog">✕</button>
+    </div>
+    <form class="modal-form" id="callback-form" action="<%= summit_notify_path %>" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type="hidden" name="passId" value="callback">
+      <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Leave your number and our team will call you back with everything you need to know about
+        The Schools of India Summit 2026.
+      </p>
+      <div class="form-group">
+        <label class="form-label" for="callback-fullname">Full Name *</label>
+        <input type="text" id="callback-fullname" name="name" class="form-input" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="callback-phone">Phone Number *</label>
+        <input type="tel" id="callback-phone" name="phone" class="form-input" placeholder="+91 98765 43210" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="callback-email">Email Address</label>
+        <input type="email" id="callback-email" name="email" class="form-input" placeholder="name@school.edu (optional)">
+      </div>
+      <button type="submit" class="btn btn-primary modal-submit-btn">Request Call Back</button>
     </form>
   </dialog>
 
@@ -547,6 +581,21 @@
         });
       }
     });
+
+    // Request a Call Back modal
+    var callbackDialog = document.getElementById('callback-dialog');
+    var callbackCloseBtn = document.getElementById('callback-close-btn');
+    if (callbackCloseBtn && callbackDialog) {
+      callbackCloseBtn.addEventListener('click', function() { callbackDialog.close(); });
+      callbackDialog.addEventListener('click', function(e) { if (e.target === callbackDialog) callbackDialog.close(); });
+    }
+    var callbackTrigger = document.getElementById('hero-cta-callback');
+    if (callbackTrigger && callbackDialog) {
+      callbackTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        callbackDialog.showModal();
+      });
+    }
 
 
     // Schedule tabs
