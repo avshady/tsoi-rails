@@ -221,7 +221,7 @@ const cmsData = {
       {
         name: "Mrunal Shah",
         designation: "Founder & Play Expert",
-        organisation: "Social Brick",
+        organisation: "Sunday Brick",
         photo: "/summit/assets/advisor_mrunal.jpg",
         color: "#f59e0b"
       },
