@@ -318,7 +318,7 @@
         <div class="schedule-list" id="schedule-list"></div>
       </div>
       <div style="text-align:center; margin-top:2.5rem;">
-        <a href="/summit/collaterals/schedule_full.html" target="_blank" class="btn btn-secondary" style="font-size:0.9rem;">Download Full Schedule ↓</a>
+        <a href="#callback" id="schedule-cta-callback" class="btn btn-secondary" style="font-size:0.9rem;">Download Full Schedule ↓</a>
       </div>
     </div>
   </section>
@@ -589,11 +589,13 @@
       callbackCloseBtn.addEventListener('click', function() { callbackDialog.close(); });
       callbackDialog.addEventListener('click', function(e) { if (e.target === callbackDialog) callbackDialog.close(); });
     }
-    var callbackTrigger = document.getElementById('hero-cta-callback');
-    if (callbackTrigger && callbackDialog) {
-      callbackTrigger.addEventListener('click', function(e) {
-        e.preventDefault();
-        callbackDialog.showModal();
+    var callbackTriggers = document.querySelectorAll('#hero-cta-callback, #schedule-cta-callback');
+    if (callbackTriggers.length && callbackDialog) {
+      callbackTriggers.forEach(function(trigger) {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          callbackDialog.showModal();
+        });
       });
     }
 
