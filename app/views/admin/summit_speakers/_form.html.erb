@@ -24,9 +24,15 @@
   </div>
 
   <div style="margin-bottom:1.25rem;">
-    <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:6px;">Photo URL or Path</label>
+    <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; margin-bottom:6px;">Photo</label>
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:10px;">
+      <% if speaker.photo.present? %>
+        <img src="<%= speaker.photo.split('?').first %>?v=<%= speaker.updated_at.to_i %>" style="width:56px; height:56px; object-fit:cover; border-radius:50%; border:2px solid <%= speaker.accent_color.presence || '#ccc' %>;" onerror="this.style.display='none'">
+      <% end %>
+      <%= f.file_field :photo_upload, accept: "image/*", style:"font-size:13px;" %>
+    </div>
+    <p style="font-size:11px; opacity:0.45; margin:0 0 8px;">Upload a photo (jpg, png, webp, gif) — it replaces the field below. Or skip the upload and enter a URL / path directly:</p>
     <%= f.text_field :photo, placeholder: "/summit/assets/advisor_lakshmi.jpg or https://...", style:"width:100%; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px; box-sizing:border-box;" %>
-    <p style="font-size:11px; opacity:0.45; margin:5px 0 0;">Enter a full URL or a path starting with /summit/assets/</p>
   </div>
 
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:2rem;">
