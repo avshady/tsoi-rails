@@ -184,9 +184,9 @@ const cmsData = {
         color: "#ff2a7f"
       },
       {
-        name: "Sanjay Malpani",
+        name: "Dr. Sanjay Malpani",
         designation: "Director",
-        organisation: "Malpani Group of Schools",
+        organisation: "Malpani Group",
         photo: "/summit/assets/advisor_sanjay.jpg",
         color: "#7c3aed"
       },
