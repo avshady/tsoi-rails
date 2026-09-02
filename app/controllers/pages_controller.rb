@@ -66,7 +66,7 @@ class PagesController < ApplicationController
       tagline: "The right people make the difference. We help you find them.",
       desc:    "Connect with top-tier educational professionals. TSOI streamlines hiring for teachers, administrators, and school leadership — from bulk teacher recruitment to C-suite executive search for your institution.",
       img:     "https://images.pexels.com/photos/7580920/pexels-photo-7580920.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop",
-      img2:    "https://images.pexels.com/photos/5709579/pexels-photo-5709579.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop",
+      img2:    "https://images.pexels.com/photos/7644081/pexels-photo-7644081.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop",
       steps: [
         { num: "01", title: "Needs Analysis", body: "We audit your existing team structure, identify gaps, and define role specifications for every position." },
         { num: "02", title: "Talent Sourcing", body: "Access our curated database of verified educators, B.Ed graduates, and experienced school administrators." },
@@ -140,8 +140,8 @@ class PagesController < ApplicationController
       title:   "School Management Advisory",
       tagline: "Expert eyes on your school. Actionable plans for every department.",
       desc:    "Partner with TSOI for comprehensive management support, enhancing both academic outcomes and operational efficiency. Whether you are a single-campus school hitting a growth ceiling or a chain looking to standardise — our consultants have seen it all.",
-      img:     "https://images.pexels.com/photos/9623645/pexels-photo-9623645.jpeg?auto=compress&cs=tinysrgb&w=1600&h=1000&fit=crop",
-      img2:    "https://images.pexels.com/photos/7580944/pexels-photo-7580944.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop",
+      img:     "/images/school-management-hero.png",
+      img2:    "https://images.pexels.com/photos/5918384/pexels-photo-5918384.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop",
       steps: [
         { num: "01", title: "Diagnostic Audit", body: "A 360° review covering academics, HR, finance, marketing, admissions, compliance, and parent satisfaction." },
         { num: "02", title: "Prioritised Roadmap", body: "A clear, time-bound action plan ranking initiatives by impact and ease of implementation — not a 100-page report." },
