@@ -361,11 +361,12 @@ a {
 }
 
 /* ----------------------------------------------------
-   AS FEATURED IN STRIP
+   FEATURED IN STRIP (MARQUEE)
    ---------------------------------------------------- */
 .featured-strip {
   padding: 2rem 0;
   border-bottom: 1px solid var(--border-glow);
+  overflow: hidden;
 }
 
 .featured-label {
@@ -378,24 +379,43 @@ a {
   margin-bottom: 1.5rem;
 }
 
-.featured-logos {
+.featured-track-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.featured-track-wrap:hover .featured-track {
+  animation-play-state: paused;
+}
+
+.featured-track {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 3.5rem;
-  flex-wrap: wrap;
+  gap: 4rem;
+  width: max-content;
+  animation: marquee-logos 22s linear infinite;
+}
+
+@keyframes marquee-logos {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 .featured-logo-img {
   height: 36px;
   width: auto;
   display: block;
-  opacity: 1;
+  flex-shrink: 0;
   object-fit: contain;
 }
 
 .featured-logo-img.is-square {
   height: 52px;
+}
+
+.featured-logo-img.is-uni {
+  height: 62px;
 }
 
 /* ----------------------------------------------------
