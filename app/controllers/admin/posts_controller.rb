@@ -1,6 +1,6 @@
 module Admin
   class PostsController < BaseController
-    before_action :set_post, only: [:edit, :update, :destroy]
+    before_action :set_post, only: [ :edit, :update, :destroy ]
 
     def index
       @posts = Post.recent

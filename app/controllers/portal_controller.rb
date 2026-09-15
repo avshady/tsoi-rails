@@ -1,7 +1,7 @@
 class PortalController < ApplicationController
   layout "portal"
 
-  before_action :require_school, only: [:dashboard, :update]
+  before_action :require_school, only: [ :dashboard, :update ]
 
   def login
     redirect_to portal_dashboard_path if current_portal_school

@@ -528,8 +528,24 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// Pull saved CMS content from the database, falling back to the bundled
+// defaults (public/summit/cms-data.js) if nothing is saved or the request fails.
+async function hydrateFromServer() {
+  try {
+    const res = await fetch('/summit/cms/data', { headers: { 'Accept': 'application/json' } });
+    if (!res.ok) return;
+    const json = await res.json();
+    if (json && json.data) {
+      window.currentCmsData = json.data;
+    }
+  } catch (e) {
+    // Endpoint unavailable — keep the bundled defaults.
+  }
+}
+
 // Initial Render
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await hydrateFromServer();
   renderPage(window.currentCmsData);
   setupScheduleFilters();
 });

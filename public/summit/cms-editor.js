@@ -205,23 +205,35 @@ function attachEditorListeners(container) {
   });
 }
 
+// Read the Rails CSRF token embedded in the page head so state-changing
+// requests (auth + save) are accepted by the server.
+function csrfToken() {
+  const meta = document.querySelector('meta[name="csrf-token"]');
+  return meta ? meta.getAttribute('content') : '';
+}
+
 let saveTimeout;
 function saveCmsDataToServer() {
   clearTimeout(saveTimeout);
   saveTimeout = setTimeout(() => {
-    fetch('/api/save-cms', {
+    fetch('/summit/cms/save', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken()
       },
       body: JSON.stringify(window.currentCmsData)
     })
     .then(res => res.json())
     .then(res => {
-      console.log('CMS data auto-saved to disk:', res.message);
+      if (res.ok) {
+        console.log('CMS data saved to database:', res.message);
+      } else {
+        console.error('CMS save rejected:', res.message);
+      }
     })
     .catch(err => {
-      console.error('Failed to auto-save CMS data to disk:', err);
+      console.error('Failed to save CMS data:', err);
     });
   }, 1000); // 1-second debounce
 }
@@ -250,25 +262,41 @@ function renderPasswordScreen() {
   `;
 
   const form = document.getElementById('cms-unlock-form');
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const passcode = document.getElementById('cms-passcode-input').value;
-    
-    // Simple custom passcode check (configurable)
-    if (passcode === 'admin2026') {
+    const input   = document.getElementById('cms-passcode-input');
+    const passcode = input.value;
+
+    // The passcode is verified on the SERVER — it is never stored in this file.
+    // A correct passcode unlocks the session so subsequent saves are accepted.
+    let ok = false;
+    try {
+      const res = await fetch('/summit/cms/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken()
+        },
+        body: JSON.stringify({ password: passcode })
+      });
+      ok = res.ok;
+    } catch (err) {
+      ok = false;
+    }
+
+    if (ok) {
       sessionStorage.setItem('cms_unlocked', 'true');
       buildCmsForm(); // Render editing fields
-      
+
       // Reveal action buttons
       document.getElementById('cms-reset-btn').style.display = 'block';
       document.getElementById('cms-copy-btn').style.display = 'block';
     } else {
       const errorMsg = document.getElementById('cms-error-msg');
-      const input = document.getElementById('cms-passcode-input');
       errorMsg.style.display = 'block';
       input.style.borderColor = 'var(--color-magenta)';
       input.value = '';
-      
+
       // Trigger shake warning
       input.parentElement.classList.add('shake');
       setTimeout(() => {

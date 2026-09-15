@@ -32,7 +32,7 @@ class AddRemainingSummitSpeakers < ActiveRecord::Migration[8.1]
   end
 
   def down
-    SummitSpeaker.where(name: ["Dr. Swati Popat Vats", "Russell John Cailey", "Mrunal Shah"]).destroy_all
+    SummitSpeaker.where(name: [ "Dr. Swati Popat Vats", "Russell John Cailey", "Mrunal Shah" ]).destroy_all
     SummitSpeaker.where(name: "Parimal Merchant").update_all(
       title:        "Director – Global Family Managed Business Program",
       organisation: "Piramal Foundation"

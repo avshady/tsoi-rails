@@ -1,6 +1,6 @@
 module Admin
   class SummitSpeakersController < BaseController
-    before_action :set_speaker, only: [:edit, :update, :destroy]
+    before_action :set_speaker, only: [ :edit, :update, :destroy ]
 
     def index
       @speakers = SummitSpeaker.all

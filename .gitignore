@@ -29,3 +29,6 @@
 # Claude Code project files
 /.claude
 
+
+# Local bundle install (see bundle config path)
+/vendor/bundle

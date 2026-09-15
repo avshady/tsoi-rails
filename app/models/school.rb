@@ -56,7 +56,7 @@ class School < ApplicationRecord
   end
 
   def board_list
-    return ["CBSE"] if board.blank?
+    return [ "CBSE" ] if board.blank?
     board.split(/[,\/]/).map(&:strip).reject(&:blank?)
   end
 
