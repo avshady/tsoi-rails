@@ -225,7 +225,7 @@ a {
 }
 
 .nav-logo-img {
-  height: 36px;
+  height: 44px;
   width: auto;
   display: block;
 }
@@ -358,6 +358,46 @@ a {
 }
 .hamburger.is-active span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ----------------------------------------------------
+   AS FEATURED IN STRIP
+   ---------------------------------------------------- */
+.featured-strip {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border-glow);
+}
+
+.featured-label {
+  text-align: center;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  color: var(--text-dimmed);
+  margin-bottom: 1.5rem;
+}
+
+.featured-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.featured-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+  opacity: 0.55;
+  filter: grayscale(100%);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.featured-logo-img:hover {
+  opacity: 1;
+  filter: grayscale(0%);
 }
 
 /* ----------------------------------------------------
