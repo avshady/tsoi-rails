@@ -31,9 +31,9 @@ export function renderPage(data) {
   setCta('hero-cta-secondary', data.hero.ctaSecondary);
 
   // --- 2. INTRODUCTION ---
-  document.getElementById('intro-title').innerHTML = formatHeading(data.intro.title);
-  document.getElementById('intro-p1').textContent = data.intro.paragraph1;
-  document.getElementById('intro-p2').textContent = data.intro.paragraph2;
+  setHTML('intro-title', formatHeading(data.intro.title));
+  setText('intro-p1', data.intro.paragraph1);
+  setText('intro-p2', data.intro.paragraph2);
 
   // --- 2b. WHO TSOI IS FOR (three generations) ---
   const whoForSection = document.getElementById('who-for');
@@ -84,7 +84,7 @@ export function renderPage(data) {
   }
 
   // --- 5. THE EXPERIENCE (TIMELINE) ---
-  document.getElementById('experience-title').innerHTML = formatHeading(data.experience.title);
+  setHTML('experience-title', formatHeading(data.experience.title));
   const experienceTimeline = document.getElementById('experience-timeline');
   experienceTimeline.innerHTML = data.experience.days.map(dayInfo => `
     <div class="timeline-item color-${dayInfo.color}">
@@ -108,8 +108,8 @@ export function renderPage(data) {
 
   // --- 7. SPEAKERS SECTION ---
   // Grid is server-rendered in ERB; only update text elements
-  document.getElementById('speakers-title').innerHTML = formatHeading(data.speakers.title);
-  document.getElementById('speakers-soon-text').textContent = data.speakers.subtitle;
+  setHTML('speakers-title', formatHeading(data.speakers.title));
+  setText('speakers-soon-text', data.speakers.subtitle);
 
   // --- 7b. FEATURED SPEAKERS ---
   const featuredSection = document.getElementById('featured-speakers');
