@@ -220,19 +220,21 @@ a {
 }
 
 .logo {
-  font-weight: 800;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
-.logo-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--color-magenta);
+.nav-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .header-actions {
