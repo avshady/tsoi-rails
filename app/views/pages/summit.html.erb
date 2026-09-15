@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/summit/style.css?v=29">
+  <link rel="stylesheet" href="/summit/style.css?v=30">
 </head>
 <body>
 
@@ -143,7 +143,6 @@
         <% SummitSpeaker.all.order(:position).each do |sp| %>
           <div class="speaker-card sp-<%= sp.name.parameterize %>">
             <div class="speaker-img-wrapper">
-              <div class="speaker-bg-accent" style="background-color:<%= sp.accent_color %>;"></div>
               <% if sp.photo.present? %>
                 <% photo_url = sp.photo.split('?').first + "?v=#{sp.updated_at.to_i}" %>
                 <img src="<%= photo_url %>" alt="<%= sp.name %>" class="speaker-photo" width="280" height="280" onerror="this.style.opacity='0'">
