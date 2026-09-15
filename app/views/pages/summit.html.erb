@@ -135,8 +135,10 @@
   <!-- Board of Advisors -->
   <section class="section" id="speakers" style="border-top: 1px solid var(--border-glow);">
     <div class="container">
-      <span class="section-tag">Board of Advisors</span>
-      <h2 class="section-title" id="speakers-title">The people guiding the TSOI room</h2>
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <span class="section-tag">Board of Advisors</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="speakers-title">The people guiding the TSOI room</h2>
+      </div>
       <div class="speakers-grid" id="speakers-grid">
         <% SummitSpeaker.all.order(:position).each do |sp| %>
           <div class="speaker-card">
@@ -154,9 +156,6 @@
             </div>
           </div>
         <% end %>
-      </div>
-      <div class="speakers-footer">
-        <p class="speakers-soon-text" id="speakers-soon-text">More advisors being confirmed — check back soon.</p>
       </div>
     </div>
   </section>
