@@ -1152,6 +1152,11 @@ a {
   transform: scale(1.05);
 }
 
+.sp-dr-sanjay-malpani .speaker-photo {
+  object-fit: cover;
+  object-position: left bottom;
+}
+
 .speaker-info {
   padding: 1.5rem;
   position: relative;
