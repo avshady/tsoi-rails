@@ -382,7 +382,7 @@ a {
 .hero-ctas {
   position: absolute;
   left: 5%;
-  bottom: 11%;
+  bottom: 20%;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
