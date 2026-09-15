@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= csrf_meta_tags %>
   <title>The Schools of India — Education Summit 2026</title>
   <meta name="description" content="Where education leaders, founders, principals, and innovators shape the future of learning. Join us for three days of bold ideas and actionable strategies.">
 
@@ -33,6 +34,7 @@
           <li><a href="#partners" class="nav-link">Partners</a></li>
           <li><a href="/summit/recognitions.html" class="nav-link">Recognitions 2026</a></li>
           <li><a href="#faqs" class="nav-link">FAQs</a></li>
+          <li><a href="https://drive.google.com/drive/folders/1XvwMbWW6cOaji--xBDi2YsZZJVgQz6ph?usp=share_link" target="_blank" rel="noopener" class="nav-link nav-press-kit">Press Kit</a></li>
         </ul>
         <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="btn btn-primary nav-register-btn" id="nav-register-btn">Register</a>
         <button class="hamburger" aria-label="Toggle Menu" id="hamburger-btn">
@@ -53,38 +55,33 @@
     <a href="#partners" class="mobile-nav-link">Partners</a>
     <a href="/summit/recognitions.html" class="mobile-nav-link">Recognitions 2026</a>
     <a href="#faqs" class="mobile-nav-link">FAQs</a>
+    <a href="https://drive.google.com/drive/folders/1XvwMbWW6cOaji--xBDi2YsZZJVgQz6ph?usp=share_link" target="_blank" rel="noopener" class="mobile-nav-link">Press Kit</a>
     <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="mobile-nav-link" style="color: var(--color-magenta);">Register →</a>
   </div>
 
   <!-- Hero -->
   <section class="hero-section" id="hero">
-    <svg class="sticker sticker-magenta" style="top: 15%; right: 10%; width: 50px; height: 50px;" viewBox="0 0 24 24" fill="currentColor">
+    <svg class="sticker sticker-magenta" style="top: 15%; right: 2%; width: 50px; height: 50px;" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
     </svg>
-    <svg class="sticker sticker-lime" style="bottom: 25%; left: 5%; width: 40px; height: 40px;" viewBox="0 0 24 24" fill="currentColor">
+    <svg class="sticker sticker-lime" style="bottom: 10%; left: 2%; width: 40px; height: 40px;" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
     </svg>
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <h1 class="hero-headline" id="hero-headline"></h1>
-        <p class="hero-subheadline" id="hero-subheadline"></p>
-        <div class="hero-meta">
-          <span class="hero-date" id="hero-date"></span>
-          <span class="hero-location">
-            <span style="color: var(--color-lime);">📍</span> <span id="hero-location-text"></span>
-          </span>
-        </div>
-        <div class="hero-ctas">
-          <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="btn btn-primary" id="hero-cta-primary">Register Now</a>
-          <a href="#sponsor" class="btn btn-secondary" id="hero-cta-secondary">Become a Sponsor</a>
-          <a href="#callback" class="btn btn-secondary" id="hero-cta-callback">Request Call Back</a>
-          <a href="https://drive.google.com/drive/folders/1XvwMbWW6cOaji--xBDi2YsZZJVgQz6ph?usp=share_link" target="_blank" rel="noopener" class="btn btn-secondary" id="hero-cta-presskit">Press Kit</a>
-        </div>
-      </div>
-      <div class="hero-art-container">
-        <div class="hero-art-main">
-          SHAPING<br>THE<br>FUTURE
-        </div>
+    <div class="container">
+      <img src="/summit/assets/hero-banner.png" alt="The Schools of India Summit 2026 — 300 K-12 school leaders, 3 days, 30 Oct–1 Nov 2026, Novotel Imagicaa, Khopoli" class="hero-banner-img">
+      <div class="hero-ctas">
+        <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="hero-btn hero-btn-primary">
+          Reserve Your Seat
+          <span class="hero-btn-sub">Register Now</span>
+        </a>
+        <a href="/summit/recognitions.html" class="hero-btn hero-btn-secondary">
+          Submit Your 5%
+          <span class="hero-btn-sub">Nominate for The 5% Recognition</span>
+        </a>
+        <a href="#" onclick="document.getElementById('registration-dialog').showModal(); return false;" class="hero-btn hero-btn-tertiary">
+          Be A Patron
+          <span class="hero-btn-sub">Support the Summit</span>
+        </a>
       </div>
     </div>
   </section>
