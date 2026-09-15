@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/summit/style.css?v=24">
+  <link rel="stylesheet" href="/summit/style.css?v=25">
 </head>
 <body>
 
@@ -132,6 +132,35 @@
     </div>
   </section>
 
+  <!-- Board of Advisors -->
+  <section class="section" id="speakers" style="border-top: 1px solid var(--border-glow);">
+    <div class="container">
+      <span class="section-tag">Board of Advisors</span>
+      <h2 class="section-title" id="speakers-title">The people guiding the TSOI room</h2>
+      <div class="speakers-grid" id="speakers-grid">
+        <% SummitSpeaker.all.order(:position).each do |sp| %>
+          <div class="speaker-card">
+            <div class="speaker-img-wrapper">
+              <div class="speaker-bg-accent" style="background-color:<%= sp.accent_color %>;"></div>
+              <% if sp.photo.present? %>
+                <% photo_url = sp.photo.split('?').first + "?v=#{sp.updated_at.to_i}" %>
+                <img src="<%= photo_url %>" alt="<%= sp.name %>" class="speaker-photo" width="280" height="280" onerror="this.style.opacity='0'">
+              <% end %>
+            </div>
+            <div class="speaker-info">
+              <h3 class="speaker-name"><%= sp.name %></h3>
+              <p class="speaker-title"><%= sp.title %></p>
+              <p class="speaker-org"><%= sp.organisation %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="speakers-footer">
+        <p class="speakers-soon-text" id="speakers-soon-text">More advisors being confirmed — check back soon.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Why Attend -->
   <section class="section" id="why-attend">
     <div class="container">
@@ -181,38 +210,6 @@
       <span class="section-tag">Pillars</span>
       <h2 class="section-title">What We'll Explore</h2>
       <div class="themes-grid" id="themes-grid"></div>
-    </div>
-  </section>
-
-  <!-- Speakers -->
-  <section class="section" id="speakers">
-    <svg class="sticker sticker-violet" style="top: 10%; left: 5%; width: 45px; height: 45px;" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
-    </svg>
-    <div class="container">
-      <span class="section-tag">Visionaries</span>
-      <h2 class="section-title" id="speakers-title">Board of Advisors</h2>
-      <div class="speakers-grid" id="speakers-grid">
-        <% SummitSpeaker.all.each do |sp| %>
-          <div class="speaker-card">
-            <div class="speaker-img-wrapper">
-              <div class="speaker-bg-accent" style="background-color:<%= sp.accent_color %>;"></div>
-              <% if sp.photo.present? %>
-                <% photo_url = sp.photo.split('?').first + "?v=#{sp.updated_at.to_i}" %>
-                <img src="<%= photo_url %>" alt="<%= sp.name %>" class="speaker-photo" width="280" height="280" onerror="this.style.opacity='0'">
-              <% end %>
-            </div>
-            <div class="speaker-info">
-              <h3 class="speaker-name"><%= sp.name %></h3>
-              <p class="speaker-title"><%= sp.title %></p>
-              <p class="speaker-org"><%= sp.organisation %></p>
-            </div>
-          </div>
-        <% end %>
-      </div>
-      <div class="speakers-footer">
-        <p class="speakers-soon-text" id="speakers-soon-text">More speakers being confirmed — check back soon.</p>
-      </div>
     </div>
   </section>
 

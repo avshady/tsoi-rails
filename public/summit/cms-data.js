@@ -22,7 +22,7 @@ const cmsData = {
     title: "The most curated room in K-12 Education",
     lead: "The whole K-12 ecosystem, in one room. A 16-year-old student. A 29-year-old founder. A 65-year-old institution builder. A principal. An educator. Sitting at the same table, redesigning the future of K-12 Education - together, not in separate panels.",
     generations: [
-      { name: "Next-generation Founder", color: "magenta" },
+      { name: "Next-generation Founders", color: "magenta" },
       { name: "The Educators", color: "magenta" },
       { name: "The Institution Builders", color: "violet" },
       { name: "Principals", color: "cyan" },
@@ -160,7 +160,7 @@ const cmsData = {
     "Technology Integration"
   ],
   speakers: {
-    title: "Board of Advisors",
+    title: "The people guiding the TSOI room",
     subtitle: "More speakers being confirmed — check back soon.",
     list: [
       {
