@@ -16,7 +16,7 @@ const cmsData = {
   intro: {
     title: "The Central Question",
     paragraph1: "If we could design education again for the world children are entering, what would we keep, what would we change, and what would we build?",
-    paragraph2: "TSOI is not a summit designed to predict the future of education from a stage. It is designed to bring together the people who will actually build that future."
+    paragraph2: ""
   },
   whoTsoiFor: {
     title: "Not an Event for Everyone in Education",
