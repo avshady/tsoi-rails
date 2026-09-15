@@ -50,12 +50,15 @@ export function renderPage(data) {
   }
 
   // --- 3. WHY ATTEND ---
+  const whyPalette = ['#FF2A7F', '#7C3AED', '#2DE67B', '#06B6D4'];
   const whyGrid = document.getElementById('why-grid');
   whyGrid.innerHTML = data.whyAttend.map((item, index) => `
-    <div class="why-card">
-      <div class="why-card-icon">${index + 1}</div>
-      <h3 class="why-card-title">${item.title}</h3>
-      <p class="why-card-desc">${item.description}</p>
+    <div class="why-card" style="background-color:${whyPalette[index % 4]};">
+      <div class="why-card-ghost-num">0${index + 1}</div>
+      <div class="why-card-content">
+        <h3 class="why-card-title">${item.title}</h3>
+        <p class="why-card-desc">${item.description}</p>
+      </div>
     </div>
   `).join('');
 
