@@ -744,6 +744,25 @@ a {
 /* ----------------------------------------------------
    WHO TSOI IS FOR (THREE GENERATIONS)
    ---------------------------------------------------- */
+#who-for {
+  overflow: hidden;
+}
+
+#who-for::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/summit/assets/tsoi-light-background.png') center / cover no-repeat;
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#who-for > .container {
+  position: relative;
+  z-index: 1;
+}
+
 .who-for-lead {
   max-width: 720px;
   margin: 1rem auto 0;
