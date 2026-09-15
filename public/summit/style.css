@@ -745,67 +745,82 @@ a {
    WHO TSOI IS FOR (THREE GENERATIONS)
    ---------------------------------------------------- */
 .who-for-lead {
-  max-width: 640px;
+  max-width: 720px;
   margin: 1rem auto 0;
   color: var(--text-muted);
   font-size: 1.05rem;
-  line-height: 1.7;
+  line-height: 1.75;
+  text-align: center;
 }
 
+/* Scattered ecosystem pill layout */
 .generations-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  max-width: 1100px;
+  position: relative;
+  height: 380px;
+  max-width: 760px;
   margin: 3rem auto 2.5rem;
 }
 
-@media (min-width: 768px) {
-  .generations-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.ecosystem-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--text-white);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
-.generation-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-glow);
-  border-top: 3px solid var(--color-magenta);
-  border-radius: 1rem;
-  padding: 2rem 1.75rem;
-  transition: var(--transition-fast);
-}
-
-.generation-card:hover {
-  border-color: var(--border-active);
-  transform: translateY(-3px);
-}
-
-.generation-card.color-violet { border-top-color: var(--color-violet); }
-.generation-card.color-magenta { border-top-color: var(--color-magenta); }
-.generation-card.color-lime { border-top-color: var(--color-lime); }
-
-.generation-role {
-  font-size: 0.75rem;
+.ecosystem-pill {
+  position: absolute;
+  padding: 0.65rem 1.5rem;
+  border-radius: 9999px;
+  border: 1.5px solid;
+  background-color: var(--bg-dark);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-magenta);
-  margin-bottom: 0.75rem;
-}
-.generation-card.color-violet .generation-role { color: var(--color-violet); }
-.generation-card.color-lime .generation-role { color: var(--color-lime); }
-
-.generation-name {
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin-bottom: 0.75rem;
-  line-height: 1.25;
-}
-
-.generation-desc {
-  color: var(--text-muted);
   font-size: 0.95rem;
-  line-height: 1.65;
+  white-space: nowrap;
+  color: var(--text-white);
+}
+
+.ecosystem-pill.color-magenta { border-color: var(--color-magenta); }
+.ecosystem-pill.color-violet  { border-color: var(--color-violet); }
+.ecosystem-pill.color-cyan    { border-color: var(--color-cyan); }
+.ecosystem-pill.color-lime    { border-color: var(--color-lime); }
+
+/* pos-1: Next-generation Founder — top center */
+.ecosystem-pill.pos-1 { top: 4%; left: 50%; transform: translateX(-50%); }
+/* pos-2: The Educators — left middle */
+.ecosystem-pill.pos-2 { top: 34%; left: 2%; }
+/* pos-3: The Institution Builders — right middle */
+.ecosystem-pill.pos-3 { top: 26%; right: 0; }
+/* pos-4: Principals — bottom left */
+.ecosystem-pill.pos-4 { bottom: 10%; left: 18%; }
+/* pos-5: The Students — bottom right */
+.ecosystem-pill.pos-5 { bottom: 10%; right: 12%; }
+
+@media (max-width: 767px) {
+  .generations-grid {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    padding: 1.5rem 0;
+  }
+  .ecosystem-pill { position: static; transform: none; }
+  .ecosystem-center {
+    position: static;
+    transform: none;
+    display: block;
+    text-align: center;
+    margin: 0.5rem 0;
+    width: 100%;
+  }
 }
 
 .who-for-closing {

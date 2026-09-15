@@ -19,27 +19,14 @@ const cmsData = {
     paragraph2: "TSOI is not a summit designed to predict the future of education from a stage. It is designed to bring together the people who will actually build that future."
   },
   whoTsoiFor: {
-    title: "Not an Event for Everyone in Education",
-    lead: "TSOI is deliberately curated. The primary audience: people who will build, inherit, lead or reinvent education over the next 10–20 years.",
+    title: "The most curated room in K-12 Education",
+    lead: "The whole K-12 ecosystem, in one room. A 16-year-old student. A 29-year-old founder. A 65-year-old institution builder. A principal. An educator. Sitting at the same table, redesigning the future of K-12 Education - together, not in separate panels.",
     generations: [
-      {
-        name: "The Generation That Built It",
-        role: "Founders, Promoters & Experienced Educators",
-        description: "Decades of building institutions. Their role is to share what worked, what failed, what took decades to understand, and what the next generation should never forget.",
-        color: "violet"
-      },
-      {
-        name: "The Generation That Will Lead It",
-        role: "Next-Generation Education Leaders",
-        description: "Young promoters, teachers, principals and entrepreneurs who will shape education over the coming decades — bringing different expectations around technology, culture and scale.",
-        color: "magenta"
-      },
-      {
-        name: "The Generation Experiencing It",
-        role: "Students",
-        description: "Not performers, not decoration, not a ceremonial panel. Students participate in real conversations about the systems being designed for them.",
-        color: "lime"
-      }
+      { name: "Next-generation Founder", color: "magenta" },
+      { name: "The Educators", color: "magenta" },
+      { name: "The Institution Builders", color: "violet" },
+      { name: "Principals", color: "cyan" },
+      { name: "The Students", color: "lime" }
     ],
     closing: "Education's past, present and future in the same room."
   },

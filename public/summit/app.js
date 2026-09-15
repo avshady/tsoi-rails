@@ -40,13 +40,12 @@ export function renderPage(data) {
   if (whoForSection && data.whoTsoiFor) {
     setHTML('who-for-title', formatHeading(data.whoTsoiFor.title));
     setText('who-for-lead', data.whoTsoiFor.lead);
-    setHTML('generations-grid', data.whoTsoiFor.generations.map(g => `
-      <div class="generation-card color-${g.color}">
-        <div class="generation-role">${g.role}</div>
-        <h3 class="generation-name">${g.name}</h3>
-        <p class="generation-desc">${g.description}</p>
-      </div>
-    `).join(''));
+    setHTML('generations-grid', `
+      <div class="ecosystem-center"><em>The K-12 Ecosystem</em></div>
+      ${data.whoTsoiFor.generations.map((g, i) => `
+        <div class="ecosystem-pill color-${g.color} pos-${i + 1}">${g.name}</div>
+      `).join('')}
+    `);
     setText('who-for-closing', data.whoTsoiFor.closing);
   }
 
