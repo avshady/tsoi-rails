@@ -390,14 +390,12 @@ a {
   height: 36px;
   width: auto;
   display: block;
-  opacity: 0.55;
-  filter: grayscale(100%);
-  transition: opacity 0.2s ease, filter 0.2s ease;
+  opacity: 1;
+  object-fit: contain;
 }
 
-.featured-logo-img:hover {
-  opacity: 1;
-  filter: grayscale(0%);
+.featured-logo-img.is-square {
+  height: 52px;
 }
 
 /* ----------------------------------------------------
