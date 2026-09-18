@@ -536,7 +536,7 @@ const cmsData = {
     ctaSecondary: { text: "Become a Sponsor", action: "#sponsor" }
   },
   footer: {
-    about: "The Education Summit 2026 is India's premier gathering for institutional leaders, builders, and innovators, driving systemic growth and human-centric pedagogy.",
+    about: "The Schools of India Summit is a 3-day residential gathering for K-12 founders, principals, educators and students - built around one rule: come with a fix that worked, leave with five that will.",
     contact: {
       email: "summit@theschoolsofindia.org",
       phone: "+91 92265 23616",
