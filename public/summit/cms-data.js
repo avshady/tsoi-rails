@@ -32,36 +32,28 @@ const cmsData = {
   },
   whyAttend: [
     {
-      title: "Learn from India’s leading educators",
-      description: "Gain insights from pioneers who have successfully transformed schools and modern learning environments."
+      title: "Practical ideas",
+      description: "Not frameworks in theory - practices other schools have already tested, refined, and are willing to hand over exactly as they run them."
     },
     {
-      title: "Hear future-focused keynote sessions",
-      description: "Engage with global thought leaders discussing the intersection of AI, child psychology, and school leadership."
+      title: "The TSOI Playbook",
+      description: "A working document built live across all three days - every SOP and framework that surfaced in the room, yours to adapt long after the summit ends."
     },
     {
-      title: "Discover innovative teaching practices",
-      description: "Explore evidence-based methodologies that elevate student engagement and learning outcomes."
+      title: "One problem, a concrete solution",
+      description: "Walk in stuck on something specific. Walk out with either a sharper way to think about it, or the name of someone who’s already solved it."
     },
     {
-      title: "Network with school leaders",
-      description: "Build relationships with over 500+ principals, directors, and decision-makers from across the region."
+      title: "5-10 real relationships",
+      description: "Not LinkedIn connections made in a coffee queue - the kind built over three days solving the same problems in the same room. People you’ll actually call."
     },
     {
-      title: "Explore EdTech solutions",
-      description: "Get hands-on demonstrations of the latest educational technologies, LMS platforms, and AI tools."
+      title: "A sharper question",
+      description: "The question you walked in with won’t survive three days of pushback from people who’ve built what you’re trying to build. You’ll leave with a better one."
     },
     {
-      title: "Participate in workshops",
-      description: "Join practical, interactive masterclasses designed to solve real-world school operations challenges."
-    },
-    {
-      title: "Build meaningful partnerships",
-      description: "Connect with developers, investors, and service providers to scale your institution's impact."
-    },
-    {
-      title: "Leave with actionable ideas",
-      description: "Walk away with structured frameworks, toolkits, and strategies you can implement immediately."
+      title: "One experiment",
+      description: "Paired with someone in the room to keep you honest, you leave with exactly one change to run the week you’re back - not a list of forty you’ll never open again."
     }
   ],
   whoShouldAttend: [
@@ -160,7 +152,7 @@ const cmsData = {
     "Technology Integration"
   ],
   speakers: {
-    title: "The people guiding the TSOI room",
+    title: "The people guiding<br>the TSOI room",
     subtitle: "More speakers being confirmed — check back soon.",
     list: [
       {

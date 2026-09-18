@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/summit/style.css?v=31">
+  <link rel="stylesheet" href="/summit/style.css?v=32">
 </head>
 <body>
 
@@ -137,7 +137,7 @@
     <div class="container">
       <div style="text-align: center; margin-bottom: 1rem;">
         <span class="section-tag">Board of Advisors</span>
-        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="speakers-title">The people guiding the TSOI room</h2>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="speakers-title">The people guiding<br>the TSOI room</h2>
       </div>
       <div class="speakers-grid" id="speakers-grid">
         <% SummitSpeaker.all.order(:position).each do |sp| %>
@@ -162,8 +162,11 @@
   <!-- Why Attend -->
   <section class="section" id="why-attend">
     <div class="container">
-      <span class="section-tag">Benefits</span>
-      <h2 class="section-title" id="why-title">Why You Should Be Here</h2>
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-tag">Benefits</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="why-title">Why You Should Be Here</h2>
+        <p class="why-intro-text">Not just a goodie bag. Not just an award. Six things worth carrying back to your school on Day 4.</p>
+      </div>
       <div class="why-grid" id="why-grid"></div>
     </div>
   </section>
