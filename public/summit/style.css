@@ -225,13 +225,13 @@ a {
 }
 
 .nav-logo-img {
-  height: 44px;
+  height: 54px;
   width: auto;
   display: block;
 }
 
 .footer-logo-img {
-  height: 44px;
+  height: 54px;
   width: auto;
   display: block;
   margin-bottom: 1rem;
@@ -669,15 +669,15 @@ a {
 
 @media (min-width: 1024px) {
   .why-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
 .why-card {
-  border-radius: 1.75rem;
+  border-radius: 1.25rem;
   position: relative;
   overflow: hidden;
-  min-height: 300px;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -694,7 +694,7 @@ a {
   position: absolute;
   top: -0.5rem;
   left: 0.75rem;
-  font-size: 9rem;
+  font-size: 6rem;
   font-weight: 900;
   line-height: 1;
   color: white;
@@ -822,7 +822,7 @@ a {
 .flow-card {
   border: 1.5px solid;
   border-radius: 1rem;
-  padding: 1.5rem 1.5rem 1rem;
+  padding: 1.5rem 1.5rem 4rem;
   position: relative;
   overflow: hidden;
   background-color: var(--bg-card);
@@ -1035,7 +1035,7 @@ a {
 .format-card-content { position: relative; z-index: 1; }
 
 .format-card-title {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.4rem;
   color: var(--text-white);

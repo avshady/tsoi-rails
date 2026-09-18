@@ -368,7 +368,7 @@ const cmsData = {
       { time: "8:15 – 8:45 AM", type: "Address", title: "Built by One Generation, Reimagined by the Next", speaker: "Dr Ganesh Natarajan — Former Chairman, NASSCOM", location: "" },
       { time: "8:45 – 9:15 AM", type: "Address", title: "A View From Outside", speaker: "Russell John Cailey — CEO & Founder, Almach AI", location: "" },
       { time: "9:15 – 9:45 AM", type: "Address", title: "The Indian Classroom at a Crossroads", speaker: "Dr Swati Popat Vats — President, ECA & Podar Education Network", location: "" },
-      { time: "9:45 – 10:45 AM", type: "Showcase", title: "The 5% Showcase (tentative) — Ten schools, five minutes each", speaker: "", location: "" },
+      { time: "9:45 – 10:45 AM", type: "Showcase", title: "The 5% Showcase — Ten schools, five minutes each", speaker: "", location: "" },
       { time: "10:45 – 11:05 AM", type: "Break", title: "Break", speaker: "", location: "" },
       { time: "11:05 – 11:35 AM", type: "Build", title: "When I Go Back...", speaker: "", location: "" },
       { time: "11:35 AM – 12:00 PM", type: "Close", title: "Closing: What We Heard Adults Say (25 min)", speaker: "", location: "" },
