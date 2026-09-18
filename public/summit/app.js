@@ -52,7 +52,7 @@ export function renderPage(data) {
   // --- 3. WHY ATTEND ---
   const whyPalette = ['#FF2A7F', '#7C3AED', '#2DE67B', '#06B6D4'];
   const whyGrid = document.getElementById('why-grid');
-  whyGrid.innerHTML = data.whyAttend.map((item, index) => `
+  if (whyGrid) whyGrid.innerHTML = data.whyAttend.map((item, index) => `
     <div class="why-card" style="background-color:${whyPalette[index % 4]};">
       <div class="why-card-ghost-num">0${index + 1}</div>
       <div class="why-card-content">
@@ -64,7 +64,7 @@ export function renderPage(data) {
 
   // --- 4. WHO SHOULD ATTEND ---
   const whoGrid = document.getElementById('who-grid');
-  whoGrid.innerHTML = data.whoShouldAttend.map(role => `
+  if (whoGrid) whoGrid.innerHTML = data.whoShouldAttend.map(role => `
     <div class="who-badge">${role}</div>
   `).join('');
 
@@ -88,7 +88,7 @@ export function renderPage(data) {
   // --- 5. THE EXPERIENCE (TIMELINE) ---
   setHTML('experience-title', formatHeading(data.experience.title));
   const experienceTimeline = document.getElementById('experience-timeline');
-  experienceTimeline.innerHTML = data.experience.days.map(dayInfo => `
+  if (experienceTimeline) experienceTimeline.innerHTML = data.experience.days.map(dayInfo => `
     <div class="timeline-item color-${dayInfo.color}">
       <div class="timeline-dot"></div>
       <div class="timeline-content">
@@ -101,7 +101,7 @@ export function renderPage(data) {
 
   // --- 6. THEMES ---
   const themesGrid = document.getElementById('themes-grid');
-  themesGrid.innerHTML = data.themes.map(theme => `
+  if (themesGrid) themesGrid.innerHTML = data.themes.map(theme => `
     <div class="theme-card">
       <div class="theme-bullet"></div>
       <span class="theme-name">${theme}</span>
@@ -141,7 +141,7 @@ export function renderPage(data) {
 
   // --- 8. SESSIONS ---
   const sessionsGrid = document.getElementById('sessions-grid');
-  sessionsGrid.innerHTML = data.sessions.map(sess => `
+  if (sessionsGrid) sessionsGrid.innerHTML = data.sessions.map(sess => `
     <div class="session-card">
       <div class="session-icon">${sess.icon}</div>
       <h3 class="session-title">${sess.title}</h3>
@@ -164,7 +164,7 @@ export function renderPage(data) {
 
   // --- 10. NETWORKING ---
   const netGrid = document.getElementById('net-grid');
-  netGrid.innerHTML = data.networking.map(item => `
+  if (netGrid) netGrid.innerHTML = data.networking.map(item => `
     <div class="feature-card">
       <h3 class="feature-card-title">${item.title}</h3>
       <p class="feature-card-desc">${item.description}</p>
@@ -173,7 +173,7 @@ export function renderPage(data) {
 
   // --- 11. INNOVATION SHOWCASE ---
   const showcaseGrid = document.getElementById('showcase-grid');
-  showcaseGrid.innerHTML = data.innovationShowcase.map(item => `
+  if (showcaseGrid) showcaseGrid.innerHTML = data.innovationShowcase.map(item => `
     <div class="feature-card">
       <h3 class="feature-card-title" style="color: var(--color-lime);">${item.title}</h3>
       <p class="feature-card-desc">${item.desc}</p>
@@ -267,7 +267,7 @@ export function renderPage(data) {
 
   // --- 17. FREQUENTLY ASKED QUESTIONS ---
   const faqsContainer = document.getElementById('faqs-container');
-  faqsContainer.innerHTML = data.faqs.map(faq => `
+  if (faqsContainer) faqsContainer.innerHTML = data.faqs.map(faq => `
     <div class="faq-item">
       <button class="faq-trigger">
         <span>${faq.question}</span>
