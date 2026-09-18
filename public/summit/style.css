@@ -411,21 +411,21 @@ a {
 }
 
 
+.partners-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3.5rem;
+  padding: 0 2rem;
+}
+
 #partners .featured-logo-img {
   height: 56px;
 }
 
 #partners .partner-lg {
   height: 90px;
-}
-
-.partners-track {
-  animation-name: marquee-partners;
-}
-
-@keyframes marquee-partners {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-33.333%); }
 }
 
 .featured-logo-img.is-square {
