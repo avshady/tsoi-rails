@@ -411,6 +411,10 @@ a {
 }
 
 
+#partners .featured-logo-img {
+  height: 56px;
+}
+
 .featured-logo-img.is-square {
   height: 52px;
 }
