@@ -29,7 +29,7 @@ class Post < ApplicationRecord
   # Rough reading time from the body's word count.
   def reading_minutes
     words = body.to_s.split.size
-    [(words / 200.0).ceil, 1].max
+    [ (words / 200.0).ceil, 1 ].max
   end
 
   def summary

@@ -1,4 +1,5 @@
 class SiteContent < ApplicationRecord
+  self.table_name  = "site_content"
   self.primary_key = "key"
 
   def self.get(key)

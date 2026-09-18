@@ -11,14 +11,14 @@ module Api
 
     # Boards shown as distinct pills in the sidebar.
     # Everything NOT in this list is treated as "State Board".
-    CURATED_BOARDS   = ['State Board', 'ICSE', 'IB', 'CBSE', 'IGCSE'].freeze
+    CURATED_BOARDS   = [ "State Board", "ICSE", "IB", "CBSE", "IGCSE" ].freeze
     NON_STATE_BOARDS = %w[CBSE ICSE IB IGCSE Cambridge NIOS].freeze
 
     def index
-      page     = [params[:page].to_i, 1].max
+      page     = [ params[:page].to_i, 1 ].max
       per_page = params[:per].to_i
       per_page = 24 if per_page <= 0
-      per_page = [per_page, 100].min
+      per_page = [ per_page, 100 ].min
 
       q        = params[:q].to_s.strip
       state    = params[:state].to_s.strip
@@ -52,7 +52,7 @@ module Api
       # Board filtering: "State Board" expands to every board that is NOT
       # one of the curated main boards (CBSE/ICSE/IB/IGCSE/Cambridge/NIOS).
       if boards.any?
-        specific     = boards - ["State Board"]
+        specific     = boards - [ "State Board" ]
         state_board  = boards.include?("State Board")
 
         if specific.any? && state_board
@@ -97,17 +97,17 @@ module Api
 
     def cities
       q     = params[:q].to_s.strip
-      limit = [params[:limit].to_i, 200].min
+      limit = [ params[:limit].to_i, 200 ].min
       limit = 100 if limit == 0
 
       cities = if q.present?
         School.where("district LIKE ?", "#{q}%")
-              .where.not(district: [nil, ''])
+              .where.not(district: [ nil, "" ])
               .distinct.order(:district)
               .limit(limit)
               .pluck(:district, :state)
       else
-        School.where.not(district: [nil, ''])
+        School.where.not(district: [ nil, "" ])
               .distinct.order(:district)
               .limit(limit)
               .pluck(:district, :state)

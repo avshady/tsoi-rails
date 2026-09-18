@@ -31,38 +31,40 @@ export function renderPage(data) {
   setCta('hero-cta-secondary', data.hero.ctaSecondary);
 
   // --- 2. INTRODUCTION ---
-  document.getElementById('intro-title').innerHTML = formatHeading(data.intro.title);
-  document.getElementById('intro-p1').textContent = data.intro.paragraph1;
-  document.getElementById('intro-p2').textContent = data.intro.paragraph2;
+  setHTML('intro-title', formatHeading(data.intro.title));
+  setText('intro-p1', data.intro.paragraph1);
+  setText('intro-p2', data.intro.paragraph2);
 
   // --- 2b. WHO TSOI IS FOR (three generations) ---
   const whoForSection = document.getElementById('who-for');
   if (whoForSection && data.whoTsoiFor) {
     setHTML('who-for-title', formatHeading(data.whoTsoiFor.title));
     setText('who-for-lead', data.whoTsoiFor.lead);
-    setHTML('generations-grid', data.whoTsoiFor.generations.map(g => `
-      <div class="generation-card color-${g.color}">
-        <div class="generation-role">${g.role}</div>
-        <h3 class="generation-name">${g.name}</h3>
-        <p class="generation-desc">${g.description}</p>
-      </div>
-    `).join(''));
+    setHTML('generations-grid', `
+      <div class="ecosystem-center"><em>The K-12 Ecosystem</em></div>
+      ${data.whoTsoiFor.generations.map((g, i) => `
+        <div class="ecosystem-pill color-${g.color} pos-${i + 1}">${g.name}</div>
+      `).join('')}
+    `);
     setText('who-for-closing', data.whoTsoiFor.closing);
   }
 
   // --- 3. WHY ATTEND ---
+  const whyPalette = ['#FF2A7F', '#7C3AED', '#2DE67B', '#06B6D4'];
   const whyGrid = document.getElementById('why-grid');
-  whyGrid.innerHTML = data.whyAttend.map((item, index) => `
-    <div class="why-card">
-      <div class="why-card-icon">${index + 1}</div>
-      <h3 class="why-card-title">${item.title}</h3>
-      <p class="why-card-desc">${item.description}</p>
+  if (whyGrid) whyGrid.innerHTML = data.whyAttend.map((item, index) => `
+    <div class="why-card" style="background-color:${whyPalette[index % 4]};">
+      <div class="why-card-ghost-num">0${index + 1}</div>
+      <div class="why-card-content">
+        <h3 class="why-card-title">${item.title}</h3>
+        <p class="why-card-desc">${item.description}</p>
+      </div>
     </div>
   `).join('');
 
   // --- 4. WHO SHOULD ATTEND ---
   const whoGrid = document.getElementById('who-grid');
-  whoGrid.innerHTML = data.whoShouldAttend.map(role => `
+  if (whoGrid) whoGrid.innerHTML = data.whoShouldAttend.map(role => `
     <div class="who-badge">${role}</div>
   `).join('');
 
@@ -84,9 +86,9 @@ export function renderPage(data) {
   }
 
   // --- 5. THE EXPERIENCE (TIMELINE) ---
-  document.getElementById('experience-title').innerHTML = formatHeading(data.experience.title);
+  setHTML('experience-title', formatHeading(data.experience.title));
   const experienceTimeline = document.getElementById('experience-timeline');
-  experienceTimeline.innerHTML = data.experience.days.map(dayInfo => `
+  if (experienceTimeline) experienceTimeline.innerHTML = data.experience.days.map(dayInfo => `
     <div class="timeline-item color-${dayInfo.color}">
       <div class="timeline-dot"></div>
       <div class="timeline-content">
@@ -99,7 +101,7 @@ export function renderPage(data) {
 
   // --- 6. THEMES ---
   const themesGrid = document.getElementById('themes-grid');
-  themesGrid.innerHTML = data.themes.map(theme => `
+  if (themesGrid) themesGrid.innerHTML = data.themes.map(theme => `
     <div class="theme-card">
       <div class="theme-bullet"></div>
       <span class="theme-name">${theme}</span>
@@ -108,8 +110,8 @@ export function renderPage(data) {
 
   // --- 7. SPEAKERS SECTION ---
   // Grid is server-rendered in ERB; only update text elements
-  document.getElementById('speakers-title').innerHTML = formatHeading(data.speakers.title);
-  document.getElementById('speakers-soon-text').textContent = data.speakers.subtitle;
+  setHTML('speakers-title', formatHeading(data.speakers.title));
+  setText('speakers-soon-text', data.speakers.subtitle);
 
   // --- 7b. FEATURED SPEAKERS ---
   const featuredSection = document.getElementById('featured-speakers');
@@ -139,7 +141,7 @@ export function renderPage(data) {
 
   // --- 8. SESSIONS ---
   const sessionsGrid = document.getElementById('sessions-grid');
-  sessionsGrid.innerHTML = data.sessions.map(sess => `
+  if (sessionsGrid) sessionsGrid.innerHTML = data.sessions.map(sess => `
     <div class="session-card">
       <div class="session-icon">${sess.icon}</div>
       <h3 class="session-title">${sess.title}</h3>
@@ -162,7 +164,7 @@ export function renderPage(data) {
 
   // --- 10. NETWORKING ---
   const netGrid = document.getElementById('net-grid');
-  netGrid.innerHTML = data.networking.map(item => `
+  if (netGrid) netGrid.innerHTML = data.networking.map(item => `
     <div class="feature-card">
       <h3 class="feature-card-title">${item.title}</h3>
       <p class="feature-card-desc">${item.description}</p>
@@ -171,7 +173,7 @@ export function renderPage(data) {
 
   // --- 11. INNOVATION SHOWCASE ---
   const showcaseGrid = document.getElementById('showcase-grid');
-  showcaseGrid.innerHTML = data.innovationShowcase.map(item => `
+  if (showcaseGrid) showcaseGrid.innerHTML = data.innovationShowcase.map(item => `
     <div class="feature-card">
       <h3 class="feature-card-title" style="color: var(--color-lime);">${item.title}</h3>
       <p class="feature-card-desc">${item.desc}</p>
@@ -265,7 +267,7 @@ export function renderPage(data) {
 
   // --- 17. FREQUENTLY ASKED QUESTIONS ---
   const faqsContainer = document.getElementById('faqs-container');
-  faqsContainer.innerHTML = data.faqs.map(faq => `
+  if (faqsContainer) faqsContainer.innerHTML = data.faqs.map(faq => `
     <div class="faq-item">
       <button class="faq-trigger">
         <span>${faq.question}</span>
@@ -528,8 +530,24 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// Pull saved CMS content from the database, falling back to the bundled
+// defaults (public/summit/cms-data.js) if nothing is saved or the request fails.
+async function hydrateFromServer() {
+  try {
+    const res = await fetch('/summit/cms/data', { headers: { 'Accept': 'application/json' } });
+    if (!res.ok) return;
+    const json = await res.json();
+    if (json && json.data) {
+      window.currentCmsData = json.data;
+    }
+  } catch (e) {
+    // Endpoint unavailable — keep the bundled defaults.
+  }
+}
+
 // Initial Render
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await hydrateFromServer();
   renderPage(window.currentCmsData);
   setupScheduleFilters();
 });

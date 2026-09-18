@@ -20,7 +20,7 @@ class DedupeAndReorderSummitSpeakers < ActiveRecord::Migration[8.1]
       next if recs.empty?
 
       keeper = recs.find { |r| r.name == c[:name] } || recs.first
-      (recs - [keeper]).each(&:destroy)
+      (recs - [ keeper ]).each(&:destroy)
 
       attrs = { name: c[:name], position: c[:position] }
       attrs[:title]        = c[:title]        if c[:title]

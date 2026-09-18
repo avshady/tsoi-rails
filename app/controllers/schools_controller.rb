@@ -40,7 +40,7 @@ class SchoolsController < ApplicationController
       phone:      params[:phone].to_s.strip,
       school_name: school.name,
       service:    "Claim Listing",
-      message:    ["Role: #{role}", "School ID: #{school.id}", note.presence].compact.join(" — "),
+      message:    [ "Role: #{role}", "School ID: #{school.id}", note.presence ].compact.join(" — "),
       status:     "new"
     )
     flash[:notice] = "Your claim request has been submitted. Our team will verify and reach out within 2-3 business days."

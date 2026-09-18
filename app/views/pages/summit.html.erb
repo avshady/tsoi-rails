@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= csrf_meta_tags %>
   <title>The Schools of India — Education Summit 2026</title>
   <meta name="description" content="Where education leaders, founders, principals, and innovators shape the future of learning. Join us for three days of bold ideas and actionable strategies.">
 
@@ -10,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/summit/style.css?v=11">
+  <link rel="stylesheet" href="/summit/style.css?v=44">
 </head>
 <body>
 
@@ -22,7 +23,7 @@
   <header class="header">
     <div class="container header-inner">
       <a href="/" class="logo">
-        THE SCHOOLS OF INDIA <span class="logo-dot"></span>
+        <img src="/summit/assets/tsoi-summit-logo.png" alt="The Schools of India Summit" class="nav-logo-img">
       </a>
       <div class="header-actions">
         <ul class="nav-menu">
@@ -33,6 +34,7 @@
           <li><a href="#partners" class="nav-link">Partners</a></li>
           <li><a href="/summit/recognitions.html" class="nav-link">Recognitions 2026</a></li>
           <li><a href="#faqs" class="nav-link">FAQs</a></li>
+          <li><a href="https://drive.google.com/drive/folders/1XvwMbWW6cOaji--xBDi2YsZZJVgQz6ph?usp=share_link" target="_blank" rel="noopener" class="nav-link nav-press-kit">Press Kit</a></li>
         </ul>
         <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="btn btn-primary nav-register-btn" id="nav-register-btn">Register</a>
         <button class="hamburger" aria-label="Toggle Menu" id="hamburger-btn">
@@ -53,50 +55,66 @@
     <a href="#partners" class="mobile-nav-link">Partners</a>
     <a href="/summit/recognitions.html" class="mobile-nav-link">Recognitions 2026</a>
     <a href="#faqs" class="mobile-nav-link">FAQs</a>
+    <a href="https://drive.google.com/drive/folders/1XvwMbWW6cOaji--xBDi2YsZZJVgQz6ph?usp=share_link" target="_blank" rel="noopener" class="mobile-nav-link">Press Kit</a>
     <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="mobile-nav-link" style="color: var(--color-magenta);">Register →</a>
   </div>
 
   <!-- Hero -->
   <section class="hero-section" id="hero">
-    <svg class="sticker sticker-magenta" style="top: 15%; right: 10%; width: 50px; height: 50px;" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
-    </svg>
-    <svg class="sticker sticker-lime" style="bottom: 25%; left: 5%; width: 40px; height: 40px;" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
-    </svg>
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <h1 class="hero-headline" id="hero-headline"></h1>
-        <p class="hero-subheadline" id="hero-subheadline"></p>
-        <div class="hero-meta">
-          <span class="hero-date" id="hero-date"></span>
-          <span class="hero-location">
-            <span style="color: var(--color-lime);">📍</span> <span id="hero-location-text"></span>
-          </span>
-        </div>
-        <div class="hero-ctas">
-          <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="btn btn-primary" id="hero-cta-primary">Register Now</a>
-          <a href="#sponsor" class="btn btn-secondary" id="hero-cta-secondary">Become a Sponsor</a>
-          <a href="#callback" class="btn btn-secondary" id="hero-cta-callback">Request Call Back</a>
-          <a href="https://drive.google.com/drive/folders/1XvwMbWW6cOaji--xBDi2YsZZJVgQz6ph?usp=share_link" target="_blank" rel="noopener" class="btn btn-secondary" id="hero-cta-presskit">Press Kit</a>
-        </div>
-      </div>
-      <div class="hero-art-container">
-        <div class="hero-art-main">
-          SHAPING<br>THE<br>FUTURE
-        </div>
+    <div class="hero-banner-wrap">
+      <img src="/summit/assets/hero-banner.png" alt="The Schools of India Summit 2026 — 300 K-12 school leaders, 3 days, 30 Oct–1 Nov 2026, Novotel Imagicaa, Khopoli" class="hero-banner-img">
+      <div class="hero-ctas">
+        <a href="https://www.tezticket.com/events/TSOIS/sub_events/298" target="_blank" rel="noopener" class="hero-btn hero-btn-primary">
+          Reserve Your Seat
+          <span class="hero-btn-sub">Register Now</span>
+        </a>
+        <a href="/summit/recognitions.html" class="hero-btn hero-btn-secondary">
+          Submit Your 5%
+          <span class="hero-btn-sub">Nominate for The 5% Recognition</span>
+        </a>
+        <a href="#" onclick="document.getElementById('registration-dialog').showModal(); return false;" class="hero-btn hero-btn-tertiary">
+          Be A Patron
+          <span class="hero-btn-sub">Support the Summit</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Introduction -->
-  <section class="section" id="intro" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
-    <div class="container">
-      <div class="intro-text-block">
-        <span class="section-tag">Introduction</span>
-        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="intro-title"></h2>
-        <p class="intro-lead" id="intro-p1"></p>
-        <p class="intro-sub" id="intro-p2"></p>
+  <!-- Featured In -->
+  <section class="featured-strip">
+    <p class="featured-label">Featured in</p>
+    <div class="featured-track-wrap">
+      <div class="featured-track">
+        <img src="/summit/assets/standard-post-logo.png" alt="Standard Post" class="featured-logo-img">
+        <img src="/summit/assets/freepress-journal-logo.avif" alt="The Freepress Journal" class="featured-logo-img is-square">
+        <img src="/summit/assets/toi-logo.svg" alt="Times of India" class="featured-logo-img">
+        <img src="/summit/assets/uni-logo.png" alt="UNI" class="featured-logo-img is-square is-uni">
+        <img src="/summit/assets/sakal-logo.jpg" alt="Sakal" class="featured-logo-img">
+        <!-- duplicate set for seamless loop -->
+        <img src="/summit/assets/standard-post-logo.png" alt="Standard Post" class="featured-logo-img" aria-hidden="true">
+        <img src="/summit/assets/freepress-journal-logo.avif" alt="" class="featured-logo-img is-square" aria-hidden="true">
+        <img src="/summit/assets/toi-logo.svg" alt="" class="featured-logo-img" aria-hidden="true">
+        <img src="/summit/assets/uni-logo.png" alt="" class="featured-logo-img is-square is-uni" aria-hidden="true">
+        <img src="/summit/assets/sakal-logo.jpg" alt="" class="featured-logo-img" aria-hidden="true">
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder Section -->
+  <section class="section founder-section" id="founder">
+    <div class="container founder-grid">
+      <div class="founder-image-col">
+        <img src="/summit/assets/ankit-profile.png" alt="Ankit Pushpraj, CEO, The Schools of India" class="founder-img">
+      </div>
+      <div class="founder-content-col">
+        <p class="founder-eyebrow">The Story behind TSOI</p>
+        <h2 class="founder-heading">Every education summit forgot the one person it's for.</h2>
+        <p class="founder-body">For years, India's education conferences have filled rooms with founders, principals and vendors - and left one chair empty. The student. The person every decision in that room is actually about.</p>
+        <p class="founder-body">TSOI puts that right. Founders, principals, educators and the students they serve sit at the same table, in the same sessions, solving the same problems - not students as a keynote moment, but as delegates.</p>
+        <blockquote class="founder-quote">
+          <p>"Nobody designed education conferences to leave students out. It just happened that way, year after year."</p>
+          <cite>— Ankit Pushpraj, CEO, The Schools of India</cite>
+        </blockquote>
       </div>
     </div>
   </section>
@@ -114,71 +132,17 @@
     </div>
   </section>
 
-  <!-- Why Attend -->
-  <section class="section" id="why-attend">
+  <!-- Board of Advisors -->
+  <section class="section" id="speakers" style="border-top: 1px solid var(--border-glow);">
     <div class="container">
-      <span class="section-tag">Benefits</span>
-      <h2 class="section-title" id="why-title">Why You Should Be Here</h2>
-      <div class="why-grid" id="why-grid"></div>
-    </div>
-  </section>
-
-  <!-- Who Should Attend -->
-  <section class="section" id="who-attend" style="background-color: rgba(0,0,0,0.02); border-top: 1px solid var(--border-glow); border-bottom: 1px solid var(--border-glow);">
-    <div class="container">
-      <div style="text-align: center; margin-bottom: 3.5rem;">
-        <span class="section-tag">Delegates</span>
-        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Designed for Every Education Leader</h2>
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <span class="section-tag">Board of Advisors</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="speakers-title">The people guiding<br>the TSOI room</h2>
       </div>
-      <div class="who-grid" id="who-grid"></div>
-    </div>
-  </section>
-
-  <!-- Content Tracks -->
-  <section class="section" id="tracks" style="border-top: 1px solid var(--border-glow);">
-    <div class="container">
-      <div style="text-align: center; margin-bottom: 1.25rem;">
-        <span class="section-tag">Choose Your Room</span>
-        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="tracks-title"></h2>
-        <p class="tracks-lead" id="tracks-lead"></p>
-      </div>
-      <div class="tracks-grid" id="tracks-grid"></div>
-    </div>
-  </section>
-
-  <!-- Experience Timeline -->
-  <section class="section" id="experience">
-    <div class="container">
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <span class="section-tag">The Flow</span>
-        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="experience-title"></h2>
-      </div>
-      <div class="experience-timeline" id="experience-timeline"></div>
-    </div>
-  </section>
-
-  <!-- Themes -->
-  <section class="section" id="themes" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
-    <div class="container">
-      <span class="section-tag">Pillars</span>
-      <h2 class="section-title">What We'll Explore</h2>
-      <div class="themes-grid" id="themes-grid"></div>
-    </div>
-  </section>
-
-  <!-- Speakers -->
-  <section class="section" id="speakers">
-    <svg class="sticker sticker-violet" style="top: 10%; left: 5%; width: 45px; height: 45px;" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 0c1.5 5 5 8.5 12 12-7 1.5-10.5 5-12 12-1.5-7-5-10.5-12-12 7-1.5 10.5-5 12-12z"/>
-    </svg>
-    <div class="container">
-      <span class="section-tag">Visionaries</span>
-      <h2 class="section-title" id="speakers-title">Board of Advisors</h2>
       <div class="speakers-grid" id="speakers-grid">
-        <% SummitSpeaker.all.each do |sp| %>
-          <div class="speaker-card">
+        <% SummitSpeaker.all.order(:position).each do |sp| %>
+          <div class="speaker-card sp-<%= sp.name.parameterize %>">
             <div class="speaker-img-wrapper">
-              <div class="speaker-bg-accent" style="background-color:<%= sp.accent_color %>;"></div>
               <% if sp.photo.present? %>
                 <% photo_url = sp.photo.split('?').first + "?v=#{sp.updated_at.to_i}" %>
                 <img src="<%= photo_url %>" alt="<%= sp.name %>" class="speaker-photo" width="280" height="280" onerror="this.style.opacity='0'">
@@ -192,48 +156,241 @@
           </div>
         <% end %>
       </div>
-      <div class="speakers-footer">
-        <p class="speakers-soon-text" id="speakers-soon-text">More speakers being confirmed — check back soon.</p>
+    </div>
+  </section>
+
+  <!-- Why Attend -->
+  <section class="section" id="why-attend">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="section-tag">Benefits</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="why-title">Why You Should Be Here</h2>
+        <p class="why-intro-text">Not just a goodie bag. Not just an award. Six things worth carrying back to your school on Day 4.</p>
+      </div>
+      <div class="why-grid" id="why-grid"></div>
+    </div>
+  </section>
+
+  <!-- The Flow -->
+  <section class="section" id="flow" style="border-top: 1px solid var(--border-glow);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="section-tag">The Flow</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Three days. No filler.</h2>
+      </div>
+      <div class="flow-columns">
+        <div class="flow-card flow-card-magenta">
+          <div class="flow-ghost-num">1</div>
+          <p class="flow-day flow-day-magenta">Day 0</p>
+          <p class="flow-theme">Arrive & Belong</p>
+          <hr class="flow-divider">
+          <ul class="flow-items">
+            <li class="flow-item">Arrival & Check-In</li>
+            <li class="flow-item">Opening Performance</li>
+            <li class="flow-item">Why We Built This</li>
+            <li class="flow-item">Reflective School</li>
+            <li class="flow-item">Live Music & Dinner</li>
+          </ul>
+        </div>
+        <div class="flow-card flow-card-violet">
+          <div class="flow-ghost-num">2</div>
+          <p class="flow-day flow-day-violet">Day 1</p>
+          <p class="flow-theme">Question Everything</p>
+          <hr class="flow-divider">
+          <ul class="flow-items">
+            <li class="flow-item">Yoga & Breakfast</li>
+            <li class="flow-item">You Can Make It Happen</li>
+            <li class="flow-item">Students Take Over</li>
+            <li class="flow-item">Parallel Tracks</li>
+            <li class="flow-item">Every Child, Across the Range</li>
+          </ul>
+        </div>
+        <div class="flow-card flow-card-lime">
+          <div class="flow-ghost-num">3</div>
+          <p class="flow-day flow-day-lime">Day 2</p>
+          <p class="flow-theme">Build What's Next</p>
+          <hr class="flow-divider">
+          <ul class="flow-items">
+            <li class="flow-item">Built by One Generation</li>
+            <li class="flow-item">The Indian Classroom at a Crossroads</li>
+            <li class="flow-item">The 5% Showcase</li>
+            <li class="flow-item">When I Go Back...</li>
+            <li class="flow-item">Closing Reflection</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Participation strip -->
+      <div class="flow-strip">
+        <span class="flow-strip-text">LISTEN &gt; QUESTION &gt; SHARE &gt; SOLVE &gt; BUILD &gt; COMMIT</span>
+      </div>
+
+      <!-- Download CTA -->
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="#" class="btn btn-secondary flow-schedule-btn">Download Full Schedule</a>
       </div>
     </div>
   </section>
 
-  <!-- Featured Speakers -->
-  <section class="section" id="featured-speakers" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
+  <!-- Formats -->
+  <section class="section" id="formats" style="border-top: 1px solid var(--border-glow);">
+    <div class="container formats-split">
+      <div class="formats-left">
+        <span class="section-tag">The TSOI Experience</span>
+        <h2 class="section-title">Participation, not content consumption.</h2>
+        <p class="formats-body">Every format at the TSOI Summit puts you in a room working a real problem — not listening to one.</p>
+      </div>
+      <div class="format-cards-grid">
+        <div class="format-card format-card-tall format-card-magenta">
+          <div class="format-card-ghost">5%</div>
+          <div class="format-card-content">
+            <h3 class="format-card-title format-title-magenta">The 5% Sharing Sessions</h3>
+            <p class="format-card-desc">Schools showcasing what works that others can copy.</p>
+          </div>
+        </div>
+        <div class="format-card format-card-violet">
+          <div class="format-card-ghost">↻</div>
+          <div class="format-card-content">
+            <h3 class="format-card-title">What We'd Do Differently</h3>
+            <p class="format-card-desc">Experienced leaders on the decisions, systems and assumptions they'd approach differently today.</p>
+          </div>
+        </div>
+        <div class="format-card format-card-lime">
+          <div class="format-card-ghost">2035</div>
+          <div class="format-card-content">
+            <h3 class="format-card-title">The School of 2035</h3>
+            <p class="format-card-desc">Redesigning a school from scratch, with students at the table.</p>
+          </div>
+        </div>
+        <div class="format-card format-card-cyan">
+          <div class="format-card-ghost">✦</div>
+          <div class="format-card-content">
+            <h3 class="format-card-title">Wellness & Networking</h3>
+            <p class="format-card-desc">Yoga & mindfulness sessions along with the TSOI Gala Dinner & community launch event.</p>
+          </div>
+        </div>
+        <div class="format-card format-card-magenta">
+          <div class="format-card-ghost">⌘</div>
+          <div class="format-card-content">
+            <h3 class="format-card-title">Problem Rooms</h3>
+            <p class="format-card-desc">Dedicated breakout sessions for next-gen founders, principals & educators.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voices on the Stage -->
+  <section class="section" id="featured-speakers-new" style="border-top: 1px solid var(--border-glow);">
     <div class="container">
-      <div style="text-align: center; margin-bottom: 1.25rem;">
+      <div style="text-align: center; margin-bottom: 3rem;">
         <span class="section-tag">Featured Speakers</span>
-        <h2 class="section-title" style="margin-left: auto; margin-right: auto;" id="featured-speakers-title"></h2>
-        <p class="featured-speakers-lead" id="featured-speakers-lead"></p>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Voices on the stage.</h2>
       </div>
-      <div class="featured-speakers-grid" id="featured-speakers-grid"></div>
-      <p class="featured-speakers-closing" id="featured-speakers-closing"></p>
+      <div class="speakers-list-grid">
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/lakshmi-kumar.png" alt="Dr. Lakshmi Kumar" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Dr. Lakshmi Kumar</p>
+            <p class="speaker-list-role">Director - Avasara Academy</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/sanjay-malpani.png" alt="Dr. Sanjay Malpani" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Dr. Sanjay Malpani</p>
+            <p class="speaker-list-role">Director - Malpani Group; Chairman - Dhruv Global School</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/parimal-merchant.png" alt="Dr. Parimal Merchant" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Dr. Parimal Merchant</p>
+            <p class="speaker-list-role">Director - GFMB, SP Jain School of Global Management</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/kiran-bir-sethi.png" alt="Kiran Bir Sethi" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Kiran Bir Sethi</p>
+            <p class="speaker-list-role">Founder - The Riverside High School</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/sanjay-jain.png" alt="Sanjay Jain" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Sanjay Jain</p>
+            <p class="speaker-list-role">Head - Google for Education, India</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/aneesh-bangia.png" alt="Aneesh Bangia" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Aneesh Bangia</p>
+            <p class="speaker-list-role">Co-founder - Open Door and Thinking Classroom</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/umes-shreshtha.png" alt="Umes Shreshtha" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Umes Shreshtha</p>
+            <p class="speaker-list-role">Director - CIPL, King's College, Nepal</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/devika-nadig.png" alt="Devika Nadig" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Devika Nadig</p>
+            <p class="speaker-list-role">Director - Shikshangan Education Initiatives</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/ganesh-natrajan.png" alt="Dr. Ganesh Natrajan" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Dr. Ganesh Natrajan</p>
+            <p class="speaker-list-role">Former Chairman NASSCOM</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/preethi-vickram.png" alt="Preethi Vickram" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Preethi Vickram</p>
+            <p class="speaker-list-role">Founder - Tapas Progressive Learning</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/swati-popat-vats.png" alt="Dr. Swati Popat Vats" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Dr. Swati Popat Vats</p>
+            <p class="speaker-list-role">President - ECA & Podar Education Network</p>
+          </div>
+        </div>
+        <div class="speaker-list-entry">
+          <img src="/summit/assets/speakers/manjushree-patil.png" alt="Manjushree Patil" class="speaker-list-photo">
+          <div class="speaker-list-info">
+            <p class="speaker-list-name">Manjushree Patil</p>
+            <p class="speaker-list-role">Founder - Director Aatman Academy</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Sessions -->
-  <section class="section" id="sessions" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
-    <div class="container">
-      <span class="section-tag">Formats</span>
-      <h2 class="section-title">Signature TSOI Formats</h2>
-      <div class="sessions-grid" id="sessions-grid"></div>
-    </div>
-  </section>
-
-<!-- Networking & Showcase -->
-  <section class="section" id="networking-showcase" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
-    <div class="container">
-      <div class="feature-split">
-        <div>
-          <span class="section-tag">Connections</span>
-          <h2 class="section-title" style="font-size: 2.25rem; margin-bottom: 2rem;">Connections That Last Beyond Three Days</h2>
-          <div class="net-grid" id="net-grid"></div>
-        </div>
-        <div>
-          <span class="section-tag">Exhibition</span>
-          <h2 class="section-title" style="font-size: 2.25rem; margin-bottom: 2rem;">Explore the Future of Education</h2>
-          <div class="showcase-grid" id="showcase-grid"></div>
-        </div>
+  <!-- The 5% Showcase -->
+  <section class="section" id="five-percent" style="border-top: 1px solid var(--border-glow); background-color: rgba(0,0,0,0.02);">
+    <div class="container five-pct-wrap">
+      <span class="section-tag">The 5% Showcase</span>
+      <h2 class="section-title five-pct-headline">What's your 5%?</h2>
+      <p class="five-pct-body">Every school has mastered something. Share it, and it could take the Summit stage — and join a free, permanent library every school in India can search.</p>
+      <div class="five-pct-chips">
+        <span class="five-pct-chip">Free to submit</span>
+        <span class="five-pct-chip">10 schools take the stage</span>
+        <span class="five-pct-chip">Travel & stay covered</span>
+        <span class="five-pct-chip">Contributions close 3 Oct</span>
+      </div>
+      <div class="five-pct-ctas">
+        <a href="#" class="btn btn-secondary">See how it works</a>
+        <a href="/summit/recognitions.html" class="btn btn-primary">Submit your 5%</a>
       </div>
     </div>
   </section>
@@ -253,13 +410,6 @@
               <div>
                 <h4 class="venue-detail-title">Parking</h4>
                 <p class="venue-detail-desc" id="venue-parking"></p>
-              </div>
-            </div>
-            <div class="venue-detail-item">
-              <span class="venue-detail-icon">🏨</span>
-              <div>
-                <h4 class="venue-detail-title">Nearby Hotels</h4>
-                <p class="venue-detail-desc" id="venue-hotels"></p>
               </div>
             </div>
             <div class="venue-detail-item">
@@ -319,48 +469,28 @@
   </section>
 
   <!-- Partners -->
-  <section class="section" id="partners">
-    <div class="container">
-      <div style="text-align: center; margin-bottom: 3rem;">
-        <span class="section-tag">Partners</span>
-        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Our Partners</h2>
-      </div>
-      <div class="partners-grid">
-        <div class="partner-card">
-          <div class="partner-logo-wrap">
-            <img src="/summit/assets/partners/edumojo.png" alt="Edu Mojo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="partner-logo-fallback" style="display:none;">Edu Mojo</span>
-          </div>
-          <div class="partner-role">Technology Partner</div>
-        </div>
-        <div class="partner-card">
-          <div class="partner-logo-wrap">
-            <img src="/summit/assets/partners/stockpaperscissors.png" alt="Stock Paper Scissors" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="partner-logo-fallback" style="display:none;">Stock. Paper. Scissors.</span>
-          </div>
-          <div class="partner-role">Merchandise Partner</div>
-        </div>
-        <div class="partner-card">
-          <div class="partner-logo-wrap">
-            <img src="/summit/assets/partners/tezticket.png" alt="TezTicket" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="partner-logo-fallback" style="display:none;">TezTicket</span>
-          </div>
-          <div class="partner-role">Ticketing Partner</div>
-        </div>
-        <div class="partner-card">
-          <div class="partner-logo-wrap">
-            <img src="/summit/assets/partners/gameplan.png" alt="Game Plan" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="partner-logo-fallback" style="display:none;">Game Plan</span>
-          </div>
-          <div class="partner-role">Fitness Partner</div>
-        </div>
-        <div class="partner-card">
-          <div class="partner-logo-wrap">
-            <img src="/summit/assets/partners/bloomed.png" alt="bloomed" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="partner-logo-fallback" style="display:none;">bloomed</span>
-          </div>
-          <div class="partner-role">Knowledge Partner</div>
-        </div>
+  <section class="featured-strip" id="partners">
+    <p class="featured-label">Our Partners</p>
+    <div class="featured-track-wrap">
+      <div class="featured-track partners-track">
+        <img src="/summit/assets/partners/edumojo.png" alt="Edu Mojo" class="featured-logo-img">
+        <img src="/summit/assets/partners/stockpaperscissors.png" alt="Stock Paper Scissors" class="featured-logo-img partner-lg">
+        <img src="/summit/assets/partners/tezticket.png" alt="TezTicket" class="featured-logo-img partner-lg">
+        <img src="/summit/assets/partners/gameplan.png" alt="Game Plan" class="featured-logo-img partner-lg">
+        <img src="/summit/assets/partners/bloomed.png" alt="bloomed" class="featured-logo-img partner-lg">
+        <img src="/summit/assets/partners/imagicaa.svg" alt="Imagicaa" class="featured-logo-img">
+        <img src="/summit/assets/partners/edumojo.png" alt="" class="featured-logo-img" aria-hidden="true">
+        <img src="/summit/assets/partners/stockpaperscissors.png" alt="" class="featured-logo-img partner-lg" aria-hidden="true">
+        <img src="/summit/assets/partners/tezticket.png" alt="" class="featured-logo-img partner-lg" aria-hidden="true">
+        <img src="/summit/assets/partners/gameplan.png" alt="" class="featured-logo-img partner-lg" aria-hidden="true">
+        <img src="/summit/assets/partners/bloomed.png" alt="" class="featured-logo-img partner-lg" aria-hidden="true">
+        <img src="/summit/assets/partners/imagicaa.svg" alt="" class="featured-logo-img" aria-hidden="true">
+        <img src="/summit/assets/partners/edumojo.png" alt="" class="featured-logo-img" aria-hidden="true">
+        <img src="/summit/assets/partners/stockpaperscissors.png" alt="" class="featured-logo-img partner-lg" aria-hidden="true">
+        <img src="/summit/assets/partners/tezticket.png" alt="" class="featured-logo-img partner-lg" aria-hidden="true">
+        <img src="/summit/assets/partners/gameplan.png" alt="" class="featured-logo-img partner-lg" aria-hidden="true">
+        <img src="/summit/assets/partners/bloomed.png" alt="" class="featured-logo-img partner-lg" aria-hidden="true">
+        <img src="/summit/assets/partners/imagicaa.svg" alt="" class="featured-logo-img" aria-hidden="true">
       </div>
     </div>
   </section>
@@ -403,7 +533,7 @@
       <div class="footer-top">
         <div class="footer-about">
           <div class="footer-logo">
-            THE SCHOOLS OF INDIA <span class="logo-dot"></span>
+            <img src="/summit/assets/tsoi-summit-logo.png" alt="The Schools of India Summit" class="footer-logo-img">
           </div>
           <p id="footer-about-text"></p>
         </div>

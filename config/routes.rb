@@ -20,11 +20,16 @@ Rails.application.routes.draw do
   get "/blog/:slug",  to: "posts#show",  as: :blog_post
 
   post "/summit/notify",           to: "pages#summit_notify"
+
+  # Summit CMS — server-side auth + database persistence
+  get  "/summit/cms/data", to: "summit_cms#data"
+  post "/summit/cms/auth", to: "summit_cms#auth"
+  post "/summit/cms/save", to: "summit_cms#save"
   post "/contact/send",            to: "pages#contact_send"
   post "/services/:slug/inquiry",  to: "pages#service_inquiry", as: :service_inquiry
 
   # Schools
-  resources :schools, only: [:index, :show] do
+  resources :schools, only: [ :index, :show ] do
     member { post :claim }
   end
 
@@ -49,10 +54,10 @@ Rails.application.routes.draw do
   # Admin (simple, no auth for local dev)
   namespace :admin do
     root "dashboard#index"
-    resources :schools, only: [:index, :show, :edit, :update] do
+    resources :schools, only: [ :index, :show, :edit, :update ] do
       member { post :generate_token }
     end
-    resources :summit_speakers, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :summit_speakers, only: [ :index, :new, :create, :edit, :update, :destroy ]
     resources :posts
 
     # CMS
@@ -61,6 +66,6 @@ Rails.application.routes.draw do
     post "content/service/:slug/text",  to: "content#update_service_text",  as: :content_service_text
 
     # Inquiries
-    resources :inquiries, only: [:index, :destroy]
+    resources :inquiries, only: [ :index, :destroy ]
   end
 end

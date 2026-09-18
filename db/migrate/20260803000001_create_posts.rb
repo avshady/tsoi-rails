@@ -14,6 +14,6 @@ class CreatePosts < ActiveRecord::Migration[8.1]
     end
 
     add_index :posts, :slug, unique: true
-    add_index :posts, [:published, :published_at]
+    add_index :posts, [ :published, :published_at ]
   end
 end

@@ -5,7 +5,7 @@ module Admin
     def index
       @q      = params[:q].to_s
       @state  = params[:state].to_s
-      @page   = [params[:page].to_i, 1].max
+      @page   = [ params[:page].to_i, 1 ].max
       per     = 50
 
       scope = School.all
