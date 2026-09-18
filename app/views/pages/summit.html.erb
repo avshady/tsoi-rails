@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/summit/style.css?v=51">
+  <link rel="stylesheet" href="/summit/style.css?v=52">
 </head>
 <body>
 
@@ -661,6 +661,60 @@
     </form>
   </dialog>
 
+  <!-- Privacy Policy Modal -->
+  <dialog id="privacy-dialog" class="legal-dialog">
+    <div class="modal-header">
+      <h3 class="modal-title">Privacy Policy</h3>
+      <button class="modal-close-btn" id="privacy-close-btn" aria-label="Close dialog">✕</button>
+    </div>
+    <p class="legal-dialog-meta">The Schools of India Summit 2026 · Last updated: September 2026</p>
+    <div class="legal-dialog-body">
+      <h4>1. Information We Collect</h4>
+      <p>When you register, request a call back, become a sponsor, download the schedule, or subscribe to updates, we collect the details you provide — typically your name, email, phone number, school or organisation, and designation.</p>
+      <h4>2. How We Use Your Information</h4>
+      <p>We use this information to process your registration and enquiries, respond to sponsorship and call-back requests, send you the Summit schedule and event updates, and improve the Summit experience.</p>
+      <h4>3. Third-Party Services</h4>
+      <p>Ticket registration is processed by TezTicket, and 5% Showcase submissions are collected via Google Forms. These providers have their own privacy policies governing the information you give them directly.</p>
+      <h4>4. Data Security</h4>
+      <p>We implement reasonable security measures to protect your information. However, no method of transmission over the internet is completely secure.</p>
+      <h4>5. Your Rights</h4>
+      <p>You have the right to access, correct, or delete your personal information. Contact us at <a href="mailto:summit@theschoolsofindia.org" style="color:var(--color-magenta);">summit@theschoolsofindia.org</a> to exercise these rights.</p>
+      <h4>6. Changes to This Policy</h4>
+      <p>We may update this policy from time to time. Material changes will be posted on this page.</p>
+      <h4>7. Contact</h4>
+      <p>For privacy questions about the Summit, contact <a href="mailto:summit@theschoolsofindia.org" style="color:var(--color-magenta);">summit@theschoolsofindia.org</a>.</p>
+    </div>
+  </dialog>
+
+  <!-- Terms & Conditions Modal -->
+  <dialog id="terms-dialog" class="legal-dialog">
+    <div class="modal-header">
+      <h3 class="modal-title">Terms &amp; Conditions</h3>
+      <button class="modal-close-btn" id="terms-close-btn" aria-label="Close dialog">✕</button>
+    </div>
+    <p class="legal-dialog-meta">The Schools of India Summit 2026 · Last updated: September 2026</p>
+    <div class="legal-dialog-body">
+      <h4>1. Acceptance of Terms</h4>
+      <p>By registering for or attending The Schools of India Summit 2026, you agree to be bound by these Terms &amp; Conditions. If you do not agree, please do not register.</p>
+      <h4>2. Registration &amp; Ticketing</h4>
+      <p>Tickets are sold and processed by TezTicket, a third-party ticketing platform. Payment, refund, and transfer requests are subject to TezTicket's own terms and policies.</p>
+      <h4>3. Event Changes</h4>
+      <p>TSOI may modify the schedule, speakers, tracks, or venue where necessary. Registrants will be notified of any material changes ahead of the event.</p>
+      <h4>4. Media &amp; Photography</h4>
+      <p>By attending, you consent to being photographed and filmed for TSOI's promotional and archival use, including Summit stage recordings, session photography, and 5% Showcase presentation videos.</p>
+      <h4>5. Code of Conduct</h4>
+      <p>Attendees are expected to behave respectfully toward speakers, delegates, and staff. TSOI reserves the right to refuse entry or remove any attendee who violates this.</p>
+      <h4>6. Intellectual Property</h4>
+      <p>All TSOI branding, content, and materials are the property of The Schools of India and may not be reproduced without permission. Practices submitted to the 5% Showcase remain owned by the contributing school under the Showcase's own terms.</p>
+      <h4>7. Limitation of Liability</h4>
+      <p>TSOI shall not be liable for any indirect, incidental, or consequential damages arising from your registration for or attendance at the Summit.</p>
+      <h4>8. Changes to Terms</h4>
+      <p>We reserve the right to modify these terms at any time. Continued registration or attendance after changes constitutes acceptance of the new terms.</p>
+      <h4>9. Contact</h4>
+      <p>For questions about these terms, contact <a href="mailto:summit@theschoolsofindia.org" style="color:var(--color-magenta);">summit@theschoolsofindia.org</a>.</p>
+    </div>
+  </dialog>
+
   <% if Rails.env.development? %>
   <button class="cms-panel-btn" id="cms-toggle-btn" aria-label="Open CMS Panel">⚙</button>
   <div class="cms-drawer" id="cms-drawer">
@@ -760,6 +814,36 @@
           e.preventDefault();
           scheduleDialog.showModal();
         });
+      });
+    }
+
+    // Privacy Policy / Terms & Conditions modals
+    var privacyDialog = document.getElementById('privacy-dialog');
+    var privacyCloseBtn = document.getElementById('privacy-close-btn');
+    if (privacyCloseBtn && privacyDialog) {
+      privacyCloseBtn.addEventListener('click', function() { privacyDialog.close(); });
+      privacyDialog.addEventListener('click', function(e) { if (e.target === privacyDialog) privacyDialog.close(); });
+    }
+    var termsDialog = document.getElementById('terms-dialog');
+    var termsCloseBtn = document.getElementById('terms-close-btn');
+    if (termsCloseBtn && termsDialog) {
+      termsCloseBtn.addEventListener('click', function() { termsDialog.close(); });
+      termsDialog.addEventListener('click', function(e) { if (e.target === termsDialog) termsDialog.close(); });
+    }
+    // Footer links (rendered dynamically by app.js) — delegate so #privacy/#terms open modals instead of a dead anchor jump
+    var footerLinks = document.getElementById('footer-links');
+    if (footerLinks) {
+      footerLinks.addEventListener('click', function(e) {
+        var link = e.target.closest('a');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (href === '#privacy' && privacyDialog) {
+          e.preventDefault();
+          privacyDialog.showModal();
+        } else if (href === '#terms' && termsDialog) {
+          e.preventDefault();
+          termsDialog.showModal();
+        }
       });
     }
 

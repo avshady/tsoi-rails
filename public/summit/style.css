@@ -2754,6 +2754,40 @@ dialog::backdrop {
   color: var(--text-white);
 }
 
+dialog.legal-dialog {
+  max-width: 640px;
+}
+
+.legal-dialog-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+  margin: -1rem 0 1.25rem;
+}
+
+.legal-dialog-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 0.75rem;
+}
+
+.legal-dialog-body h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.legal-dialog-body h4:first-child {
+  margin-top: 0;
+}
+
+.legal-dialog-body p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 0.75rem;
+}
+
 .modal-form {
   display: flex;
   flex-direction: column;
