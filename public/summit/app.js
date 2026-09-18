@@ -24,7 +24,7 @@ export function renderPage(data) {
   // --- 1. HERO SECTION ---
   setHTML('hero-headline', formatHeading(data.hero.headline));
   setText('hero-subheadline', data.hero.subheadline);
-  setText('hero-date', data.hero.dates);
+  setHTML('hero-date', data.hero.dates);
   setText('hero-location-text', data.hero.location);
   
   setCta('hero-cta-primary', data.hero.ctaPrimary);
@@ -287,7 +287,7 @@ export function renderPage(data) {
   if (data.ctaSection) {
     setHTML('cta-banner-title', formatHeading(data.ctaSection.title));
     setText('cta-banner-sub', data.ctaSection.subheadline);
-    setText('cta-banner-dates', data.ctaSection.dates);
+    setHTML('cta-banner-dates', data.ctaSection.dates);
     setCta('cta-banner-primary', data.ctaSection.ctaPrimary);
     setCta('cta-banner-secondary', data.ctaSection.ctaSecondary);
   }

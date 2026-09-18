@@ -434,6 +434,10 @@ a {
   height: 48px;
 }
 
+#partners img[alt="TezTicket"] {
+  height: 38px;
+}
+
 .featured-logo-img.is-square {
   height: 52px;
 }

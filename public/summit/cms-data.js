@@ -2,7 +2,7 @@ const cmsData = {
   hero: {
     headline: "For the People Building What Education Becomes Next",
     subheadline: "Three days where the generation that built Indian education, the generation that will lead it, and the students experiencing it sit at the same table.",
-    dates: "30 & 31 October • 1 November 2026",
+    dates: "30<sup>th</sup> & 31<sup>st</sup> October • 1<sup>st</sup> November 2026",
     location: "Novotel Imagicaa, Khopoli",
     ctaPrimary: {
       text: "Register Now",
@@ -118,19 +118,19 @@ const cmsData = {
     title: "Every Child Can Flourish.",
     days: [
       {
-        day: "30 Oct - WHY",
+        day: "30<sup>th</sup> Oct - WHY",
         theme: "Why Schools Must Change",
         description: "Arrivals, the opening film 'The Child of 2040', and the Opening Debate - 'Schooling Should Not Take Fifteen Years.'",
         color: "violet"
       },
       {
-        day: "31 Oct - HOW",
+        day: "31<sup>st</sup> Oct - HOW",
         theme: "Building the Future School",
         description: "Morning provocations, five tracks - The Future · Build · Learning · People · The 5% - The 5% Showcase, the Innovation Festival, private Imagicaa access, and the Schools of India Gala.",
         color: "magenta"
       },
       {
-        day: "1 Nov - NOW WHAT",
+        day: "1<sup>st</sup> Nov - NOW WHAT",
         theme: "Taking It Home",
         description: "The 'When I Go Back' 90-Day Action Plan workshop, TSOI Community Launch, and the closing ceremony with The Schools of India Pledge.",
         color: "lime"
@@ -531,7 +531,7 @@ const cmsData = {
   ctaSection: {
     title: "Ready to Shape the Future of Education?",
     subheadline: "Join hundreds of educators, founders, principals, and innovators for three transformative days of learning and collaboration.",
-    dates: "30 & 31 October • 1 November 2026",
+    dates: "30<sup>th</sup> & 31<sup>st</sup> October • 1<sup>st</sup> November 2026",
     ctaPrimary: { text: "Register Now", action: "https://www.tezticket.com/events/TSOIS/sub_events/298" },
     ctaSecondary: { text: "Become a Sponsor", action: "#sponsor" }
   },
