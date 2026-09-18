@@ -249,19 +249,23 @@ class PagesController < ApplicationController
     phone        = params[:phone].to_s.strip
     role         = params[:role].to_s.strip
     organisation = params[:organisation].to_s.strip
+    designation  = params[:designation].to_s.strip
     pass_id      = params[:passId].to_s.strip
 
     newsletter = role == "Newsletter Subscriber"
     sponsor    = pass_id == "sponsor"
     callback   = pass_id == "callback"
+    schedule   = pass_id == "schedule"
 
     parts = []
-    parts << "Role: #{role}"         if role.present? && !newsletter
-    parts << "Pass: #{pass_id}"      if pass_id.present? && !sponsor && !callback
+    parts << "Role: #{role}"               if role.present? && !newsletter
+    parts << "Designation: #{designation}" if designation.present?
+    parts << "Pass: #{pass_id}"            if pass_id.present? && !sponsor && !callback && !schedule
 
     service = if newsletter then "Summit Newsletter"
     elsif sponsor then "Summit Sponsorship"
     elsif callback then "Summit Callback Request"
+    elsif schedule then "Summit Schedule Download"
     else "Summit Registration"
     end
 
@@ -274,6 +278,11 @@ class PagesController < ApplicationController
       message:     parts.join(" · ").presence,
       status:      "new"
     )
+
+    if schedule
+      redirect_to "/summit/collaterals/schedule_full.html"
+      return
+    end
 
     first_name = name.split.first.presence || "You"
     flash[:notice] = if newsletter

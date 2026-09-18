@@ -227,7 +227,7 @@
 
       <!-- Download CTA -->
       <div style="text-align: center; margin-top: 2rem;">
-        <a href="#" class="btn btn-secondary flow-schedule-btn">Download Full Schedule</a>
+        <a href="#" id="flow-schedule-btn" class="btn btn-secondary flow-schedule-btn">Download Full Schedule</a>
       </div>
     </div>
   </section>
@@ -463,7 +463,7 @@
         <div class="schedule-list" id="schedule-list"></div>
       </div>
       <div style="text-align:center; margin-top:2.5rem;">
-        <a href="#callback" id="schedule-cta-callback" class="btn btn-secondary" style="font-size:0.9rem;">Download Full Schedule ↓</a>
+        <a href="#" id="schedule-cta-download" class="btn btn-secondary" style="font-size:0.9rem;">Download Full Schedule ↓</a>
       </div>
     </div>
   </section>
@@ -639,6 +639,42 @@
     </form>
   </dialog>
 
+  <!-- Download Full Schedule Modal -->
+  <dialog id="schedule-dialog">
+    <div class="modal-header">
+      <h3 class="modal-title">Download Full Schedule</h3>
+      <button class="modal-close-btn" id="schedule-close-btn" aria-label="Close dialog">✕</button>
+    </div>
+    <form class="modal-form" id="schedule-form" action="<%= summit_notify_path %>" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type="hidden" name="passId" value="schedule">
+      <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Share a few details and we'll take you straight to the full three-day schedule.
+      </p>
+      <div class="form-group">
+        <label class="form-label" for="schedule-name">Name *</label>
+        <input type="text" id="schedule-name" name="name" class="form-input" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="schedule-phone">Mobile Number *</label>
+        <input type="tel" id="schedule-phone" name="phone" class="form-input" placeholder="+91 98765 43210" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="schedule-email">Email *</label>
+        <input type="email" id="schedule-email" name="email" class="form-input" placeholder="name@school.edu" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="schedule-school">School *</label>
+        <input type="text" id="schedule-school" name="organisation" class="form-input" placeholder="Enter your school name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="schedule-designation">Designation *</label>
+        <input type="text" id="schedule-designation" name="designation" class="form-input" placeholder="e.g. Principal, Director" required>
+      </div>
+      <button type="submit" class="btn btn-primary modal-submit-btn">Download Full Schedule</button>
+    </form>
+  </dialog>
+
   <% if Rails.env.development? %>
   <button class="cms-panel-btn" id="cms-toggle-btn" aria-label="Open CMS Panel">⚙</button>
   <div class="cms-drawer" id="cms-drawer">
@@ -714,7 +750,7 @@
       callbackCloseBtn.addEventListener('click', function() { callbackDialog.close(); });
       callbackDialog.addEventListener('click', function(e) { if (e.target === callbackDialog) callbackDialog.close(); });
     }
-    var callbackTriggers = document.querySelectorAll('#hero-cta-callback, #schedule-cta-callback');
+    var callbackTriggers = document.querySelectorAll('#hero-cta-callback');
     if (callbackTriggers.length && callbackDialog) {
       callbackTriggers.forEach(function(trigger) {
         trigger.addEventListener('click', function(e) {
@@ -724,6 +760,22 @@
       });
     }
 
+    // Download Full Schedule modal — gate the download behind this form
+    var scheduleDialog = document.getElementById('schedule-dialog');
+    var scheduleCloseBtn = document.getElementById('schedule-close-btn');
+    if (scheduleCloseBtn && scheduleDialog) {
+      scheduleCloseBtn.addEventListener('click', function() { scheduleDialog.close(); });
+      scheduleDialog.addEventListener('click', function(e) { if (e.target === scheduleDialog) scheduleDialog.close(); });
+    }
+    var scheduleTriggers = document.querySelectorAll('#flow-schedule-btn, #schedule-cta-download');
+    if (scheduleTriggers.length && scheduleDialog) {
+      scheduleTriggers.forEach(function(trigger) {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          scheduleDialog.showModal();
+        });
+      });
+    }
 
     // Schedule tabs
     document.querySelectorAll('.schedule-tab').forEach(function(tab) {
