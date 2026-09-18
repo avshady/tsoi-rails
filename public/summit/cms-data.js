@@ -75,7 +75,7 @@ const cmsData = {
   ],
   tracks: {
     title: "Five Tracks. One Central Question.",
-    lead: "Rather than dividing the summit by job title, TSOI is organised around the questions education needs to answer. Choose your room — the summit still feels like one shared gathering, not five disconnected conferences.",
+    lead: "Rather than dividing the summit by job title, TSOI is organised around the questions education needs to answer. Choose your room - the summit still feels like one shared gathering, not five disconnected conferences.",
     list: [
       {
         number: "01",
@@ -118,19 +118,19 @@ const cmsData = {
     title: "Every Child Can Flourish.",
     days: [
       {
-        day: "30 Oct — WHY",
+        day: "30 Oct - WHY",
         theme: "Why Schools Must Change",
-        description: "Arrivals, the opening film 'The Child of 2040', and the Opening Debate — 'Schooling Should Not Take Fifteen Years.'",
+        description: "Arrivals, the opening film 'The Child of 2040', and the Opening Debate - 'Schooling Should Not Take Fifteen Years.'",
         color: "violet"
       },
       {
-        day: "31 Oct — HOW",
+        day: "31 Oct - HOW",
         theme: "Building the Future School",
-        description: "Morning provocations, five tracks — The Future · Build · Learning · People · The 5% — The 5% Showcase, the Innovation Festival, private Imagicaa access, and the Schools of India Gala.",
+        description: "Morning provocations, five tracks - The Future · Build · Learning · People · The 5% - The 5% Showcase, the Innovation Festival, private Imagicaa access, and the Schools of India Gala.",
         color: "magenta"
       },
       {
-        day: "1 Nov — NOW WHAT",
+        day: "1 Nov - NOW WHAT",
         theme: "Taking It Home",
         description: "The 'When I Go Back' 90-Day Action Plan workshop, TSOI Community Launch, and the closing ceremony with The Schools of India Pledge.",
         color: "lime"
@@ -153,7 +153,7 @@ const cmsData = {
   ],
   speakers: {
     title: "The people guiding<br>the TSOI room",
-    subtitle: "More speakers being confirmed — check back soon.",
+    subtitle: "More speakers being confirmed - check back soon.",
     list: [
       {
         name: "Lakshmi Kumar",
@@ -240,17 +240,17 @@ const cmsData = {
     },
     {
       title: "We Messed Up",
-      description: "Founders and institutions explain experiments, investments or decisions that did not work. No PR — one institution's expensive mistake becomes another's free lesson.",
+      description: "Founders and institutions explain experiments, investments or decisions that did not work. No PR - one institution's expensive mistake becomes another's free lesson.",
       icon: "💥"
     },
     {
       title: "TSOI Debates",
-      description: "Real arguments on real motions — 'Schooling should not take fifteen years,' 'AI will make teachers less important.' Audience votes before and after.",
+      description: "Real arguments on real motions - 'Schooling should not take fifteen years,' 'AI will make teachers less important.' Audience votes before and after.",
       icon: "🗣️"
     },
     {
       title: "Problem Rooms",
-      description: "Small, facilitated groups formed around a shared problem — teacher attrition, admissions, AI policy. No keynote, no slides. Every room leaves with practical actions.",
+      description: "Small, facilitated groups formed around a shared problem - teacher attrition, admissions, AI policy. No keynote, no slides. Every room leaves with practical actions.",
       icon: "🧩"
     },
     {
@@ -265,12 +265,12 @@ const cmsData = {
     },
     {
       title: "Morning Provocations",
-      description: "Three people, seven minutes each, no panels — sharp opening arguments that set up the day's discussion.",
+      description: "Three people, seven minutes each, no panels - sharp opening arguments that set up the day's discussion.",
       icon: "⚡"
     },
     {
       title: "TSOI Next",
-      description: "A community and programming layer for the people who will build the next generation of education — founders, successors, and young institution builders.",
+      description: "A community and programming layer for the people who will build the next generation of education - founders, successors, and young institution builders.",
       icon: "🚀"
     }
   ],
@@ -325,10 +325,10 @@ const cmsData = {
     { title: "School Services", desc: "Branding agencies, enrollment consultants, and bus fleet trackers." }
   ],
   venue: {
-    name: "Novotel Imagicaa Khopoli",
-    city: "Khopoli, Maharashtra, India",
+    name: "Novotel, Imagicaa, Khopoli",
+    city: "Maharashtra, India",
     parking: "Ample free parking available on-site at the Imagicaa resort complex.",
-    hotels: "Delegates may book rooms directly at Novotel Imagicaa Khopoli — special Summit rates available on request.",
+    hotels: "Delegates may book rooms directly at Novotel Imagicaa Khopoli - special Summit rates available on request.",
     travel: "Approx. 80 km from Mumbai. Accessible via Mumbai-Pune Expressway, Exit Khopoli. Shuttle services from Mumbai planned.",
     mapPlaceholder: "Interactive Map Location: 18.7815° N, 73.3211° E"
   },
@@ -338,11 +338,11 @@ const cmsData = {
       { time: "1:00 – 1:45 PM", type: "Meal", title: "Lunch", speaker: "", location: "" },
       { time: "2:00 – 2:30 PM", type: "Logistics", title: "Doors Open, Guest Seating", speaker: "", location: "" },
       { time: "2:30 – 3:00 PM", type: "Experience", title: "Opening Performance", speaker: "Dhruv Global School Students", location: "" },
-      { time: "3:00 – 3:30 PM", type: "Address", title: "Why We Built This", speaker: "Sanjay Malpani — Director, Malpani Group; President, Geeta Parivaar", location: "" },
-      { time: "3:30 – 4:00 PM", type: "Address", title: "What Leadership Actually Looks Like", speaker: "Seetha Murty — President, Heads Association of IB World Schools, India", location: "" },
+      { time: "3:00 – 3:30 PM", type: "Address", title: "Why We Built This", speaker: "Sanjay Malpani - Director, Malpani Group; President, Geeta Parivaar", location: "" },
+      { time: "3:30 – 4:00 PM", type: "Address", title: "What Leadership Actually Looks Like", speaker: "Seetha Murty - President, Heads Association of IB World Schools, India", location: "" },
       { time: "4:00 – 4:30 PM", type: "Break", title: "Tea", speaker: "", location: "" },
-      { time: "4:30 – 5:45 PM", type: "Workshop", title: "Pre-Summit Workshop: The Reflective School", speaker: "Devika Nadig — Shikshangan", location: "" },
-      { time: "5:45 – 6:25 PM", type: "Address", title: "We Failed First — And Here's What It Taught Us", speaker: "Arun Bhati — Founder & CEO, Orahi and 1 Million Founders", location: "" },
+      { time: "4:30 – 5:45 PM", type: "Workshop", title: "Pre-Summit Workshop: The Reflective School", speaker: "Devika Nadig - Shikshangan", location: "" },
+      { time: "5:45 – 6:25 PM", type: "Address", title: "We Failed First - And Here's What It Taught Us", speaker: "Arun Bhati - Founder & CEO, Orahi and 1 Million Founders", location: "" },
       { time: "6:25 – 7:55 PM", type: "Signature", title: "How Learning Actually Happens (90 min)", speaker: "Umes Shrestha", location: "" },
       { time: "8:00 – 8:30 PM", type: "Experience", title: "Musical Soiree", speaker: "", location: "" },
       { time: "8:30 PM onward", type: "Social", title: "Live Music & Dinner", speaker: "", location: "" }
@@ -350,29 +350,29 @@ const cmsData = {
     Day2: [
       { time: "7:30 – 8:30 AM", type: "Move", title: "Yoga", speaker: "", location: "" },
       { time: "8:45 – 9:45 AM", type: "Meal", title: "Breakfast", speaker: "", location: "" },
-      { time: "9:45 – 10:45 AM", type: "Address", title: "You Can Make It Happen (40 min + 20 min Q&A)", speaker: "Anil Swarup — Former Secretary, School Education, GoI", location: "" },
-      { time: "10:45 – 11:15 AM", type: "Signature", title: "Design for Change", speaker: "Kiran Bir Sethi — Founder, Riverside School and Design for Change", location: "" },
+      { time: "9:45 – 10:45 AM", type: "Address", title: "You Can Make It Happen (40 min + 20 min Q&A)", speaker: "Anil Swarup - Former Secretary, School Education, GoI", location: "" },
+      { time: "10:45 – 11:15 AM", type: "Signature", title: "Design for Change", speaker: "Kiran Bir Sethi - Founder, Riverside School and Design for Change", location: "" },
       { time: "11:15 – 11:45 AM", type: "Break", title: "Tea", speaker: "", location: "" },
-      { time: "11:45 AM – 12:20 PM", type: "Students", title: "Students Take Over (35 min)", speaker: "Lakshmi Kumar — Director, Avasara Academy (moderator)", location: "" },
+      { time: "11:45 AM – 12:20 PM", type: "Students", title: "Students Take Over (35 min)", speaker: "Lakshmi Kumar - Director, Avasara Academy (moderator)", location: "" },
       { time: "12:20 – 1:20 PM", type: "Meal", title: "Lunch", speaker: "", location: "" },
-      { time: "1:20 – 1:50 PM", type: "Signature", title: "Design Thinking for Schools", speaker: "Sanjay Jain — Head of Google for Education, India", location: "" },
-      { time: "1:50 – 3:50 PM", type: "Tracks", title: "Parallel Tracks — Building (founders only) & Learning (open to all)", speaker: "Parimal Merchant · Aneesh Bangia · Preethi Vikram & others", location: "" },
+      { time: "1:20 – 1:50 PM", type: "Signature", title: "Design Thinking for Schools", speaker: "Sanjay Jain - Head of Google for Education, India", location: "" },
+      { time: "1:50 – 3:50 PM", type: "Tracks", title: "Parallel Tracks - Building (founders only) & Learning (open to all)", speaker: "Parimal Merchant · Aneesh Bangia · Preethi Vikram & others", location: "" },
       { time: "3:50 – 4:05 PM", type: "Break", title: "Tea", speaker: "", location: "" },
       { time: "4:05 – 5:35 PM", type: "Signature", title: "Playful Classrooms (90 min, whole room)", speaker: "Mrunal Shah", location: "" },
-      { time: "5:35 – 7:05 PM", type: "Signature", title: "Every Child, Across the Range (90 min, whole-room reconvene)", speaker: "Manjushree Patil — Founder Director, Aatman Academy", location: "" },
+      { time: "5:35 – 7:05 PM", type: "Signature", title: "Every Child, Across the Range (90 min, whole-room reconvene)", speaker: "Manjushree Patil - Founder Director, Aatman Academy", location: "" },
       { time: "After 7:05 PM", type: "Experience", title: "Free Evening: Imagicaa Experience → Night Social", speaker: "", location: "" }
     ],
     Day3: [
       { time: "7:00 – 7:30 AM", type: "Move", title: "Yoga", speaker: "", location: "" },
       { time: "7:45 – 8:15 AM", type: "Logistics", title: "Luggage Out & Breakfast", speaker: "", location: "" },
-      { time: "8:15 – 8:45 AM", type: "Address", title: "Built by One Generation, Reimagined by the Next", speaker: "Dr Ganesh Natarajan — Former Chairman, NASSCOM", location: "" },
-      { time: "8:45 – 9:15 AM", type: "Address", title: "A View From Outside", speaker: "Russell John Cailey — CEO & Founder, Almach AI", location: "" },
-      { time: "9:15 – 9:45 AM", type: "Address", title: "The Indian Classroom at a Crossroads", speaker: "Dr Swati Popat Vats — President, ECA & Podar Education Network", location: "" },
-      { time: "9:45 – 10:45 AM", type: "Showcase", title: "The 5% Showcase — Ten schools, five minutes each", speaker: "", location: "" },
+      { time: "8:15 – 8:45 AM", type: "Address", title: "Built by One Generation, Reimagined by the Next", speaker: "Dr Ganesh Natarajan - Former Chairman, NASSCOM", location: "" },
+      { time: "8:45 – 9:15 AM", type: "Address", title: "A View From Outside", speaker: "Russell John Cailey - CEO & Founder, Almach AI", location: "" },
+      { time: "9:15 – 9:45 AM", type: "Address", title: "The Indian Classroom at a Crossroads", speaker: "Dr Swati Popat Vats - President, ECA & Podar Education Network", location: "" },
+      { time: "9:45 – 10:45 AM", type: "Showcase", title: "The 5% Showcase - Ten schools, five minutes each", speaker: "", location: "" },
       { time: "10:45 – 11:05 AM", type: "Break", title: "Break", speaker: "", location: "" },
       { time: "11:05 – 11:35 AM", type: "Build", title: "When I Go Back...", speaker: "", location: "" },
       { time: "11:35 AM – 12:00 PM", type: "Close", title: "Closing: What We Heard Adults Say (25 min)", speaker: "", location: "" },
-      { time: "12:00 PM", type: "Close", title: "Checkout — hard noon stop", speaker: "", location: "" }
+      { time: "12:00 PM", type: "Close", title: "Checkout - hard noon stop", speaker: "", location: "" }
     ]
   },
   registration: [
@@ -473,7 +473,7 @@ const cmsData = {
       color: "magenta"
     },
     {
-      quote: "The Principal Roundtables were incredibly rich. Hearing fellow leaders tackle the exact same hurdles—like teacher retention and parent alignment—helped me find immediate, workable solutions.",
+      quote: "The Principal Roundtables were incredibly rich. Hearing fellow leaders tackle the exact same hurdles-like teacher retention and parent alignment-helped me find immediate, workable solutions.",
       author: "Sister Mary D'Souza",
       role: "Principal",
       institution: "St. Jude Academy",
@@ -497,7 +497,7 @@ const cmsData = {
   faqs: [
     {
       question: "Who can attend The Schools of India Summit 2026?",
-      answer: "The Summit is open to everyone in education — school founders, directors and trustees, principals and academic heads, teachers and educators, EdTech founders, and anyone building or working in education."
+      answer: "The Summit is open to everyone in education - school founders, directors and trustees, principals and academic heads, teachers and educators, EdTech founders, and anyone building or working in education."
     },
     {
       question: "Is accommodation included?",
@@ -513,7 +513,7 @@ const cmsData = {
     },
     {
       question: "Can schools register as a group?",
-      answer: "Yes. Schools can register an entire school delegation as well — you'll find that option on the <a href='https://www.tezticket.com/events/TSOIS/sub_events/298' target='_blank' rel='noopener'>registration page</a>."
+      answer: "Yes. Schools can register an entire school delegation as well - you'll find that option on the <a href='https://www.tezticket.com/events/TSOIS/sub_events/298' target='_blank' rel='noopener'>registration page</a>."
     },
     {
       question: "Is parking available, and how do I get to the venue?",
@@ -525,7 +525,7 @@ const cmsData = {
     },
     {
       question: "Will there be takeaways from the sessions?",
-      answer: "Yes — delegates will leave with plenty of practical takeaways from across the three days of the Summit."
+      answer: "Yes - delegates will leave with plenty of practical takeaways from across the three days of the Summit."
     }
   ],
   ctaSection: {
