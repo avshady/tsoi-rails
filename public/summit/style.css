@@ -812,6 +812,84 @@ a {
   pointer-events: none;
 }
 
+.flow-strip {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.flow-strip-text {
+  display: inline-block;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 9999px;
+  padding: 0.85rem 2.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-cyan);
+  text-align: center;
+}
+
+.flow-schedule-btn {
+  font-size: 0.9rem;
+  padding: 0.8rem 2rem;
+}
+
+/* ----------------------------------------------------
+   FEATURED SPEAKERS LIST
+   ---------------------------------------------------- */
+.speakers-list-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .speakers-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .speakers-list-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.speaker-list-entry {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-glow);
+}
+
+.speaker-list-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: var(--bg-card);
+}
+
+.speaker-list-info { flex: 1; min-width: 0; }
+
+.speaker-list-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 0.15rem;
+  line-height: 1.3;
+}
+
+.speaker-list-role {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
 /* ----------------------------------------------------
    FORMATS SECTION
    ---------------------------------------------------- */
