@@ -414,6 +414,7 @@ a {
   height: 44px;
   opacity: 1;
   filter: none;
+  mix-blend-mode: multiply;
 }
 
 .featured-logo-img.is-square {
