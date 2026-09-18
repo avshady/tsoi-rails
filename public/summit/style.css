@@ -415,6 +415,19 @@ a {
   height: 56px;
 }
 
+#partners .partner-lg {
+  height: 90px;
+}
+
+.partners-track {
+  animation-name: marquee-partners;
+}
+
+@keyframes marquee-partners {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
 .featured-logo-img.is-square {
   height: 52px;
 }
