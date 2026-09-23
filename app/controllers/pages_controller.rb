@@ -243,6 +243,12 @@ class PagesController < ApplicationController
     render layout: false
   end
 
+  def registration
+    render layout: false
+  end
+
+  ATTRIBUTION_PARAM_KEYS = %w[utm_source utm_medium utm_campaign utm_content utm_term fbclid li_fat_id page_section].freeze
+
   def summit_notify
     email        = params[:email].to_s.strip
     name         = params[:name].to_s.strip
@@ -252,20 +258,28 @@ class PagesController < ApplicationController
     designation  = params[:designation].to_s.strip
     pass_id      = params[:passId].to_s.strip
 
-    newsletter = role == "Newsletter Subscriber"
-    sponsor    = pass_id == "sponsor"
-    callback   = pass_id == "callback"
-    schedule   = pass_id == "schedule"
+    newsletter   = role == "Newsletter Subscriber"
+    sponsor      = pass_id == "sponsor"
+    callback     = pass_id == "callback"
+    schedule     = pass_id == "schedule"
+    registration = pass_id == "registration"
+
+    attribution = ATTRIBUTION_PARAM_KEYS.filter_map do |key|
+      value = params[key].to_s.strip
+      "#{key}: #{value}" if value.present?
+    end
 
     parts = []
     parts << "Role: #{role}"               if role.present? && !newsletter
     parts << "Designation: #{designation}" if designation.present?
-    parts << "Pass: #{pass_id}"            if pass_id.present? && !sponsor && !callback && !schedule
+    parts << "Pass: #{pass_id}"            if pass_id.present? && !sponsor && !callback && !schedule && !registration
+    parts.concat(attribution)
 
     service = if newsletter then "Summit Newsletter"
     elsif sponsor then "Summit Sponsorship"
     elsif callback then "Summit Callback Request"
     elsif schedule then "Summit Schedule Download"
+    elsif registration then "Summit Registration Landing"
     else "Summit Registration"
     end
 
@@ -289,14 +303,14 @@ class PagesController < ApplicationController
       "Subscribed! We'll keep you updated."
     elsif sponsor
       "Thanks #{first_name}! Our partnerships team will be in touch about sponsorship shortly."
-    elsif callback
+    elsif callback || registration
       "Thanks #{first_name}! We'll call you back shortly."
     else
       "Welcome, #{first_name}! You're on our priority list."
     end
-    redirect_to summit_path
+    redirect_to(registration ? "/registration" : summit_path)
   rescue => e
     flash[:notice] = "You're on our priority list — we'll be in touch soon."
-    redirect_to summit_path
+    redirect_to(params[:passId].to_s.strip == "registration" ? "/registration" : summit_path)
   end
 end

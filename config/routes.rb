@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/privacy",     to: "pages#privacy"
   get "/recognition", to: "pages#recognition"
   get "/summit",      to: "pages#summit"
+  get "/registration", to: "pages#registration"
 
   # Blog
   get "/blog",        to: "posts#index", as: :blog
