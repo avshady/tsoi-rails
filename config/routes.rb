@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "/recognition", to: "pages#recognition"
   get "/summit",      to: "pages#summit"
   get "/registration", to: "pages#registration"
+  get "/thank-you",    to: "pages#thank_you"
 
   # Blog
   get "/blog",        to: "posts#index", as: :blog

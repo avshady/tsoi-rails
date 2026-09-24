@@ -247,6 +247,10 @@ class PagesController < ApplicationController
     render layout: false
   end
 
+  def thank_you
+    render layout: false
+  end
+
   ATTRIBUTION_PARAM_KEYS = %w[utm_source utm_medium utm_campaign utm_content utm_term fbclid li_fat_id page_section].freeze
 
   def summit_notify
@@ -299,18 +303,31 @@ class PagesController < ApplicationController
     end
 
     first_name = name.split.first.presence || "You"
-    flash[:notice] = if newsletter
-      "Subscribed! We'll keep you updated."
-    elsif sponsor
+
+    if newsletter
+      flash[:notice] = "Subscribed! We'll keep you updated."
+      redirect_to summit_path
+      return
+    end
+
+    flash[:notice] = if sponsor
       "Thanks #{first_name}! Our partnerships team will be in touch about sponsorship shortly."
     elsif callback || registration
       "Thanks #{first_name}! We'll call you back shortly."
     else
       "Welcome, #{first_name}! You're on our priority list."
     end
-    redirect_to(registration ? "/registration" : summit_path)
+    flash[:back_path]  = registration ? "/registration" : summit_path
+    flash[:back_label] = registration ? "Back to Registration" : "Back to the Summit"
+    redirect_to "/thank-you"
   rescue => e
-    flash[:notice] = "You're on our priority list — we'll be in touch soon."
-    redirect_to(params[:passId].to_s.strip == "registration" ? "/registration" : summit_path)
+    if params[:passId].to_s.strip == "schedule"
+      redirect_to "/summit/collaterals/schedule_full.html"
+      return
+    end
+    flash[:notice]     = "You're on our priority list — we'll be in touch soon."
+    flash[:back_path]  = params[:passId].to_s.strip == "registration" ? "/registration" : summit_path
+    flash[:back_label] = params[:passId].to_s.strip == "registration" ? "Back to Registration" : "Back to the Summit"
+    redirect_to "/thank-you"
   end
 end
