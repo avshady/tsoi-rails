@@ -487,13 +487,21 @@ if (regDialog) {
   });
 }
 
-// Wire all "#registration" anchor links to open the modal directly
-document.querySelectorAll('a[href="#registration"]').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    openRegistrationModal('', 'Register Interest');
+// Wire all "#registration" anchor links to open the modal directly.
+// MUST run after renderPage(): setCta() rewrites the href of CMS-driven CTA
+// buttons (e.g. #cta-banner-primary ships as href="#registration" and becomes
+// the TezTicket URL). Binding before the render attached this listener to those
+// buttons, and its preventDefault() then swallowed the click — the link looked
+// external but opened the modal. Binding after the render means only anchors
+// still genuinely pointing at "#registration" get the modal.
+function wireRegistrationAnchors() {
+  document.querySelectorAll('a[href="#registration"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      openRegistrationModal('', 'Register Interest');
+    });
   });
-});
+}
 
 // Hamburger menu navigation trigger
 const hamburger = document.getElementById('hamburger-btn');
@@ -549,6 +557,7 @@ async function hydrateFromServer() {
 document.addEventListener('DOMContentLoaded', async () => {
   await hydrateFromServer();
   renderPage(window.currentCmsData);
+  wireRegistrationAnchors();
   setupScheduleFilters();
 });
 
