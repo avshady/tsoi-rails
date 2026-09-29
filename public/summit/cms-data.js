@@ -549,7 +549,6 @@ const cmsData = {
       { name: "YouTube", url: "https://youtube.com", icon: "youtube" }
     ],
     links: [
-      { text: "About the Summit", url: "#intro" },
       { text: "Sponsors & Partners", url: "#partners" },
       { text: "FAQs", url: "#faqs" },
       { text: "Privacy Policy", url: "#privacy" },
