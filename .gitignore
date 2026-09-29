@@ -32,3 +32,6 @@
 
 # Local bundle install (see bundle config path)
 /vendor/bundle
+
+# macOS Finder metadata
+.DS_Store

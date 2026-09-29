@@ -43,3 +43,6 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
+
+# Design source files (originals only, never served)
+/_source-assets/
