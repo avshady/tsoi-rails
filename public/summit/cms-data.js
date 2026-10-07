@@ -2,8 +2,8 @@ const cmsData = {
   hero: {
     headline: "For the People Building What Education Becomes Next",
     subheadline: "Three days where the generation that built Indian education, the generation that will lead it, and the students experiencing it sit at the same table.",
-    dates: "30<sup>th</sup> & 31<sup>st</sup> October • 1<sup>st</sup> November 2026",
-    location: "Novotel Imagicaa, Khopoli",
+    dates: "Date &amp; venue to be announced soon",
+    location: "Venue to be announced soon",
     ctaPrimary: {
       text: "Register Now",
       action: "https://www.tezticket.com/events/TSOIS/sub_events/298"
@@ -118,21 +118,21 @@ const cmsData = {
     title: "Every Child Can Flourish.",
     days: [
       {
-        day: "30<sup>th</sup> Oct - WHY",
+        day: "Day 1 - WHY",
         theme: "Why Schools Must Change",
-        description: "Arrivals, the opening film 'The Child of 2040', and the Opening Debate - 'Schooling Should Not Take Fifteen Years.'",
+        description: "Full programme to be announced soon.",
         color: "violet"
       },
       {
-        day: "31<sup>st</sup> Oct - HOW",
+        day: "Day 2 - HOW",
         theme: "Building the Future School",
-        description: "Morning provocations, five tracks - The Future · Build · Learning · People · The 5% - The 5% Showcase, the Innovation Festival, private Imagicaa access, and the Schools of India Gala.",
+        description: "Full programme to be announced soon.",
         color: "magenta"
       },
       {
-        day: "1<sup>st</sup> Nov - NOW WHAT",
+        day: "Day 3 - NOW WHAT",
         theme: "Taking It Home",
-        description: "The 'When I Go Back' 90-Day Action Plan workshop, TSOI Community Launch, and the closing ceremony with The Schools of India Pledge.",
+        description: "Full programme to be announced soon.",
         color: "lime"
       }
     ]
@@ -325,55 +325,17 @@ const cmsData = {
     { title: "School Services", desc: "Branding agencies, enrollment consultants, and bus fleet trackers." }
   ],
   venue: {
-    name: "Novotel, Imagicaa, Khopoli",
-    city: "Maharashtra, India",
-    parking: "Ample free parking available on-site at the Imagicaa resort complex.",
-    hotels: "Delegates may book rooms directly at Novotel Imagicaa Khopoli - special Summit rates available on request.",
-    travel: "Approx. 80 km from Mumbai. Accessible via Mumbai-Pune Expressway, Exit Khopoli. Shuttle services from Mumbai planned.",
-    mapPlaceholder: "Interactive Map Location: 18.7815° N, 73.3211° E"
+    name: "Venue to be announced soon",
+    city: "",
+    parking: "",
+    hotels: "",
+    travel: "",
+    mapPlaceholder: ""
   },
   schedule: {
-    Day1: [
-      { time: "12:00 PM", type: "Logistics", title: "Arrival & Check-In", speaker: "", location: "" },
-      { time: "1:00 – 1:45 PM", type: "Meal", title: "Lunch", speaker: "", location: "" },
-      { time: "2:00 – 2:30 PM", type: "Logistics", title: "Doors Open, Guest Seating", speaker: "", location: "" },
-      { time: "2:30 – 3:00 PM", type: "Experience", title: "Opening Performance", speaker: "Dhruv Global School Students", location: "" },
-      { time: "3:00 – 3:30 PM", type: "Address", title: "Why We Built This", speaker: "Sanjay Malpani - Director, Malpani Group; President, Geeta Parivaar", location: "" },
-      { time: "3:30 – 4:00 PM", type: "Address", title: "What Leadership Actually Looks Like", speaker: "Seetha Murty - President, Heads Association of IB World Schools, India", location: "" },
-      { time: "4:00 – 4:30 PM", type: "Break", title: "Tea", speaker: "", location: "" },
-      { time: "4:30 – 5:45 PM", type: "Workshop", title: "Pre-Summit Workshop: The Reflective School", speaker: "Devika Nadig - Shikshangan", location: "" },
-      { time: "5:45 – 6:25 PM", type: "Address", title: "We Failed First - And Here's What It Taught Us", speaker: "Arun Bhati - Founder & CEO, Orahi and 1 Million Founders", location: "" },
-      { time: "6:25 – 7:55 PM", type: "Signature", title: "How Learning Actually Happens (90 min)", speaker: "Umes Shrestha", location: "" },
-      { time: "8:00 – 8:30 PM", type: "Experience", title: "Musical Soiree", speaker: "", location: "" },
-      { time: "8:30 PM onward", type: "Social", title: "Live Music & Dinner", speaker: "", location: "" }
-    ],
-    Day2: [
-      { time: "7:30 – 8:30 AM", type: "Move", title: "Yoga", speaker: "", location: "" },
-      { time: "8:45 – 9:45 AM", type: "Meal", title: "Breakfast", speaker: "", location: "" },
-      { time: "9:45 – 10:45 AM", type: "Address", title: "You Can Make It Happen (40 min + 20 min Q&A)", speaker: "Anil Swarup - Former Secretary, School Education, GoI", location: "" },
-      { time: "10:45 – 11:15 AM", type: "Signature", title: "Design for Change", speaker: "Kiran Bir Sethi - Founder, Riverside School and Design for Change", location: "" },
-      { time: "11:15 – 11:45 AM", type: "Break", title: "Tea", speaker: "", location: "" },
-      { time: "11:45 AM – 12:20 PM", type: "Students", title: "Students Take Over (35 min)", speaker: "Lakshmi Kumar - Director, Avasara Academy (moderator)", location: "" },
-      { time: "12:20 – 1:20 PM", type: "Meal", title: "Lunch", speaker: "", location: "" },
-      { time: "1:20 – 1:50 PM", type: "Signature", title: "Design Thinking for Schools", speaker: "Sanjay Jain - Head of Google for Education, India", location: "" },
-      { time: "1:50 – 3:50 PM", type: "Tracks", title: "Parallel Tracks - Building (founders only) & Learning (open to all)", speaker: "Parimal Merchant · Aneesh Bangia · Preethi Vikram & others", location: "" },
-      { time: "3:50 – 4:05 PM", type: "Break", title: "Tea", speaker: "", location: "" },
-      { time: "4:05 – 5:35 PM", type: "Signature", title: "Playful Classrooms (90 min, whole room)", speaker: "Mrunal Shah", location: "" },
-      { time: "5:35 – 7:05 PM", type: "Signature", title: "Every Child, Across the Range (90 min, whole-room reconvene)", speaker: "Manjushree Patil - Founder Director, Aatman Academy", location: "" },
-      { time: "After 7:05 PM", type: "Experience", title: "Free Evening: Imagicaa Experience → Night Social", speaker: "", location: "" }
-    ],
-    Day3: [
-      { time: "7:00 – 7:30 AM", type: "Move", title: "Yoga", speaker: "", location: "" },
-      { time: "7:45 – 8:15 AM", type: "Logistics", title: "Luggage Out & Breakfast", speaker: "", location: "" },
-      { time: "8:15 – 8:45 AM", type: "Address", title: "Built by One Generation, Reimagined by the Next", speaker: "Dr Ganesh Natarajan - Former Chairman, NASSCOM", location: "" },
-      { time: "8:45 – 9:15 AM", type: "Address", title: "A View From Outside", speaker: "Russell John Cailey - CEO & Founder, Almach AI", location: "" },
-      { time: "9:15 – 9:45 AM", type: "Address", title: "The Indian Classroom at a Crossroads", speaker: "Dr Swati Popat Vats - President, ECA & Podar Education Network", location: "" },
-      { time: "9:45 – 10:45 AM", type: "Showcase", title: "The 5% Showcase - Ten schools, five minutes each", speaker: "", location: "" },
-      { time: "10:45 – 11:05 AM", type: "Break", title: "Break", speaker: "", location: "" },
-      { time: "11:05 – 11:35 AM", type: "Build", title: "When I Go Back...", speaker: "", location: "" },
-      { time: "11:35 AM – 12:00 PM", type: "Close", title: "Closing: What We Heard Adults Say (25 min)", speaker: "", location: "" },
-      { time: "12:00 PM", type: "Close", title: "Checkout - hard noon stop", speaker: "", location: "" }
-    ]
+    Day1: [],
+    Day2: [],
+    Day3: []
   },
   registration: [
     {
@@ -501,7 +463,7 @@ const cmsData = {
     },
     {
       question: "Is accommodation included?",
-      answer: "Yes. Hotel accommodation is included for delegates at Novotel Imagicaa, Khopoli."
+      answer: "Yes. Hotel accommodation is included for delegates."
     },
     {
       question: "Will delegates receive a participation kit?",
@@ -517,7 +479,7 @@ const cmsData = {
     },
     {
       question: "Is parking available, and how do I get to the venue?",
-      answer: "Yes, parking is available at the venue. Transfers are also covered from the nearest airports, so you're taken care of on arrival."
+      answer: "The venue will be announced soon. Parking and travel details will be shared along with it."
     },
     {
       question: "Can I transfer my ticket to someone else?",
@@ -531,7 +493,7 @@ const cmsData = {
   ctaSection: {
     title: "Ready to Shape the Future of Education?",
     subheadline: "Join hundreds of educators, founders, principals, and innovators for three transformative days of learning and collaboration.",
-    dates: "30<sup>th</sup> & 31<sup>st</sup> October • 1<sup>st</sup> November 2026",
+    dates: "Date &amp; venue to be announced soon",
     ctaPrimary: { text: "Register Now", action: "https://www.tezticket.com/events/TSOIS/sub_events/298" },
     ctaSecondary: { text: "Become a Sponsor", action: "#sponsor" }
   },
