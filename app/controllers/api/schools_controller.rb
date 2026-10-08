@@ -11,8 +11,8 @@ module Api
 
     # Boards shown as distinct pills in the sidebar.
     # Everything NOT in this list is treated as "State Board".
-    CURATED_BOARDS   = [ "State Board", "ICSE", "IB", "CBSE", "IGCSE" ].freeze
-    NON_STATE_BOARDS = %w[CBSE ICSE IB IGCSE Cambridge NIOS].freeze
+    CURATED_BOARDS   = [ "State Board", "ICSE", "IB", "CBSE", "IGCSE", "Preschool" ].freeze
+    NON_STATE_BOARDS = %w[CBSE ICSE IB IGCSE Cambridge NIOS Preschool].freeze
 
     def index
       page     = [ params[:page].to_i, 1 ].max
@@ -49,23 +49,15 @@ module Api
       # city param maps to district column — UDISE stores ward names in city, districts are real city names
       scope = scope.where("district LIKE ?", "%#{city}%")                if city.present?
 
-      # Board filtering: "State Board" expands to every board that is NOT
-      # one of the curated main boards (CBSE/ICSE/IB/IGCSE/Cambridge/NIOS).
+      # Board filtering. A school can hold several boards ("CBSE, IGCSE"), so a
+      # board matches any entry in that list. "State Board" means none of the
+      # main boards (CBSE/ICSE/IB/IGCSE/Cambridge/NIOS/Preschool) is listed.
       if boards.any?
-        specific     = boards - [ "State Board" ]
-        state_board  = boards.include?("State Board")
-
-        if specific.any? && state_board
-          # e.g. CBSE + State Board → board IN ('CBSE') OR board NOT IN (main list)
-          scope = scope.where(
-            "board IN (?) OR board NOT IN (?)", specific, NON_STATE_BOARDS
-          )
-        elsif specific.any?
-          scope = scope.where(board: specific)
-        else
-          # Only "State Board" selected
-          scope = scope.where.not(board: NON_STATE_BOARDS)
+        clauses = (boards - [ "State Board" ]).map { |b| board_listed_sql(b) }
+        if boards.include?("State Board")
+          clauses << "NOT (#{NON_STATE_BOARDS.map { |b| board_listed_sql(b) }.join(' OR ')})"
         end
+        scope = scope.where(clauses.map { |c| "(#{c})" }.join(" OR "))
       end
 
       scope = scope.where(type: types)   if types.any?
@@ -126,6 +118,15 @@ module Api
     end
 
     private
+
+    # True when `board` is one of the comma-separated entries in the board column.
+    def board_listed_sql(board)
+      like = School.sanitize_sql_like(board)
+      School.sanitize_sql_array([
+        "(board = ? OR board LIKE ? OR board LIKE ? OR board LIKE ?)",
+        board, "#{like}, %", "%, #{like}", "%, #{like}, %"
+      ])
+    end
 
     def set_cors_headers
       response.headers["Access-Control-Allow-Origin"] = "*"

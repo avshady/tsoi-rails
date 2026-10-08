@@ -3,7 +3,8 @@ class SchoolsController < ApplicationController
 
   def index
     @states  = School.distinct.order(:state).pluck(:state).compact.reject(&:blank?)
-    @boards  = School.distinct.order(:board).pluck(:board).compact.reject(&:blank?)
+    @boards  = School.distinct.pluck(:board).compact
+                     .flat_map { |b| b.split(",").map(&:strip) }.reject(&:blank?).uniq.sort
     @types   = School.distinct.order(:type).pluck(:type).compact.reject(&:blank?)
     @genders = School.distinct.order(:gender).pluck(:gender).compact.reject(&:blank?)
 

@@ -49,7 +49,9 @@
         <div>
           <label class="pf-label">Board / Affiliation</label>
           <select class="pf-select" name="school[board]">
-            <% %w[CBSE ICSE IB State\ Board IGCSE Cambridge Other].each do |b| %>
+            <% board_options = %w[CBSE ICSE IB State\ Board IGCSE Cambridge Preschool Other] %>
+            <% board_options.unshift(@school.board) if @school.board.present? && !board_options.include?(@school.board) %>
+            <% board_options.each do |b| %>
               <option value="<%= b %>" <%= 'selected' if @school.board == b %>><%= b %></option>
             <% end %>
           </select>
