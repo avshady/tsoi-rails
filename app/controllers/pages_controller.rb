@@ -24,12 +24,31 @@ class PagesController < ApplicationController
   end
 
   def parents
-    @total_schools = School.count
-    @states     = School.distinct.order(:state).pluck(:state).compact.reject(&:blank?)
-    counts = School.where(district: MAJOR_CITIES).group(:district).count
-    @top_cities = MAJOR_CITIES.select { |c| counts[c].to_i > 0 }
-                               .sort_by { |c| -counts.fetch(c, 0) }
-                               .first(10)
+    @total_schools = School.listing_total
+    @states        = School.listing_states
+    major          = MAJOR_CITIES.filter_map { |c| SchoolPlace.find(c) }
+    counts         = School.place_counts(major)
+    @top_places    = major.select { |p| counts[p.name].to_i > 0 }
+                          .sort_by { |p| -counts[p.name] }
+                          .first(10)
+
+    # The location the visitor last picked or was detected in (set by the page).
+    # "all" means they chose all of India, so the page does not detect again.
+    saved = cookies[:tsoi_location].to_s
+    kind, value = saved.split(":", 2)
+    @location = if kind == "place" && (place = SchoolPlace.find(value))
+      { value: place.value, label: place.name }
+    elsif kind == "state" && @states.include?(value)
+      { value: saved, label: value }
+    end
+    @detect_location = @location.nil? && saved != "all"
+
+    search_params = {}
+    search_params[kind.to_sym] = value if @location
+    @initial_data = {
+      results: SchoolSearch.new(search_params).as_json,
+      filters: { boards: SchoolSearch::CURATED_BOARDS, types: School.listing_types }
+    }
   end
 
   SERVICES_DATA = {

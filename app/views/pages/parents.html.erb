@@ -57,16 +57,22 @@
         <label style="display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin-bottom:8px; opacity:0.5;">City or Region</label>
         <div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:8px;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.4; flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <select id="locationFilter" onchange="applyFilters()" style="flex:1; border:none; outline:none; font-size:1.125rem; font-family:Playfair Display,Georgia,serif; background:transparent; color:#5F1219; cursor:pointer; appearance:none; min-width:0;">
+          <select id="locationFilter" onchange="onLocationChange()" style="flex:1; border:none; outline:none; font-size:1.125rem; font-family:Playfair Display,Georgia,serif; background:transparent; color:#5F1219; cursor:pointer; appearance:none; min-width:0;">
             <option value="">Anywhere in India</option>
+            <% top_values = @top_places.map(&:value) + @states.map { |s| "state:#{s}" } %>
+            <% if @location && !top_values.include?(@location[:value]) %>
+              <optgroup label="Near You" id="nearYouGroup">
+                <option value="<%= @location[:value] %>" selected><%= @location[:label] %></option>
+              </optgroup>
+            <% end %>
             <optgroup label="Top Cities">
-              <% @top_cities.each do |city| %>
-                <option value="district:<%= city %>"><%= city %></option>
+              <% @top_places.each do |place| %>
+                <option value="<%= place.value %>" <%= 'selected' if @location&.dig(:value) == place.value %>><%= place.name %></option>
               <% end %>
             </optgroup>
             <optgroup label="Browse by State">
               <% @states.each do |s| %>
-                <option value="state:<%= s %>"><%= s %></option>
+                <option value="state:<%= s %>" <%= 'selected' if @location&.dig(:value) == "state:#{s}" %>><%= s %></option>
               <% end %>
             </optgroup>
           </select>
@@ -120,6 +126,11 @@
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:8px;">
         <h2 id="resultsCount" style="font-family:Playfair Display,Georgia,serif; font-size:1.25rem; color:#5F1219; margin:0;">Loading schools…</h2>
         <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.5;">Sorted by Relevance</div>
+      </div>
+      <div id="locationNote" style="display:none; align-items:center; gap:8px; flex-wrap:wrap; font-size:12px; color:rgba(26,26,26,0.7); margin:-0.75rem 0 1.25rem;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#821E25" stroke-width="2" style="flex-shrink:0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span id="locationNoteText"></span>
+        <button id="locationNoteAll" type="button" onclick="showAllIndia()" style="display:none; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:#821E25; background:none; border:none; border-bottom:1px solid #821E25; padding:0 0 1px; cursor:pointer; font-family:inherit;">Show all of India</button>
       </div>
       <div id="schoolCards" style="display:flex; flex-direction:column; gap:1.5rem;"></div>
       <div id="loadingState" style="display:flex; align-items:center; justify-content:center; padding:4rem; gap:12px; opacity:0.4;">
@@ -242,7 +253,10 @@
 }
 </style>
 
+<script type="application/json" id="parentsInitialData"><%= json_escape(@initial_data.to_json).html_safe %></script>
 <script>
+var detectLocation = <%= @detect_location ? 'true' : 'false' %>;
+var initialLocation = <%= json_escape((@location && @location[:label]).to_json).html_safe %>;
 var selectedBoards = [];
 var selectedTypes  = [];
 var maxFee         = null;
@@ -252,29 +266,86 @@ var isLoading      = false;
 var searchTimer    = null;
 var compareIds     = [];   // max 3
 
+// The first page of results (for the visitor's saved location, if any) and the
+// filter options come with the page, so nothing waits on a second request.
 document.addEventListener('DOMContentLoaded', function() {
-  loadFilters();
-  loadSchools(true);
+  var initial = JSON.parse(document.getElementById('parentsInitialData').textContent);
+  renderFilters(initial.filters);
+  renderResults(initial.results, true);
+  if (initialLocation) showLocationNote('Showing schools in ' + initialLocation, true);
+  if (detectLocation) locateVisitor();
 });
 
-function loadFilters() {
-  fetch('/api/schools/filters')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      renderCheckboxGroup('boardFilters', data.boards, selectedBoards, function(v) {
-        var idx = selectedBoards.indexOf(v);
-        if (idx > -1) selectedBoards.splice(idx, 1);
-        else selectedBoards.push(v);
-        applyFilters();
-      });
-      renderCheckboxGroup('typeFilters', data.types, selectedTypes, function(v) {
-        var idx = selectedTypes.indexOf(v);
-        if (idx > -1) selectedTypes.splice(idx, 1);
-        else selectedTypes.push(v);
-        applyFilters();
-      });
-    });
+function renderFilters(data) {
+  renderCheckboxGroup('boardFilters', data.boards, selectedBoards, function(v) {
+    var idx = selectedBoards.indexOf(v);
+    if (idx > -1) selectedBoards.splice(idx, 1);
+    else selectedBoards.push(v);
+    applyFilters();
+  });
+  renderCheckboxGroup('typeFilters', data.types, selectedTypes, function(v) {
+    var idx = selectedTypes.indexOf(v);
+    if (idx > -1) selectedTypes.splice(idx, 1);
+    else selectedTypes.push(v);
+    applyFilters();
+  });
 }
+
+// ── Location: ask the browser where the visitor is, show schools there, and
+// remember the place (or their own pick) for the next visit. ──
+var locationTouched = false;
+
+function locateVisitor() {
+  if (!navigator.geolocation) return;
+  showLocationNote('Finding schools near you…', false);
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    if (locationTouched) return;
+    loadSchools(true, { lat: pos.coords.latitude.toFixed(3), lon: pos.coords.longitude.toFixed(3) });
+  }, function() {
+    if (!locationTouched) hideLocationNote();
+  }, { timeout: 10000, maximumAge: 3600000 });
+}
+
+function onDetectedLocation(loc) {
+  var select = document.getElementById('locationFilter');
+  if (!select.querySelector('option[value="' + CSS.escape(loc.value) + '"]')) {
+    var group = document.createElement('optgroup');
+    group.label = 'Near You';
+    var opt = document.createElement('option');
+    opt.value = loc.value; opt.textContent = loc.label;
+    group.appendChild(opt);
+    select.insertBefore(group, select.options[1] ? select.options[1].parentNode : null);
+  }
+  select.value = loc.value;
+  saveLocation(loc.value);
+  showLocationNote('Showing schools near ' + loc.label, true);
+}
+
+function onLocationChange() {
+  locationTouched = true;
+  var select = document.getElementById('locationFilter');
+  saveLocation(select.value || 'all');
+  if (select.value) showLocationNote('Showing schools in ' + select.options[select.selectedIndex].text, true);
+  else hideLocationNote();
+  applyFilters();
+}
+
+function showAllIndia() {
+  document.getElementById('locationFilter').value = '';
+  onLocationChange();
+}
+
+function saveLocation(value) {
+  document.cookie = 'tsoi_location=' + encodeURIComponent(value) + '; path=/; max-age=' + (60 * 60 * 24 * 90) + '; SameSite=Lax';
+}
+
+function showLocationNote(text, canShowAll) {
+  document.getElementById('locationNoteText').textContent = text;
+  document.getElementById('locationNoteAll').style.display = canShowAll ? 'inline' : 'none';
+  document.getElementById('locationNote').style.display = 'flex';
+}
+
+function hideLocationNote() { document.getElementById('locationNote').style.display = 'none'; }
 
 function renderCheckboxGroup(containerId, items, selectedArr, onToggle) {
   var container = document.getElementById(containerId);
@@ -326,6 +397,7 @@ function clearAllFilters() {
   selectedBoards.length = 0; selectedTypes.length = 0; maxFee = null;
   document.getElementById('searchQ').value = '';
   document.getElementById('locationFilter').value = '';
+  locationTouched = true; saveLocation('all'); hideLocationNote();
   document.getElementById('feeSlider').value = '1500000';
   document.getElementById('feeDisplay').textContent = 'No Limit';
   ['boardFilters','typeFilters'].forEach(function(id) {
@@ -340,8 +412,8 @@ function clearAllFilters() {
   loadSchools(true);
 }
 
-function loadSchools(reset) {
-  if (isLoading) return;
+function loadSchools(reset, coords) {
+  if (isLoading && !reset) return;   // a reset supersedes any request in flight
   if (reset) {
     page = 1;
     document.getElementById('schoolCards').innerHTML = '';
@@ -355,27 +427,48 @@ function loadSchools(reset) {
   var q   = document.getElementById('searchQ').value.trim();
   var loc = document.getElementById('locationFilter').value;
   if (q) params.set('q', q);
-  if (loc.indexOf('district:') === 0) params.set('district', loc.slice(9));
-  else if (loc.indexOf('city:') === 0)  params.set('city',  loc.slice(5));
-  else if (loc.indexOf('state:') === 0) params.set('state', loc.slice(6));
+  if (coords) { params.set('lat', coords.lat); params.set('lon', coords.lon); }
+  else if (loc.indexOf('place:') === 0)    params.set('place',    loc.slice(6));
+  else if (loc.indexOf('district:') === 0) params.set('district', loc.slice(9));
+  else if (loc.indexOf('city:') === 0)     params.set('city',     loc.slice(5));
+  else if (loc.indexOf('state:') === 0)    params.set('state',    loc.slice(6));
   selectedBoards.forEach(function(b) { params.append('board[]', b); });
   selectedTypes.forEach(function(t)  { params.append('type[]',  t); });
   if (maxFee) params.set('fees_max', maxFee);
   params.set('page', page); params.set('per', 24);
+  var requestId = ++latestRequest;
   fetch('/api/schools?' + params.toString())
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      isLoading = false; totalPages = data.pages;
-      document.getElementById('loadingState').style.display = 'none';
-      var count = data.total;
-      document.getElementById('resultsCount').textContent = count.toLocaleString('en-IN') + ' ' + (count===1?'School':'Schools') + ' Found';
-      if (data.schools.length === 0 && page === 1) { document.getElementById('emptyState').style.display = 'flex'; return; }
-      var frag = document.createDocumentFragment();
-      data.schools.forEach(function(s) { frag.appendChild(makeCard(s)); });
-      document.getElementById('schoolCards').appendChild(frag);
-      if (page < totalPages) document.getElementById('loadMoreWrap').style.display = 'block';
+      var stale = requestId !== latestRequest;   // a newer search replaced this one
+      if (coords && !locationTouched) {
+        if (data.location) {
+          onDetectedLocation(data.location);
+          if (stale) { applyFilters(); return; }   // filters changed meanwhile: rerun them for this place
+        } else {
+          hideLocationNote();
+        }
+      }
+      if (stale) return;
+      isLoading = false;
+      renderResults(data, false);
     })
-    .catch(function() { isLoading = false; document.getElementById('loadingState').style.display = 'none'; });
+    .catch(function() { if (requestId === latestRequest) { isLoading = false; document.getElementById('loadingState').style.display = 'none'; } });
+}
+
+var latestRequest = 0;
+
+function renderResults(data, reset) {
+  totalPages = data.pages;
+  if (reset) document.getElementById('schoolCards').innerHTML = '';
+  document.getElementById('loadingState').style.display = 'none';
+  var count = data.total;
+  document.getElementById('resultsCount').textContent = count.toLocaleString('en-IN') + ' ' + (count===1?'School':'Schools') + ' Found';
+  if (data.schools.length === 0 && page === 1) { document.getElementById('emptyState').style.display = 'flex'; return; }
+  var frag = document.createDocumentFragment();
+  data.schools.forEach(function(s) { frag.appendChild(makeCard(s)); });
+  document.getElementById('schoolCards').appendChild(frag);
+  document.getElementById('loadMoreWrap').style.display = page < totalPages ? 'block' : 'none';
 }
 
 function loadMore() { page++; loadSchools(false); }
