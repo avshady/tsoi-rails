@@ -51,6 +51,9 @@ Rails.application.routes.draw do
     # legacy paths
     get  "cities",           to: "schools#cities"
     get  "filters",          to: "schools#filters"
+
+    # Blog publishing API (token auth, see Api::PostsController)
+    resources :posts, param: :slug, only: [ :index, :show, :create, :update, :destroy ]
   end
 
   # Admin (simple, no auth for local dev)
