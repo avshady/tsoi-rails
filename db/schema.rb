@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_08_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_21_000001) do
   create_table "inquiries", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
@@ -28,8 +28,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_000001) do
     t.text "body"
     t.string "category"
     t.string "cover_image"
+    t.string "cover_image_alt"
     t.datetime "created_at", null: false
     t.text "excerpt"
+    t.text "json_ld"
+    t.text "meta_description"
+    t.string "meta_title"
     t.boolean "published", default: false, null: false
     t.datetime "published_at"
     t.string "slug", null: false

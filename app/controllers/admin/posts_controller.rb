@@ -43,14 +43,16 @@ module Admin
 
     private
 
+    # Post#to_param is the slug, so admin URLs carry the slug, not the id.
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find_by(slug: params[:id]) || Post.find(params[:id])
     end
 
     def post_params
       params.require(:post).permit(
-        :title, :slug, :author, :category, :cover_image,
-        :excerpt, :body, :published, :published_at
+        :title, :slug, :author, :category, :cover_image, :cover_image_alt,
+        :excerpt, :body, :published, :published_at,
+        :meta_title, :meta_description, :json_ld
       )
     end
   end

@@ -8,7 +8,7 @@ class UpdateAllAdvisorPhotos < ActiveRecord::Migration[8.1]
     "Russell John Cailey"  => "/summit/assets/advisor_russell.png",
     "Dr. Sanjay Malpani"   => "/summit/assets/advisor_sanjay.png",
     "Dr. Seetha Murty"     => "/summit/assets/advisor_seetha.png",
-    "Dr. Swati Popat Vats" => "/summit/assets/advisor_swati.png",
+    "Dr. Swati Popat Vats" => "/summit/assets/advisor_swati.png"
   }.freeze
 
   def up

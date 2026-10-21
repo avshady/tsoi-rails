@@ -1,10 +1,38 @@
-<% content_for :title, "#{@post.title} — The Schools of India" %>
-<% content_for :description, @post.summary %>
+<% content_for :title, @post.seo_title %>
+<% content_for :description, @post.seo_description %>
+<% content_for :head do %>
+  <link rel="canonical" href="<%= @post.canonical_url %>">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Schools of India">
+  <meta property="og:title" content="<%= @post.meta_title.presence || @post.title %>">
+  <meta property="og:description" content="<%= @post.seo_description %>">
+  <meta property="og:url" content="<%= @post.canonical_url %>">
+  <% if @post.cover_image_url %>
+    <meta property="og:image" content="<%= @post.cover_image_url %>">
+    <meta property="og:image:alt" content="<%= @post.cover_image_alt.presence || @post.title %>">
+    <meta name="twitter:card" content="summary_large_image">
+  <% end %>
+  <%= post_json_ld_tag(@post) %>
+<% end %>
 
 <style>
   body { background:#f4f0e6 !important; }
   .article-body p { font-size:1.15rem; line-height:1.85; color:rgba(0,0,0,0.72); font-weight:300; margin:0 0 1.6rem; }
   .article-body p:first-of-type { font-size:1.3rem; color:rgba(0,0,0,0.8); line-height:1.7; }
+  .article-body h2 { font-family:'Playfair Display',Georgia,serif; font-size:1.85rem; line-height:1.25; color:#1A1A1A; font-weight:700; letter-spacing:-0.02em; margin:3rem 0 1.25rem; }
+  .article-body h3 { font-size:1.3rem; line-height:1.35; color:#1A1A1A; font-weight:700; margin:2.25rem 0 1rem; }
+  .article-body a { color:#821E25; text-decoration:underline; text-underline-offset:3px; }
+  .article-body strong { font-weight:600; color:rgba(0,0,0,0.85); }
+  .article-body ul, .article-body ol { font-size:1.15rem; line-height:1.85; color:rgba(0,0,0,0.72); font-weight:300; margin:0 0 1.6rem; padding-left:1.5rem; }
+  .article-body ul { list-style:disc; }
+  .article-body ol { list-style:decimal; }
+  .article-body li { margin-bottom:0.4rem; }
+  .article-body img { display:block; max-width:100%; height:auto; margin:2.5rem auto; border-radius:4px; }
+  .article-body .table-wrap { overflow-x:auto; margin:0 0 2rem; }
+  .article-body table { width:100%; border-collapse:collapse; font-size:1rem; background:white; border:1px solid rgba(130,30,37,0.25); }
+  .article-body th, .article-body td { text-align:left; padding:0.85rem 1rem; border-bottom:1px solid rgba(0,0,0,0.08); vertical-align:top; }
+  .article-body th { background:#821E25; color:white; font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; }
+  .article-body blockquote { border-left:3px solid #821E25; margin:0 0 1.6rem; padding:0.25rem 0 0.25rem 1.25rem; font-style:italic; }
   .related-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
   .related-card:hover .related-title { color:#821E25; }
   .related-title { transition:color 0.2s; }
@@ -35,7 +63,7 @@
   <% if @post.cover_image.present? %>
     <div class="article-wrap" style="background:#f4f0e6; padding:2.5rem 3rem 0; max-width:820px; margin:0 auto; width:100%;">
       <div style="aspect-ratio:16/9; background:#ddd8d0; overflow:hidden; border-radius:4px;">
-        <img src="<%= @post.cover_image %>" alt="<%= @post.title %>" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.style.display='none'">
+        <img src="<%= @post.cover_image %>" alt="<%= @post.cover_image_alt.presence || @post.title %>" style="width:100%; height:100%; object-fit:cover;" onerror="this.parentElement.style.display='none'">
       </div>
     </div>
   <% end %>
@@ -43,7 +71,7 @@
   <!-- Body -->
   <div class="article-wrap article-body" style="background:#f4f0e6; padding:3rem 3rem 4rem; max-width:820px; margin:0 auto; width:100%;">
     <% if @post.body.present? %>
-      <%= simple_format @post.body %>
+      <%= post_body_html(@post) %>
     <% else %>
       <p style="opacity:0.5; font-style:italic;">This article has no content yet.</p>
     <% end %>

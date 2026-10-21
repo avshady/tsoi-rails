@@ -9,7 +9,7 @@ class UpdateAdvisoryPhotosPrecomposed < ActiveRecord::Migration[8.1]
     "Mrunal Shah"          => "/summit/assets/advisory_mrunal.png",
     "Seetha Murty"         => "/summit/assets/advisory_seetha.png",
     "Dr. Seetha Murty"     => "/summit/assets/advisory_seetha.png",
-    "Kiran Bir Sethi"      => "/summit/assets/advisory_kiran.png",
+    "Kiran Bir Sethi"      => "/summit/assets/advisory_kiran.png"
   }.freeze
 
   def up

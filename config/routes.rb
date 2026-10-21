@@ -51,6 +51,9 @@ Rails.application.routes.draw do
     # legacy paths
     get  "cities",           to: "schools#cities"
     get  "filters",          to: "schools#filters"
+
+    # Blog publishing API (token auth, see Api::PostsController)
+    resources :posts, param: :slug, only: [ :index, :show, :create, :update, :destroy ]
   end
 
   # Admin (simple, no auth for local dev)
@@ -60,6 +63,8 @@ Rails.application.routes.draw do
       member { post :generate_token }
     end
     resources :summit_speakers, only: [ :index, :new, :create, :edit, :update, :destroy ]
+    # Blog images: upload to public/images/blog, returns Markdown snippets
+    post "posts/images", to: "blog_images#create", as: :post_images
     resources :posts
 
     # CMS

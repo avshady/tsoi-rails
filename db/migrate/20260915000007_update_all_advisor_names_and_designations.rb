@@ -9,7 +9,7 @@ class UpdateAllAdvisorNamesAndDesignations < ActiveRecord::Migration[8.1]
       "Dr. Swati Popat Vats" => {                                title: "President",                                                            organisation: "ECA & Podar Education Network" },
       "Mrunal Shah"          => {                                title: "Founder & Play Expert",                                                organisation: "Sunday Bricks" },
       "Russell John Cailey"  => {                                title: "CEO & Founder",                                                        organisation: "Almach AI™" },
-      "Kiran Bir Sethi"      => {                                title: "Founder",                                                              organisation: "The Riverside High School" },
+      "Kiran Bir Sethi"      => {                                title: "Founder",                                                              organisation: "The Riverside High School" }
     }.each do |current_name, attrs|
       sp = SummitSpeaker.find_by(name: current_name)
       sp&.update!(attrs)
