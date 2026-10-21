@@ -66,6 +66,18 @@ aliases:
   logs: app logs -f
   dbc: app exec --interactive --reuse "bin/rails dbconsole --include-password"
 
+# Persist uploaded blog images across deploys. The admin image uploader writes
+# to public/images/blog inside the container; without a volume, each deploy
+# builds a fresh image and wipes those uploads, breaking every post that links
+# one. A named Docker volume survives redeploys and needs no host path.
+#
+# NOTE: this uses a named volume (tsoi_rails_blog_images). If you would rather
+# store the files at a specific path on the host (e.g. to back them up with the
+# rest of the server), replace the source with that absolute host path and tell
+# me the path — see the chat message accompanying this change.
+volumes:
+  - "tsoi_rails_blog_images:/rails/public/images/blog"
+
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old
 # version inside the asset_path.

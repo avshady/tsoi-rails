@@ -84,4 +84,55 @@ class AdminPostsTest < ActionDispatch::IntegrationTest
     assert_match "Only JPG, PNG", images[2]["error"]
     assert_not File.exist?(UPLOAD_DIR.join("test-upload-evil.png"))
   end
+  test "scheduling a post with a future publish_at keeps it off the public blog" do
+    post "/admin/posts", headers: AUTH, params: { post: {
+      title: "Scheduled One", body: "Later.", published: "1", publish_at: 2.days.from_now.change(sec: 0).strftime("%Y-%m-%dT%H:%M")
+    } }
+    assert_redirected_to "/admin/posts"
+    assert_match "scheduled for", flash[:notice]
+
+    sched = Post.find_by!(slug: "scheduled-one")
+    assert sched.scheduled?
+    assert_not sched.live?
+
+    get "/blog/scheduled-one"
+    assert_redirected_to "/blog"
+  end
+
+  test "publishing with a blank publish_at goes live immediately" do
+    post "/admin/posts", headers: AUTH, params: { post: {
+      title: "Immediate One", body: "Now.", published: "1", publish_at: ""
+    } }
+    assert_redirected_to "/admin/posts"
+    live = Post.find_by!(slug: "immediate-one")
+    assert live.live?
+    assert live.publish_at.present?
+  end
+
+  test "the admin list shows a Scheduled badge" do
+    Post.create!(title: "Badge Post", published: true, publish_at: 3.days.from_now)
+    get "/admin/posts", headers: AUTH
+    assert_response :success
+    assert_includes response.body, "Scheduled"
+  end
+
+  test "preview renders markdown through the public pipeline without saving" do
+    assert_no_difference -> { Post.count } do
+      post "/admin/posts/preview", headers: AUTH, as: :json, params: {
+        body: "## Heading\n\n| A | B |\n|---|---|\n| 1 | 2 |\n\n[CBSE](https://cbse.gov.in)",
+        title: "Preview Title"
+      }
+    end
+    assert_response :success
+    html = response.parsed_body["html"]
+    assert_includes html, "<h2"
+    assert_includes html, "<table>"
+    assert_includes html, 'rel="noopener noreferrer"'
+    assert_equal "Preview Title — The Schools of India", response.parsed_body["title"]
+  end
+
+  test "preview requires admin login" do
+    post "/admin/posts/preview", as: :json, params: { body: "x" }
+    assert_response :unauthorized
+  end
 end

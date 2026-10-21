@@ -6,7 +6,7 @@ module Api
   # If the variable isn't set, the API is disabled and answers 503.
   class PostsController < ActionController::API
     PERMITTED = %i[
-      title slug author category cover_image cover_image_alt excerpt body published published_at
+      title slug author category cover_image cover_image_alt excerpt body published published_at publish_at
       meta_title meta_description json_ld
     ].freeze
     MAX_PER_PAGE = 100
@@ -102,9 +102,7 @@ module Api
       end
 
       @post.assign_attributes(attrs)
-      # Stamp the publish date the first time a post goes live.
-      @post.published_at = Time.current if @post.published? && @post.published_at.blank?
-
+      # Publish timestamps are set by Post#apply_publish_schedule on save.
       if @post.save
         render json: { post: post_json(@post) }, status: success_status
       else
@@ -134,6 +132,7 @@ module Api
         meta_description: post.meta_description,
         published: post.published,
         published_at: post.published_at,
+        publish_at: post.publish_at,
         created_at: post.created_at,
         updated_at: post.updated_at,
         url: "#{request.base_url}/blog/#{post.slug}"

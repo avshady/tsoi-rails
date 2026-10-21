@@ -84,4 +84,19 @@ class BlogPostPageTest < ActionDispatch::IntegrationTest
     get "/blog/secret-draft"
     assert_redirected_to "/blog"
   end
+  test "a scheduled post is hidden until its publish_at passes" do
+    Post.create!(title: "Future Post", published: true, publish_at: 2.days.from_now, body: "Soon.")
+    get "/blog/future-post"
+    assert_redirected_to "/blog"
+
+    get "/blog"
+    assert_not_includes response.body, "Future Post"
+  end
+
+  test "a due scheduled post is public" do
+    Post.create!(title: "Due Post", published: true, publish_at: 1.hour.ago, body: "Live now.")
+    get "/blog/due-post"
+    assert_response :success
+    assert_includes response.body, "Live now."
+  end
 end
