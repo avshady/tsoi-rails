@@ -39,10 +39,14 @@ Content-Type: application/json
 |---|---|
 | `title` | **Required.** |
 | `slug` | Optional. Generated from the title if omitted (`-2`, `-3`… added on clashes). Must be unique. |
-| `body` | Article text. Paragraphs separated by a blank line. Basic HTML (`<h2>`, `<a>`, `<strong>`, `<ul>`…) is allowed; scripts are stripped. |
+| `body` | Article in Markdown: `##` headings, `**bold**`, `[text](url)` links, pipe tables, lists, `![alt](url)` images. Scripts and unsafe HTML are stripped. |
 | `excerpt` | Short summary for the blog listing. Falls back to the first paragraph. |
-| `category` | One of: School Leadership, Teaching & Learning, Parents, EdTech, Operations, Summit, News (case-insensitive). |
+| `category` | One of: School Launch, School Operations, Curriculum & Academics, EdTech & Innovation, School Leadership, Education Policy, School Growth & Scaling, School Selection, Parent Resources (case-insensitive). |
 | `cover_image` | Public image URL. |
+| `cover_image_alt` | Alt text for the cover image. |
+| `meta_title` | Page `<title>` (50–60 chars). Falls back to "Title — The Schools of India". |
+| `meta_description` | Google snippet (150–160 chars). Falls back to the excerpt. |
+| `json_ld` | Schema.org JSON-LD. Raw JSON, or the pipeline's `<script type="application/ld+json">` block(s); must be valid JSON. |
 | `author` | Defaults to "The Schools of India". |
 | `published` | `true` to go live. **Defaults to `false` (draft).** |
 | `published_at` | Optional ISO 8601 time. Set automatically the first time a post is published. |
@@ -58,8 +62,10 @@ curl -X POST https://<your-site>/api/posts \
   -d '{
     "title": "How to Choose the Right CBSE School",
     "excerpt": "A practical checklist for parents.",
-    "body": "First paragraph.\n\n<h2>Section</h2>\n\nSecond paragraph.",
-    "category": "Parents",
+    "body": "First paragraph.\n\n## Section\n\nSecond paragraph with a [link](https://cbse.gov.in).",
+    "category": "School Selection",
+    "meta_title": "How to Choose the Right CBSE School: A Parent Checklist",
+    "meta_description": "...",
     "cover_image": "https://cdn.example.com/cover.jpg",
     "published": true
   }'
@@ -86,5 +92,5 @@ Response (`201`):
 | `400` | Empty request body on create. |
 | `401` | Missing or wrong token. |
 | `404` | No post with that slug/id. |
-| `422` | Validation failed — see `errors` array (e.g. missing title, taken slug, unknown category). |
+| `422` | Validation failed — see `errors` array (e.g. missing title, taken slug, unknown category, invalid JSON-LD). |
 | `503` | `BLOG_API_TOKEN` is not configured on the server. |

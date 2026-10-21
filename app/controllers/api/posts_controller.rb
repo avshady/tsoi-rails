@@ -5,7 +5,10 @@ module Api
   #   Authorization: Bearer <token>
   # If the variable isn't set, the API is disabled and answers 503.
   class PostsController < ActionController::API
-    PERMITTED = %i[title slug author category cover_image excerpt body published published_at].freeze
+    PERMITTED = %i[
+      title slug author category cover_image cover_image_alt excerpt body published published_at
+      meta_title meta_description json_ld
+    ].freeze
     MAX_PER_PAGE = 100
 
     before_action :authenticate
@@ -125,14 +128,17 @@ module Api
         author: post.author,
         category: post.category,
         cover_image: post.cover_image,
+        cover_image_alt: post.cover_image_alt,
         excerpt: post.excerpt,
+        meta_title: post.meta_title,
+        meta_description: post.meta_description,
         published: post.published,
         published_at: post.published_at,
         created_at: post.created_at,
         updated_at: post.updated_at,
         url: "#{request.base_url}/blog/#{post.slug}"
       }
-      json[:body] = post.body if include_body
+      json.merge!(body: post.body, json_ld: post.json_ld) if include_body
       json
     end
   end

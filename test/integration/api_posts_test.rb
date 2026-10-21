@@ -34,13 +34,13 @@ class ApiPostsTest < ActionDispatch::IntegrationTest
   test "creates a published post that shows on the blog" do
     post "/api/posts", headers: auth, as: :json, params: {
       title: "Choosing the Right School", body: "First paragraph.\n\nSecond paragraph.",
-      category: "parents", cover_image: "https://example.com/cover.jpg", published: true
+      category: "parent resources", cover_image: "https://example.com/cover.jpg", published: true
     }
     assert_response :created
 
     json = response.parsed_body["post"]
     assert_equal "choosing-the-right-school", json["slug"]
-    assert_equal "Parents", json["category"]
+    assert_equal "Parent Resources", json["category"]
     assert_equal "The Schools of India", json["author"]
     assert json["published"]
     assert json["published_at"].present?
@@ -66,7 +66,7 @@ class ApiPostsTest < ActionDispatch::IntegrationTest
     post "/api/posts", headers: auth, as: :json, params: { body: "No title" }
     assert_response :unprocessable_entity
 
-    post "/api/posts", headers: auth, as: :json, params: { title: "X", category: "Sports" }
+    post "/api/posts", headers: auth, as: :json, params: { title: "X", category: "Parents" }
     assert_response :unprocessable_entity
     assert_match "Category must be one of", response.parsed_body["errors"].first
   end

@@ -1,6 +1,12 @@
 <% inp = "width:100%; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:14px; box-sizing:border-box; font-family:inherit;" %>
 <% lbl = "display:block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.55; margin-bottom:6px;" %>
 
+<% hint = "font-size:11px; opacity:0.45; margin:6px 0 0;" %>
+<% category_options = Post::CATEGORIES.map { |c| [ c, c ] } %>
+<% if post.category.present? && !Post::CATEGORIES.include?(post.category) %>
+  <% category_options.unshift([ "#{post.category} (old category)", post.category ]) %>
+<% end %>
+
 <%= form_with model: [:admin, post], local: true do |f| %>
   <% if post.errors.any? %>
     <div style="background:#fef2f2; border:1px solid #fecaca; color:#991b1b; padding:12px 16px; margin-bottom:1.5rem; border-radius:4px; font-size:13px;">
@@ -22,7 +28,7 @@
       <div>
         <%= f.label :category, "Category", style: lbl %>
         <%= f.select :category,
-              options_for_select(Post::CATEGORIES, post.category),
+              options_for_select(category_options, post.category),
               { include_blank: "— none —" },
               style: inp %>
       </div>
@@ -31,7 +37,12 @@
     <div style="margin-bottom:1.25rem;">
       <%= f.label :cover_image, "Cover image URL", style: lbl %>
       <%= f.text_field :cover_image, placeholder: "/images/blog/my-post.jpg or https://…", style: inp %>
-      <p style="font-size:11px; opacity:0.45; margin:6px 0 0;">Paste a full URL, or upload the file to <code>public/images/blog/</code> and use <code>/images/blog/filename.jpg</code>.</p>
+      <p style="<%= hint %>">Paste a full URL, or upload it under <strong>Images</strong> below and click “Use as cover”.</p>
+    </div>
+
+    <div style="margin-bottom:1.25rem;">
+      <%= f.label :cover_image_alt, "Cover image alt text", style: lbl %>
+      <%= f.text_field :cover_image_alt, placeholder: "Describe the banner image for screen readers and Google Images", style: inp %>
     </div>
 
     <div style="margin-bottom:1.25rem;">
@@ -41,8 +52,39 @@
 
     <div>
       <%= f.label :body, "Body *", style: lbl %>
-      <%= f.text_area :body, rows: 20, placeholder: "Write the article here.\n\nLeave a blank line between paragraphs — they become separate paragraphs on the page.", style: inp + " line-height:1.7;" %>
-      <p style="font-size:11px; opacity:0.45; margin:6px 0 0;">Plain text. Separate paragraphs with a blank line.</p>
+      <%= f.text_area :body, rows: 24, placeholder: "Write or paste the article in Markdown.\n\n## A section heading\n\nA paragraph with **bold** and a [link](https://example.com).\n\n![Alt text](/images/blog/my-infographic.png)", style: inp + " line-height:1.7; font-family:ui-monospace,Menlo,monospace; font-size:13px;" %>
+      <p style="<%= hint %>">Markdown — headings with <code>##</code>, links with <code>[text](url)</code>, images with <code>![alt](url)</code>. Separate paragraphs with a blank line.</p>
+    </div>
+  </div>
+
+  <%# Images: uploaded straight away with JS so the form isn't submitted; the file input has no name. %>
+  <div id="blog-images" data-upload-url="<%= admin_post_images_path %>" style="background:white; border:1px solid rgba(0,0,0,0.08); padding:1.75rem; margin-bottom:1.5rem;">
+    <p style="<%= lbl %>">Images (banner &amp; infographics)</p>
+    <input type="file" id="blog-images-input" multiple accept="image/png,image/jpeg,image/webp,image/gif" style="font-size:13px;">
+    <p style="<%= hint %>">Uploads to <code>/images/blog/</code>. For each image, set the alt text, then copy its Markdown into the Body where it should appear. JPG, PNG, WebP or GIF, up to 10 MB.</p>
+    <p id="blog-images-status" style="font-size:12px; margin:10px 0 0; display:none;"></p>
+    <div id="blog-images-list"></div>
+  </div>
+
+  <div style="background:white; border:1px solid rgba(0,0,0,0.08); padding:1.75rem; margin-bottom:1.5rem;">
+    <p style="<%= lbl %> opacity:0.8; margin-bottom:1.25rem;">SEO / structured data</p>
+
+    <div style="margin-bottom:1.25rem;">
+      <%= f.label :meta_title, "Meta title", style: lbl %>
+      <%= f.text_field :meta_title, placeholder: "Shown as the Google result title. Leave blank to use the post title.", style: inp, data: { count: "50-60" } %>
+      <p style="<%= hint %>">Aim for 50–60 characters. <span data-count-for="post_meta_title"></span></p>
+    </div>
+
+    <div style="margin-bottom:1.25rem;">
+      <%= f.label :meta_description, "Meta description", style: lbl %>
+      <%= f.text_area :meta_description, rows: 3, placeholder: "The snippet under the Google result. Leave blank to use the excerpt.", style: inp, data: { count: "150-160" } %>
+      <p style="<%= hint %>">Aim for 150–160 characters. <span data-count-for="post_meta_description"></span></p>
+    </div>
+
+    <div>
+      <%= f.label :json_ld, "JSON-LD", style: lbl %>
+      <%= f.text_area :json_ld, rows: 12, placeholder: "Paste the structured-data block from the pipeline (Article + FAQPage). With or without the <script type=\"application/ld+json\"> tags.", style: inp + " font-family:ui-monospace,Menlo,monospace; font-size:12px;" %>
+      <p style="<%= hint %>">Added to the page &lt;head&gt; exactly as pasted. Must be valid JSON — the post won't save otherwise.</p>
     </div>
   </div>
 
@@ -55,8 +97,10 @@
 
     <div style="margin-top:1.25rem;">
       <%= f.label :slug, "URL slug", style: lbl %>
-      <%= f.text_field :slug, placeholder: "auto-generated from the title", style: inp %>
-      <p style="font-size:11px; opacity:0.45; margin:6px 0 0;">Leave blank to generate from the title. Changing this on a live post breaks existing links.</p>
+      <%= f.text_field :slug, placeholder: "auto-generated from the title", style: inp,
+            data: { live: post.published? && post.persisted?, original: post.slug_was } %>
+      <p style="<%= hint %>">Leave blank to generate from the title. Changing this on a live post breaks existing links.</p>
+      <p id="slug-warning" style="display:none; font-size:12px; font-weight:600; color:#991b1b; margin:6px 0 0;">This post is live — changing the slug breaks every existing link to it, including Google results.</p>
     </div>
   </div>
 
@@ -65,3 +109,113 @@
     <%= link_to "Cancel", admin_posts_path, style:"color:#999; font-size:13px; font-weight:600; text-decoration:none;" %>
   </div>
 <% end %>
+
+<script>
+  (function () {
+    // Character counters for the meta fields.
+    document.querySelectorAll("[data-count]").forEach(function (field) {
+      var out = document.querySelector('[data-count-for="' + field.id + '"]');
+      var range = field.dataset.count.split("-").map(Number);
+      var update = function () {
+        var n = field.value.length;
+        out.textContent = n + " now";
+        out.style.color = n === 0 ? "" : (n >= range[0] && n <= range[1] ? "#166534" : "#b45309");
+        out.style.fontWeight = "600";
+      };
+      field.addEventListener("input", update);
+      update();
+    });
+
+    // Warn before changing the slug of a live post.
+    var slug = document.getElementById("post_slug");
+    var slugWarning = document.getElementById("slug-warning");
+    if (slug && slug.dataset.live === "true") {
+      slug.addEventListener("input", function () {
+        slugWarning.style.display = slug.value !== slug.dataset.original ? "block" : "none";
+      });
+    }
+
+    // Image uploads -> Markdown snippets.
+    var box = document.getElementById("blog-images");
+    var input = document.getElementById("blog-images-input");
+    var list = document.getElementById("blog-images-list");
+    var status = document.getElementById("blog-images-status");
+    if (!box || !input) return;
+
+    var esc = function (s) { return s.replace(/[\[\]]/g, ""); };
+    var btn = "background:none; border:1px solid rgba(0,0,0,0.2); border-radius:4px; padding:6px 12px; font-size:12px; font-weight:600; cursor:pointer;";
+
+    function addRow(img) {
+      var row = document.createElement("div");
+      row.style.cssText = "display:grid; grid-template-columns:72px 1fr; gap:14px; align-items:start; padding:14px 0; border-top:1px solid rgba(0,0,0,0.06); margin-top:14px;";
+      if (img.error) {
+        row.innerHTML = '<div></div><p style="margin:0; font-size:12px; color:#991b1b;"></p>';
+        row.querySelector("p").textContent = img.name + ": " + img.error;
+        list.appendChild(row);
+        return;
+      }
+      row.innerHTML =
+        '<img style="width:72px; height:52px; object-fit:cover; border-radius:3px; background:#eee;">' +
+        '<div>' +
+        '  <input type="text" placeholder="Alt text" style="width:100%; padding:7px 10px; border:1px solid rgba(0,0,0,0.15); border-radius:4px; font-size:13px; box-sizing:border-box; margin-bottom:8px;">' +
+        '  <code style="display:block; font-size:12px; background:#f6f6f6; padding:7px 10px; border-radius:4px; word-break:break-all; margin-bottom:8px;"></code>' +
+        '  <button type="button" data-act="copy" style="' + btn + '">Copy Markdown</button> ' +
+        '  <button type="button" data-act="cover" style="' + btn + '">Use as cover</button>' +
+        '</div>';
+      var alt = row.querySelector("input");
+      var code = row.querySelector("code");
+      row.querySelector("img").src = img.url;
+      alt.value = img.alt || "";
+      var snippet = function () { return "![" + esc(alt.value) + "](" + img.url + ")"; };
+      var render = function () { code.textContent = snippet(); };
+      alt.addEventListener("input", render);
+      render();
+
+      row.querySelector('[data-act="copy"]').addEventListener("click", function (e) {
+        var b = e.currentTarget;
+        if (!navigator.clipboard) {
+          // No clipboard API (plain http): select the snippet so it can be copied by hand.
+          window.getSelection().selectAllChildren(code);
+          return;
+        }
+        navigator.clipboard.writeText(snippet()).then(function () {
+          b.textContent = "Copied ✓";
+          setTimeout(function () { b.textContent = "Copy Markdown"; }, 1500);
+        });
+      });
+      row.querySelector('[data-act="cover"]').addEventListener("click", function (e) {
+        document.getElementById("post_cover_image").value = img.url;
+        document.getElementById("post_cover_image_alt").value = alt.value;
+        e.currentTarget.textContent = "Set as cover ✓";
+      });
+      list.appendChild(row);
+    }
+
+    input.addEventListener("change", function () {
+      if (!input.files.length) return;
+      var data = new FormData();
+      Array.prototype.forEach.call(input.files, function (f) { data.append("images[]", f); });
+      status.style.display = "block";
+      status.style.color = "";
+      status.textContent = "Uploading " + input.files.length + " image(s)…";
+
+      fetch(box.dataset.uploadUrl, {
+        method: "POST",
+        body: data,
+        headers: { "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content, "Accept": "application/json" },
+        credentials: "same-origin"
+      })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, json: j }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.json.error || "Upload failed.");
+          res.json.images.forEach(addRow);
+          status.textContent = "Done. Copy each snippet into the Body where the image should appear.";
+          input.value = "";
+        })
+        .catch(function (err) {
+          status.style.color = "#991b1b";
+          status.textContent = err.message;
+        });
+    });
+  })();
+</script>
