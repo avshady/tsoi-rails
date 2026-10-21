@@ -67,6 +67,9 @@ Rails.application.routes.draw do
     post "posts/images", to: "blog_images#create", as: :post_images
     # Render Body markdown to HTML for the form's Preview button (no save)
     post "posts/preview", to: "posts#preview", as: :preview_posts
+    # Import a draft post from the pipeline's .md package + images
+    get  "posts/import", to: "post_imports#new",    as: :import_posts
+    post "posts/import", to: "post_imports#create"
     resources :posts
 
     # CMS

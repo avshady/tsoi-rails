@@ -2,7 +2,10 @@
 
 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem;">
   <h1 style="font-size:1.5rem; font-weight:700; margin:0;">Blog Posts</h1>
-  <%= link_to "+ New Post", new_admin_post_path, style:"background:#821E25; color:white; padding:8px 18px; font-size:13px; font-weight:700; text-decoration:none; border-radius:4px;" %>
+  <div style="display:flex; gap:10px;">
+    <%= link_to "Import from pipeline", admin_import_posts_path, style:"background:white; color:#821E25; border:1px solid #821E25; padding:7px 17px; font-size:13px; font-weight:700; text-decoration:none; border-radius:4px;" %>
+    <%= link_to "+ New Post", new_admin_post_path, style:"background:#821E25; color:white; padding:8px 18px; font-size:13px; font-weight:700; text-decoration:none; border-radius:4px;" %>
+  </div>
 </div>
 
 <% if @posts.any? %>
