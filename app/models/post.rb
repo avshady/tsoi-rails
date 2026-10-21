@@ -22,9 +22,16 @@ class Post < ApplicationRecord
 
   before_validation :generate_slug
   before_validation :normalize_json_ld
+  before_save       :apply_publish_schedule
 
-  scope :published, -> { where(published: true).order(Arel.sql("COALESCE(published_at, created_at) DESC")) }
-  scope :recent,    -> { order(Arel.sql("COALESCE(published_at, created_at) DESC")) }
+  ORDER = Arel.sql("COALESCE(published_at, created_at) DESC").freeze
+
+  # Publicly visible posts: the flag is on AND the scheduled time (if any) has
+  # arrived. A NULL publish_at means "no schedule" — posts published before
+  # scheduling existed stay live. Filtering here is what enforces scheduling;
+  # no background job flips anything, the post simply isn't returned until due.
+  scope :live, -> { where(published: true).where("publish_at IS NULL OR publish_at <= ?", Time.current).order(ORDER) }
+  scope :recent, -> { order(ORDER) }
 
   # Use the slug in URLs instead of the id.
   def to_param
@@ -33,6 +40,16 @@ class Post < ApplicationRecord
 
   def display_date
     (published_at || created_at)&.strftime("%-d %B %Y")
+  end
+
+  # Flagged to publish, but its scheduled time is still in the future.
+  def scheduled?
+    published? && publish_at.present? && publish_at > Time.current
+  end
+
+  # Currently visible to the public (mirrors the `live` scope for a single record).
+  def live?
+    published? && (publish_at.nil? || publish_at <= Time.current)
   end
 
   # Rough reading time from the body's word count.
@@ -70,6 +87,17 @@ class Post < ApplicationRecord
   end
 
   private
+
+  # Keep the schedule fields consistent whenever a post is published:
+  #   - "Published" checked, no publish_at  -> goes live now (publish_at = now).
+  #   - "Published" checked, future publish_at -> stays scheduled until then.
+  # published_at (the displayed date) is stamped once, to the go-live time.
+  def apply_publish_schedule
+    return unless published?
+
+    self.publish_at   ||= Time.current
+    self.published_at ||= publish_at
+  end
 
   # The pipeline delivers JSON-LD wrapped in one or more
   # <script type="application/ld+json"> tags. Store only the JSON; several

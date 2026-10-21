@@ -53,7 +53,19 @@
     <div>
       <%= f.label :body, "Body *", style: lbl %>
       <%= f.text_area :body, rows: 24, placeholder: "Write or paste the article in Markdown.\n\n## A section heading\n\nA paragraph with **bold** and a [link](https://example.com).\n\n![Alt text](/images/blog/my-infographic.png)", style: inp + " line-height:1.7; font-family:ui-monospace,Menlo,monospace; font-size:13px;" %>
-      <p style="<%= hint %>">Markdown — headings with <code>##</code>, links with <code>[text](url)</code>, images with <code>![alt](url)</code>. Separate paragraphs with a blank line.</p>
+      <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
+        <button type="button" id="body-preview-btn" data-preview-url="<%= admin_preview_posts_path %>"
+                style="background:none; border:1px solid rgba(0,0,0,0.2); border-radius:4px; padding:7px 14px; font-size:12px; font-weight:600; cursor:pointer;">Preview</button>
+        <p style="<%= hint %> margin:0;">Markdown — headings with <code>##</code>, links with <code>[text](url)</code>, images with <code>![alt](url)</code>. Separate paragraphs with a blank line.</p>
+      </div>
+      <div id="body-preview" style="display:none; margin-top:1.25rem; border:1px solid rgba(0,0,0,0.12); border-radius:4px; background:#f4f0e6;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 14px; border-bottom:1px solid rgba(0,0,0,0.1);">
+          <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.55;">Preview — how the article body will render</span>
+          <button type="button" id="body-preview-close" style="background:none; border:none; font-size:16px; line-height:1; cursor:pointer; opacity:0.5;">&times;</button>
+        </div>
+        <p id="body-preview-meta" style="margin:0; padding:10px 14px 0; font-size:11px; opacity:0.5;"></p>
+        <div id="body-preview-html" class="article-body" style="padding:1.5rem;"></div>
+      </div>
     </div>
   </div>
 
@@ -96,6 +108,12 @@
     <p style="font-size:11px; opacity:0.45; margin:8px 0 0 26px;">Leave unticked to keep it as a draft. The publish date is stamped automatically the first time you publish.</p>
 
     <div style="margin-top:1.25rem;">
+      <%= f.label :publish_at, "Publish at", style: lbl %>
+      <%= f.datetime_local_field :publish_at, value: post.publish_at&.strftime("%Y-%m-%dT%H:%M"), style: inp %>
+      <p style="<%= hint %>">Optional. Leave blank to publish immediately when “Published” is ticked. Set a future date and tick “Published” to schedule — the post stays hidden from /blog until then.</p>
+    </div>
+
+    <div style="margin-top:1.25rem;">
       <%= f.label :slug, "URL slug", style: lbl %>
       <%= f.text_field :slug, placeholder: "auto-generated from the title", style: inp,
             data: { live: post.published? && post.persisted?, original: post.slug_was } %>
@@ -110,8 +128,63 @@
   </div>
 <% end %>
 
+<style>
+  /* Mirror the public article-body styles so the preview matches /blog. */
+  #body-preview .article-body h2 { font-family:'Playfair Display',Georgia,serif; font-size:1.6rem; line-height:1.25; font-weight:700; margin:2rem 0 1rem; }
+  #body-preview .article-body h3 { font-size:1.2rem; font-weight:700; margin:1.6rem 0 0.8rem; }
+  #body-preview .article-body p { font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.75); margin:0 0 1.2rem; }
+  #body-preview .article-body a { color:#821E25; text-decoration:underline; text-underline-offset:3px; }
+  #body-preview .article-body strong { font-weight:600; }
+  #body-preview .article-body ul, #body-preview .article-body ol { font-size:1.05rem; line-height:1.8; color:rgba(0,0,0,0.75); margin:0 0 1.2rem; padding-left:1.5rem; }
+  #body-preview .article-body ul { list-style:disc; }
+  #body-preview .article-body ol { list-style:decimal; }
+  #body-preview .article-body li { margin-bottom:0.3rem; }
+  #body-preview .article-body img { display:block; max-width:100%; height:auto; margin:1.5rem auto; border-radius:4px; }
+  #body-preview .article-body .table-wrap { overflow-x:auto; margin:0 0 1.5rem; }
+  #body-preview .article-body table { width:100%; border-collapse:collapse; font-size:0.95rem; background:white; border:1px solid rgba(130,30,37,0.25); }
+  #body-preview .article-body th, #body-preview .article-body td { text-align:left; padding:0.7rem 0.9rem; border-bottom:1px solid rgba(0,0,0,0.08); vertical-align:top; }
+  #body-preview .article-body th { background:#821E25; color:white; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; }
+  #body-preview .article-body blockquote { border-left:3px solid #821E25; margin:0 0 1.2rem; padding:0.2rem 0 0.2rem 1.2rem; font-style:italic; }
+</style>
+
 <script>
   (function () {
+    // Markdown preview: render the Body through the same pipeline as /blog.
+    var previewBtn = document.getElementById("body-preview-btn");
+    var previewPanel = document.getElementById("body-preview");
+    var previewHtml = document.getElementById("body-preview-html");
+    var previewMeta = document.getElementById("body-preview-meta");
+    var body = document.getElementById("post_body");
+    var csrf = document.querySelector('meta[name="csrf-token"]');
+    if (previewBtn && body) {
+      previewBtn.addEventListener("click", function () {
+        previewBtn.disabled = true;
+        previewBtn.textContent = "Rendering…";
+        fetch(previewBtn.dataset.previewUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json", "X-CSRF-Token": csrf ? csrf.content : "" },
+          credentials: "same-origin",
+          body: JSON.stringify({
+            body: body.value,
+            title: (document.getElementById("post_title") || {}).value,
+            excerpt: (document.getElementById("post_excerpt") || {}).value,
+            meta_title: (document.getElementById("post_meta_title") || {}).value,
+            meta_description: (document.getElementById("post_meta_description") || {}).value
+          })
+        })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            previewHtml.innerHTML = data.html || "<p style='opacity:0.5'>Nothing to preview yet.</p>";
+            previewMeta.textContent = "Title: " + (data.title || "") + "  ·  Description: " + (data.description || "");
+            previewPanel.style.display = "block";
+            previewPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          })
+          .catch(function () { previewHtml.innerHTML = "<p style='color:#991b1b'>Preview failed. Try again.</p>"; previewPanel.style.display = "block"; })
+          .finally(function () { previewBtn.disabled = false; previewBtn.textContent = "Preview"; });
+      });
+      document.getElementById("body-preview-close").addEventListener("click", function () { previewPanel.style.display = "none"; });
+    }
+
     // Character counters for the meta fields.
     document.querySelectorAll("[data-count]").forEach(function (field) {
       var out = document.querySelector('[data-count-for="' + field.id + '"]');

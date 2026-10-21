@@ -104,4 +104,17 @@ class ApiPostsTest < ActionDispatch::IntegrationTest
     get "/api/posts/draft-one", headers: auth
     assert_response :not_found
   end
+  test "accepts publish_at to schedule a post" do
+    post "/api/posts", headers: auth, as: :json, params: {
+      title: "Scheduled via API", body: "x", published: true, publish_at: "2099-01-01T00:00:00Z"
+    }
+    assert_response :created
+    json = response.parsed_body["post"]
+    assert json["published"]
+    assert_equal "2099-01-01T00:00:00.000Z", json["publish_at"]
+
+    created = Post.find_by!(slug: "scheduled-via-api")
+    assert created.scheduled?
+    assert_not created.live?
+  end
 end

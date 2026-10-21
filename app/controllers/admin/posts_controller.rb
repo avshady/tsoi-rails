@@ -12,9 +12,9 @@ module Admin
 
     def create
       @post = Post.new(post_params)
-      @post.published_at ||= Time.current if @post.published?
+      # Publish timestamps are set by Post#apply_publish_schedule on save.
       if @post.save
-        redirect_to admin_posts_path, notice: "Post created."
+        redirect_to admin_posts_path, notice: create_notice(@post)
       else
         render :new, status: :unprocessable_entity
       end
@@ -23,17 +23,23 @@ module Admin
     def edit; end
 
     def update
-      attrs = post_params
-      # Stamp the publish date the first time a post goes live.
-      if attrs[:published] == "1" && @post.published_at.blank?
-        attrs = attrs.merge(published_at: Time.current)
-      end
-
-      if @post.update(attrs)
+      if @post.update(post_params)
         redirect_to admin_posts_path, notice: "Post updated."
       else
         render :edit, status: :unprocessable_entity
       end
+    end
+
+    # POST /admin/posts/preview — renders Body markdown through the same
+    # pipeline as the public page, without saving. Used by the form's Preview
+    # button. Returns JSON so the form can inject the HTML inline.
+    def preview
+      post = Post.new(preview_params)
+      render json: {
+        html: view_context.post_body_html(post),
+        title: post.seo_title,
+        description: post.seo_description
+      }
     end
 
     def destroy
@@ -51,9 +57,21 @@ module Admin
     def post_params
       params.require(:post).permit(
         :title, :slug, :author, :category, :cover_image, :cover_image_alt,
-        :excerpt, :body, :published, :published_at,
+        :excerpt, :body, :published, :published_at, :publish_at,
         :meta_title, :meta_description, :json_ld
       )
+    end
+
+    def preview_params
+      params.permit(:body, :title, :excerpt, :meta_title, :meta_description)
+    end
+
+    def create_notice(post)
+      if post.scheduled?
+        "Post scheduled for #{post.publish_at.strftime('%-d %b %Y, %-l:%M %p')}."
+      else
+        "Post created."
+      end
     end
   end
 end

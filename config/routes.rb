@@ -65,6 +65,8 @@ Rails.application.routes.draw do
     resources :summit_speakers, only: [ :index, :new, :create, :edit, :update, :destroy ]
     # Blog images: upload to public/images/blog, returns Markdown snippets
     post "posts/images", to: "blog_images#create", as: :post_images
+    # Render Body markdown to HTML for the form's Preview button (no save)
+    post "posts/preview", to: "posts#preview", as: :preview_posts
     resources :posts
 
     # CMS
