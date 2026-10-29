@@ -2,7 +2,7 @@ const cmsData = {
   hero: {
     headline: "For the People Building What Education Becomes Next",
     subheadline: "One day where the generation that built Indian education, the generation that will lead it, and the students experiencing it ask one question together: what will education look like in 2040?",
-    dates: "January · Pune",
+    dates: "January 2027 · Pune",
     location: "Pune",
     ctaPrimary: {
       text: "Request a Call Back",
@@ -479,7 +479,7 @@ const cmsData = {
     },
     {
       question: "Is parking available, and how do I get to the venue?",
-      answer: "The Summit is in Pune this January. The exact venue will be announced soon, and parking and travel details will be shared along with it."
+      answer: "The Summit is in Pune in January 2027. The exact venue will be announced soon, and parking and travel details will be shared along with it."
     },
     {
       question: "Can I transfer my ticket to someone else?",
@@ -493,7 +493,7 @@ const cmsData = {
   ctaSection: {
     title: "The future of Indian education is something we build.",
     subheadline: "Join founders, school leaders, teachers and students for one day designing school for the child of 2040 - starting with the child, not the school.",
-    dates: "January · Pune",
+    dates: "January 2027 · Pune",
     ctaPrimary: { text: "Request a Call Back", action: "#callback" },
     ctaSecondary: { text: "Become a Sponsor", action: "#sponsor" }
   },

@@ -1,4 +1,4 @@
-import initialData from './cms-data.js?v=17';
+import initialData from './cms-data.js?v=18';
 
 // Setup global store for CMS editing
 if (!window.currentCmsData) {
