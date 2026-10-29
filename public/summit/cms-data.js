@@ -1,12 +1,12 @@
 const cmsData = {
   hero: {
     headline: "For the People Building What Education Becomes Next",
-    subheadline: "Three days where the generation that built Indian education, the generation that will lead it, and the students experiencing it sit at the same table.",
+    subheadline: "One day where the generation that built Indian education, the generation that will lead it, and the students experiencing it ask one question together: what will education look like in 2040?",
     dates: "Date &amp; venue to be announced soon",
     location: "Venue to be announced soon",
     ctaPrimary: {
-      text: "Register Now",
-      action: "https://www.tezticket.com/events/TSOIS/sub_events/298"
+      text: "Request a Call Back",
+      action: "#callback"
     },
     ctaSecondary: {
       text: "Become a Sponsor",
@@ -28,7 +28,7 @@ const cmsData = {
       { name: "Principals", color: "cyan" },
       { name: "The Students", color: "lime" }
     ],
-    closing: "Education's past, present and future in the same room."
+    closing: "Education's past, present and future in the same room, designing school for the child of 2040."
   },
   whyAttend: [
     {
@@ -37,7 +37,7 @@ const cmsData = {
     },
     {
       title: "The TSOI Playbook",
-      description: "A working document built live across all three days - every SOP and framework that surfaced in the room, yours to adapt long after the summit ends."
+      description: "A working document built live across the day - every SOP and framework that surfaced in the room, yours to adapt long after the summit ends."
     },
     {
       title: "One problem, a concrete solution",
@@ -45,11 +45,11 @@ const cmsData = {
     },
     {
       title: "5-10 real relationships",
-      description: "Not LinkedIn connections made in a coffee queue - the kind built over three days solving the same problems in the same room. People you’ll actually call."
+      description: "Not LinkedIn connections made in a coffee queue - the kind built over a day spent solving the same problems in the same room. People you’ll actually call."
     },
     {
       title: "A sharper question",
-      description: "The question you walked in with won’t survive three days of pushback from people who’ve built what you’re trying to build. You’ll leave with a better one."
+      description: "The question you walked in with won’t survive a day of pushback from people who’ve built what you’re trying to build. You’ll leave with a better one."
     },
     {
       title: "One experiment",
@@ -80,7 +80,7 @@ const cmsData = {
       {
         number: "01",
         name: "The Future",
-        question: "What will education look like in 2035?",
+        question: "What will education look like in 2040?",
         themes: "AI in education · the future role of teachers · personalised learning · future skills · assessment · credentials beyond degrees",
         color: "violet"
       },
@@ -254,7 +254,7 @@ const cmsData = {
       icon: "🧩"
     },
     {
-      title: "Build School 2035",
+      title: "Build School 2040",
       description: "Mixed teams of students, teachers, founders and next-generation leaders design the school they would create today, from a blank sheet.",
       icon: "🏗️"
     },
@@ -471,11 +471,11 @@ const cmsData = {
     },
     {
       question: "Are meals included?",
-      answer: "Yes. All meals across the three days of the Summit are covered."
+      answer: "Yes. All meals on the day of the Summit are covered."
     },
     {
-      question: "Can schools register as a group?",
-      answer: "Yes. Schools can register an entire school delegation as well - you'll find that option on the <a href='https://www.tezticket.com/events/TSOIS/sub_events/298' target='_blank' rel='noopener'>registration page</a>."
+      question: "Can schools attend as a group?",
+      answer: "Yes. Schools can bring an entire school delegation. Request a call back and our team will help you plan it."
     },
     {
       question: "Is parking available, and how do I get to the venue?",
@@ -487,18 +487,18 @@ const cmsData = {
     },
     {
       question: "Will there be takeaways from the sessions?",
-      answer: "Yes - delegates will leave with plenty of practical takeaways from across the three days of the Summit."
+      answer: "Yes - delegates will leave with plenty of practical takeaways from the Summit."
     }
   ],
   ctaSection: {
-    title: "Ready to Shape the Future of Education?",
-    subheadline: "Join hundreds of educators, founders, principals, and innovators for three transformative days of learning and collaboration.",
+    title: "The future of Indian education is something we build.",
+    subheadline: "Join founders, school leaders, teachers and students for one day designing school for the child of 2040 - starting with the child, not the school.",
     dates: "Date &amp; venue to be announced soon",
-    ctaPrimary: { text: "Register Now", action: "https://www.tezticket.com/events/TSOIS/sub_events/298" },
+    ctaPrimary: { text: "Request a Call Back", action: "#callback" },
     ctaSecondary: { text: "Become a Sponsor", action: "#sponsor" }
   },
   footer: {
-    about: "The Schools of India Summit is a 3-day residential gathering for K-12 founders, principals, educators and students - built around one rule: come with a fix that worked, leave with five that will.",
+    about: "The Schools of India Summit is a one-day gathering for K-12 founders, principals, educators and students - built around one theme: Educating for 2040, from school-centred to child-centred futures.",
     contact: {
       email: "summit@theschoolsofindia.org",
       phone: "+91 92265 23616",

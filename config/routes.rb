@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "/recognition", to: "pages#recognition"
   get "/summit",      to: "pages#summit"
   get "/registration", to: "pages#registration"
+  # The 5% Showcase page is down for now
+  get "/summit/recognitions", to: redirect("/summit")
   get "/thank-you",    to: "pages#thank_you"
 
   # Blog
