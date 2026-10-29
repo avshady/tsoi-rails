@@ -2,8 +2,8 @@ const cmsData = {
   hero: {
     headline: "For the People Building What Education Becomes Next",
     subheadline: "One day where the generation that built Indian education, the generation that will lead it, and the students experiencing it ask one question together: what will education look like in 2040?",
-    dates: "Date &amp; venue to be announced soon",
-    location: "Venue to be announced soon",
+    dates: "January · Pune",
+    location: "Pune",
     ctaPrimary: {
       text: "Request a Call Back",
       action: "#callback"
@@ -325,8 +325,8 @@ const cmsData = {
     { title: "School Services", desc: "Branding agencies, enrollment consultants, and bus fleet trackers." }
   ],
   venue: {
-    name: "Venue to be announced soon",
-    city: "",
+    name: "Venue in Pune to be announced soon",
+    city: "Pune",
     parking: "",
     hotels: "",
     travel: "",
@@ -479,7 +479,7 @@ const cmsData = {
     },
     {
       question: "Is parking available, and how do I get to the venue?",
-      answer: "The venue will be announced soon. Parking and travel details will be shared along with it."
+      answer: "The Summit is in Pune this January. The exact venue will be announced soon, and parking and travel details will be shared along with it."
     },
     {
       question: "Can I transfer my ticket to someone else?",
@@ -493,7 +493,7 @@ const cmsData = {
   ctaSection: {
     title: "The future of Indian education is something we build.",
     subheadline: "Join founders, school leaders, teachers and students for one day designing school for the child of 2040 - starting with the child, not the school.",
-    dates: "Date &amp; venue to be announced soon",
+    dates: "January · Pune",
     ctaPrimary: { text: "Request a Call Back", action: "#callback" },
     ctaSecondary: { text: "Become a Sponsor", action: "#sponsor" }
   },
