@@ -281,3 +281,13 @@ body { overflow-x: clip; }
   .promise h2 { white-space: normal; font-size: clamp(28px, 4.2vw, 36px); }
   .event-bar .venue-logo { width: 105px; }
 }
+
+/* Tighten the transitions after announcements and around partnership enquiries. */
+#experience { padding-bottom: 40px; }
+#partners { padding-bottom: 24px; }
+.partnership-section { padding-block: 48px; }
+.partnership-section .partnership { margin-top: 0; }
+@media (max-width: 700px) {
+  #experience { padding-bottom: 32px; }
+  .partnership-section { padding-block: 32px; }
+}
