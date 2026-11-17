@@ -1,0 +1,8 @@
+Current participation card imagery
+
+Workshop: existing TSOI repository asset tsoi_experiences_workshop.jpg
+Networking: existing TSOI repository asset tsoi_delegation_walk.jpg
+Blueprint: existing TSOI repository asset tsoi_thesis_collaborate.jpg
+Student voices, recognition, dinner: illustrative images generated using built-in image_gen. Full prompts in generation-prompts.json. These are not photographs of actual TSOI events.
+
+The previous Pexels stock photographs are no longer used on the page.

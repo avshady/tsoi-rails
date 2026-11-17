@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% policy_title = @summit_policy == "privacy" ? "Privacy Policy" : "Terms & Conditions" %>
+  <title><%= policy_title %> | TSOI Summit 2027</title>
+  <meta name="description" content="<%= policy_title %> for The Schools of India Summit 2027, taking place on 10th January 2027 at The Westin, Koregaon Park, Pune.">
+  <link rel="stylesheet" href="/summit/launch.css?v=4">
+  <link rel="stylesheet" href="/summit/refinements.css?v=2">
+</head>
+<body class="summit-policy-page">
+  <header class="policy-header wrap">
+    <a class="brand" href="<%= summit_path %>"><img src="/summit/assets/tsoi_summit_combined_logo.png" alt="The Schools of India Summit" width="1200" height="300"></a>
+    <a class="text-link" href="<%= summit_path %>">Back to the Summit</a>
+  </header>
+  <main class="policy-document">
+    <p class="eyebrow">The Schools of India Summit 2027</p>
+    <h1><%= policy_title %></h1>
+    <p class="policy-updated">Last updated: 13 November 2026</p>
+    <%= render "pages/summit_#{@summit_policy}_content" %>
+  </main>
+  <footer class="policy-footer wrap">
+    <p>© 2027 The Schools of India</p>
+    <nav aria-label="Legal pages"><a href="<%= summit_privacy_path %>">Privacy Policy</a><a href="<%= summit_terms_path %>">Terms &amp; Conditions</a></nav>
+  </footer>
+</body>
+</html>

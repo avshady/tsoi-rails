@@ -46,3 +46,7 @@
 
 # Design source files (originals only, never served)
 /_source-assets/
+
+# Private local backups and working notes must never enter an image.
+/backups/
+/TSOI_SUMMIT_PROJECT_MEMORY.md

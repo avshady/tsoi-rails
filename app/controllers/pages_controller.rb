@@ -243,6 +243,16 @@ class PagesController < ApplicationController
     render layout: false
   end
 
+  def summit_privacy
+    @summit_policy = "privacy"
+    render "summit_legal", layout: false
+  end
+
+  def summit_terms
+    @summit_policy = "terms"
+    render "summit_legal", layout: false
+  end
+
   def registration
     render layout: false
   end
@@ -287,6 +297,12 @@ class PagesController < ApplicationController
     else "Summit Registration"
     end
 
+    launch_enquiry = %w[booking partnership].include?(params[:page_section].to_s)
+    if launch_enquiry && [name, email, phone, role, organisation].any?(&:blank?)
+      redirect_to summit_path(anchor: params[:page_section]), alert: "Please complete all enquiry fields so our team can contact you."
+      return
+    end
+
     Inquiry.create!(
       name:        name,
       email:       email,
@@ -311,7 +327,7 @@ class PagesController < ApplicationController
     end
 
     flash[:notice] = if sponsor
-      "Thanks #{first_name}! Our partnerships team will be in touch about sponsorship shortly."
+      "Thanks #{first_name}! Our partnerships team will be in touch about partnership opportunities shortly."
     elsif callback || registration
       "Thanks #{first_name}! We'll call you back shortly."
     else
@@ -321,6 +337,10 @@ class PagesController < ApplicationController
     flash[:back_label] = registration ? "Back to Registration" : "Back to the Summit"
     redirect_to "/thank-you"
   rescue => e
+    if %w[booking partnership].include?(params[:page_section].to_s)
+      redirect_to summit_path(anchor: params[:page_section]), alert: "We couldn’t save your enquiry. Please try again or email summit@theschoolsofindia.org."
+      return
+    end
     if params[:passId].to_s.strip == "schedule"
       redirect_to "/summit/collaterals/schedule_full.html"
       return

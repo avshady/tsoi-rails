@@ -1,0 +1,18 @@
+{
+  "mode": "Built-in image_gen",
+  "note": "Illustrative Indian education conference scenes; not photographs of actual TSOI events.",
+  "generated": {
+    "students": {
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape image for an Indian education summit website accordion card. Three Indian senior secondary students, boys and girls aged 16\u201318 in neat Indian school uniforms, seated on a small education conference panel with an Indian woman moderator in a sari. Students speaking into handheld microphones. A professional hotel conference room in Pune, attentive educators blurred in background. Authentic Indian education context, thoughtful engaged expressions. Composition: wide horizontal 16:9, medium-wide editorial photography, all key people fully within frame with generous margins, natural skin texture and realistic contemporary Indian setting, balanced exposure, no exaggerated stock-photo posing. No text, lettering, logos, dates, watermarks or foreign conference imagery. This is an illustrative scene, not documentation of a real event.",
+      "saved_asset": "students-india.jpg"
+    },
+    "recognition": {
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape image for an Indian education summit website accordion card. An Indian woman school principal in an elegant sari receiving a modest glass award from an Indian senior educator in a suit at an education leadership conference. Two other Indian educators applaud nearby. Tasteful hotel ballroom stage in Pune with subtle purple lighting. Natural dignified candid moment, believable hands and trophy. Composition: wide horizontal 16:9, medium-wide editorial photography, all key people fully within frame with generous margins, natural skin texture and realistic contemporary Indian setting, balanced exposure, no exaggerated stock-photo posing. No text, lettering, logos, dates, watermarks or foreign conference imagery. This is an illustrative scene, not documentation of a real event.",
+      "saved_asset": "recognition-india.jpg"
+    },
+    "dinner": {
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape image for an Indian education summit website accordion card. Indian school principals and educators in saris, kurtas and formal suits conversing around beautifully set round dinner tables at an education conference gala in a modern Pune hotel ballroom. Warm ambient light, a small live Indian classical music performance softly visible in background. Candid convivial professional atmosphere. Composition: wide horizontal 16:9, medium-wide editorial photography, all key people fully within frame with generous margins, natural skin texture and realistic contemporary Indian setting, balanced exposure, no exaggerated stock-photo posing. No text, lettering, logos, dates, watermarks or foreign conference imagery. This is an illustrative scene, not documentation of a real event.",
+      "saved_asset": "dinner-india.jpg"
+    }
+  }
+}

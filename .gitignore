@@ -35,3 +35,6 @@
 
 # macOS Finder metadata
 .DS_Store
+
+# Private local restore archives and database dumps.
+/backups/

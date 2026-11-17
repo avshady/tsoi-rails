@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "/privacy",     to: "pages#privacy"
   get "/recognition", to: "pages#recognition"
   get "/summit",      to: "pages#summit"
+  get "/summit/privacy-policy", to: "pages#summit_privacy", as: :summit_privacy
+  get "/summit/terms-and-conditions", to: "pages#summit_terms", as: :summit_terms
   get "/registration", to: "pages#registration"
   get "/thank-you",    to: "pages#thank_you"
 
