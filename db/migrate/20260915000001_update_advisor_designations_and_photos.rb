@@ -8,7 +8,7 @@ class UpdateAdvisorDesignationsAndPhotos < ActiveRecord::Migration[8.1]
     { name: "Dr. Swati Popat Vats", title: "President - ECA & Podar Education Network",                             organisation: "Podar Education Network" },
     { name: "Mrunal Shah",          title: "Founder & Play Expert",                                                  organisation: "Sunday Bricks" },
     { name: "Russell John Cailey",  title: "CEO & Founder",                                                          organisation: "Almach AI™" },
-    { name: "Kiran Bir Sethi",      photo: "/summit/assets/advisor_kiran.png" },
+    { name: "Kiran Bir Sethi",      photo: "/summit/assets/advisor_kiran.png" }
   ].freeze
 
   def up

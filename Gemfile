@@ -15,6 +15,11 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
+# Render blog post bodies from Markdown (pure Ruby, no native extensions)
+gem "kramdown", "~> 2.5"
+# GitHub-flavoured Markdown parser for kramdown (pipe tables, fenced code, autolinks)
+gem "kramdown-parser-gfm", "~> 1.1"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get "/summit/privacy-policy", to: "pages#summit_privacy", as: :summit_privacy
   get "/summit/terms-and-conditions", to: "pages#summit_terms", as: :summit_terms
   get "/registration", to: "pages#registration"
+  # The 5% Showcase page is down for now
+  get "/summit/recognitions", to: redirect("/summit")
   get "/thank-you",    to: "pages#thank_you"
 
   # Blog
@@ -53,6 +55,9 @@ Rails.application.routes.draw do
     # legacy paths
     get  "cities",           to: "schools#cities"
     get  "filters",          to: "schools#filters"
+
+    # Blog publishing API (token auth, see Api::PostsController)
+    resources :posts, param: :slug, only: [ :index, :show, :create, :update, :destroy ]
   end
 
   # Admin (simple, no auth for local dev)
@@ -62,6 +67,13 @@ Rails.application.routes.draw do
       member { post :generate_token }
     end
     resources :summit_speakers, only: [ :index, :new, :create, :edit, :update, :destroy ]
+    # Blog images: upload to public/images/blog, returns Markdown snippets
+    post "posts/images", to: "blog_images#create", as: :post_images
+    # Render Body markdown to HTML for the form's Preview button (no save)
+    post "posts/preview", to: "posts#preview", as: :preview_posts
+    # Import a draft post from the pipeline's .md package + images
+    get  "posts/import", to: "post_imports#new",    as: :import_posts
+    post "posts/import", to: "post_imports#create"
     resources :posts
 
     # CMS

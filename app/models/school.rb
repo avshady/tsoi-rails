@@ -17,6 +17,33 @@ class School < ApplicationRecord
     q
   }
 
+  # Listing-wide figures that every Parents Corner visit needs. They scan the
+  # whole table, so they are cached briefly rather than run per request.
+  LISTING_CACHE_TTL = 10.minutes
+
+  def self.listing_total
+    Rails.cache.fetch("schools/listing_total", expires_in: LISTING_CACHE_TTL) { count }
+  end
+
+  def self.listing_states
+    Rails.cache.fetch("schools/listing_states", expires_in: LISTING_CACHE_TTL) do
+      distinct.order(:state).pluck(:state).compact.reject(&:blank?)
+    end
+  end
+
+  def self.listing_types
+    Rails.cache.fetch("schools/listing_types", expires_in: LISTING_CACHE_TTL) do
+      distinct.order(:type).pluck(:type).compact.reject(&:blank?)
+    end
+  end
+
+  # School counts for the given places, by place name.
+  def self.place_counts(places)
+    Rails.cache.fetch([ "schools/place_counts", *places.map(&:name) ], expires_in: LISTING_CACHE_TTL) do
+      places.to_h { |p| [ p.name, p.apply(all).count ] }
+    end
+  end
+
   # Parse JSON-like fields stored as comma-separated strings
   def facilities_list
     return [] if facilities.blank?
