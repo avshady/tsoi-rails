@@ -317,7 +317,7 @@ class PagesController < ApplicationController
     end
 
     launch_enquiry = %w[booking partnership].include?(params[:page_section].to_s)
-    if launch_enquiry && [name, email, phone, role, organisation].any?(&:blank?)
+    if launch_enquiry && [ name, email, phone, role, organisation ].any?(&:blank?)
       redirect_to summit_path(anchor: params[:page_section]), alert: "Please complete all enquiry fields so our team can contact you."
       return
     end
