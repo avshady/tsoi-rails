@@ -291,3 +291,20 @@ body { overflow-x: clip; }
   #experience { padding-bottom: 32px; }
   .partnership-section { padding-block: 32px; }
 }
+
+/* Restore the previous Voices on the stage portrait-and-text layout. */
+#speakers { border-top: 1px solid var(--line); }
+#speakers .speakers-list-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 30px; row-gap: 18px; margin-top: 40px; }
+#speakers .speaker-list-entry { display: flex; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+#speakers .speaker-list-photo { width: 80px; height: 80px; flex-shrink: 0; border-radius: 8px; object-fit: contain; object-position: center bottom; background: var(--surface); }
+#speakers .speaker-list-initials { display: grid; place-items: center; background: #efe6fc; color: var(--accent); font-size: 25px; font-weight: 600; }
+#speakers .speaker-list-info { flex: 1; min-width: 0; }
+#speakers .speaker-list-name { font-size: 17px; line-height: 1.35; font-weight: 700; margin: 0 0 6px; }
+#speakers .speaker-list-topic { font-size: 14px; line-height: 1.5; color: var(--muted); margin: 0; }
+#speakers .speaker-list-status { display: inline-block; font-size: 11px; line-height: 1.5; color: #92254f; background: #fceaf2; border-radius: 4px; padding: 2px 7px; margin: 8px 0 0; }
+#speakers .speakers-note { text-align: center; color: var(--muted); font-size: 13px; margin: 30px auto 0; max-width: 640px; }
+@media (max-width: 1023px) { #speakers .speakers-list-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px) { #speakers .speakers-list-grid { grid-template-columns: 1fr; margin-top: 25px; row-gap: 4px; } }
+
+#speakers .speakers-actions { display: flex; justify-content: center; margin-top: 36px; }
+@media (max-width: 639px) { #speakers .programme-download { white-space: normal; text-align: center; } }
