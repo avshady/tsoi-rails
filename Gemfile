@@ -16,7 +16,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 
 # Render blog post bodies from Markdown (pure Ruby, no native extensions)
-gem "kramdown", "~> 2.5"
+gem "kramdown", "~> 2.6"
 # GitHub-flavoured Markdown parser for kramdown (pipe tables, fenced code, autolinks)
 gem "kramdown-parser-gfm", "~> 1.1"
 
